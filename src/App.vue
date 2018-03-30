@@ -2,7 +2,7 @@
   <div id="app">
     <NavBar></NavBar>
 
-    <div class="page mt-8">
+    <div class="page mt-9">
       <div class="page-main">
         <div class="page-content">
           <div class="container-fluid" style="padding-left: 120px">
