@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
-    <div class="container-fluid">
-      <div style="width:100px"></div>
-      <div class="w-100 d-flex">
+    <div class="container">
+      <!-- <div style="width:100px"></div> -->
+      <!-- <div class="w-100 d-flex"> -->
         <router-link class="navbar-brand p-0 d-flex flex-row align-items-center" to="/" exact>
         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 200 200">
           <g fill="none" fill-rule="evenodd">
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      </div>
+      <!-- </div> -->
     </div>
   </nav>
 </template>

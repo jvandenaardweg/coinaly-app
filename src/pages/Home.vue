@@ -1,6 +1,9 @@
 <template>
   <div>
 
+    <EmptyState></EmptyState>
+
+
     <!-- <div class="page-header">
       <h1 class="page-title">
         Page: Home
@@ -138,12 +141,14 @@
 <script>
 import SubNav from '../components/SubNav.vue'
 import CardTrade from '../components/CardTrade.vue'
+import EmptyState from '../components/EmptyState.vue'
 
 export default {
   name: 'PageHome',
   components: {
     SubNav,
-    CardTrade
+    CardTrade,
+    EmptyState
   }
 }
 </script>

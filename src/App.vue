@@ -5,8 +5,9 @@
     <div class="page mt-9">
       <div class="page-main">
         <div class="page-content">
-          <div class="container-fluid" style="padding-left: 120px">
-            <Sidebar></Sidebar>
+          <!-- <div class="container-fluid" style="padding-left: 120px"> -->
+          <div class="container">
+            <!-- <Sidebar></Sidebar> -->
             <router-view></router-view>
           </div>
         </div>
@@ -32,8 +33,18 @@ export default {
 @import "./scss/bootstrap/setting";
 @import "~bootstrap/scss/bootstrap";
 
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+}
+
 .navbar {
   border-bottom: 1px $border-color solid;
+}
+
+.btn {
+  font-weight: 600;
 }
 
 .sidebar {
