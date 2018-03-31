@@ -1,9 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
     <div class="container">
-      <!-- <div style="width:100px"></div> -->
-      <!-- <div class="w-100 d-flex"> -->
-        <router-link class="navbar-brand p-0 d-flex flex-row align-items-center" to="/" exact>
+      <router-link class="navbar-brand p-0 d-flex flex-row align-items-center" to="/" exact>
         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 200 200">
           <g fill="none" fill-rule="evenodd">
             <circle cx="100" cy="100" r="100" fill="#07F"/>
@@ -21,6 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-item nav-link" to="/" exact>Home</router-link>
+          <router-link class="nav-item nav-link" to="/exchanges">Exchanges</router-link>
           <router-link class="nav-item nav-link" to="/balances">Balances</router-link>
           <router-link class="nav-item nav-link" to="/buy">Buy</router-link>
           <router-link class="nav-item nav-link" to="/sell">Sell</router-link>
@@ -28,14 +27,41 @@
           <!-- <a class="nav-item nav-link disabled" href="#">Markets</a> -->
         </div>
       </div>
-
-      <!-- </div> -->
+      <div class="dropdown">
+        <button @click="show = !show" class="btn btn-tertiary btn-md dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bittrex
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" :class="{'show': show }" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Switch to: <strong>Binance</strong></a>
+          <a class="dropdown-item" href="#">Switch to: <strong>GDAX</strong></a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Change API keys</a>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  data () {
+    return {
+      show: false
+    }
+  }
 }
 </script>
+
+
+<style lang="scss">
+@import "../scss/bootstrap/setting";
+.navbar-nav {
+  .nav-link {
+    &.active {
+      background: $border-color;
+      border-radius: $border-radius;
+    }
+  }
+}
+</style>

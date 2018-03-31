@@ -15,9 +15,14 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "cryptocurrencies": "^3.0.1",
     "feather-icons": "^4.7.0",
+    "raven-js": "^3.24.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",

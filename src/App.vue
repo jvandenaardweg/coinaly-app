@@ -33,6 +33,10 @@ export default {
 @import "./scss/bootstrap/setting";
 @import "~bootstrap/scss/bootstrap";
 
+// Customizing bootstrap standard components a little bit
+@import "./scss/bootstrap/components/dropdown";
+@import "./scss/bootstrap/components/card";
+
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -44,7 +48,7 @@ html {
 }
 
 .btn {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .sidebar {

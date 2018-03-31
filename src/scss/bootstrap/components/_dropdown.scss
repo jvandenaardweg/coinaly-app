@@ -1,0 +1,10 @@
+.dropdown {
+  .dropdown-menu {
+    &.dropdown-menu-right {
+      &.show {
+        right: 0;
+        left: auto;
+      }
+    }
+  }
+}

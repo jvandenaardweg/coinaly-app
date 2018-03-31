@@ -1,23 +1,14 @@
 <template>
   <div>
 
-    <EmptyState></EmptyState>
-
-
-    <!-- <div class="page-header">
-      <h1 class="page-title">
-        Page: Home
-      </h1>
-    </div> -->
-
     <!-- <SubNav></SubNav> -->
 
     <div class="row">
       <div class="col-lg-3">
         <div class="card bg-primary mb-5">
           <div class="card-body text-center">
-            <h1 class="h1 text-white mb-1">&euro; 12.035,51</h1>
-            <h2 class="h5 text-white font-weight-light">2.41231 BTC</h2>
+            <h1 class="h1 text-white mb-1 font-weight-bold">&euro; 12.035,51</h1>
+            <h2 class="h5 text-light font-weight-normal">2.41231 BTC</h2>
           </div>
         </div>
       </div>
