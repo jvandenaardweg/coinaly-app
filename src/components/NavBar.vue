@@ -27,7 +27,7 @@
           <!-- <a class="nav-item nav-link disabled" href="#">Markets</a> -->
         </div>
       </div>
-      <div class="dropdown">
+      <!-- <div class="dropdown">
         <button @click="show = !show" class="btn btn-tertiary btn-md dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Bittrex
         </button>
@@ -37,7 +37,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Change API keys</a>
         </div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>

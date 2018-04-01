@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PageSell from '@/pages/Sell'
+// import PageSell from '@/pages/Sell'
 import PageBuy from '@/pages/Buy'
 import PageHome from '@/pages/Home'
 import PageMarkets from '@/pages/Markets'
 import PageBalances from '@/pages/Balances'
 import PageExchanges from '@/pages/Exchanges'
+
+import PageSellIndex from '@/pages/sell/Index.vue'
+import PageSellSelectQuoteCurrency from '@/pages/sell/SelectQuoteCurrency.vue'
+import PageSellSelectBaseCurrency from '@/pages/sell/SelectBaseCurrency.vue'
+import PageSellSelectPricing from '@/pages/sell/SelectPricing.vue'
 
 Vue.use(Router)
 
@@ -24,8 +29,29 @@ export default new Router({
     },
     {
       path: '/sell',
-      name: 'Sell',
-      component: PageSell
+      component: PageSellIndex,
+      children: [
+        {
+          path: '',
+          component: PageSellSelectQuoteCurrency
+        },
+        {
+          path: ':quoteCurrency',
+          component: PageSellSelectBaseCurrency,
+          beforeEnter: (to, from, next) => {
+            console.log('validate selected quote currency', to.params.quoteCurrency, 'Does this user have this in his balance?')
+            next()
+          }
+        },
+        {
+          path: ':quoteCurrency/:baseCurrency',
+          component: PageSellSelectPricing,
+          beforeEnter: (to, from, next) => {
+            console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
+            next()
+          }
+        }
+      ]
     },
     {
       path: '/markets',

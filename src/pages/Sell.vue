@@ -5,58 +5,62 @@
         Page: Sell
       </h1>
     </div> -->
-    <form name="sell">
+    <!-- <form name="sell"> -->
 
       <div class="row justify-content-center" v-show="!steps.firstStep.validated">
         <div class="col-md-5">
-          <div class="text-center">
-            <h1 class="h2 mb-4">What are you selling?</h1>
-            <p class="text-muted">The currencies below are what's in your current balance.</p>
-          </div>
-          <div class="card">
-            <ul class="list-group list-group-flush">
-              <li v-for="(meta, symbol, index) in balances" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="custom-control custom-radio">
-                  <input type="radio" :id="`quoteCurrency-${symbol}`" name="quoteCurrency" v-model="quoteCurrency" :value="symbol" class="custom-control-input">
-                  <label class="custom-control-label" :for="`quoteCurrency-${symbol}`"><strong>{{ symbol }}</strong> ({{ $store.state.symbols[symbol] }})</label>
-                </div>
-                <span class="badge badge-secondary badge-pill">{{ meta.free }}</span>
-              </li>
-            </ul>
-            <div class="card-footer">
-              <button type="button" class="btn btn-primary btn-block" @click="steps.firstStep.validated = true" :class="{'disabled': quoteCurrency === null}" :disabed="quoteCurrency === null">Next step: Market</button>
+          <form name="quoteCurrency" @submit="handleFirstStepSubmit($event)">
+            <div class="text-center">
+              <h1 class="h2 mb-4">What are you selling?</h1>
+              <p class="text-muted">The currencies below are what's in your current balance.</p>
             </div>
-          </div>
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li v-for="(meta, symbol, index) in balances" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" :id="`quoteCurrency-${symbol}`" name="quoteCurrency" v-model="quoteCurrency" :value="symbol" class="custom-control-input">
+                    <label class="custom-control-label" :for="`quoteCurrency-${symbol}`"><strong>{{ symbol }}</strong> ({{ $store.state.symbols[symbol] }})</label>
+                  </div>
+                  <span class="badge badge-secondary badge-pill">{{ meta.free }}</span>
+                </li>
+              </ul>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-block" :class="{'disabled': quoteCurrency === null}" :disabed="quoteCurrency === null">Next step: Market</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
 
       <div class="row justify-content-center" v-show="steps.firstStep.validated && !steps.secondStep.validated">
         <div class="col-md-5">
-          <div class="text-center">
-            <h1 class="h2 mb-6">Sell {{ quoteCurrency }} for {{ baseCurrencyTitle }}</h1>
-          </div>
-          <div class="card">
-            <ul class="list-group list-group-flush">
-              <li v-for="(meta, symbol, index) in baseMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="custom-control custom-radio">
-                  <input type="radio" :id="`baseCurrency-${symbol}`" name="baseCurrency" v-model="baseCurrency" :value="symbol" class="custom-control-input">
-                  <label class="custom-control-label" :for="`baseCurrency-${symbol}`"><strong>{{ symbol }}</strong> ({{ $store.state.symbols[symbol] }})</label>
-                </div>
-                <span class="badge badge-primary badge-pill" v-if="meta.smartMarketTrade">Smart Market Trade</span>
-                <span class="badge badge-secondary badge-pill">Max: {{ meta.max }}</span>
-              </li>
-            </ul>
-            <div v-if="baseMarkets[baseCurrency] && baseMarkets[baseCurrency].smartMarketTrade" class="text-left p-4 bg-primary text-white">
-              <h3 class="h4 font-weight-bold">About Smart Market Trading</h3>
-              <p>With Smart Trading our systems will automatically convert to a currency that's not commonly tradable on an exchange.</p>
-              <p>Our systems will market trade {{ quoteCurrency }} to BTC first. Once that's done, we will market trade BTC to {{ baseCurrency }}.</p>
-              <p><strong>Note:</strong> The fees for an market trade are a little bit higher then an limit trade and the results may vary. So only use this option if you want to get out of the market (exit a trade) fast and are willing to take a little risk.</p>
+          <form name="baseCurrency" @submit="handleSecondStepSubmit($event)">
+            <div class="text-center">
+              <h1 class="h2 mb-6">Sell {{ quoteCurrency }} for {{ baseCurrencyTitle }}</h1>
             </div>
-            <div class="card-footer">
-              <!-- <button type="button" class="btn btn-outline-secondary float-left" @click="steps.firstStep.validated = false">Previous step</button> -->
-              <button type="button" class="btn btn-primary btn-block" @click="steps.secondStep.validated = true" :class="{'disabled': baseCurrency === null}" :disabed="baseCurrency === null">Next step: Pricing</button>
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li v-for="(meta, symbol, index) in baseMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" :id="`baseCurrency-${symbol}`" name="baseCurrency" v-model="baseCurrency" :value="symbol" class="custom-control-input">
+                    <label class="custom-control-label" :for="`baseCurrency-${symbol}`"><strong>{{ symbol }}</strong> ({{ $store.state.symbols[symbol] }})</label>
+                  </div>
+                  <span class="badge badge-primary badge-pill" v-if="meta.smartMarketTrade">Smart Market Trade</span>
+                  <span class="badge badge-secondary badge-pill">Max: {{ meta.max }}</span>
+                </li>
+              </ul>
+              <div v-if="baseMarkets[baseCurrency] && baseMarkets[baseCurrency].smartMarketTrade" class="text-left p-4 bg-primary text-white">
+                <h3 class="h4 font-weight-bold">About Smart Market Trading</h3>
+                <p>With Smart Trading our systems will automatically convert to a currency that's not commonly tradable on an exchange.</p>
+                <p>Our systems will market trade {{ quoteCurrency }} to BTC first. Once that's done, we will market trade BTC to {{ baseCurrency }}.</p>
+                <p><strong>Note:</strong> The fees for an market trade are a little bit higher then an limit trade and the results may vary. So only use this option if you want to get out of the market (exit a trade) fast and are willing to take a little risk.</p>
+              </div>
+              <div class="card-footer">
+                <!-- <button type="button" class="btn btn-outline-secondary float-left" @click="steps.firstStep.validated = false">Previous step</button> -->
+                <button type="submit" class="btn btn-primary btn-block" :class="{'disabled': baseCurrency === null}" :disabed="baseCurrency === null">Next step: Pricing</button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -103,7 +107,7 @@
           </div>
         </div>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 
 </template>
@@ -165,6 +169,18 @@ export default {
     },
     baseCurrencyTitle () {
       return (this.baseCurrency) ? this.baseCurrencyUppercased : '...?'
+    }
+  },
+  methods: {
+    handleFirstStepSubmit ($event) {
+      $event.preventDefault()
+      this.steps.firstStep.validated = true
+      console.log('validate first step')
+    },
+    handleSecondStepSubmit ($event) {
+      $event.preventDefault()
+      this.steps.secondStep.validated = true
+      console.log('validate second step')
     }
   }
 }
