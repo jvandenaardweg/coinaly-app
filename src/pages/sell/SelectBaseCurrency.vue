@@ -9,7 +9,7 @@
         <ul class="list-group list-group-flush">
           <li v-for="(meta, symbol, index) in baseMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === symbol }" @click="setSelected(symbol)">
             <div class="custom-control custom-radio">
-              <img :src="`static/icons/cryptocurrencies/svg/color/${symbol.toLowerCase()}.svg`" width="18" class="mr-1" :alt="symbol" />  
+              <img :src="`static/icons/cryptocurrencies/svg/color/${symbol.toLowerCase()}.svg`" width="18" class="mr-1" :alt="symbol" />
               <input type="radio" :id="`baseCurrency-${symbol}`" name="baseCurrency" v-model="baseCurrency" :value="symbol" class="custom-control-input">
               <label class="custom-control-label" :for="`baseCurrency-${symbol}`"><strong>{{ symbol }}</strong> <span class="text-muted">({{ $store.state.symbols[symbol] }})</span></label>
             </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="card-footer">
           <!-- <router-link class="btn btn-outline-secondary float-left" :to="`/sell/${$route.params.quoteCurrency}`">Previous step</router-link> -->
-          <router-link class="btn btn-primary btn-block" :to="`/sell/${$route.params.quoteCurrency}/${baseCurrency}`" :class="{'disabled': baseCurrency === null}" :disabed="baseCurrency === null">Next step: Pricing</router-link>
+          <router-link class="btn btn-primary btn-block" :to="`/sell/${$route.params.quoteCurrency}/${baseCurrency}`" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">Next step: Pricing</router-link>
         </div>
       </div>
     </div>

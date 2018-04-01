@@ -17,6 +17,7 @@
     "bootstrap": "^4.0.0",
     "cryptocurrencies": "^3.0.1",
     "feather-icons": "^4.7.0",
+    "moment-timezone": "^0.5.14",
     "raven-js": "^3.24.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

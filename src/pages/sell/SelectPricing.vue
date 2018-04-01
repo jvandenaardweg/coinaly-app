@@ -26,9 +26,8 @@
           <button type="button" class="btn btn-outline-secondary btn-sm">ask</button>
           <button type="button" class="btn btn-outline-secondary btn-sm">24hr low</button>
           <button type="button" class="btn btn-outline-secondary btn-sm">24hr high</button>
-          
           <div class="form-group">
-            <label>Amount of {{ baseCurrency }}</label>
+            <label class="font-weight-bold">Amount of {{ baseCurrency }}</label>
             <div class="input-group mb-3">
               <input type="text" class="form-control" :placeholder="`Price for 1 ${quoteCurrency} in ${baseCurrency}`" aria-label="Recipient's username" aria-describedby="basic-addon2">
               <div class="input-group-append">
@@ -36,34 +35,33 @@
               </div>
             </div>
           </div>
-          
           <button type="button" class="btn btn-outline-secondary btn-sm">10%</button>
           <button type="button" class="btn btn-outline-secondary btn-sm">20%</button>
           <button type="button" class="btn btn-outline-secondary btn-sm">25%</button>
           <button type="button" class="btn btn-outline-secondary btn-sm">50%</button>
           <button type="button" class="btn btn-outline-secondary btn-sm">75%</button>
           <button type="button" class="btn btn-outline-secondary btn-sm">100%</button>
-          <!-- <button type="button" class="badge badge-light">100%</button> -->
         </div>
         <div class="card-footer">
-          <!-- <button type="button" class="btn btn-outline-secondary float-left" @click="steps.firstStep.validated = false">Previous step</button> -->
           <button type="button" class="btn btn-success btn-lg btn-block" @click="steps.secondStep.validated = true" :class="{'disabled': baseCurrency === null}" :disabed="baseCurrency === null">Sell {{ quoteCurrency }} for {{ baseCurrency }}</button>
         </div>
       </div>
     </div>
     <div class="col-md-7">
-      <div class="card">
-        <img src="http://placehold.it/1280x1024" class="img-fluid" />
-      </div>
+      <TradingViewChart :exchange="`BITTREX`" :baseCurrency="baseCurrency" :quoteCurrency="quoteCurrency"></TradingViewChart>
     </div>
   </div>
 </template>
 
 <script>
+import TradingViewChart from '../../components/TradingViewChart.vue'
 // import { mapGetters } from 'vuex'
 
 export default {
   name: 'PageSellSelectPricing',
+  components: {
+    TradingViewChart
+  },
   data () {
     return {
       showSmartTradeInfo: false,
