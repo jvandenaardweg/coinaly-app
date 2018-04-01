@@ -6,6 +6,8 @@
       </div>
       <div class="card">
         <div class="card-body">
+          {{ marketSymbol }}<br />
+          <!-- {{ allMarkets[marketSymbol].last }}<br /> -->
           Balance: {{ quoteCurrency }} <router-link :to="`/sell`" class="btn btn-link btn-sm">Change</router-link><br />
           Market: {{ baseCurrency }} <router-link :to="`/sell/${quoteCurrency}`" class="btn btn-link btn-sm">Change</router-link><br />
           <div class="form-group">
@@ -55,7 +57,8 @@
 
 <script>
 import TradingViewChart from '../../components/TradingViewChart.vue'
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+// import pickBy from 'lodash/pickBy'
 
 export default {
   name: 'PageSellSelectPricing',
@@ -109,6 +112,16 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      allCurrencies: 'balances/allCurrencies',
+      allFilledCurrencies: 'balances/allFilledCurrencies',
+      allCurrenciesTotal: 'balances/allCurrenciesTotal',
+      allFilledCurrenciesTotal: 'balances/allFilledCurrenciesTotal',
+      allMarkets: 'markets/allMarkets'
+    }),
+    marketSymbol () {
+      return `${this.quoteCurrency}/${this.baseCurrency}`
+    },
     baseCurrencyUppercased () {
       return (this.baseCurrency) ? this.baseCurrency.toUpperCase() : null
     },

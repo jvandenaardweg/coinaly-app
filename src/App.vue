@@ -25,6 +25,9 @@ export default {
   components: {
     NavBar,
     Sidebar
+  },
+  created () {
+    this.$store.dispatch('markets/listenTickers')
   }
 }
 </script>

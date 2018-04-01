@@ -7,24 +7,26 @@
       </div>
       <div class="card">
         <ul class="list-group list-group-flush">
-          <li v-for="(meta, symbol, index) in balances" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': quoteCurrency === symbol }" @click="setSelected(symbol)">
+          <li v-for="(meta, symbol, index) in allFilledCurrencies" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': quoteCurrency === symbol }" @click="setSelected(symbol)">
             <div class="custom-control custom-radio">
-              <img :src="`static/icons/cryptocurrencies/svg/color/${symbol.toLowerCase()}.svg`" width="18" class="mr-1" :alt="symbol" />  
+              <img :src="`static/icons/cryptocurrencies/svg/color/${symbol.toLowerCase()}.svg`" width="18" class="mr-1" :alt="symbol" />
               <input type="radio" :id="`quoteCurrency-${symbol}`" name="quoteCurrency" v-model="quoteCurrency" :value="symbol" class="custom-control-input">
               <label class="custom-control-label" :for="`quoteCurrency-${symbol}`"><strong>{{ symbol }}</strong> <span class="text-muted">({{ $store.state.symbols[symbol] }})</span></label>
             </div>
-            <span class="text-muted"><span>{{ meta.free }}</span></span>
+            <span class="text-muted"><span>{{ meta.free | number }} {{ symbol }}</span></span>
           </li>
         </ul>
         <div class="card-footer">
           <router-link class="btn btn-primary btn-block" :to="`/sell/${quoteCurrency}`" :class="{'disabled': !quoteCurrency}" :disabed="!quoteCurrency">Next step: Market</router-link>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PageSellSelectQuoteCurrency',
   data () {
@@ -38,13 +40,21 @@ export default {
           free: 21573
         },
         'GVT': {
-          free: 25.0123
+          free: 25.06784267
         },
         'BTC': {
-          free: 1.123464
+          free: 1.65789234
         }
       }
     }
+  },
+  computed: {
+    ...mapGetters({
+      allCurrencies: 'balances/allCurrencies',
+      allFilledCurrencies: 'balances/allFilledCurrencies',
+      allCurrenciesTotal: 'balances/allCurrenciesTotal',
+      allFilledCurrenciesTotal: 'balances/allFilledCurrenciesTotal'
+    })
   },
   methods: {
     handleFirstStepSubmit ($event) {

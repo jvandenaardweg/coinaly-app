@@ -8,6 +8,7 @@ import store from './store'
 import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 import { sync } from 'vuex-router-sync'
+import './filters'
 
 Vue.config.productionTip = false
 
