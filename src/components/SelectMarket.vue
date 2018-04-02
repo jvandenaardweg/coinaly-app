@@ -3,14 +3,14 @@
 
     <LoadingCard v-if="isLoadingMarkets" :text="'Loading Markets...'"></LoadingCard>
 
-    <EmptyCard v-if="!isLoadingMarkets && !hasMarkets" :text="`No markets for ${quoteCurrency}`"></EmptyCard>
+    <EmptyCard v-if="!isLoadingMarkets && !hasMarkets" :text="`No markets for ${quoteCurrency} on [Bittrex]`"></EmptyCard>
 
     <ul v-if="hasMarkets" class="list-group list-group-flush">
       <li v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketNameToSymbol(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
           <img :src="`static/icons/cryptocurrencies/svg/color/${marketNameToSymbol(symbol).toLowerCase()}.svg`" width="18" class="mr-1" :alt="marketNameToSymbol(symbol)" />
           <input type="radio" :id="`baseCurrency-${marketNameToSymbol(symbol)}`" name="baseCurrency" v-model="baseCurrency" :value="marketNameToSymbol(symbol)" class="custom-control-input">
-          <label class="custom-control-label" :for="`baseCurrency-${marketNameToSymbol(symbol)}`"><strong>{{ marketNameToSymbol(symbol) }}</strong> <span class="text-muted">({{ $store.state.symbols[marketNameToSymbol(symbol)] }})</span></label>
+          <label class="custom-control-label" :for="`baseCurrency-${marketNameToSymbol(symbol)}`"><strong>{{ marketNameToSymbol(symbol) }}</strong> <span class="text-muted" v-if="fullCurrencyName(symbol)">({{ fullCurrencyName(symbol) }})</span></label>
         </div>
         <span class="badge badge-primary badge-pill" v-if="meta.smartMarketTrade">Smart Market Trade</span>
         <span class="text-muted">~ {{ maxSellPrice(symbol) | number }} {{ marketNameToSymbol(symbol) }}</span>
@@ -24,7 +24,7 @@
       <p><strong>Note:</strong> Market Trading has higher exchange fee's. So only use this option if you want to get out of the market (exit a trade) fast and are willing to take a little risk.</p>
     </div>
     <div class="card-footer">
-      <router-link class="btn btn-primary btn-block" :to="`/sell/${quoteCurrency}/${baseCurrency}`" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
+      <router-link class="btn btn-primary btn-block" :to="`/${routeBase}/${quoteCurrency}/${baseCurrency}`" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
     </div>
 
   </div>
@@ -43,7 +43,8 @@ export default {
     'isLoadingMarkets',
     'previousBaseCurrency',
     'quoteCurrency',
-    'nextStepAction'
+    'nextStepAction',
+    'routeBase'
   ],
   components: {
     LoadingCard,
@@ -71,6 +72,11 @@ export default {
       const quoteCurrencyBalance = this.allFilledCurrencies[this.quoteCurrency]
       const quoteCurrencyMarket = this.allMarkets[marketSymbol]
       if (quoteCurrencyBalance && quoteCurrencyMarket) return quoteCurrencyBalance.free * quoteCurrencyMarket.last
+      return null
+    },
+    fullCurrencyName (symbol) {
+      const currencyFullName = this.$store.state.symbols[this.marketNameToSymbol(symbol)]
+      if (currencyFullName) return currencyFullName
       return null
     }
   },

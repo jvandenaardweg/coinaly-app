@@ -14,7 +14,7 @@
       </li>
     </ul>
     <div class="card-footer">
-      <router-link class="btn btn-primary btn-block" :to="`/sell/${quoteCurrency}`" :class="{'disabled': !quoteCurrency}" :disabed="!quoteCurrency">{{ nextStepAction }}</router-link>
+      <router-link class="btn btn-primary btn-block" :to="`/${routeBase}/${quoteCurrency}`" :class="{'disabled': !quoteCurrency}" :disabed="!quoteCurrency">{{ nextStepAction }}</router-link>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ import LoadingCard from './LoadingCard'
 
 export default {
   name: 'SelectBalance',
-  props: ['allFilledCurrencies', 'previousQuoteCurrency', 'nextStepAction'],
+  props: ['allFilledCurrencies', 'previousQuoteCurrency', 'nextStepAction', 'routeBase'],
   components: {
     LoadingCard
   },

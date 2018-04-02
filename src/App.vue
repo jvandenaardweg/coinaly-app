@@ -43,6 +43,7 @@ export default {
 // Customizing bootstrap standard components a little bit
 @import "./scss/bootstrap/components/dropdown";
 @import "./scss/bootstrap/components/card";
+@import "./scss/bootstrap/components/select-group";
 
 html {
   -webkit-font-smoothing: antialiased;

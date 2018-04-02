@@ -4,7 +4,14 @@
       <div class="text-left">
         <h1 class="h2 mb-6">Sell {{ quoteCurrency }} for {{ baseCurrency }}</h1>
       </div>
-      <SelectPricing :activeMarket="activeMarket" :activeBalance="activeBalance" :quoteCurrency="quoteCurrency" :baseCurrency="baseCurrency" :marketSymbol="marketSymbol"></SelectPricing>
+      <SelectPricing
+        :activeMarket="activeMarket"
+        :activeBalance="activeBalance"
+        :quoteCurrency="quoteCurrency"
+        :baseCurrency="baseCurrency"
+        :marketSymbol="marketSymbol"
+        :routeBase="'sell'">
+      </SelectPricing>
     </div>
     <div class="col-md-7">
       <TradingViewChart :exchange="`BITTREX`" :baseCurrency="baseCurrency" :quoteCurrency="quoteCurrency"></TradingViewChart>

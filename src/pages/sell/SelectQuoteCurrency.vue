@@ -8,7 +8,8 @@
       <SelectBalance
         :allFilledCurrencies="allFilledCurrencies"
         :previousQuoteCurrency="previousQuoteCurrency"
-        :nextStepAction="'Next step: Market'">
+        :nextStepAction="'Next step: Market'"
+        :routeBase="'sell'">
         </SelectBalance>
     </div>
   </div>

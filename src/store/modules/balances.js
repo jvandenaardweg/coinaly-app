@@ -26,6 +26,14 @@ export default {
       'BTC': {
         free: 1.65789234,
         total: 1.65789234
+      },
+      'USDT': {
+        free: 9013,
+        total: 9013
+      },
+      'ETH': {
+        free: 3.2467,
+        total: 3.2467
       }
     },
     isLoading: false,
