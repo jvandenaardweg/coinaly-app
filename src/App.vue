@@ -1,14 +1,12 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
-
     <div class="page mt-9">
       <div class="page-main">
         <div class="page-content">
-          <!-- <div class="container-fluid" style="padding-left: 120px"> -->
           <div class="container">
-            <!-- <Sidebar></Sidebar> -->
             <router-view></router-view>
+            {{ websocketsError }}
           </div>
         </div>
       </div>
@@ -19,6 +17,7 @@
 <script>
 import NavBar from './components/NavBar.vue'
 import Sidebar from './components/Sidebar.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
@@ -27,7 +26,12 @@ export default {
     Sidebar
   },
   created () {
-    this.$store.dispatch('markets/listenTickers')
+    this.$store.dispatch('websockets/connect', 'bittrex')
+  },
+  computed: {
+    ...mapGetters({
+      websocketsError: 'websockets/error'
+    })
   }
 }
 </script>

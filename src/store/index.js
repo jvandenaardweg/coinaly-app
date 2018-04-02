@@ -8,6 +8,7 @@ import ExchangesStore from './modules/exchanges'
 import OrdersStore from './modules/orders'
 import DepositsStore from './modules/deposits'
 import WithdrawalsStore from './modules/withdrawals'
+import WebsocketsStore from './modules/websockets'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     exchanges: ExchangesStore,
     orders: OrdersStore,
     deposits: DepositsStore,
-    withdrawals: WithdrawalsStore
+    withdrawals: WithdrawalsStore,
+    websockets: WebsocketsStore
   }
 })

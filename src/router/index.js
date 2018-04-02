@@ -12,6 +12,8 @@ import PageSellSelectQuoteCurrency from '@/pages/sell/SelectQuoteCurrency.vue'
 import PageSellSelectBaseCurrency from '@/pages/sell/SelectBaseCurrency.vue'
 import PageSellSelectPricing from '@/pages/sell/SelectPricing.vue'
 
+// import store from '../store'
+
 Vue.use(Router)
 
 export default new Router({
@@ -37,11 +39,7 @@ export default new Router({
         },
         {
           path: ':quoteCurrency',
-          component: PageSellSelectBaseCurrency,
-          beforeEnter: (to, from, next) => {
-            console.log('validate selected quote currency', to.params.quoteCurrency, 'Does this user have this in his balance?')
-            next()
-          }
+          component: PageSellSelectBaseCurrency
         },
         {
           path: ':quoteCurrency/:baseCurrency',

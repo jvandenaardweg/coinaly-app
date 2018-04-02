@@ -1,7 +1,7 @@
 import axios from '../../axios'
 import Vue from 'vue'
 import VueCookie from 'vue-cookie'
-import socket from '../../socketcluster'
+// import socket from '../../socketcluster'
 import pickBy from 'lodash/pickBy'
 Vue.use(VueCookie)
 
@@ -9,6 +9,16 @@ const selectedMarketCookie = Vue.cookie.get('selectedMarket') || null
 const initialSelectedMarket = (selectedMarketCookie === 'null' ? null : selectedMarketCookie)
 
 function filterMarkets (array, symbol) {
+  // if (!array.length) return null
+  // // return (data) => {
+  // return Object.keys(array).filter((key) => {
+  //   console.log(key)
+  //   return key.match(/\/BTC/g)
+  // }).reduce((obj, curKey) => {
+  //   obj[curKey] = array[curKey]
+  //   return obj
+  // })
+  // }
   return pickBy(array, (values, marketSymbol) => {
     return marketSymbol.includes(symbol)
   })
@@ -37,6 +47,7 @@ export default {
   mutations: {
     addAllMarkets (state, markets) {
       state.markets = markets
+      state.isLoading = false
     },
     // addPriceIndexes (state, markets) {
     //   let payload = {
@@ -148,15 +159,15 @@ export default {
         .finally(() => {
           context.commit('stopLoading')
         })
-    },
-    listenTickers (context) {
-      const exchangeDataChannel = socket.subscribe('markets--bittrex')
-      exchangeDataChannel.watch(function (response) {
-        console.log('Received Exchange Data:', response)
-        // const markets = Object.values(response.data)
-        context.commit('addAllMarkets', response.data)
-        // context.commit('addPriceIndexes', response.data)
-      })
     }
+    // listenTickers (context) {
+    //   const exchangeDataChannel = socket.subscribe('markets--bittrex')
+    //   exchangeDataChannel.watch(function (response) {
+    //     console.log('Received Exchange Data:', response)
+    //     // const markets = Object.values(response.data)
+    //     context.commit('addAllMarkets', response.data)
+    //     // context.commit('addPriceIndexes', response.data)
+    //   })
+    // }
   }
 }

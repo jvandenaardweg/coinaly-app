@@ -5,73 +5,33 @@
         <h1 class="h2 mb-4">What are you selling?</h1>
         <p class="text-muted">The currencies below are what's in your current balance.</p>
       </div>
-      <div class="card">
-        <ul class="list-group list-group-flush">
-          <li v-for="(meta, symbol, index) in allFilledCurrencies" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': quoteCurrency === symbol }" @click="setSelected(symbol)">
-            <div class="custom-control custom-radio">
-              <img :src="`static/icons/cryptocurrencies/svg/color/${symbol.toLowerCase()}.svg`" width="18" class="mr-1" :alt="symbol" />
-              <input type="radio" :id="`quoteCurrency-${symbol}`" name="quoteCurrency" v-model="quoteCurrency" :value="symbol" class="custom-control-input">
-              <label class="custom-control-label" :for="`quoteCurrency-${symbol}`"><strong>{{ symbol }}</strong> <span class="text-muted">({{ $store.state.symbols[symbol] }})</span></label>
-            </div>
-            <span class="text-muted"><span>{{ meta.free | number }} {{ symbol }}</span></span>
-          </li>
-        </ul>
-        <div class="card-footer">
-          <router-link class="btn btn-primary btn-block" :to="`/sell/${quoteCurrency}`" :class="{'disabled': !quoteCurrency}" :disabed="!quoteCurrency">Next step: Market</router-link>
-        </div>
-      </div>
+      <SelectBalance
+        :allFilledCurrencies="allFilledCurrencies"
+        :previousQuoteCurrency="previousQuoteCurrency"
+        :nextStepAction="'Next step: Market'">
+        </SelectBalance>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import SelectBalance from '../../components/SelectBalance'
 
 export default {
   name: 'PageSellSelectQuoteCurrency',
+  components: {
+    SelectBalance
+  },
   data () {
     return {
-      quoteCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null,
-      balances: {
-        'XVG': {
-          free: 1500
-        },
-        'XLM': {
-          free: 21573
-        },
-        'GVT': {
-          free: 25.06784267
-        },
-        'BTC': {
-          free: 1.65789234
-        }
-      }
+      previousQuoteCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null
     }
   },
   computed: {
     ...mapGetters({
-      allCurrencies: 'balances/allCurrencies',
-      allFilledCurrencies: 'balances/allFilledCurrencies',
-      allCurrenciesTotal: 'balances/allCurrenciesTotal',
-      allFilledCurrenciesTotal: 'balances/allFilledCurrenciesTotal'
+      allFilledCurrencies: 'balances/allFilledCurrencies'
     })
-  },
-  methods: {
-    handleFirstStepSubmit ($event) {
-      $event.preventDefault()
-      this.steps.firstStep.validated = true
-      console.log('validate first step')
-    },
-    setSelected (symbol) {
-      this.quoteCurrency = symbol
-    }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.list-group-item,
-label {
-  cursor: pointer;
-}
-</style>
