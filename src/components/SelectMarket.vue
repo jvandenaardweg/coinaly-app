@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     hasMarkets () {
-      return Object.keys(this.quoteCurrencyMarkets).length
+      return Object.keys(this.quoteCurrencyMarkets).length > 0
     }
   },
   methods: {
