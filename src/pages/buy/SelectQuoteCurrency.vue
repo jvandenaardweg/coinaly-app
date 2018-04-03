@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <SelectCurrency
+      <SelectMarketQuote
         @change="handleChange"
         :quoteCurrencyMarkets="quoteCurrencyMarkets"
         :allFilledCurrencies="allFilledCurrencies"
@@ -41,10 +41,10 @@
         :previousBaseCurrency="previousBaseCurrency"
         :nextStepAction="'Next step: Using Balance'"
         :routeBase="'sell'">
-      </SelectCurrency>
+      </SelectMarketQuote>
 
-      
-      
+
+
       <!-- <ul class="list-group list-group-flush">
         <li v-for="(meta, marketSymbol, index) in quoteCurrencyMarkets" :key="marketSymbol" :index="index" class="list-group-item" :class="{'d-none': !isAvailable(marketSymbol)}">
           <img :src="`static/icons/cryptocurrencies/svg/color/${iconName(marketSymbol)}.svg`" width="18" class="mr-1" :alt="symbol" /> {{ marketSymbol }} {{ isAvailable(marketSymbol) }}
@@ -57,13 +57,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import SelectCurrency from '../../components/SelectCurrency'
+import SelectMarketQuote from '../../components/SelectMarketQuote'
 import pickBy from 'lodash/pickBy'
 
 export default {
   name: 'PageSellSelectQuoteCurrency',
   components: {
-    SelectCurrency
+    SelectMarketQuote
   },
   data () {
     return {

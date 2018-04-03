@@ -8,12 +8,13 @@
       <SelectMarket
         @change="handleChange"
         :quoteCurrencyMarkets="quoteCurrencyMarkets"
-        :allMarkets="allMarkets" 
+        :allMarkets="allMarkets"
         :allFilledCurrencies="allFilledCurrencies"
         :isLoadingMarkets="isLoadingMarkets"
         :previousBaseCurrency="previousBaseCurrency"
         :quoteCurrency="quoteCurrency"
         :nextStepAction="'Next step: Pricing'"
+        :currencySymbols="$store.state.symbols"
         :routeBase="'sell'">
       </SelectMarket>
     </div>

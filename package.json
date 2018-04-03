@@ -10,14 +10,38 @@
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-vue"
+    ],
+    "modulePathIgnorePatterns": ["<rootDir>/externals"]
+  },
   "dependencies": {
+    "@vue/test-utils": "^1.0.0-beta.13",
     "axios": "^0.18.0",
+    "babel-jest": "^22.4.3",
     "bootstrap": "^4.0.0",
     "cryptocurrencies": "^3.0.1",
     "feather-icons": "^4.7.0",
+    "jest": "^22.4.3",
+    "jest-serializer-vue": "^1.0.0",
+    "jest-vue-preprocessor": "^1.4.0",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "moment-timezone": "^0.5.14",
@@ -27,6 +51,7 @@
     "socketcluster-client": "^11.0.0",
     "vue": "^2.5.2",
     "vue-cookie": "^1.1.4",
+    "vue-jest": "^2.3.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0",
