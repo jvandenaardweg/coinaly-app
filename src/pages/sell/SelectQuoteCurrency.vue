@@ -7,7 +7,7 @@
       </div>
       <CardSelectBalance
         :balances="allFilledCurrencies"
-        :activeBalance="previousQuoteCurrency"
+        :activeCurrency="activeCurrency"
         :nextStepAction="'Next step: Market'"
         :isLoading="isLoading"
         :routeBase="'sell'">
@@ -27,7 +27,7 @@ export default {
   },
   data () {
     return {
-      previousQuoteCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null
+      activeCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null
     }
   },
   computed: {

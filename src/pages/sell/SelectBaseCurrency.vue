@@ -5,7 +5,7 @@
         <h1 class="h2 mb-4">Sell {{ quoteCurrency }} for {{ baseCurrencyTitle }}</h1>
         <p class="text-muted">The markets below are are tradable for {{ quoteCurrency }} on your exchange [Bittrex].</p>
       </div>
-      <SelectMarket
+      <CardSelectMarket
         @change="handleChange"
         :quoteCurrencyMarkets="quoteCurrencyMarkets"
         :allMarkets="allMarkets"
@@ -16,7 +16,7 @@
         :nextStepAction="'Next step: Pricing'"
         :currencySymbols="$store.state.symbols"
         :routeBase="'sell'">
-      </SelectMarket>
+      </CardSelectMarket>
     </div>
   </div>
 
@@ -25,14 +25,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import pickBy from 'lodash/pickBy'
-import SelectMarket from '../../components/SelectMarket'
+import CardSelectMarket from '../../components/CardSelectMarket'
 import store from '../../store'
 import router from '../../router'
 
 export default {
   name: 'PageSellSelectBaseCurrency',
   components: {
-    SelectMarket
+    CardSelectMarket
   },
   data () {
     return {

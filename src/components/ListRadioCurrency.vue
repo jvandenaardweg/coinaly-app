@@ -53,8 +53,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/bootstrap/setting";
+
 .list-group-item,
 label {
   cursor: pointer;
+}
+
+.list-group-item {
+  &:not(.active) {
+    &:hover {
+      background-color: $light;
+    }
+  }
 }
 </style>

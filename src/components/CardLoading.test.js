@@ -8,13 +8,13 @@ describe('components/CardLoading.vue', () => {
 
   beforeEach(() => {
     component = shallow(CardLoading, {
-      stubs: ['router-link', 'router-view'],
       propsData: {
         isLoading: true,
         text: sampleLoadingText
       }
     })
   })
+
   it('renders a vue instance', () => {
     expect(component.isVueInstance()).toBe(true)
   })
