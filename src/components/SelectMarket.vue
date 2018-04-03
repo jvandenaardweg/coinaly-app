@@ -6,6 +6,8 @@
     <EmptyCard v-if="!isLoadingMarkets && !hasMarkets" :text="`No markets for ${quoteCurrency} on [Bittrex]`"></EmptyCard>
 
     <ul v-if="hasMarkets" class="list-group list-group-flush">
+      <ListRadioMarket v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketSymbolToBaseSymbol(symbol) }" @click="setSelected(symbol)"></ListRadioMarket>
+
       <li v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketSymbolToBaseSymbol(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
           <img :src="`static/icons/cryptocurrencies/svg/color/${marketSymbolToBaseSymbol(symbol).toLowerCase()}.svg`" width="18" class="mr-1" :alt="marketSymbolToBaseSymbol(symbol)" />
@@ -33,6 +35,7 @@
 <script>
 import LoadingCard from './LoadingCard'
 import EmptyCard from './EmptyCard'
+import ListRadioMarket from './ListRadioMarket'
 
 export default {
   name: 'SelectMarket',
@@ -49,7 +52,8 @@ export default {
   ],
   components: {
     LoadingCard,
-    EmptyCard
+    EmptyCard,
+    ListRadioMarket
   },
   data () {
     return {
