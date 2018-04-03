@@ -3,6 +3,8 @@
 
     <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
 
+    <CardEmpty :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardEmpty>
+
     <ul v-if="hasMarkets" class="list-group list-group-flush">
       <li v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketNameToSymbol(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
@@ -21,8 +23,8 @@
 </template>
 
 <script>
-import CardLoading from './CardLoading'
-import EmptyCard from './EmptyCard'
+import CardLoading from './card/CardLoading'
+import CardEmpty from './card/CardEmpty'
 
 export default {
   name: 'SelectCurrency',
@@ -36,7 +38,7 @@ export default {
   ],
   components: {
     CardLoading,
-    EmptyCard
+    CardEmpty
   },
   data () {
     return {

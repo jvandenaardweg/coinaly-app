@@ -25,7 +25,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import pickBy from 'lodash/pickBy'
-import CardSelectMarket from '../../components/CardSelectMarket'
+import CardSelectMarket from '@/components/card/CardSelectMarket'
 import store from '../../store'
 import router from '../../router'
 

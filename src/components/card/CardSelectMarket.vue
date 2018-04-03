@@ -3,13 +3,20 @@
 
     <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
 
-    <ListRadioMarkets
+    <CardEmpty
+      :is-empty="!isLoadingMarkets && !hasMarkets"
+      :text="`No selling markets available for ${quoteCurrency}.`"
+      :actionLink="'/sell'"
+      :actionLabel="'Select different currency'">
+    </CardEmpty>
+
+    <ListGroupSelectMarkets
       v-if="!isLoadingMarkets"
       :markets="quoteCurrencyMarkets"
       :balances="allFilledCurrencies"
       :activeCurrency="baseCurrency"
       @selectedCurrency="handleSelectedCurrency">
-    </ListRadioMarkets>
+    </ListGroupSelectMarkets>
 
     <div class="card-footer">
       <router-link class="btn btn-primary btn-block" :to="`/${routeBase}/${quoteCurrency}/${baseCurrency}`" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
@@ -19,9 +26,9 @@
 </template>
 
 <script>
-import CardLoading from '@/components/CardLoading'
-import EmptyCard from '@/components/EmptyCard'
-import ListRadioMarkets from '@/components/ListRadioMarkets'
+import CardLoading from '@/components/card/CardLoading'
+import CardEmpty from '@/components/card/CardEmpty'
+import ListGroupSelectMarkets from '@/components/list-group/ListGroupSelectMarkets'
 
 export default {
   name: 'CardSelectMarket',
@@ -38,40 +45,23 @@ export default {
   ],
   components: {
     CardLoading,
-    EmptyCard,
-    ListRadioMarkets
+    CardEmpty,
+    ListGroupSelectMarkets
   },
   data () {
     return {
-      showSmartTradeInfo: false,
       baseCurrency: this.previousBaseCurrency
     }
   },
   computed: {
     hasMarkets () {
+      if (!this.quoteCurrencyMarkets) return false
       return Object.keys(this.quoteCurrencyMarkets).length > 0
     }
   },
   methods: {
-    setSelected (marketSymbol) {
-      this.baseCurrency = this.marketSymbolToBaseSymbol(marketSymbol)
-    },
     handleSelectedCurrency (symbol) {
       this.baseCurrency = symbol
-    },
-    marketSymbolToBaseSymbol (marketSymbol) {
-      return marketSymbol.split('/')[1]
-    },
-    maxSellPrice (marketSymbol) {
-      const quoteCurrencyBalance = this.allFilledCurrencies[this.quoteCurrency]
-      const quoteCurrencyMarket = this.allMarkets[marketSymbol]
-      if (quoteCurrencyBalance && quoteCurrencyMarket) return quoteCurrencyBalance.free * quoteCurrencyMarket.last
-      return null
-    },
-    fullCurrencyName (marketSymbol) {
-      const currencyFullName = this.currencySymbols[this.marketSymbolToBaseSymbol(marketSymbol)]
-      if (currencyFullName) return currencyFullName
-      return null
     }
   },
   watch: {

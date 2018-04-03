@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">42.86% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>3/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">42.86% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>3/7</span>
       </div>
     </div>
     <p class="quiet">
@@ -100,7 +100,12 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,6 +115,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,22 +141,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,12 +169,14 @@
 &nbsp;
     &lt;CardLoading :isLoading="isLoading" :text="'Loading Balances...'"&gt;&lt;/CardLoading&gt;
 &nbsp;
-    &lt;ListRadioCurrency
+    &lt;CardEmpty :isEmpty="!isLoading &amp;&amp; !hasBalances" :text="'No currencies available in your balance.'"&gt;&lt;/CardEmpty&gt;
+&nbsp;
+    &lt;ListRadioCurrencies
       v-if="!isLoading"
       :currencies="balances"
       :activeCurrency="currency"
       @selectedCurrency="handleSelectedCurrency"&gt;
-    &lt;/ListRadioCurrency&gt;
+    &lt;/ListRadioCurrencies&gt;
 &nbsp;
     &lt;div class="card-footer"&gt;
       &lt;router-link class="btn btn-primary btn-block" :to="`/${routeBase}/${currency}`" :class="{'disabled': !currency}" :disabed="!currency"&gt;{{ nextStepAction }}&lt;/router-link&gt;
@@ -174,15 +186,17 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import CardLoading from '@/components/CardLoading'</span>
-<span class="cstat-no" title="statement not covered" >import ListRadioCurrency from '@/components/ListRadioCurrency'</span>
+import CardLoading from '@/components/CardLoading'
+import CardEmpty from '@/components/CardEmpty'
+import ListRadioCurrencies from '@/components/ListRadioCurrencies'
 &nbsp;
 export default {
   name: 'SelectBalance',
-  props: ['balances', 'activeCurrency', 'nextStepAction', 'routeBase', 'isLoading'],
+  props: ['balances', 'activeCurrency', 'nextStepAction', 'isLoading', 'routeBase'],
   components: {
     CardLoading,
-    ListRadioCurrency
+    CardEmpty,
+    ListRadioCurrencies
   },
 <span class="fstat-no" title="function not covered" >  data () {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
@@ -191,7 +205,8 @@ export default {
   },
   computed: {
 <span class="fstat-no" title="function not covered" >    hasBalances () {</span>
-<span class="cstat-no" title="statement not covered" >      return Object.keys(this.balances).length</span>
+<span class="cstat-no" title="statement not covered" >      if (!this.balances) return false</span>
+<span class="cstat-no" title="statement not covered" >      return Object.keys(this.balances).length &gt; 0</span>
     }
   },
   methods: {
@@ -214,7 +229,7 @@ label {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Apr 03 2018 21:05:14 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Apr 03 2018 23:06:54 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

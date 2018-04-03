@@ -1,9 +1,9 @@
 import { shallow } from '@vue/test-utils'
-import CardLoading from '@/components/CardLoading.vue'
+import CardLoading from '@/components/card/CardLoading.vue'
 
 const sampleLoadingText = 'Currently loading data...'
 
-describe('components/CardLoading.vue', () => {
+describe('components/card/CardLoading.vue', () => {
   let component
 
   beforeEach(() => {

@@ -20,31 +20,31 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">36.84% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>19/19</span>
+        <span class='fraction'>7/19</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">16.67% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>1/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>2/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">37.5% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>16/16</span>
+        <span class='fraction'>6/16</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -86,67 +86,67 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">81x</span>
-<span class="cline-any cline-yes">81x</span>
-<span class="cline-any cline-yes">81x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">80x</span>
-<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const cryptocurrencies = require('cryptocurrencies')
 &nbsp;
 // Returns "BTC" from "XVG/BTC"
-export function marketSymbolToBaseSymbol (marketSymbol) {
-  const marketSymbolUppercased = marketSymbol.toUpperCase()
-  return marketSymbolUppercased.split('/')[1]
+export function <span class="fstat-no" title="function not covered" >marketSymbolToBaseSymbol </span>(marketSymbol) {
+  const marketSymbolUppercased = <span class="cstat-no" title="statement not covered" >marketSymbol.toUpperCase()</span>
+<span class="cstat-no" title="statement not covered" >  return marketSymbolUppercased.split('/')[1]</span>
 }
 &nbsp;
 // Returns "XVG" from "XVG/BTC"
-export function marketSymbolToQuoteSymbol (marketSymbol) {
-  const marketSymbolUppercased = marketSymbol.toUpperCase()
-  return marketSymbolUppercased.split('/')[0]
+export function <span class="fstat-no" title="function not covered" >marketSymbolToQuoteSymbol </span>(marketSymbol) {
+  const marketSymbolUppercased = <span class="cstat-no" title="statement not covered" >marketSymbol.toUpperCase()</span>
+<span class="cstat-no" title="statement not covered" >  return marketSymbolUppercased.split('/')[0]</span>
 }
 &nbsp;
 // Returns "Verge" from "XVG"
 export function symbolToName (symbol) {
   const symbolUppercased = symbol.toUpperCase()
   const currencyFullName = cryptocurrencies[symbolUppercased]
-  if (currencyFullName) return currencyFullName
-  return null
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (currencyFullName) return currencyFullName
+<span class="cstat-no" title="statement not covered" >  return null</span>
 }
 &nbsp;
 // Returns ["Verge", "Bitcoin"] from "XVG/BTC"
-export function symbolsToNames (symbols) {
-  if (!symbols) return null
-  const symbolsArray = symbols.split('/')
-  return symbolsArray.map(symbol =&gt; {
-    if (cryptocurrencies[symbol]) return cryptocurrencies[symbol]
-    return null
+export function <span class="fstat-no" title="function not covered" >symbolsToNames </span>(symbols) {
+<span class="cstat-no" title="statement not covered" >  if (!symbols) <span class="cstat-no" title="statement not covered" >return null</span></span>
+  const symbolsArray = <span class="cstat-no" title="statement not covered" >symbols.split('/')</span>
+<span class="cstat-no" title="statement not covered" >  return symbolsArray.map(<span class="fstat-no" title="function not covered" >sy</span>mbol =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (cryptocurrencies[symbol]) <span class="cstat-no" title="statement not covered" >return cryptocurrencies[symbol]</span></span>
+<span class="cstat-no" title="statement not covered" >    return null</span>
   })
 }
 &nbsp;
@@ -160,7 +160,7 @@ export function symbolIconLocation (symbol) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Apr 03 2018 21:05:14 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Apr 03 2018 23:06:54 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

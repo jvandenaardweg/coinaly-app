@@ -1,8 +1,5 @@
 <template>
   <ul class="list-group list-group-flush">
-    <li v-if="!hasCurrencies" class="list-group-item">
-      <p class="m-0 text-center font-weight-bold text-muted">No currencies available.</p>
-    </li>
     <li v-for="(meta, symbol, index) in currencies" :key="symbol" :id="`list-group-item-${symbol}`" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': isActive(symbol) }" @click="setSelected(symbol)">
       <div class="custom-control custom-radio">
         <img :src="symbolIconLocation(symbol)" :id="`list-group-item-icon-${symbol}`" width="18" class="mr-1" :alt="symbol" />
@@ -21,7 +18,7 @@
 import { symbolToName, symbolIconLocation } from '@/helpers/symbols'
 
 export default {
-  name: 'ListRadioCurrency',
+  name: 'ListGroupSelectCurrencies',
   props: ['currencies', 'activeCurrency'],
   data () {
     return {
@@ -41,7 +38,7 @@ export default {
   computed: {
     hasCurrencies () {
       if (!this.currencies) return false
-      return Object.keys(this.currencies).length
+      return Object.keys(this.currencies).length > 0
     }
   },
   watch: {
@@ -53,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/bootstrap/setting";
+@import "../../scss/bootstrap/setting";
 
 .list-group-item,
 label {

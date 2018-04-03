@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import SelectPricing from '../../components/SelectPricing'
-import TradingViewChart from '../../components/TradingViewChart.vue'
+import SelectPricing from '@/components/SelectPricing'
+import TradingViewChart from '@/components/TradingViewChart.vue'
 import { mapGetters } from 'vuex'
 import pickBy from 'lodash/pickBy'
 // import store from '../../store'

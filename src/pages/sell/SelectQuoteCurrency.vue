@@ -18,7 +18,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CardSelectBalance from '../../components/CardSelectBalance'
+import CardSelectBalance from '@/components/card/CardSelectBalance'
 
 export default {
   name: 'PageSellSelectQuoteCurrency',

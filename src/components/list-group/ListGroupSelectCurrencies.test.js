@@ -1,15 +1,15 @@
 import { shallow } from '@vue/test-utils'
-import ListRadioCurrency from '@/components/ListRadioCurrency.vue'
-import '../filters'
+import ListGroupSelectCurrencies from '@/components/list-group/ListGroupSelectCurrencies.vue'
+import '@/filters'
 
 import mocksBalances from '@/services/api/mocks/balances.json'
 
-describe('components/ListRadioCurrency.vue', () => {
+describe('components/list-group/ListGroupSelectCurrencies.vue', () => {
   let component
   const exampleSelectedCurrency = 'XVG'
 
   beforeEach(() => {
-    component = shallow(ListRadioCurrency, {
+    component = shallow(ListGroupSelectCurrencies, {
       stubs: ['router-link', 'router-view'],
       propsData: {
         currencies: mocksBalances
@@ -22,6 +22,17 @@ describe('components/ListRadioCurrency.vue', () => {
 
   it('should contain correct currencies prop', () => {
     expect(component.vm.currencies).toMatchObject(mocksBalances)
+  })
+
+  it('should return correct hasCurrencies value when having an array of currencies in currencies prop', () => {
+    expect(component.vm.hasCurrencies).toBe(true)
+  })
+
+  it('should return correct hasCurrencies value when having an empty currencies prop', () => {
+    component.setProps({
+      currencies: null
+    })
+    expect(component.vm.hasCurrencies).toBe(false)
   })
 
   it('renders correct amount of currencies', () => {
@@ -58,14 +69,6 @@ describe('components/ListRadioCurrency.vue', () => {
   it('renders correct available amount', () => {
     const listGroupItemAmount = component.find(`#list-group-item-amount-${exampleSelectedCurrency}`)
     expect(listGroupItemAmount.text()).toBe('1,500 XVG')
-  })
-
-  it('renders empty state message when there are no currencies', () => {
-    component.setProps({
-      currencies: null
-    })
-    const listGroupItemAmount = component.find('.list-group-item')
-    expect(listGroupItemAmount.text()).toBe('No currencies available.')
   })
 
   it('should emit selected currency back to parent', () => {

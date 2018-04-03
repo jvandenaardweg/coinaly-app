@@ -3,12 +3,14 @@
 
     <CardLoading :isLoading="isLoading" :text="'Loading Balances...'"></CardLoading>
 
-    <ListRadioCurrency
+    <CardEmpty :isEmpty="!isLoading && !hasBalances" :text="'No currencies available in your balance.'"></CardEmpty>
+
+    <ListRadioCurrencies
       v-if="!isLoading"
       :currencies="balances"
       :activeCurrency="currency"
       @selectedCurrency="handleSelectedCurrency">
-    </ListRadioCurrency>
+    </ListRadioCurrencies>
 
     <div class="card-footer">
       <router-link class="btn btn-primary btn-block" :to="`/${routeBase}/${currency}`" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
@@ -18,15 +20,17 @@
 </template>
 
 <script>
-import CardLoading from '@/components/CardLoading'
-import ListRadioCurrency from '@/components/ListRadioCurrency'
+import CardLoading from '@/components/card/CardLoading'
+import CardEmpty from '@/components/card/CardEmpty'
+import ListRadioCurrencies from '@/components/list-group/ListGroupSelectCurrencies'
 
 export default {
-  name: 'SelectBalance',
-  props: ['balances', 'activeCurrency', 'nextStepAction', 'routeBase', 'isLoading'],
+  name: 'CardSelectBalance',
+  props: ['balances', 'activeCurrency', 'nextStepAction', 'isLoading', 'routeBase'],
   components: {
     CardLoading,
-    ListRadioCurrency
+    CardEmpty,
+    ListRadioCurrencies
   },
   data () {
     return {
@@ -35,7 +39,8 @@ export default {
   },
   computed: {
     hasBalances () {
-      return Object.keys(this.balances).length
+      if (!this.balances) return false
+      return Object.keys(this.balances).length > 0
     }
   },
   methods: {

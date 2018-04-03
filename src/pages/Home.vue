@@ -130,9 +130,9 @@
 </template>
 
 <script>
-import SubNav from '../components/SubNav.vue'
-import CardTrade from '../components/CardTrade.vue'
-import EmptyState from '../components/EmptyState.vue'
+import SubNav from '@/components/SubNav.vue'
+import CardTrade from '@/components/card/CardTrade.vue'
+import EmptyState from '@/components/EmptyState.vue'
 
 export default {
   name: 'PageHome',
