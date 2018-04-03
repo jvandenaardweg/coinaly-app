@@ -17,22 +17,19 @@
   "jest": {
     "moduleFileExtensions": [
       "js",
-      "json",
       "vue"
     ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
     },
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-vue"
     ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/externals"
-    ]
+    "collectCoverage": true
   },
   "dependencies": {
     "@vue/test-utils": "^1.0.0-beta.13",

@@ -1,13 +1,18 @@
 <template>
   <div class="card">
 
-    <LoadingCard v-if="isLoadingMarkets" :text="'Loading Markets...'"></LoadingCard>
+    <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
 
     <EmptyCard v-if="!isLoadingMarkets && !hasMarkets" :text="`No markets for ${quoteCurrency} on [Bittrex]`"></EmptyCard>
 
-    <ul v-if="hasMarkets" class="list-group list-group-flush">
-      <ListRadioMarket v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketSymbolToBaseSymbol(symbol) }" @click="setSelected(symbol)"></ListRadioMarket>
+    <ListRadioCurrency
+      v-if="!isLoadingMarkets"
+      :currencies="quoteCurrencyMarkets"
+      :activeCurrency="baseCurrency"
+      @selectedCurrency="handleSelectedCurrency">
+    </ListRadioCurrency>
 
+    <ul v-if="hasMarkets" class="list-group list-group-flush">
       <li v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketSymbolToBaseSymbol(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
           <img :src="`static/icons/cryptocurrencies/svg/color/${marketSymbolToBaseSymbol(symbol).toLowerCase()}.svg`" width="18" class="mr-1" :alt="marketSymbolToBaseSymbol(symbol)" />
@@ -33,9 +38,9 @@
 </template>
 
 <script>
-import LoadingCard from './LoadingCard'
-import EmptyCard from './EmptyCard'
-import ListRadioMarket from './ListRadioMarket'
+import CardLoading from '@/components/CardLoading'
+import EmptyCard from '@/components/EmptyCard'
+import ListRadioCurrency from '@/components/ListRadioCurrency'
 
 export default {
   name: 'SelectMarket',
@@ -51,9 +56,9 @@ export default {
     'routeBase'
   ],
   components: {
-    LoadingCard,
+    CardLoading,
     EmptyCard,
-    ListRadioMarket
+    ListRadioCurrency
   },
   data () {
     return {
@@ -69,6 +74,9 @@ export default {
   methods: {
     setSelected (marketSymbol) {
       this.baseCurrency = this.marketSymbolToBaseSymbol(marketSymbol)
+    },
+    handleSelectedCurrency (symbol) {
+      this.baseCurrency = symbol
     },
     marketSymbolToBaseSymbol (marketSymbol) {
       return marketSymbol.split('/')[1]

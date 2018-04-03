@@ -1,5 +1,6 @@
 import axios from '../../axios'
 import pickBy from 'lodash/pickBy'
+import mocksBalances from '@/services/api/mocks/balances.json'
 
 function filterFilledCurrencies (currencies) {
   return pickBy(currencies, (currency, currencyName) => {
@@ -10,32 +11,7 @@ function filterFilledCurrencies (currencies) {
 export default {
   namespaced: true,
   state: {
-    currencies: {
-      'XVG': {
-        free: 1500,
-        total: 1500
-      },
-      'XLM': {
-        free: 21573,
-        total: 21573
-      },
-      'GVT': {
-        free: 25.06784267,
-        total: 25.06784267
-      },
-      'BTC': {
-        free: 1.65789234,
-        total: 1.65789234
-      },
-      'USDT': {
-        free: 9013,
-        total: 9013
-      },
-      'ETH': {
-        free: 3.2467,
-        total: 3.2467
-      }
-    },
+    currencies: mocksBalances, // TODO: remove when we got api
     isLoading: false,
     hasError: false,
     worth: [],
@@ -93,7 +69,7 @@ export default {
       return Object.keys(filterFilledCurrencies(state.currencies)).length
     },
     isLoading: state => {
-      return state.isLoading
+      return !Object.keys(state.currencies).length && state.isLoading
     },
     serverError: state => {
       return state.serverError

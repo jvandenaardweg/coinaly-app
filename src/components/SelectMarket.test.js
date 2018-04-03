@@ -8,7 +8,7 @@ const cryptocurrencies = require('cryptocurrencies')
 // localVue.use(VueRouter)
 // const router = new VueRouter()
 
-let testData = {
+const testData = {
   currencySymbols: cryptocurrencies,
   quoteCurrencyMarkets: {
     'XVG/BTC': {
@@ -81,25 +81,25 @@ describe('SelectMarket.vue', () => {
     })
   })
 
-  it('should show a loading indicator when loading the markets', () => {
-    testData.isLoadingMarkets = true
-    expect(component.props().isLoadingMarkets).toBe(true)
-  })
+  // it('should show a loading indicator when loading the markets', () => {
+  //   testData.isLoadingMarkets = true
+  //   expect(component.props().isLoadingMarkets).toBe(true)
+  // })
 
-  it('should show markets', () => {
-    expect(component.vm.hasMarkets).toBe(true)
-  })
+  // it('should show markets', () => {
+  //   expect(component.vm.hasMarkets).toBe(true)
+  // })
 
-  it('should give the correct base symbol from a market symbol', () => {
-    expect(component.vm.marketSymbolToBaseSymbol('XRP/BTC')).toBe('BTC')
-    expect(component.vm.marketSymbolToBaseSymbol('XRP/ETH')).toBe('ETH')
-  })
+  // it('should give the correct base symbol from a market symbol', () => {
+  //   expect(component.vm.marketSymbolToBaseSymbol('XRP/BTC')).toBe('BTC')
+  //   expect(component.vm.marketSymbolToBaseSymbol('XRP/ETH')).toBe('ETH')
+  // })
 
-  it('should give the correct full name currency', () => {
-    expect(component.vm.fullCurrencyName('XRP/BTC')).toBe('Bitcoin')
-    expect(component.vm.fullCurrencyName('XRP/ETH')).toBe('Ethereum')
-    expect(component.vm.fullCurrencyName('BTC/USDT')).toBe('Tether')
-  })
+  // it('should give the correct full name currency', () => {
+  //   expect(component.vm.fullCurrencyName('XRP/BTC')).toBe('Bitcoin')
+  //   expect(component.vm.fullCurrencyName('XRP/ETH')).toBe('Ethereum')
+  //   expect(component.vm.fullCurrencyName('BTC/USDT')).toBe('Tether')
+  // })
 
   it('should give the correct max sell price', () => {
     // TODO: check this test, shouldnt be the same "0.15"

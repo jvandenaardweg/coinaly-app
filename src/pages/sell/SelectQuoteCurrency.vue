@@ -5,24 +5,25 @@
         <h1 class="h2 mb-4">What are you selling?</h1>
         <p class="text-muted">The currencies below are what's in your current balance.</p>
       </div>
-      <SelectBalance
-        :allFilledCurrencies="allFilledCurrencies"
-        :previousQuoteCurrency="previousQuoteCurrency"
+      <CardSelectBalance
+        :balances="allFilledCurrencies"
+        :activeBalance="previousQuoteCurrency"
         :nextStepAction="'Next step: Market'"
+        :isLoading="isLoading"
         :routeBase="'sell'">
-        </SelectBalance>
+        </CardSelectBalance>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import SelectBalance from '../../components/SelectBalance'
+import CardSelectBalance from '../../components/CardSelectBalance'
 
 export default {
   name: 'PageSellSelectQuoteCurrency',
   components: {
-    SelectBalance
+    CardSelectBalance
   },
   data () {
     return {
@@ -31,7 +32,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allFilledCurrencies: 'balances/allFilledCurrencies'
+      allFilledCurrencies: 'balances/allFilledCurrencies',
+      isLoading: 'balances/isLoading'
     })
   }
 }

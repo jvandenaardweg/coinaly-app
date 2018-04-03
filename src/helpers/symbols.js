@@ -29,3 +29,8 @@ export function symbolsToNames (symbols) {
     return null
   })
 }
+
+export function symbolIconLocation (symbol) {
+  const lowerCasedSymbol = symbol.toLowerCase()
+  return `static/icons/cryptocurrencies/svg/color/${lowerCasedSymbol}.svg`
+}

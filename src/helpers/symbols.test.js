@@ -1,6 +1,6 @@
-import { marketSymbolToBaseSymbol, marketSymbolToQuoteSymbol, symbolToName, symbolsToNames } from './symbols'
+import { marketSymbolToBaseSymbol, marketSymbolToQuoteSymbol, symbolToName, symbolsToNames, symbolIconLocation } from './symbols'
 
-describe('helpers/markets.js', () => {
+describe('helpers/symbols.js', () => {
   it('should return the correct base symbol from a market symbol', () => {
     expect(marketSymbolToBaseSymbol('XRP/BTC')).toBe('BTC')
     expect(marketSymbolToBaseSymbol('XRP/ETH')).toBe('ETH')
@@ -22,5 +22,11 @@ describe('helpers/markets.js', () => {
     expect(symbolsToNames('XVG/BTC')).toEqual(expect.arrayContaining(['Verge', 'Bitcoin']))
     expect(symbolsToNames('XVG')).toEqual(expect.arrayContaining(['Verge']))
     expect(symbolsToNames('UNKNOWNCRYPTO')).toEqual(expect.arrayContaining([null]))
+    expect(symbolsToNames('')).toEqual(null)
+  })
+
+  it('should return a correct icon file location', () => {
+    expect(symbolIconLocation('XRP')).toBe('static/icons/cryptocurrencies/svg/color/xrp.svg')
+    expect(symbolIconLocation('BTC')).toBe('static/icons/cryptocurrencies/svg/color/btc.svg')
   })
 })
