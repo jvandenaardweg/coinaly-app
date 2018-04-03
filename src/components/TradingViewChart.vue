@@ -93,11 +93,6 @@ export default {
         greyText: options.greyText || ""
       */
     })
-  },
-  methods: {
-    handleClose () {
-      this.$emit('close')
-    }
   }
 }
 </script>
