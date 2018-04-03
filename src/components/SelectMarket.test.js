@@ -86,8 +86,8 @@ describe('SelectMarket.vue', () => {
       router,
       propsData: testData
     })
-    expect(wrapper.vm.marketNameToBaseSymbol('XRP/BTC')).toBe('BTC')
-    expect(wrapper.vm.marketNameToBaseSymbol('XRP/ETH')).toBe('ETH')
+    expect(wrapper.vm.marketSymbolToBaseSymbol('XRP/BTC')).toBe('BTC')
+    expect(wrapper.vm.marketSymbolToBaseSymbol('XRP/ETH')).toBe('ETH')
   })
 
   it('should give the correct full name currency', () => {

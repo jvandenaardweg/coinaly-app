@@ -6,14 +6,14 @@
     <EmptyCard v-if="!isLoadingMarkets && !hasMarkets" :text="`No markets for ${quoteCurrency} on [Bittrex]`"></EmptyCard>
 
     <ul v-if="hasMarkets" class="list-group list-group-flush">
-      <li v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketNameToBaseSymbol(symbol) }" @click="setSelected(symbol)">
+      <li v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketSymbolToBaseSymbol(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
-          <img :src="`static/icons/cryptocurrencies/svg/color/${marketNameToBaseSymbol(symbol).toLowerCase()}.svg`" width="18" class="mr-1" :alt="marketNameToBaseSymbol(symbol)" />
-          <input type="radio" :id="`baseCurrency-${marketNameToBaseSymbol(symbol)}`" name="baseCurrency" v-model="baseCurrency" :value="marketNameToBaseSymbol(symbol)" class="custom-control-input">
-          <label class="custom-control-label" :for="`baseCurrency-${marketNameToBaseSymbol(symbol)}`"><strong>{{ marketNameToBaseSymbol(symbol) }}</strong> <span class="text-muted" v-if="fullCurrencyName(symbol)">({{ fullCurrencyName(symbol) }})</span></label>
+          <img :src="`static/icons/cryptocurrencies/svg/color/${marketSymbolToBaseSymbol(symbol).toLowerCase()}.svg`" width="18" class="mr-1" :alt="marketSymbolToBaseSymbol(symbol)" />
+          <input type="radio" :id="`baseCurrency-${marketSymbolToBaseSymbol(symbol)}`" name="baseCurrency" v-model="baseCurrency" :value="marketSymbolToBaseSymbol(symbol)" class="custom-control-input">
+          <label class="custom-control-label" :for="`baseCurrency-${marketSymbolToBaseSymbol(symbol)}`"><strong>{{ marketSymbolToBaseSymbol(symbol) }}</strong> <span class="text-muted" v-if="fullCurrencyName(symbol)">({{ fullCurrencyName(symbol) }})</span></label>
         </div>
         <span class="badge badge-primary badge-pill" v-if="meta.smartMarketTrade">Smart Market Trade</span>
-        <span class="text-muted">~ {{ maxSellPrice(symbol) | number }} {{ marketNameToBaseSymbol(symbol) }}</span>
+        <span class="text-muted">~ {{ maxSellPrice(symbol) | number }} {{ marketSymbolToBaseSymbol(symbol) }}</span>
       </li>
     </ul>
     <div v-if="quoteCurrencyMarkets[baseCurrency] && quoteCurrencyMarkets[baseCurrency].smartMarketTrade" class="text-left p-4 bg-primary text-white">
@@ -64,9 +64,9 @@ export default {
   },
   methods: {
     setSelected (marketSymbol) {
-      this.baseCurrency = this.marketSymbolToBaseSymbol(marketName)
+      this.baseCurrency = this.marketSymbolToBaseSymbol(marketSymbol)
     },
-    marketNameToBaseSymbol (marketSymbol) {
+    marketSymbolToBaseSymbol (marketSymbol) {
       return marketSymbol.split('/')[1]
     },
     maxSellPrice (marketSymbol) {
@@ -76,7 +76,7 @@ export default {
       return null
     },
     fullCurrencyName (marketSymbol) {
-      const currencyFullName = this.currencySymbols[this.marketNameToBaseSymbol(marketSymbol)]
+      const currencyFullName = this.currencySymbols[this.marketSymbolToBaseSymbol(marketSymbol)]
       if (currencyFullName) return currencyFullName
       return null
     }
