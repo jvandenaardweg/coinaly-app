@@ -20,7 +20,11 @@
 
 <script>
 export default {
-  name: 'Sidebar'
+  name: 'Sidebar',
+  // Using empty data fixes some weird Jest coverage issues
+  data () {
+    return {}
+  }
 }
 </script>
 

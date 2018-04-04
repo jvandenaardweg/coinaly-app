@@ -9,7 +9,11 @@
 
 <script>
 export default {
-  name: 'CardEmpty',
-  props: ['isEmpty', 'text', 'actionLink', 'actionLabel']
+  name: 'CardPartialEmpty',
+  props: ['isEmpty', 'text', 'actionLink', 'actionLabel'],
+  // Using empty data fixes some weird Jest coverage issues
+  data () {
+    return {}
+  }
 }
 </script>

@@ -10,6 +10,10 @@ const moment = require('moment-timezone')
 export default {
   name: 'TradingViewChart',
   props: ['exchange', 'baseCurrency', 'quoteCurrency'],
+  // Using empty data fixes some weird Jest coverage issues
+  data () {
+    return {}
+  },
   computed: {
     tradingViewSymbol () {
       return `${this.exchange}:${this.quoteCurrency}${this.baseCurrency}`

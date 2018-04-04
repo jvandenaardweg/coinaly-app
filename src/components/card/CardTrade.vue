@@ -16,7 +16,11 @@
 
 <script>
 export default {
-  name: 'CardTrade'
+  name: 'CardTrade',
+  // Using empty data fixes some weird Jest coverage issues
+  data () {
+    return {}
+  }
 }
 </script>
 

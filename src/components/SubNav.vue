@@ -17,6 +17,10 @@
 
 <script>
 export default {
-  name: 'SubNav'
+  name: 'SubNav',
+  // Using empty data fixes some weird Jest coverage issues
+  data () {
+    return {}
+  }
 }
 </script>

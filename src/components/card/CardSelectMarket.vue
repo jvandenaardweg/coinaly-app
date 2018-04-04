@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import CardLoading from '@/components/card/partials/CardLoading'
-import CardEmpty from '@/components/card/partials/CardEmpty'
+import CardLoading from '@/components/card/CardPartialLoading'
+import CardEmpty from '@/components/card/CardPartialEmpty'
 import ListGroupSelectMarkets from '@/components/list-group/ListGroupSelectMarkets'
 
 export default {

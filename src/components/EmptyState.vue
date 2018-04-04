@@ -13,6 +13,10 @@
 <script>
 export default {
   name: 'EmptyState',
-  props: ['title', 'content', 'action', 'link']
+  props: ['title', 'content', 'action', 'link'],
+  // Using empty data fixes some weird Jest coverage issues
+  data () {
+    return {}
+  }
 }
 </script>

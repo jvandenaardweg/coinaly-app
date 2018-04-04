@@ -6,7 +6,11 @@
 
 <script>
 export default {
-  name: 'CardLoading',
-  props: ['isLoading', 'text']
+  name: 'CardPartialLoading',
+  props: ['isLoading', 'text'],
+  // Using empty data fixes some weird Jest coverage issues
+  data () {
+    return {}
+  }
 }
 </script>
