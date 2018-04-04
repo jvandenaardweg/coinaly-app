@@ -1,5 +1,7 @@
 # coinalyapp
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jvandenaardweg/coinaly-app.svg?token=77b9cd16e94a04a9da9fd961983d269458840e852c9a7078eab0dbf9f636f584&ts=1522829686902)](https://greenkeeper.io/)
+
 > Cryptocurrency trading made simple
 
 ## Build Setup
