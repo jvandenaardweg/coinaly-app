@@ -56,6 +56,12 @@ export default {
         return null
       }
     },
+    hasCurrencies: state => {
+      return Object.keys(state.currencies).length > 0
+    },
+    isEmpty: state => {
+      return Object.keys(state.currencies).length === 0 && state.isLoading === false
+    },
     allCurrencies: state => {
       return state.currencies
     },
@@ -69,7 +75,7 @@ export default {
       return Object.keys(filterFilledCurrencies(state.currencies)).length
     },
     isLoading: state => {
-      return !Object.keys(state.currencies).length && state.isLoading
+      return Object.keys(state.currencies).length === 0 && state.isLoading
     },
     serverError: state => {
       return state.serverError

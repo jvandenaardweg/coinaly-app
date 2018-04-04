@@ -11,7 +11,7 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --coverage  --notify",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "jest": {

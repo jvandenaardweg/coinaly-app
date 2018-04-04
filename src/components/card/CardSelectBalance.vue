@@ -3,14 +3,14 @@
 
     <CardLoading :isLoading="isLoading" :text="'Loading Balances...'"></CardLoading>
 
-    <CardEmpty :isEmpty="!isLoading && !hasBalances" :text="'No currencies available in your balance.'"></CardEmpty>
+    <CardEmpty :isEmpty="isEmpty" :text="'No currencies available in your balance.'"></CardEmpty>
 
-    <ListRadioCurrencies
-      v-if="!isLoading"
-      :currencies="balances"
+    <ListGroupSelectCurrencies
+      v-if="showListGroup"
+      :currencies="allFilledCurrencies"
       :activeCurrency="currency"
       @selectedCurrency="handleSelectedCurrency">
-    </ListRadioCurrencies>
+    </ListGroupSelectCurrencies>
 
     <div class="card-footer">
       <router-link class="btn btn-primary btn-block" :to="routeUrl" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
@@ -20,17 +20,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CardLoading from '@/components/card/CardPartialLoading'
 import CardEmpty from '@/components/card/CardPartialEmpty'
-import ListRadioCurrencies from '@/components/list-group/ListGroupSelectCurrencies'
+import ListGroupSelectCurrencies from '@/components/list-group/ListGroupSelectCurrencies'
 
 export default {
   name: 'CardSelectBalance',
-  props: ['balances', 'activeCurrency', 'nextStepAction', 'isLoading', 'routeBase'],
+  props: ['activeCurrency', 'nextStepAction', 'routeBase'],
   components: {
     CardLoading,
     CardEmpty,
-    ListRadioCurrencies
+    ListGroupSelectCurrencies
   },
   data () {
     return {
@@ -38,9 +39,14 @@ export default {
     }
   },
   computed: {
-    hasBalances () {
-      if (!this.balances) return false
-      return Object.keys(this.balances).length > 0
+    ...mapGetters({
+      allFilledCurrencies: 'balances/allFilledCurrencies',
+      hasCurrencies: 'balances/hasCurrencies',
+      isLoading: 'balances/isLoading',
+      isEmpty: 'balances/isEmpty'
+    }),
+    showListGroup () {
+      return !this.isLoading && !this.isEmpty
     },
     routeUrl () {
       return `/${this.routeBase}/${this.currency}`
@@ -53,10 +59,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.list-group-item,
-label {
-  cursor: pointer;
-}
-</style>
