@@ -1,5 +1,5 @@
 <template>
-  <div class="card"  @keyup.enter="handleEnter">
+  <div class="card">
 
     <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
 
@@ -65,9 +65,6 @@ export default {
   methods: {
     handleSelectedCurrency (symbol) {
       this.baseCurrency = symbol
-    },
-    handleEnter () {
-      if (this.baseCurrency) this.$router.push(this.goToUrl)
     }
   },
   watch: {
