@@ -1,6 +1,7 @@
-import axios from '../../axios'
+// import axios from '../../axios'
+import * as api from '@/api/balances'
 import pickBy from 'lodash/pickBy'
-import mocksBalances from '@/services/api/mocks/balances.json'
+// import mocksBalances from '@/services/api/mocks/balances.json'
 
 function filterFilledCurrencies (currencies) {
   return pickBy(currencies, (currency, currencyName) => {
@@ -11,7 +12,7 @@ function filterFilledCurrencies (currencies) {
 export default {
   namespaced: true,
   state: {
-    currencies: mocksBalances, // TODO: remove when we got api
+    currencies: [],
     isLoading: false,
     hasError: false,
     worth: [],
@@ -82,19 +83,32 @@ export default {
     }
   },
   actions: {
-    getAll (context) {
-      context.commit('startLoading')
-      return axios.get(`balances`)
+    // getAll (context) {
+    //   context.commit('startLoading')
+    //   return axios.get(`balances`)
+    //     .then(response => {
+    //       context.commit('addAll', response.data)
+    //     })
+    //     .catch(error => {
+    //       context.commit('addServerError', error.response.data)
+    //       console.error('Failed to get the balances.', error)
+    //     })
+    //     .finally(() => {
+    //       context.commit('stopLoading')
+    //     })
+    // }
+    getAll ({ commit }) {
+      commit('startLoading')
+      api.getAllBalances()
         .then(response => {
-          context.commit('addAll', response.data)
+          commit('addAll', response)
+          commit('stopLoading')
         })
-        .catch(error => {
-          context.commit('addServerError', error.response.data)
-          console.error('Failed to get the balances.', error)
-        })
-        .finally(() => {
-          context.commit('stopLoading')
-        })
+
+      // setTimeout(() => {
+      //   commit('addAll', mocksBalances)
+      //   commit('stopLoading')
+      // }, 1500)
     }
   }
 }

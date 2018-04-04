@@ -6,10 +6,10 @@
         <p class="text-muted">The currencies below are what's in your current balance.</p>
       </div>
       <CardSelectBalance
-        :activeCurrency="activeCurrency"
+        :preselectedCurrency="preselectedCurrency"
         :nextStepAction="'Next step: Market'"
         :routeBase="'sell'">
-        </CardSelectBalance>
+      </CardSelectBalance>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      activeCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null
+      preselectedCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null
     }
   }
 }

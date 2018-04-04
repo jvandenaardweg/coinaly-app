@@ -27,6 +27,7 @@ export default {
   },
   created () {
     this.$store.dispatch('websockets/connect', 'bittrex')
+    this.$store.dispatch('balances/getAll')
   },
   computed: {
     ...mapGetters({

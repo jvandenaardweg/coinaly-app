@@ -9,7 +9,7 @@
           <span class="text-muted">(<span :id="`list-group-item-name-${marketSymbolToBaseSymbol(marketSymbol)}`">{{ symbolToName(marketSymbolToBaseSymbol(marketSymbol)) }}</span>)</span>
         </label>
       </div>
-      <span class="text-muted"><span :id="`list-group-item-amount-${marketSymbolToBaseSymbol(marketSymbol)}`">~ {{ marketLast(marketSymbol) }} {{ marketSymbolToBaseSymbol(marketSymbol) }}</span></span>
+      <span class="text-muted"><span :id="`list-group-item-amount-${marketSymbolToBaseSymbol(marketSymbol)}`">{{ marketLast(marketSymbol) }} {{ marketSymbolToBaseSymbol(marketSymbol) }}</span></span>
     </li>
   </ul>
 </template>
