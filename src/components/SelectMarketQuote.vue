@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import CardLoading from './card/CardLoading'
-import CardEmpty from './card/CardEmpty'
+import CardLoading from '@/components/card/partials/CardLoading'
+import CardEmpty from '@/components/card/partials/CardEmpty'
 
 export default {
   name: 'SelectCurrency',

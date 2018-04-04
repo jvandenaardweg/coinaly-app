@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card"  @keyup.enter="handleEnter">
 
     <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
 
@@ -19,15 +19,15 @@
     </ListGroupSelectMarkets>
 
     <div class="card-footer">
-      <router-link class="btn btn-primary btn-block" :to="`/${routeBase}/${quoteCurrency}/${baseCurrency}`" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
+      <router-link class="btn btn-primary btn-block" :to="routeUrl" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
     </div>
 
   </div>
 </template>
 
 <script>
-import CardLoading from '@/components/card/CardLoading'
-import CardEmpty from '@/components/card/CardEmpty'
+import CardLoading from '@/components/card/partials/CardLoading'
+import CardEmpty from '@/components/card/partials/CardEmpty'
 import ListGroupSelectMarkets from '@/components/list-group/ListGroupSelectMarkets'
 
 export default {
@@ -57,11 +57,17 @@ export default {
     hasMarkets () {
       if (!this.quoteCurrencyMarkets) return false
       return Object.keys(this.quoteCurrencyMarkets).length > 0
+    },
+    routeUrl () {
+      return `/${this.routeBase}/${this.quoteCurrency}/${this.baseCurrency}`
     }
   },
   methods: {
     handleSelectedCurrency (symbol) {
       this.baseCurrency = symbol
+    },
+    handleEnter () {
+      if (this.baseCurrency) this.$router.push(this.goToUrl)
     }
   },
   watch: {

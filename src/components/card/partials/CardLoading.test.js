@@ -1,5 +1,5 @@
 import { shallow } from '@vue/test-utils'
-import CardLoading from '@/components/card/CardLoading.vue'
+import CardLoading from '@/components/card/partials/CardLoading.vue'
 
 const sampleLoadingText = 'Currently loading data...'
 

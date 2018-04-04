@@ -1,10 +1,10 @@
 // import { shallow } from '@vue/test-utils'
-import CardEmpty from '@/components/card/CardEmpty.vue'
+import CardEmpty from '@/components/card/partials/CardEmpty.vue'
 import { shallow } from '@vue/test-utils'
 
 const sampleEmptyText = 'This is empty...'
 
-describe('components/card/CardEmpty.vue', () => {
+describe('components/card/partials/CardEmpty.vue', () => {
   let component
 
   beforeEach(() => {

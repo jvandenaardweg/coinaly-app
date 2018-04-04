@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @keyup.enter="handleEnter">
 
     <CardLoading :isLoading="isLoading" :text="'Loading Balances...'"></CardLoading>
 
@@ -13,15 +13,15 @@
     </ListRadioCurrencies>
 
     <div class="card-footer">
-      <router-link class="btn btn-primary btn-block" :to="`/${routeBase}/${currency}`" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
+      <router-link class="btn btn-primary btn-block" :to="routeUrl" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
     </div>
 
   </div>
 </template>
 
 <script>
-import CardLoading from '@/components/card/CardLoading'
-import CardEmpty from '@/components/card/CardEmpty'
+import CardLoading from '@/components/card/partials/CardLoading'
+import CardEmpty from '@/components/card/partials/CardEmpty'
 import ListRadioCurrencies from '@/components/list-group/ListGroupSelectCurrencies'
 
 export default {
@@ -41,11 +41,17 @@ export default {
     hasBalances () {
       if (!this.balances) return false
       return Object.keys(this.balances).length > 0
+    },
+    routeUrl () {
+      return `/${this.routeBase}/${this.currency}`
     }
   },
   methods: {
     handleSelectedCurrency (symbol) {
       this.currency = symbol
+    },
+    handleEnter () {
+      if (this.currency) this.$router.push(this.routeUrl)
     }
   }
 }
