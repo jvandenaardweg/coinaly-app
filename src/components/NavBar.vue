@@ -1,50 +1,54 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <router-link class="navbar-brand p-0 d-flex flex-row align-items-center" to="/" exact>
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 200 200">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 200 200">
           <g fill="none" fill-rule="evenodd">
-            <circle cx="100" cy="100" r="100" fill="#07F"/>
+            <circle cx="100" cy="100" r="100" fill="transparent"/>
             <g fill="#FFF" fill-rule="nonzero">
               <path d="M121.7 121.1a97 97 0 0 0 35-74.4c0-1.7-1.6-3.3-3.4-3.3a97.1 97.1 0 0 0-74.3 35 41 41 0 0 0-39.7 40.1c0 2.6 3.8 5.2 6.2 1.8 1.3-1.8 2.4-3.7 4-5.1 3.6-3.7 8.2-6.1 13.2-7 .1.5.4 1 .8 1.4l27 27 1.3.8c-.8 5-3.2 9.6-6.9 13.3-1.5 1.4-3.3 2.5-5.1 3.9-3.8 2.7-.5 6.3 1.8 6.2a41.2 41.2 0 0 0 40.1-39.7zm28.2-71c-.3 8.8-2 17.3-4.7 25.4L124.5 55a86.6 86.6 0 0 1 25.4-4.8zM48.1 107.5a34.2 34.2 0 0 1 25.3-21.8 226 226 0 0 0-8.6 15.5c-6.1.5-11.9 2.6-16.7 6.3zm45.5 22.7l-23.8-23.7a90.4 90.4 0 0 1 48-49l24.8 24.8a90.4 90.4 0 0 1-49 48zm5.2 5c4.7-2 15.4-8.4 15.5-8.5a34.1 34.1 0 0 1-21.7 25.2 31.6 31.6 0 0 0 6.2-16.6z"/>
               <path d="M63.5 117.5a3.3 3.3 0 0 0-4.8 0L47 129.3a3.3 3.3 0 1 0 4.7 4.7l11.9-11.8a3.3 3.3 0 0 0 0-4.7zM73 127c-.6-.6-1.5-1-2.4-1a3 3 0 0 0-1.6.5l-.8.5-23.7 23.7-.4.6a3.3 3.3 0 0 0 5.2 4.1L73 131.7l.5-.7c.8-1.3.6-2.9-.5-4zm9.6 9.6a3.3 3.3 0 0 0-4.8 0L66 148.4a3.3 3.3 0 1 0 4.7 4.7l11.9-11.8a3.3 3.3 0 0 0 0-4.7z"/>
             </g>
           </g>
         </svg>
-        <svg class="ml-3 mr-5" xmlns=http://www.w3.org/2000/svg height="22" viewBox="0 0 2888.8 945"><path fill=#495057 d="M0 505.4q0-57 17.7-106.5T68.2 313q32.9-36.3 80-57t106-20.5q72.6 0 137.4 26.5L366 359.2a269.6 269.6 0 0 0-46.6-14.8 250.6 250.6 0 0 0-55.4-5.8q-69.7 0-106 43.6t-36.3 123.2q0 76.5 34.3 121.2t115.8 44.6a304.5 304.5 0 0 0 59.9-5.9q29.4-5.9 51-14.7l16.7 98.1q-19.6 9.8-59.4 17.7a421.9 421.9 0 0 1-82 7.8q-65.7 0-114.3-20t-80.4-56q-31.9-35.8-47.6-85.4T0 505.4zm902-1q0 60.8-17.7 110.9t-50 85.3a225 225 0 0 1-78 55q-45.6 19.7-100.5 19.7t-100.2-19.7a226.2 226.2 0 0 1-77.6-55q-32.3-35.3-50.5-85.4t-18.2-110.8q0-60.8 18.2-110.4t51-84.9a225.5 225.5 0 0 1 78-54.5q45.1-19 99.1-19t99.6 19a219.6 219.6 0 0 1 78 54.5q32.4 35.3 50.5 84.9T902 504.4zm-121.7 0q0-76.6-32.9-121.2t-91.7-44.7q-58.9 0-91.8 44.7T531 504.4q0 77.5 32.9 122.7t91.7 45q58.9 0 91.8-45t32.9-122.7zm321 257H982.6v-513h118.7v513.2zm12.8-663.3q0 33.4-21.6 53t-51 19.6q-30.4 0-52-19.6t-21.6-53q0-34.3 21.6-54t52-19.6q29.4 0 51 19.6t21.6 54zm95.3 166.9q34.3-9.8 89.3-18.6t121.7-8.9q62.8 0 105 17.2t67.2 48q25 31 35.3 74.6t10.3 95.7v288.5h-118.7V491.6q0-41.2-5.4-70.1t-17.7-47.1a70.5 70.5 0 0 0-33.3-26.5q-21.1-8.4-51.6-8.4a395.6 395.6 0 0 0-47 3q-24.6 3-36.4 4.9v414.1h-118.7V265zM1921 678q55 0 83.4-5.8V540.7q-9.8-3-28.5-5.9a265.3 265.3 0 0 0-41.2-3 274.2 274.2 0 0 0-39.7 3 123.8 123.8 0 0 0-36.3 10.8 65.8 65.8 0 0 0-26 22q-9.8 14.3-9.8 35.9 0 42.2 26.5 58.4T1921 678zm-9.8-442.5q58.9 0 99.1 14.7t64.3 41.2q24 26.5 34.3 64.3t10.3 83v311q-27.4 6-82.9 14.2t-125.1 8.4q-46.1 0-84.4-8.8t-65.3-28.5q-27-19.6-42.2-51t-15.2-77.5q0-44.2 17.2-74.6a141 141 0 0 1 46.6-49.6q29.4-19.1 68.2-27.4a383.9 383.9 0 0 1 81-8.4 365.5 365.5 0 0 1 41.2 2.5 384.5 384.5 0 0 1 46.1 8.3v-19.6a153.7 153.7 0 0 0-4.9-39.3 81.3 81.3 0 0 0-17.2-32.9q-12.2-14.2-32.3-22t-50.6-7.9q-41.2 0-75.5 5.9t-56 13.7l-14.7-96.1q22.6-7.9 65.8-15.7a515.6 515.6 0 0 1 92.2-7.9zM2400 771.3q-53-1-87.8-11.8t-55.5-30.9q-20.6-20.1-29-50t-8.3-68.2V19.6L2338.2 0v587.8q0 21.6 3.4 36.3a58 58 0 0 0 12.3 25q8.8 10.3 24 15.7t38.7 8.3zm488.8-523q-79.5 292.4-184.5 530-19.6 44-40.2 75.5t-46.1 52a164 164 0 0 1-57 30q-31.3 9.2-72.5 9.2a254.8 254.8 0 0 1-54.5-5.9q-27-5.9-40.7-12.7l21.6-95.2q35.3 13.7 69.6 13.7 46.2 0 72.2-22t45.6-68.2q-56-108-107.5-235.6t-91.7-270.8h126.6q9.8 41.2 24 89.3t30.9 97.6q16.7 49.6 35.3 98.7t37.3 91.2q31.4-87.3 58.9-186t50-190.8h122.7z"></path></svg>
+        <!-- <svg class="ml-3 mr-5" xmlns=http://www.w3.org/2000/svg height="22" viewBox="0 0 2888.8 945"><path fill=#FFFFFF d="M0 505.4q0-57 17.7-106.5T68.2 313q32.9-36.3 80-57t106-20.5q72.6 0 137.4 26.5L366 359.2a269.6 269.6 0 0 0-46.6-14.8 250.6 250.6 0 0 0-55.4-5.8q-69.7 0-106 43.6t-36.3 123.2q0 76.5 34.3 121.2t115.8 44.6a304.5 304.5 0 0 0 59.9-5.9q29.4-5.9 51-14.7l16.7 98.1q-19.6 9.8-59.4 17.7a421.9 421.9 0 0 1-82 7.8q-65.7 0-114.3-20t-80.4-56q-31.9-35.8-47.6-85.4T0 505.4zm902-1q0 60.8-17.7 110.9t-50 85.3a225 225 0 0 1-78 55q-45.6 19.7-100.5 19.7t-100.2-19.7a226.2 226.2 0 0 1-77.6-55q-32.3-35.3-50.5-85.4t-18.2-110.8q0-60.8 18.2-110.4t51-84.9a225.5 225.5 0 0 1 78-54.5q45.1-19 99.1-19t99.6 19a219.6 219.6 0 0 1 78 54.5q32.4 35.3 50.5 84.9T902 504.4zm-121.7 0q0-76.6-32.9-121.2t-91.7-44.7q-58.9 0-91.8 44.7T531 504.4q0 77.5 32.9 122.7t91.7 45q58.9 0 91.8-45t32.9-122.7zm321 257H982.6v-513h118.7v513.2zm12.8-663.3q0 33.4-21.6 53t-51 19.6q-30.4 0-52-19.6t-21.6-53q0-34.3 21.6-54t52-19.6q29.4 0 51 19.6t21.6 54zm95.3 166.9q34.3-9.8 89.3-18.6t121.7-8.9q62.8 0 105 17.2t67.2 48q25 31 35.3 74.6t10.3 95.7v288.5h-118.7V491.6q0-41.2-5.4-70.1t-17.7-47.1a70.5 70.5 0 0 0-33.3-26.5q-21.1-8.4-51.6-8.4a395.6 395.6 0 0 0-47 3q-24.6 3-36.4 4.9v414.1h-118.7V265zM1921 678q55 0 83.4-5.8V540.7q-9.8-3-28.5-5.9a265.3 265.3 0 0 0-41.2-3 274.2 274.2 0 0 0-39.7 3 123.8 123.8 0 0 0-36.3 10.8 65.8 65.8 0 0 0-26 22q-9.8 14.3-9.8 35.9 0 42.2 26.5 58.4T1921 678zm-9.8-442.5q58.9 0 99.1 14.7t64.3 41.2q24 26.5 34.3 64.3t10.3 83v311q-27.4 6-82.9 14.2t-125.1 8.4q-46.1 0-84.4-8.8t-65.3-28.5q-27-19.6-42.2-51t-15.2-77.5q0-44.2 17.2-74.6a141 141 0 0 1 46.6-49.6q29.4-19.1 68.2-27.4a383.9 383.9 0 0 1 81-8.4 365.5 365.5 0 0 1 41.2 2.5 384.5 384.5 0 0 1 46.1 8.3v-19.6a153.7 153.7 0 0 0-4.9-39.3 81.3 81.3 0 0 0-17.2-32.9q-12.2-14.2-32.3-22t-50.6-7.9q-41.2 0-75.5 5.9t-56 13.7l-14.7-96.1q22.6-7.9 65.8-15.7a515.6 515.6 0 0 1 92.2-7.9zM2400 771.3q-53-1-87.8-11.8t-55.5-30.9q-20.6-20.1-29-50t-8.3-68.2V19.6L2338.2 0v587.8q0 21.6 3.4 36.3a58 58 0 0 0 12.3 25q8.8 10.3 24 15.7t38.7 8.3zm488.8-523q-79.5 292.4-184.5 530-19.6 44-40.2 75.5t-46.1 52a164 164 0 0 1-57 30q-31.3 9.2-72.5 9.2a254.8 254.8 0 0 1-54.5-5.9q-27-5.9-40.7-12.7l21.6-95.2q35.3 13.7 69.6 13.7 46.2 0 72.2-22t45.6-68.2q-56-108-107.5-235.6t-91.7-270.8h126.6q9.8 41.2 24 89.3t30.9 97.6q16.7 49.6 35.3 98.7t37.3 91.2q31.4-87.3 58.9-186t50-190.8h122.7z"></path></svg> -->
       </router-link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> -->
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- </button> -->
+      <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <router-link class="nav-item nav-link" to="/" exact>Home</router-link>
-          <router-link class="nav-item nav-link" to="/exchanges">Exchanges</router-link>
           <router-link class="nav-item nav-link" to="/balances">Balances</router-link>
           <router-link class="nav-item nav-link" to="/buy">Buy</router-link>
           <router-link class="nav-item nav-link" to="/sell">Sell</router-link>
           <router-link class="nav-item nav-link" to="/markets">Markets</router-link>
-          <!-- <a class="nav-item nav-link disabled" href="#">Markets</a> -->
         </div>
+      </div> -->
+      <div>
+        <BtnRefresh></BtnRefresh>
       </div>
-      <!-- <div class="dropdown">
-        <button @click="show = !show" class="btn btn-tertiary btn-md dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="dropdown">
+        <button @click="show = !show" class="btn btn-tertiary btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Bittrex
         </button>
         <div class="dropdown-menu dropdown-menu-right" :class="{'show': show }" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#">Switch to: <strong>Binance</strong></a>
           <a class="dropdown-item" href="#">Switch to: <strong>GDAX</strong></a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Change API keys</a>
+          <a class="dropdown-item" href="#">Exchange settings</a>
         </div>
-      </div> -->
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
+import BtnRefresh from '@/components/BtnRefresh'
 export default {
   name: 'NavBar',
+  components: {
+    BtnRefresh
+  },
   data () {
     return {
       show: false
@@ -56,10 +60,21 @@ export default {
 
 <style lang="scss">
 @import "../scss/bootstrap/setting";
+.navbar {
+  background-color: $blue;
+  height: 3.75rem;
+  border: 0;
+}
+
 .navbar-nav {
   .nav-link {
+    color: $white;
+    font-weight: bold;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    font-size: 1.05rem;
     &.active {
-      background: $border-color;
+      background: #517AB8;
       border-radius: $border-radius;
     }
   }

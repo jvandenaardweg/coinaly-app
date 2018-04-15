@@ -1,19 +1,5 @@
-import socketCluster from 'socketcluster-client'
-// More: https://github.com/SocketCluster/socketcluster-client#connect-options
-var options = {
-  hostname: 'socket.coinaly.io',
-  secure: true,
-  port: 443,
-  rejectUnauthorized: false, // Only necessary during debug if using a self-signed certificate
-  connectTimeout: 5000, // milliseconds
-  ackTimeout: 5000, // milliseconds
-  autoReconnectOptions: {
-    initialDelay: 5000, // milliseconds
-    randomness: 5000, // milliseconds
-    multiplier: 1.5, // decimal
-    maxDelay: 3000 // milliseconds
-  }
-}
+import Vue from 'vue'
+import { websocketConnect } from '../../websocket'
 
 export default {
   namespaced: true,
@@ -28,9 +14,13 @@ export default {
       disconnect: {},
       close: {},
       kickOut: {}
-    }
+    },
+    socket: null
   },
   mutations: {
+    addSocket (state, socket) {
+      Vue.set(state, 'socket', socket)
+    },
     setEventOutput (state, payload) {
       state.events[payload.eventName] = payload.eventData
     },
@@ -50,20 +40,42 @@ export default {
     }
   },
   actions: {
-    connect (context, exchangeName) {
-      var socket = socketCluster.create(options)
+    // getTicker ({ commit, rootGetters }, symbol) {
+    //   var socket = socketCluster.create(options)
+    //   const selectedExchange = rootGetters['exchanges/selected']
+    //   const exchangeDataChannel = socket.subscribe(`TICKERS~${selectedExchange}~${symbol}`)
+    //   exchangeDataChannel.watch(function (response) {
+    //     console.log('Received Ticker Data:', response)
+    //     commit('tickers/addTicker', response, {root: true})
+    //   })
+    // },
 
-      const exchangeDataChannel = socket.subscribe(`markets--${exchangeName}`)
+    // subscribe({ commit, rootGetters }, channel) {
+    //   const selectedExchange = rootGetters['exchanges/selected']
+    //   const exchangeDataChannel = socket.subscribe(`TICKERS~${selectedExchange.toUpperCase()}~NEW`)
+    // },
+
+    subscribe ({ commit }, channel) {
+
+    },
+
+    connect ({ commit, rootGetters }) {
+      const socket = websocketConnect()
+      commit('addSocket', socket)
+
+      const selectedExchange = rootGetters['exchanges/selected']
+      const exchangeDataChannel = socket.subscribe(`TICKERS~${selectedExchange.toUpperCase()}~NEW`)
+
       exchangeDataChannel.watch(function (response) {
         console.log('Received Exchange Data:', response)
         // const markets = Object.values(response.data)
-        context.commit('markets/addAllMarkets', response.data, {root: true})
+        commit('markets/addAllMarkets', response, {root: true})
         // context.commit('addPriceIndexes', response.data)
       })
 
       socket.on('subscribe', function (channelname) {
         console.log('subscribe:' + channelname)
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'subscribe',
           eventData: channelname
         })
@@ -71,7 +83,7 @@ export default {
 
       socket.on('subscribeFail', function (channelname) {
         console.log('subscribeFail:' + channelname)
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'subscribeFail',
           eventData: channelname
         })
@@ -79,7 +91,7 @@ export default {
 
       socket.on('unsubscribe', function (channelname) {
         console.log('unsubscribe:' + channelname)
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'unsubscribe',
           eventData: channelname
         })
@@ -87,7 +99,7 @@ export default {
 
       socket.on('subscribeStateChange', function (data) {
         console.log('subscribeStateChange:' + JSON.stringify(data))
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'subscribeStateChange',
           eventData: data
         })
@@ -98,7 +110,7 @@ export default {
       })
 
       socket.on('error', function (data) {
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'error',
           eventData: data
         })
@@ -107,8 +119,8 @@ export default {
 
       socket.on('connect', function (data) {
         console.log('Socketcluster Connect', data)
-        context.commit('removeEventOutput', 'error')
-        context.commit('setEventOutput', {
+        commit('removeEventOutput', 'error')
+        commit('setEventOutput', {
           eventName: 'connect',
           eventData: data
         })
@@ -116,7 +128,7 @@ export default {
 
       socket.on('disconnect', function (data) {
         console.log('Socketcluster Disconnect', data)
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'disconnect',
           eventData: data
         })
@@ -124,7 +136,7 @@ export default {
 
       socket.on('close', function (data) {
         console.log('Socketcluster Close', data)
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'close',
           eventData: data
         })
@@ -132,7 +144,7 @@ export default {
 
       socket.on('kickOut', function (data) {
         console.log('Socketcluster KickOut', data)
-        context.commit('setEventOutput', {
+        commit('setEventOutput', {
           eventName: 'kickOut',
           eventData: data
         })

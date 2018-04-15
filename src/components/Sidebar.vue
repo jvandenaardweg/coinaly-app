@@ -1,13 +1,20 @@
 <template>
-  <nav class="bg-dark sidebar">
+  <nav class="sidebar">
     <div class="sidebar-sticky">
-      items
+      <ul class="list-unstyled">
+        <li><a href="#" class="btn">Balances</a></li>
+        <li><a href="#" class="btn">Buy</a></li>
+        <li><a href="#" class="btn">Sell</a></li>
+        <li><a href="#" class="btn">Markets</a></li>
+        <li><a href="#" class="btn">Settings</a></li>
+      </ul>
+      <!-- items -->
       <!-- <img src="~feather-icons/dist/icons/home.svg" /> -->
       <svg class="feather feather-home"
-        width="24"
-        height="24"
+        width="20"
+        height="20"
         fill="transparent"
-        stroke="#fff"
+        stroke="#000"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -29,8 +36,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../scss/bootstrap/setting";
+
 .sidebar {
-  width: 100px;
-  z-index: 1030;
+  width: 70px;
+  z-index: 100;
+  padding-top: 4rem;
+  background: $white;
 }
 </style>

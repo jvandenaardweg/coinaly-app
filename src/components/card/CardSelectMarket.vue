@@ -19,7 +19,7 @@
     </ListGroupSelectMarkets>
 
     <div class="card-footer">
-      <router-link class="btn btn-primary btn-block" :to="routeUrl" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
+      <router-link class="btn btn-primary btn-lg btn-block" :to="routeUrl" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
     </div>
 
   </div>
@@ -76,8 +76,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/bootstrap/setting";
+@import "~bootstrap/scss/mixins/breakpoints";
+
 .list-group-item,
 label {
   cursor: pointer;
+}
+
+.card-footer {
+  @include media-breakpoint-only(xs) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    position: fixed;
+    background: none;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    border: 0;
+  }
 }
 </style>

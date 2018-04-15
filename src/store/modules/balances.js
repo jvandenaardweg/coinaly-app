@@ -61,7 +61,7 @@ export default {
       return Object.keys(state.currencies).length > 0
     },
     isEmpty: state => {
-      return Object.keys(state.currencies).length === 0 && state.isLoading === false
+      return Object.keys(state.currencies).length === 0
     },
     allCurrencies: state => {
       return state.currencies
@@ -76,7 +76,7 @@ export default {
       return Object.keys(filterFilledCurrencies(state.currencies)).length
     },
     isLoading: state => {
-      return Object.keys(state.currencies).length === 0 && state.isLoading
+      return state.isLoading
     },
     serverError: state => {
       return state.serverError
@@ -97,18 +97,14 @@ export default {
     //       context.commit('stopLoading')
     //     })
     // }
-    getAll ({ commit }) {
+    getAll ({ dispatch, commit, getters, rootGetters }, options) {
       commit('startLoading')
-      api.getAllBalances()
+      const selectedExchange = rootGetters['exchanges/selected']
+      api.getAllBalances(options, selectedExchange)
         .then(response => {
           commit('addAll', response)
           commit('stopLoading')
         })
-
-      // setTimeout(() => {
-      //   commit('addAll', mocksBalances)
-      //   commit('stopLoading')
-      // }, 1500)
     }
   }
 }

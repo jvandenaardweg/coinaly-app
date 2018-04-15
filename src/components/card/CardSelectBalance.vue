@@ -1,7 +1,7 @@
 <template>
   <div class="card">
 
-    <CardLoading :isLoading="isLoading" :text="'Loading Balances...'"></CardLoading>
+    <CardLoading :isLoading="isEmpty && isLoading" :text="'Loading Balances...'"></CardLoading>
 
     <CardEmpty :isEmpty="isEmpty" :text="'No currencies available in your balance.'"></CardEmpty>
 
@@ -15,12 +15,12 @@
             <span class="text-muted">(<span :id="`list-group-item-name-${symbol}`">{{ symbolToName(symbol) }}</span>)</span>
           </label>
         </div>
-        <span class="text-muted"><span :id="`list-group-item-amount-${symbol}`">{{ meta.free | number }} {{ symbol }}</span></span>
+        <span class="text-muted d-none d-sm-block"><span :id="`list-group-item-amount-${symbol}`">{{ meta.free | number }} {{ symbol }}</span></span>
       </li>
     </ul>
 
-    <div class="card-footer">
-      <router-link class="btn btn-primary btn-block" :to="routeUrl" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
+    <div class="card-footer" :class="{ 'd-none d-sm-block': !currency }">
+      <router-link class="btn btn-primary btn-lg btn-block" :to="routeUrl" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
     </div>
 
   </div>
@@ -72,6 +72,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../scss/bootstrap/setting";
+@import "~bootstrap/scss/mixins/breakpoints";
 
 .list-group-item,
 label {
@@ -83,6 +84,19 @@ label {
     &:hover {
       background-color: $light;
     }
+  }
+}
+
+.card-footer {
+  @include media-breakpoint-only(xs) {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    position: fixed;
+    background: none;
+    left: 0;
+    width: 100%;
+    bottom: 3.5rem;
+    border: 0;
   }
 }
 </style>

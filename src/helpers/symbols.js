@@ -14,7 +14,9 @@ export function marketSymbolToQuoteSymbol (marketSymbol) {
 
 // Returns "Verge" from "XVG"
 export function symbolToName (symbol) {
-  const symbolUppercased = symbol.toUpperCase()
+  let symbolUppercased = symbol.toUpperCase()
+  // Some exchanges use Change iota to miota (some exchanges use iota, which the wrong symbol name)
+  if (symbolUppercased === 'IOTA' || symbolUppercased === 'MIOTA') symbolUppercased = 'IOT'
   const currencyFullName = cryptocurrencies[symbolUppercased]
   if (currencyFullName) return currencyFullName
   return null
@@ -31,6 +33,8 @@ export function symbolsToNames (symbols) {
 }
 
 export function symbolIconLocation (symbol) {
-  const lowerCasedSymbol = symbol.toLowerCase()
+  let lowerCasedSymbol = symbol.toLowerCase()
+  // Change iota to miota (some exchanges use iota, which the wrong symbol name)
+  if (lowerCasedSymbol === 'iota' || lowerCasedSymbol === 'miota') lowerCasedSymbol = 'miota'
   return `static/icons/cryptocurrencies/svg/color/${lowerCasedSymbol}.svg`
 }

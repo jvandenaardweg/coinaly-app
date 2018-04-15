@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
-    <div class="page mt-9">
+
+    <TabBar></TabBar>
+    <!-- <Sidebar></Sidebar> -->
+    <div class="page">
       <div class="page-main">
         <div class="page-content">
           <div class="container">
-            <router-view></router-view>
-            {{ websocketsError }}
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
+            <ExchangeStatus></ExchangeStatus>
           </div>
         </div>
       </div>
@@ -15,24 +20,24 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
-import Sidebar from './components/Sidebar.vue'
-import { mapGetters } from 'vuex'
+import NavBar from '@/components/NavBar.vue'
+import Sidebar from '@/components/Sidebar.vue'
+import ExchangeStatus from '@/components/ExchangeStatus.vue'
+import TabBar from '@/components/TabBar.vue'
 
 export default {
   name: 'app',
   components: {
     NavBar,
-    Sidebar
+    Sidebar,
+    ExchangeStatus,
+    TabBar
   },
   created () {
-    this.$store.dispatch('websockets/connect', 'bittrex')
+    this.$store.commit('exchanges/setSelected', 'binance')
+    this.$store.dispatch('websockets/connect')
+    // this.$store.dispatch('websockets/subscribe', 'TICKERS~BITTREX~NEW')
     this.$store.dispatch('balances/getAll')
-  },
-  computed: {
-    ...mapGetters({
-      websocketsError: 'websockets/error'
-    })
   }
 }
 </script>
@@ -45,6 +50,18 @@ export default {
 @import "./scss/bootstrap/components/dropdown";
 @import "./scss/bootstrap/components/card";
 @import "./scss/bootstrap/components/select-group";
+
+#app {
+  padding-bottom: 5rem;
+}
+
+.page {
+  padding-top: 5rem;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 9rem;
+  }
+}
 
 html {
   -webkit-font-smoothing: antialiased;
