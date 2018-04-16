@@ -7,6 +7,9 @@
       <div class="col-7">
         <CardMarkets></CardMarkets>
       </div>
+      <div class="col-5">
+        rechts
+      </div>
     </div>
   </div>
 </template>

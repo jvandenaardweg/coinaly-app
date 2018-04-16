@@ -1,6 +1,6 @@
 <template>
   <form @submit="handleSubmit" @change="handleChange" :disabled="disabled" :aria-disabled="disabled">
-    <!-- <div class="form-group">
+    <div class="form-group">
       <label for="exchange">Active exchange</label>
       <select class="custom-select" id="exchange" v-model="exchange">
         <option :value="null" disabled>Select an exchange</option>
@@ -8,7 +8,7 @@
         <option value="binance">Binance</option>
       </select>
     </div>
-    <hr /> -->
+    <hr />
     <!-- <div class="form-group">
       <label for="api-key">API Key</label>
       <input type="text" class="form-control" id="api-key" placeholder="[exchange] API Key">

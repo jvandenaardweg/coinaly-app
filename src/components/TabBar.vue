@@ -1,31 +1,36 @@
 <template>
   <nav class="nav">
     <router-link class="nav-link" to="/balances">
-      <svg class="feather feather-trending-up" width="18" height="18" fill="transparent" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#trending-up"/></svg>
+      <Icon name="trending-up"></Icon>
       <span>Balances</span>
     </router-link>
     <router-link class="nav-link" to="/buy">
-      <svg class="feather feather-download" width="18" height="18" fill="transparent" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#download"/></svg>
+      <Icon name="download"></Icon>
       <span>Buy</span>
     </router-link>
     <router-link class="nav-link" to="/sell">
-      <svg class="feather feather-upload" width="18" height="18" fill="transparent" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#upload"/></svg>
+      <Icon name="upload"></Icon>
       <span>Sell</span>
     </router-link>
     <router-link class="nav-link" to="/markets">
-      <svg class="feather feather-shopping-cart" width="18" height="18" fill="transparent" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#shopping-cart"/></svg>
+      <Icon name="shopping-cart"></Icon>
       <span>Markets</span>
     </router-link>
     <router-link class="nav-link" to="/settings">
-      <svg class="feather feather-settings" width="18" height="18" fill="transparent" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#settings"/></svg>
+      <Icon name="settings"></Icon>
       <span>Settings</span>
     </router-link>
   </nav>
 </template>
 
 <script>
+import Icon from '@/components/Icon'
+
 export default {
-  name: 'TabBar'
+  name: 'TabBar',
+  components: {
+    Icon
+  }
 }
 </script>
 

@@ -13,7 +13,7 @@
     "test": "jest",
     "test:watch": "jest --watch --notify",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "heroku-postbuild": "[ $CI <> true ] && echo 'npm run build' || echo ''"
+    "heroku-postbuild": "[ $NODE_ENV != test ] && npm run build || exit 0"
   },
   "jest": {
     "moduleFileExtensions": [

@@ -23,6 +23,8 @@ import PageSellSelectQuoteCurrency from '@/pages/sell/SelectQuoteCurrency.vue'
 import PageSellSelectBaseCurrency from '@/pages/sell/SelectBaseCurrency.vue'
 import PageSellSelectPricing from '@/pages/sell/SelectPricing.vue'
 
+import PageOnboardingIndex from '@/pages/onboarding/Index.vue'
+
 // import store from '../store'
 
 Vue.use(Router)
@@ -135,6 +137,11 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: '/onboarding',
+      name: 'Onboarding',
+      component: PageOnboardingIndex
     }
   ]
 })
