@@ -52,6 +52,7 @@ export default {
 @import "./scss/bootstrap/components/dropdown";
 @import "./scss/bootstrap/components/card";
 @import "./scss/bootstrap/components/select-group";
+@import "./scss/bootstrap/components/list-group";
 
 #app {
   padding-bottom: 5rem;
@@ -59,6 +60,10 @@ export default {
 
 .page {
   padding-top: 5rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 5rem;
+  }
 
   @include media-breakpoint-up(md) {
     padding-top: 9rem;
@@ -69,6 +74,10 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 .navbar {

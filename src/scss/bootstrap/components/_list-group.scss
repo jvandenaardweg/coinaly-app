@@ -1,0 +1,6 @@
+.list-group-item {
+    @include media-breakpoint-only(xs) {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}

@@ -2,4 +2,24 @@
     .card-footer {
         margin-top: -1px;
     }
+
+    &.card-100-xs {
+      @include media-breakpoint-only(xs) {
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+    }
+
+  .card-header {
+    @include media-breakpoint-only(xs) {
+      padding: 0.75rem;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 0.95rem;
+    }
+  }
 }
