@@ -12,7 +12,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "jest",
     "test:watch": "jest --watch --notify",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "heroku-postbuild": "npm run build"
   },
   "jest": {
     "moduleFileExtensions": [
