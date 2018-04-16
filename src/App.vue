@@ -76,10 +76,6 @@ html {
   text-size-adjust: 100%;
 }
 
-body {
-  overflow-x: hidden;
-}
-
 .navbar {
   border-bottom: 1px $border-color solid;
 }

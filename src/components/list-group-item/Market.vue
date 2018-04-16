@@ -8,7 +8,7 @@
     </strong>
   </div>
   <div class="d-flex align-items-center">
-    <span v-if="!hideVolume" class="text-right mr-5">
+    <span v-if="!hideVolume" class="text-right mr-5 d-none d-sm-block">
       {{ market.baseVolume | toFixed(2) | number }} {{ marketSymbolToQuoteSymbol(market.symbol) }}
       <span class="font-weight-normal d-block text-muted">{{ market.quoteVolume | toFixed(2) | number }} {{ marketSymbolToBaseSymbol(market.symbol) }}</span>
     </span>

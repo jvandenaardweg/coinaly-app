@@ -26,7 +26,7 @@ export default {
   padding: 0.4rem 0;
   color: #fff;
   font-weight: 600;
-  width: 3.8rem;
+  width: 4rem;
   text-align: center;
 }
 </style>
