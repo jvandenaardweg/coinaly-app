@@ -22,6 +22,11 @@ if (process.env.SENTRY_URL) {
   Raven.config(process.env.SENTRY_URL).addPlugin(RavenVue, Vue).install()
 }
 
+if (window) {
+  window.addEventListener('offline', (e) => store.commit('user/setOffline'))
+  window.addEventListener('online', (e) => store.commit('user/setOnline'))
+}
+
 sync(store, router)
 
 /* eslint-disable no-new */

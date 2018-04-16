@@ -1,3 +1,4 @@
+import Vue from 'vue'
 // import axios from '../../axios'
 import * as api from '@/api/balances'
 import pickBy from 'lodash/pickBy'
@@ -21,25 +22,25 @@ export default {
   mutations: {
     addAll (state, items) {
       delete items.info
-      state.currencies = items
+      Vue.set(state, 'currencies', items)
     },
     startLoading (state) {
-      state.isLoading = true
+      Vue.set(state, 'isLoading', true)
     },
     stopLoading (state) {
-      state.isLoading = false
+      Vue.set(state, 'isLoading', false)
     },
     setError (state) {
-      state.hasError = true
+      Vue.set(state, 'hasError', true)
     },
     removeError (state) {
-      state.hasError = false
+      Vue.set(state, 'hasError', false)
     },
     setWorth (state, payload) {
-      state.worth = payload
+      Vue.set(state, 'worth', payload)
     },
     addServerError (state, error) {
-      state.serverError = error
+      Vue.set(state, 'serverError', error)
     }
   },
   getters: {
@@ -100,7 +101,7 @@ export default {
     getAll ({ dispatch, commit, getters, rootGetters }, options) {
       commit('startLoading')
       const selectedExchange = rootGetters['exchanges/selected']
-      api.getAllBalances(options, selectedExchange)
+      return api.getAllBalances(options, selectedExchange)
         .then(response => {
           commit('addAll', response)
           commit('stopLoading')

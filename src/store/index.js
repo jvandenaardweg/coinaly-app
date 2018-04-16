@@ -10,6 +10,8 @@ import DepositsStore from './modules/deposits'
 import WithdrawalsStore from './modules/withdrawals'
 import WebsocketsStore from './modules/websockets'
 import AuthorizationStore from './modules/authorization'
+import UserStore from './modules/user'
+import TickersStore from './modules/tickers'
 
 Vue.use(Vuex)
 
@@ -23,6 +25,8 @@ export default new Vuex.Store({
     deposits: DepositsStore,
     withdrawals: WithdrawalsStore,
     websockets: WebsocketsStore,
-    authorization: AuthorizationStore
+    authorization: AuthorizationStore,
+    user: UserStore,
+    tickers: TickersStore
   }
 })

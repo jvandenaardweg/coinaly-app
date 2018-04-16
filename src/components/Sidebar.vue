@@ -19,7 +19,7 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       >
-        <use xlink:href="static/icons/feather-icons/feather-sprite.svg#home"/>
+        <use xlink:href="/static/icons/feather-icons/feather-sprite.svg#home"/>
       </svg>
     </div>
   </nav>

@@ -1,26 +1,40 @@
 <template>
-  <ul class="nav nav-pills mb-5">
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
-    </li>
-  </ul>
+  <nav class="subnav">
+    <div class="form-group m-0">
+      <div class="selectgroup w-100">
+        <router-link :to="item.uri" class="selectgroup-item" v-for="item in items" :key="item.slug">
+          <input type="radio" name="value" value="50" class="selectgroup-input" :checked="selected === item.slug">
+          <span class="selectgroup-button">{{ item.label }}</span>
+        </router-link>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
 export default {
   name: 'SubNav',
+  props: ['items', 'selected'],
   // Using empty data fixes some weird Jest coverage issues
   data () {
     return {}
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import "../scss/bootstrap/setting";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+.subnav {
+  background-color: $white;
+
+  a {
+    font-weight: 600;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+</style>

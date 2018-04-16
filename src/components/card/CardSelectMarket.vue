@@ -82,6 +82,7 @@ export default {
 .list-group-item,
 label {
   cursor: pointer;
+  font-weight: normal;
 }
 
 .card-footer {

@@ -1,21 +1,41 @@
 import Vue from 'vue'
+import VueCookie from 'vue-cookie'
+Vue.use(VueCookie)
+
+const initialSelectedExchange = Vue.cookie.get('selectedExchange') || null
 
 export default {
   namespaced: true,
   state: {
-    selected: null,
+    selected: initialSelectedExchange,
     exchanges: [],
-    available: ['bittrex', 'binance'] // Inspiration for what exchange should be next: https://coinmarketcap.com/exchanges/volume/24-hour/
+    available: {
+      'bittrex': {
+        name: 'Bittrex'
+      },
+      'binance': {
+        name: 'Binance'
+      }
+    }
   },
   mutations: {
     setSelected (state, exchangeName) {
       const exchangeSlug = exchangeName.toLowerCase()
       Vue.set(state, 'selected', exchangeSlug)
+
+      if (process.env.NODE_ENV === 'production') {
+        Vue.cookie.set('selectedExchange', exchangeSlug, { expires: '99Y', domain: 'coinaly.io' })
+      } else {
+        Vue.cookie.set('selectedExchange', exchangeSlug, { expires: '99Y', domain: 'localhost' })
+      }
     }
   },
   getters: {
     selected (state) {
       return state.selected
+    },
+    selectedName (state) {
+      return state.available[state.selected].name
     }
   },
   actions: { }

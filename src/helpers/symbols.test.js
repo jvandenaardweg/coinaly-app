@@ -26,8 +26,8 @@ describe('helpers/symbols.js', () => {
   })
 
   it('should return a correct icon file location', () => {
-    expect(symbolIconLocation('XRP')).toBe('static/icons/cryptocurrencies/svg/color/xrp.svg')
-    expect(symbolIconLocation('BTC')).toBe('static/icons/cryptocurrencies/svg/color/btc.svg')
-    expect(symbolIconLocation('IOTA')).toBe('static/icons/cryptocurrencies/svg/color/miota.svg')
+    expect(symbolIconLocation('XRP')).toBe('/static/icons/cryptocurrencies/svg/color/xrp.svg')
+    expect(symbolIconLocation('BTC')).toBe('/static/icons/cryptocurrencies/svg/color/btc.svg')
+    expect(symbolIconLocation('IOTA')).toBe('/static/icons/cryptocurrencies/svg/color/miota.svg')
   })
 })

@@ -11,7 +11,7 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "jest",
-    "test:watch": "jest --watch --coverage  --notify",
+    "test:watch": "jest --watch --notify",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "jest": {
@@ -36,7 +36,7 @@
       "!**/node_modules/**"
     ],
     "coverageDirectory": "<rootDir>/test/unit/coverage",
-    "collectCoverage": true
+    "collectCoverage": false
   },
   "dependencies": {
     "@vue/test-utils": "^1.0.0-beta.13",

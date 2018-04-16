@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import PageSell from '@/pages/Sell'
-// import PageBuy from '@/pages/Buy'
 import PageHome from '@/pages/Home'
-import PageMarkets from '@/pages/Markets'
+
+import PageMarketsIndex from '@/pages/markets/Index'
+
 import PageBalances from '@/pages/Balances'
-import PageExchanges from '@/pages/Exchanges'
+// import PageExchanges from '@/pages/Exchanges'
+// import PageSettings from '@/pages/Settings'
+
+import PageSettingsIndex from '@/pages/settings/Index'
+import PageSettingsAccount from '@/pages/settings/account/Index'
+import PageSettingsExchanges from '@/pages/settings/exchanges/Index'
+import PageSettingsExchangesEdit from '@/pages/settings/exchanges/Edit'
 
 import PageBuyIndex from '@/pages/buy/Index.vue'
 import PageBuySelectQuoteCurrency from '@/pages/buy/SelectQuoteCurrency.vue'
@@ -24,12 +30,18 @@ Vue.use(Router)
 export default new Router({
   linkActiveClass: 'active',
   scrollBehavior (to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { x: 0, y: 0 }
-    }
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (savedPosition) {
+          resolve(savedPosition)
+        } else {
+          resolve({ x: 0, y: 0 })
+        }
+      }, 100)
+    })
   },
+  mode: 'history',
+  fallback: false,
   routes: [
     {
       path: '/',
@@ -42,11 +54,13 @@ export default new Router({
       children: [
         {
           path: '',
-          component: PageBuySelectQuoteCurrency
+          component: PageBuySelectQuoteCurrency,
+          name: 'Quote'
         },
         {
           path: ':quoteCurrency',
-          component: PageBuySelectBaseCurrency
+          component: PageBuySelectBaseCurrency,
+          name: 'Base'
         },
         {
           path: ':quoteCurrency/:baseCurrency',
@@ -64,11 +78,13 @@ export default new Router({
       children: [
         {
           path: '',
-          component: PageSellSelectQuoteCurrency
+          component: PageSellSelectQuoteCurrency,
+          name: 'Sell - Balance'
         },
         {
           path: ':quoteCurrency',
-          component: PageSellSelectBaseCurrency
+          component: PageSellSelectBaseCurrency,
+          name: 'Sell - Market'
         },
         {
           path: ':quoteCurrency/:baseCurrency',
@@ -83,7 +99,7 @@ export default new Router({
     {
       path: '/markets',
       name: 'Markets',
-      component: PageMarkets
+      component: PageMarketsIndex
     },
     {
       path: '/balances',
@@ -91,9 +107,34 @@ export default new Router({
       component: PageBalances
     },
     {
-      path: '/exchanges',
-      name: 'Exchanges',
-      component: PageExchanges
+      path: '/settings',
+      component: PageSettingsIndex,
+      children: [
+        {
+          path: '',
+          component: PageSettingsAccount,
+          name: 'Account settings',
+          meta: {
+            slug: 'account'
+          }
+        },
+        {
+          path: 'exchanges',
+          component: PageSettingsExchanges,
+          name: 'Exchange settings',
+          meta: {
+            slug: 'exchanges'
+          }
+        },
+        {
+          path: 'exchanges/:edit',
+          component: PageSettingsExchangesEdit,
+          name: 'Exchange edit',
+          meta: {
+            slug: 'exchanges'
+          }
+        }
+      ]
     }
   ]
 })

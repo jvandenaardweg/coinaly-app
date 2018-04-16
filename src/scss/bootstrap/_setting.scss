@@ -50,6 +50,7 @@ $gray-900: #212529;
 
 // $blue: #07f;
 $blue: #3360a3;
+$dark-blue: #22467B;
 $azure: #45aaf2;
 $indigo: #6574cd;
 $purple: #a55eea;
@@ -79,7 +80,8 @@ $light: $gray-100;
 $dark: $gray-800;
 
 $colors: (
-	"blue": $blue,
+  "blue": $blue,
+  "dark-blue": $dark-blue,
 	"azure": $azure,
 	"indigo": $indigo,
 	"purple": $purple,
@@ -98,6 +100,7 @@ $colors: (
 
 $theme-colors: (
 	"primary": $primary,
+	"dark-blue": $dark-blue,
 	"secondary": $secondary,
 	"success": $success,
 	"info": $info,
@@ -195,7 +198,7 @@ $container-max-widths: (
 	sm: 540px,
 	md: 720px,
 	lg: 960px,
-	xl: 1200px
+	xl: 960px
 );
 
 // Header

@@ -1,6 +1,13 @@
-# coinalyapp
+# Coinaly App
+This repository is the frontend of Coinaly. In other words: "the dashboard".
 
-> Cryptocurrency trading made simple
+## Development depedencies
+In order to run this project locally, you need other project dependencies:
+
+&#x21B3; [coinaly-socket](http://google.nl): Websocket server for realtime Exchange Tickers
+&#x21B3; [coinaly-api](http://google.nl): Rest API to talk with Exchange API's
+
+See their GitHub repo's for installation instructions.
 
 ## Build Setup
 

@@ -22,13 +22,13 @@ export default {
       Vue.set(state, 'socket', socket)
     },
     setEventOutput (state, payload) {
-      state.events[payload.eventName] = payload.eventData
+      Vue.set(state.events, payload.eventName, payload.eventData)
     },
     removeEventOutput (state, eventName) {
-      state.events[eventName] = {}
+      Vue.set(state.events, eventName, {})
     },
     removeError (state) {
-      state.hasError = false
+      Vue.set(state, 'hasError', false)
     }
   },
   getters: {
@@ -37,6 +37,12 @@ export default {
     },
     error: state => {
       return state.events.error
+    },
+    state: state => {
+      return state.socket.state
+    },
+    events: state => {
+      return state.events
     }
   },
   actions: {
@@ -81,6 +87,14 @@ export default {
         })
       })
 
+      socket.on('connect', function (socket) {
+        console.log('connect:', socket)
+        commit('setEventOutput', {
+          eventName: 'connect',
+          eventData: socket
+        })
+      })
+
       socket.on('subscribeFail', function (channelname) {
         console.log('subscribeFail:' + channelname)
         commit('setEventOutput', {
@@ -106,7 +120,10 @@ export default {
       })
 
       socket.on('message', function (data) {
-        // console.log('message:' + data)
+        // commit('setEventOutput', {
+        //   eventName: 'message',
+        //   eventData: 1
+        // })
       })
 
       socket.on('error', function (data) {

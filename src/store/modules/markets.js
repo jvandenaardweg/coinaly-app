@@ -46,8 +46,8 @@ export default {
   },
   mutations: {
     addAllMarkets (state, markets) {
-      state.markets = markets
-      state.isLoading = false
+      Vue.set(state, 'markets', markets)
+      Vue.set(state, 'isLoading', false)
     },
     // addPriceIndexes (state, markets) {
     //   let payload = {
@@ -69,21 +69,21 @@ export default {
     //   state.priceIndexes = payload
     // },
     startLoading (state) {
-      state.isLoading = true
+      Vue.set(state, 'isLoading', true)
     },
     stopLoading (state) {
-      state.isLoading = false
+      Vue.set(state, 'isLoading', false)
     },
     setSelectedMarket (state, market) {
+      Vue.set(state, 'selectedMarket', market)
       if (process.env.NODE_ENV === 'production') {
         Vue.cookie.set('selectedMarket', market, { expires: '99Y', domain: 'coinaly.io' })
       } else {
         Vue.cookie.set('selectedMarket', market, { expires: '99Y', domain: 'localhost' })
       }
-      state.selectedMarket = market
     },
     removeSelectedMarket (state) {
-      state.selectedMarket = null
+      Vue.set(state, 'selectedMarket', null)
       Vue.cookie.delete('selectedMarket')
     }
   },
@@ -108,6 +108,9 @@ export default {
     },
     BTCUSDTMarket: state => {
       return filterMarkets(state.markets, 'BTC/USDT')[0]
+    },
+    hasMarkets: state => {
+      return Object.keys(state.markets).length > 0
     },
     // totalVolume: state => {
     //   if (state.markets.length) {

@@ -8,9 +8,11 @@
       <div class="page-main">
         <div class="page-content">
           <div class="container">
-            <keep-alive>
-              <router-view></router-view>
-            </keep-alive>
+            <transition name="fade" mode="out-in">
+              <!-- <keep-alive> -->
+                <router-view class="view"></router-view>
+              <!-- </keep-alive> -->
+            </transition>
             <ExchangeStatus></ExchangeStatus>
           </div>
         </div>
@@ -34,7 +36,7 @@ export default {
     TabBar
   },
   created () {
-    this.$store.commit('exchanges/setSelected', 'binance')
+    // this.$store.commit('exchanges/setSelected', 'bittrex')
     this.$store.dispatch('websockets/connect')
     // this.$store.dispatch('websockets/subscribe', 'TICKERS~BITTREX~NEW')
     this.$store.dispatch('balances/getAll')
@@ -73,8 +75,13 @@ html {
   border-bottom: 1px $border-color solid;
 }
 
-.btn {
+.btn,
+label {
   font-weight: 600;
+}
+
+label {
+  margin-bottom: 0.3rem;
 }
 
 .sidebar {
@@ -85,6 +92,18 @@ html {
   z-index: 100; /* Behind the navbar */
   padding: 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.view {
+  // max-width: 800px;
+  // margin: 0 auto;
+  position: relative;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: all 100ms ease
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
 }
 
 </style>

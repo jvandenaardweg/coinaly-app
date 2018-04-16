@@ -7,22 +7,7 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <div class="form-group m-0">
-            <div class="selectgroup w-100">
-              <label class="selectgroup-item m-0">
-                <input type="radio" name="value" value="50" class="selectgroup-input" checked="">
-                <span class="selectgroup-button">All</span>
-              </label>
-              <label class="selectgroup-item m-0">
-                <input type="radio" name="value" value="100" class="selectgroup-input">
-                <span class="selectgroup-button">Available</span>
-              </label>
-              <label class="selectgroup-item m-0">
-                <input type="radio" name="value" value="150" class="selectgroup-input">
-                <span class="selectgroup-button">Unavailable</span>
-              </label>
-            </div>
-          </div>
+          <SubNav :items="subNavItems"></SubNav>
         </div>
         <div class="card-footer">
           <div class="input-icon">
@@ -57,17 +42,24 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import SelectMarketQuote from '../../components/SelectMarketQuote'
+import SelectMarketQuote from '@/components/SelectMarketQuote'
+import SubNav from '@/components/SubNav'
 import pickBy from 'lodash/pickBy'
 
 export default {
   name: 'PageSellSelectQuoteCurrency',
   components: {
-    SelectMarketQuote
+    SelectMarketQuote,
+    SubNav
   },
   data () {
     return {
-      previousQuoteCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null
+      previousQuoteCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null,
+      subNavItems: [
+        { label: 'All' },
+        { label: 'Available' },
+        { label: 'Unavailable' }
+      ]
     }
   },
   computed: {
