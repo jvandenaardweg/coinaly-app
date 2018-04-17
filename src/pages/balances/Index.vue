@@ -33,7 +33,7 @@
 
     <div class="row justify-content-center">
       <div class="col">
-        
+
 
         <div class="card mt-4">
           <ul class="list-group list-group-flush">
@@ -44,7 +44,7 @@
             <li class="list-group-item">ADA/BTC</li>
           </ul>
         </div>
-<!--         
+<!--
         <div class="card">
           <div class="card-body">body</div>
         </div> -->

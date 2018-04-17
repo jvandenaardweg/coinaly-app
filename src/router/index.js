@@ -1,12 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PageHome from '@/pages/Home'
 
 import PageMarketsIndex from '@/pages/markets/Index'
 
-import PageBalances from '@/pages/Balances'
-// import PageExchanges from '@/pages/Exchanges'
-// import PageSettings from '@/pages/Settings'
+import PageBalancesIndex from '@/pages/balances/Index'
 
 import PageSettingsIndex from '@/pages/settings/Index'
 import PageSettingsAccount from '@/pages/settings/account/Index'
@@ -24,8 +21,6 @@ import PageSellSelectBaseCurrency from '@/pages/sell/SelectBaseCurrency.vue'
 import PageSellSelectPricing from '@/pages/sell/SelectPricing.vue'
 
 import PageOnboardingIndex from '@/pages/onboarding/Index.vue'
-
-// import store from '../store'
 
 Vue.use(Router)
 
@@ -47,8 +42,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: PageHome
+      name: 'Balances',
+      component: PageBalancesIndex
     },
     {
       path: '/buy',
@@ -102,11 +97,6 @@ export default new Router({
       path: '/markets',
       name: 'Markets',
       component: PageMarketsIndex
-    },
-    {
-      path: '/balances',
-      name: 'Balances',
-      component: PageBalances
     },
     {
       path: '/settings',

@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    <router-link class="nav-link" to="/balances">
+    <router-link class="nav-link" to="/">
       <Icon name="trending-up"></Icon>
       <span>Balances</span>
     </router-link>
