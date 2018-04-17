@@ -1,8 +1,5 @@
 <template>
   <div id="balances">
-    <!-- <div class="page-header">
-      <h1 class="h3 mb-3 text-center">Balances</h1>
-    </div> -->
     <div class="row justify-content-center">
       <div class="col">
         <div class="card card-100-xs bg-blue" style="margin-top:-1.30rem;">

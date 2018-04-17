@@ -1,0 +1,17 @@
+{
+  "BTC": {
+    "free": 0,
+    "total": 0,
+    "used": 0
+  },
+  "ETH": {
+    "free": 0,
+    "total": 0,
+    "used": 0
+  },
+  "USDT": {
+    "free": 0,
+    "total": 0,
+    "used": 0
+  }
+}

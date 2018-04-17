@@ -2,7 +2,6 @@ import Vue from 'vue'
 // import axios from '../../axios'
 import * as api from '@/api/balances'
 import pickBy from 'lodash/pickBy'
-// import mocksBalances from '@/services/api/mocks/balances.json'
 
 function filterFilledCurrencies (currencies) {
   return pickBy(currencies, (currency, currencyName) => {
