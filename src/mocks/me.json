@@ -1,0 +1,14 @@
+{
+  "email": "jordyvandenaardweg@gmail.com",
+  "createdAt": 1231231311,
+  "activatedAt": 12312312123,
+  "settings": {
+    "currency": "EUR",
+    "timezone": "Europe/Amsterdam",
+    "subscription": "free-forever"
+  },
+  "subscription": {
+    "type": "free-forever",
+    "renew": false
+  }
+}

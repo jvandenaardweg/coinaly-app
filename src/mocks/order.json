@@ -1,0 +1,20 @@
+{
+  "info":{},
+  "id":"bcadc728-7aa0-47ce-80cb-701939cbc7d5",
+  "timestamp":1522569271973,
+  "datetime":"2018-04-01T07:54:31.973Z",
+  "symbol":"XLM/BTC",
+  "type":"limit",
+  "side":"sell",
+  "price":0.00002934,
+  "cost":0.04401,
+  "average":0.00002934,
+  "amount":1500,
+  "filled":1500,
+  "remaining":0,
+  "status":"closed",
+  "fee":{
+    "cost":0.00011002,
+    "currency":"BTC"
+  }
+}

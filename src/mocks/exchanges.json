@@ -1,0 +1,4 @@
+{
+  "available": ["bittrex", "binance"],
+  "supported": ["bittrex", "binance", "poloniex"]
+}
