@@ -1,5 +1,6 @@
 import axios from '../../axios'
 import Vue from 'vue'
+import { loadAllMarkets } from '../../api/markets'
 import VueCookie from 'vue-cookie'
 // import socket from '../../socketcluster'
 import pickBy from 'lodash/pickBy'
@@ -39,7 +40,7 @@ function filterMarkets (array, symbol) {
 export default {
   namespaced: true,
   state: {
-    markets: [],
+    markets: {},
     isLoading: true,
     selectedMarket: initialSelectedMarket,
     priceIndexes: null
@@ -47,7 +48,6 @@ export default {
   mutations: {
     addAllMarkets (state, markets) {
       Vue.set(state, 'markets', markets)
-      Vue.set(state, 'isLoading', false)
     },
     // addPriceIndexes (state, markets) {
     //   let payload = {
@@ -97,14 +97,21 @@ export default {
     allMarkets: state => {
       return state.markets
     },
-    allBTCMarkets: state => {
-      return filterMarkets(state.markets, '/BTC')
+    allQuoteMarkets: state => {
+      if (!Object.keys(state.markets).length) return null
+
+      return Object.keys(state.markets).reduce((obj, curKey) => {
+        obj[state.markets[curKey].quoteId] = state.markets[curKey].quoteId
+        return obj
+      }, {})
     },
-    allETHMarkets: state => {
-      return filterMarkets(state.markets, '/ETH')
-    },
-    allUSDTMarkets: state => {
-      return filterMarkets(state.markets, '/USDT')
+    allBaseMarkets: state => {
+      if (!Object.keys(state.markets).length) return null
+
+      return Object.keys(state.markets).reduce((obj, curKey) => {
+        obj[state.markets[curKey].baseId] = state.markets[curKey].baseId
+        return obj
+      }, {})
     },
     BTCUSDTMarket: state => {
       return filterMarkets(state.markets, 'BTC/USDT')[0]
@@ -161,6 +168,18 @@ export default {
         })
         .finally(() => {
           context.commit('stopLoading')
+        })
+    },
+
+    loadAll ({ commit, rootGetters }) {
+      commit('startLoading')
+      const selectedExchange = rootGetters['exchanges/selected']
+      return loadAllMarkets(false, selectedExchange)
+        .then(response => {
+          commit('addAllMarkets', response)
+        })
+        .finally(() => {
+          commit('stopLoading')
         })
     }
     // listenTickers (context) {

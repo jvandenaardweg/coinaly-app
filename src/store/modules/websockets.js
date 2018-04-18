@@ -39,6 +39,7 @@ export default {
       return state.events.error
     },
     state: state => {
+      if (!state.socket) return null
       return state.socket.state
     },
     events: state => {

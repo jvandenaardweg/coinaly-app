@@ -1,18 +1,28 @@
 {
   "BTC/USDT": {
-    "ask": 8068,
-    "baseVolume": 3500.75167604,
-    "bid": 8045.004,
-    "change": -60.600000000000364,
-    "close": 8052.4,
-    "datetime": "2018-04-16T09:27:10.927Z",
-    "high": 8421,
-    "info": {},
-    "last": 8052.4,
-    "low": 8000,
-    "percentage": -0.7469493405645306,
-    "quoteVolume": 28845577.22005272,
+    "limits": {
+      "amount": {
+        "min": 0.00037244
+      },
+      "price": {
+        "min": 1e-8
+      }
+    },
+    "precision": {
+      "amount": 8,
+      "price": 8
+    },
+    "tierBased": false,
+    "percentage": true,
+    "taker": 0.0025,
+    "maker": 0.0025,
+    "id": "USDT-BTC",
     "symbol": "BTC/USDT",
-    "timestamp": 1523870845623
+    "base": "BTC",
+    "quote": "USDT",
+    "baseId": "BTC",
+    "quoteId": "USDT",
+    "active": true,
+    "info": {}
   }
 }

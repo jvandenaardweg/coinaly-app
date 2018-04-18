@@ -1,12 +1,12 @@
 var axios = require('axios')
 require('promise.prototype.finally')
 
-let baseUrl = ''
+let baseUrl
 
-if (process.env.NODE_ENV === 'development') {
-  baseUrl = 'http://localhost:5000'
-} else {
+if (process.env.NODE_ENV === 'production') {
   baseUrl = 'https://api.coinaly.io'
+} else {
+  baseUrl = 'http://localhost:5000'
 }
 
 var axiosInstance = axios.create({
