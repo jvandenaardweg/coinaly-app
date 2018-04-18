@@ -41,9 +41,11 @@ export default {
       // TODO: subscribe to exchange websocket ticker
       this.$store.commit('exchanges/setSelected', exchangeSlug)
 
-      // TODO: do parallel
-      await this.$store.dispatch('markets/loadAll')
-      await this.$store.dispatch('balances/getAll')
+      await Promise.all([
+        this.$store.dispatch('markets/loadAll'),
+        this.$store.dispatch('balances/getAll')
+      ])
+
       this.isLoading = false
     }
   }
