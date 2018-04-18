@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown">
     <button @click="show = !show" class="btn btn-dark-blue btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{ selectedName }}
+      {{ switchStatus }}
     </button>
     <div class="dropdown-menu dropdown-menu-right" :class="{'show': show }" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" @click.prevent="handleSwitch('binance')" v-show="selected !== 'binance'">Switch to: <strong>Binance</strong></a>
@@ -19,19 +19,32 @@ export default {
   name: 'BtnSelectExchange',
   data () {
     return {
-      show: false
+      show: false,
+      isLoading: null
     }
   },
   computed: {
     ...mapGetters({
       selected: 'exchanges/selected',
       selectedName: 'exchanges/selectedName'
-    })
+    }),
+    switchStatus () {
+      if (this.isLoading) return 'Switching...'
+      return this.selectedName
+    }
   },
   methods: {
-    handleSwitch (exchangeSlug) {
-      this.$store.commit('exchanges/setSelected', exchangeSlug)
+    async handleSwitch (exchangeSlug) {
+      this.isLoading = true
       this.show = false
+
+      // TODO: subscribe to exchange websocket ticker
+      this.$store.commit('exchanges/setSelected', exchangeSlug)
+
+      // TODO: do parallel
+      await this.$store.dispatch('markets/loadAll')
+      await this.$store.dispatch('balances/getAll')
+      this.isLoading = false
     }
   }
 }
