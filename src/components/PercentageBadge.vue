@@ -7,11 +7,16 @@
 <script>
 export default {
   name: 'PercentageBadge',
-  props: ['percentage'],
+  props: {
+    percentage: Number,
+    required: true
+  },
   computed: {
     colorClass () {
-      if (this.percentage >= 0) {
+      if (this.percentage > 0) {
         return 'bg-success'
+      } else if (this.percentage === 0) {
+        return 'bg-light'
       } else {
         return 'bg-danger'
       }
@@ -28,5 +33,9 @@ export default {
   font-weight: 600;
   width: 4rem;
   text-align: center;
+
+  &.bg-light {
+    color: rgba(#000000, 0.5);
+  }
 }
 </style>

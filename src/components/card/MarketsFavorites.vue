@@ -11,11 +11,12 @@
     :text="'No markets available.'">
   </CardEmpty>
 
-  <ul v-if="hasMarkets" class="list-group list-group-flush">
-    <li v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item">
+  <div v-if="hasMarkets" class="list-group list-group-flush">
+    <router-link :to="marketLink(meta.baseId, meta.quoteId)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
       <ListGroupItemMarket :market="meta" :hideVolume="true"></ListGroupItemMarket>
-    </li>
-  </ul>
+    </router-link>
+  </div>
+
 </div>
 </template>
 
@@ -53,6 +54,10 @@ export default {
       } else {
         return false
       }
+    },
+    marketLink (quoteId, baseId) {
+      if (baseId && quoteId) return `/markets/${quoteId.toLowerCase()}/${baseId.toLowerCase()}`
+      return `/markets/${quoteId.toLowerCase()}`
     }
   }
 }

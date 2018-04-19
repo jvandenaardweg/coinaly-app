@@ -35,15 +35,17 @@ export default {
   },
   methods: {
     async handleSwitch (exchangeSlug) {
+      const uppercasedExchangeSlug = exchangeSlug.toUpperCase()
+
       this.isLoading = true
       this.show = false
 
-      // TODO: subscribe to exchange websocket ticker
       this.$store.commit('exchanges/setSelected', exchangeSlug)
 
       await Promise.all([
         this.$store.dispatch('markets/loadAll'),
-        this.$store.dispatch('balances/getAll')
+        this.$store.dispatch('balances/getAll'),
+        this.$store.dispatch('websockets/subscribe', `TICKERS~${uppercasedExchangeSlug}~NEW`)
       ])
 
       this.isLoading = false

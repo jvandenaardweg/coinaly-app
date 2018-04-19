@@ -2,7 +2,7 @@
   <div class="card card-100-xs">
 
     <div class="card-header">
-      <h2 class="h5 m-0">Available markets (5)</h2>
+      <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
       <SubNav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="'all'"></SubNav>
       <div v-if="hasMarkets" class="input-icon mt-3">
         <span class="input-icon-addon">
@@ -19,11 +19,11 @@
       :text="'No markets available.'">
     </CardEmpty>
 
-    <ul class="list-group list-group-flush">
-      <li v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item">
+    <div class="list-group list-group-flush">
+      <router-link :to="marketLink(meta.baseId, meta.quoteId)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
         <ListGroupItemMarket :market="meta" :hideVolume="false"></ListGroupItemMarket>
-      </li>
-    </ul>
+      </router-link>
+    </div>
 
     <div class="card-footer" v-if="hasMarkets">
       <button type="button" class="btn btn-outline-primary btn-block btn-lg" @click.prevent="handleShowAllMarkets">Show all markets</button>
@@ -63,7 +63,8 @@ export default {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
       hasMarkets: 'markets/hasMarkets',
-      allMarkets: 'markets/allMarkets'
+      allMarkets: 'markets/allMarkets',
+      totalMarkets: 'markets/totalMarkets'
     })
   },
   methods: {
@@ -77,6 +78,10 @@ export default {
     },
     handleShowAllMarkets () {
       this.paginationLimit = 9999
+    },
+    marketLink (quoteId, baseId) {
+      if (baseId && quoteId) return `/markets/${quoteId.toLowerCase()}/${baseId.toLowerCase()}`
+      return `/markets/${quoteId.toLowerCase()}`
     }
   }
 }

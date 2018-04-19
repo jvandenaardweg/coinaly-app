@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import BtnRefresh from '@/components/BtnRefresh'
+import BtnRefresh from '@/components/btn/Refresh'
 import BtnSelectExchange from '@/components/BtnSelectExchange'
 export default {
   name: 'NavBar',

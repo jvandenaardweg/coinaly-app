@@ -34,7 +34,5 @@ export default {
   border: 0;
   background: transparent;
   width: 40px;
-  // height: 40px;
-  // line-height: 40px;
 }
 </style>

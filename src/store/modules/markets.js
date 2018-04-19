@@ -119,6 +119,9 @@ export default {
     hasMarkets: state => {
       return Object.keys(state.markets).length > 0
     },
+    totalMarkets: state => {
+      return Object.keys(state.markets).length
+    },
     // totalVolume: state => {
     //   if (state.markets.length) {
     //     return reduceQuoteVolume(state.markets)

@@ -11,6 +11,19 @@
         border-left: 0;
         border-right: 0;
       }
+
+      .card-header {
+        position: sticky;
+        top: 60px;
+        z-index: 2;
+        background-color: #F8F8F8;
+
+        @include media-breakpoint-up(md) {
+          position: inherit;
+          top: inherit;
+          z-index: inherit;
+        }
+      }
     }
 
   .card-header {
