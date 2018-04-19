@@ -70,7 +70,7 @@ export default {
       return this.ticker.percentage
     },
     iconLocation () {
-      return symbolIconLocation(marketSymbolToBaseSymbol(this.market.symbol))
+      return symbolIconLocation(this.quoteId)
     }
   }
 }
