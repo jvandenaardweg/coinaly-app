@@ -11,17 +11,17 @@
     </div>
     <div class="market-item-meta">
       <span v-if="!hideVolume" class="market-item-volume d-none d-sm-block">
-        {{ market.baseVolume || 0 | toFixed(2) | number }} {{ quoteId }}
-        <span class="text-muted">{{ market.quoteVolume || 0 | toFixed(2) | number }} {{ baseId }}</span>
+        {{ tickerBaseVolume | toFixed(0) | number }} {{ quoteId }}
+        <span class="text-muted">{{ tickerQuoteVolume | toFixed(0) | number }} {{ baseId }}</span>
       </span>
       <span class="market-item-price">
-        {{ market.last || '-' }}
+        {{ tickerLast }}
         <span class="text-muted">
           -
         </span>
       </span>
-      <PercentageBadge :percentage="marketPercentage"></PercentageBadge>
-      <BtnFavorite :active="false" class="ml-2" @click.native="handleClickFavorite"></BtnFavorite>
+      <PercentageBadge :percentage="tickerPercentage"></PercentageBadge>
+      <BtnFavorite :active="isFavorite" class="ml-2" @click.native="handleClickFavorite"></BtnFavorite>
     </div>
   </div>
 </template>
@@ -39,6 +39,7 @@ export default {
       required: true
     },
     ticker: Object,
+    favorite: Boolean,
     hideVolume: Boolean
   },
   components: {
@@ -56,6 +57,9 @@ export default {
     }
   },
   computed: {
+    isFavorite () {
+      return Boolean(this.favorite) || false
+    },
     baseId () {
       return marketSymbolToBaseSymbol(this.market.symbol)
     },
@@ -65,12 +69,20 @@ export default {
     quoteId () {
       return marketSymbolToQuoteSymbol(this.market.symbol)
     },
-    marketPercentage () {
-      if (!this.ticker) return 0
-      return this.ticker.percentage
-    },
     iconLocation () {
       return symbolIconLocation(this.quoteId)
+    },
+    tickerPercentage () {
+      return (this.ticker) ? this.ticker.percentage : 0
+    },
+    tickerLast () {
+      return (this.ticker) ? this.ticker.last : '-'
+    },
+    tickerBaseVolume () {
+      return (this.ticker) ? this.ticker.baseVolume : 0
+    },
+    tickerQuoteVolume () {
+      return (this.ticker) ? this.ticker.quoteVolume : 0
     }
   }
 }
@@ -122,7 +134,7 @@ export default {
 
   .market-item-price {
     text-align: right;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
     width: 80px;
 
     span {

@@ -5,7 +5,14 @@ const initialIsOnline = window.navigator.onLine
 export default {
   namespaced: true,
   state: {
-    isOnline: initialIsOnline
+    isOnline: initialIsOnline,
+    marketFavorites: {
+      'bittrex': {
+        'LTC/BTC': true,
+        'ADA/BTC': true
+      },
+      'binance': {}
+    }
   },
   mutations: {
     setOffline (state, ticker) {
@@ -18,6 +25,9 @@ export default {
   getters: {
     isOnline: state => {
       return state.isOnline
+    },
+    marketFavorites: state => {
+      return state.marketFavorites
     }
   },
   actions: { }

@@ -10,44 +10,28 @@ const selectedMarketCookie = Vue.cookie.get('selectedMarket') || null
 const initialSelectedMarket = (selectedMarketCookie === 'null' ? null : selectedMarketCookie)
 
 function filterMarkets (array, symbol) {
-  // if (!array.length) return null
-  // // return (data) => {
-  // return Object.keys(array).filter((key) => {
-  //   console.log(key)
-  //   return key.match(/\/BTC/g)
-  // }).reduce((obj, curKey) => {
-  //   obj[curKey] = array[curKey]
-  //   return obj
-  // })
-  // }
   return pickBy(array, (values, marketSymbol) => {
     return marketSymbol.includes(symbol)
   })
 }
 
-// function filterMarkets (array, symbol) {
-//   return array.filter(market => {
-//     return market.symbol.includes(symbol) // Symbol is something like: XRP/BTC or ETH/BTC (where /BTC is the main market)
-//   })
-// }
-
-// function reduceQuoteVolume (array) {
-//   return array.reduce((total, number) => {
-//     return total + number.quoteVolume
-//   }, 0)
-// }
+const intialState = {
+  markets: {},
+  selectedFavorites: ['LTC/BTC', 'ADA/BTC'],
+  isLoading: true,
+  selectedMarket: initialSelectedMarket,
+  priceIndexes: null
+}
 
 export default {
   namespaced: true,
-  state: {
-    markets: {},
-    isLoading: true,
-    selectedMarket: initialSelectedMarket,
-    priceIndexes: null
-  },
+  state: intialState,
   mutations: {
     addAllMarkets (state, markets) {
       Vue.set(state, 'markets', markets)
+    },
+    setFavoriteMarkets (state, favoriteMarkets) {
+      Vue.set(state, 'selectedFavorites', favoriteMarkets)
     },
     // addPriceIndexes (state, markets) {
     //   let payload = {
@@ -96,6 +80,24 @@ export default {
     },
     allMarkets: state => {
       return state.markets
+    },
+    allFavoriteMarkets: state => {
+      let favoriteMarkets = {}
+      if (state.selectedFavorites && Object.keys(state.markets).length) {
+        state.selectedFavorites.map(marketSymbol => {
+          favoriteMarkets[marketSymbol] = state.markets[marketSymbol]
+        })
+      }
+      return favoriteMarkets
+    },
+    totalFavoriteMarkets: state => {
+      return (state.selectedFavorites) ? state.selectedFavorites.length : 0
+    },
+    hasFavoriteMarkets: state => {
+      return state.selectedFavorites && state.selectedFavorites.length > 0
+    },
+    isFavoriteMarket: state => {
+      return state.selectedFavorites
     },
     allQuoteMarkets: state => {
       if (!Object.keys(state.markets).length) return null

@@ -21,7 +21,7 @@
 
     <div class="list-group list-group-flush">
       <router-link :to="marketLink(meta.baseId, meta.quoteId)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
-        <ListGroupItemMarket :market="meta" :hideVolume="false"></ListGroupItemMarket>
+        <ListGroupItemMarket :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="false"></ListGroupItemMarket>
       </router-link>
     </div>
 
@@ -64,10 +64,16 @@ export default {
       isLoadingMarkets: 'markets/isLoading',
       hasMarkets: 'markets/hasMarkets',
       allMarkets: 'markets/allMarkets',
-      totalMarkets: 'markets/totalMarkets'
+      totalMarkets: 'markets/totalMarkets',
+      allTickers: 'tickers/allTickers',
+      selectedExchange: 'exchanges/selected',
+      userMarketFavorites: 'user/marketFavorites'
     })
   },
   methods: {
+    isFavoriteMarket (symbol) {
+      return Boolean(this.userMarketFavorites[this.selectedExchange][symbol])
+    },
     isWithinPageLimit (index) {
       this.marketsIndex = index
       if (index < this.paginationLimit) {

@@ -15,6 +15,8 @@ export default {
       close: {},
       kickOut: {}
     },
+    watching: null,
+    subscribed: null,
     socket: null
   },
   mutations: {
@@ -29,6 +31,22 @@ export default {
     },
     removeError (state) {
       Vue.set(state, 'hasError', false)
+    },
+    unsubscribe (state, channel) {
+      Vue.set(state, 'subscribed', null)
+      return state.socket.unsubscribe(channel)
+    },
+    subscribe (state, channel) {
+      Vue.set(state, 'subscribed', channel)
+      return state.socket.subscribe(channel)
+    },
+    watch (state, channel) {
+      Vue.set(state, 'watching', channel)
+      // return state.socket.watch(channel)
+    },
+    unwatch (state, channel) {
+      Vue.set(state, 'watching', null)
+      return state.socket.unwatch(channel)
     }
   },
   getters: {
@@ -62,23 +80,43 @@ export default {
     //   const exchangeDataChannel = socket.subscribe(`TICKERS~${selectedExchange.toUpperCase()}~NEW`)
     // },
 
-    subscribe ({ commit }, channel) {
+    watch ({ state, commit, rootGetters, rootState }) {
+      console.log('go watch')
+      const selectedExchange = rootGetters['exchanges/selected']
+      const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
+      commit('watch', channel)
 
+      return state.socket.watch(channel, (data) => {
+        console.log('watch:', data)
+        commit('tickers/setTickers', data, { root: true })
+      })
+    },
+
+    subscribe ({ state, commit, rootGetters }) {
+      const selectedExchange = rootGetters['exchanges/selected']
+      const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
+      return commit('subscribe', channel)
+    },
+
+    unsubscribe ({ commit, rootGetters }) {
+      const selectedExchange = rootGetters['exchanges/selected']
+      const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
+      return commit('unsubscribe', channel)
     },
 
     connect ({ commit, rootGetters }) {
       const socket = websocketConnect()
       commit('addSocket', socket)
 
-      const selectedExchange = rootGetters['exchanges/selected']
-      const exchangeDataChannel = socket.subscribe(`TICKERS~${selectedExchange.toUpperCase()}~NEW`)
+      // const selectedExchange = rootGetters['exchanges/selected']
+      // const exchangeDataChannel = socket.subscribe(`TICKERS~${selectedExchange.toUpperCase()}~NEW`)
 
-      exchangeDataChannel.watch(function (response) {
-        console.log('Received Exchange Data:', response)
-        // const markets = Object.values(response.data)
-        commit('markets/addAllMarkets', response, {root: true})
-        // context.commit('addPriceIndexes', response.data)
-      })
+      // exchangeDataChannel.watch(function (response) {
+      //   console.log('Received Exchange Data:', response)
+      //   // const markets = Object.values(response.data)
+      //   commit('markets/addAllMarkets', response, {root: true})
+      //   // context.commit('addPriceIndexes', response.data)
+      // })
 
       socket.on('subscribe', function (channelname) {
         console.log('subscribe:' + channelname)

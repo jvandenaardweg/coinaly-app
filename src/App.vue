@@ -37,9 +37,11 @@ export default {
   },
   created () {
     // this.$store.commit('exchanges/setSelected', 'bittrex')
-    // this.$store.dispatch('websockets/connect')
     this.$store.dispatch('markets/loadAll')
-    // this.$store.dispatch('websockets/subscribe', 'TICKERS~BITTREX~NEW')
+
+    this.$store.dispatch('websockets/connect')
+    this.$store.dispatch('websockets/subscribe')
+    this.$store.dispatch('websockets/watch')
     this.$store.dispatch('balances/getAll')
   }
 }

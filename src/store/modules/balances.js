@@ -43,20 +43,20 @@ export default {
     }
   },
   getters: {
-    hasCalculatedWorths: state => {
-      return Object.keys(state.worth).length
-    },
-    allWorth: state => {
-      return state.worth
-    },
-    totalWorthUsd: state => {
-      const worths = Object.values(state.worth)
-      if (worths.length) {
-        return worths.reduce((total, worth) => total + worth.usd, 0).toFixed(2)
-      } else {
-        return null
-      }
-    },
+    // hasCalculatedWorths: state => {
+    //   return Object.keys(state.worth).length
+    // },
+    // allWorth: state => {
+    //   return state.worth
+    // },
+    // totalWorthUsd: state => {
+    //   const worths = Object.values(state.worth)
+    //   if (worths.length) {
+    //     return worths.reduce((total, worth) => total + worth.usd, 0).toFixed(2)
+    //   } else {
+    //     return null
+    //   }
+    // },
     hasCurrencies: state => {
       return Object.keys(state.currencies).length > 0
     },
