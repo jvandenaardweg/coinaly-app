@@ -66,6 +66,7 @@ export default {
     padding-left: 0;
     padding-right: 0;
     color: $gray-500;
+    transition: 150ms all;
 
     @include media-breakpoint-up(md) {
       font-size: inherit;
@@ -78,6 +79,12 @@ export default {
       padding-right: 1.5rem;
       border-right: 1px $gray-300 solid;
       font-weight: 600;
+    }
+
+    &:hover {
+      @include media-breakpoint-up(md) {
+        color: $gray-700;
+      }
     }
 
     &:last-child {

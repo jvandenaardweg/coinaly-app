@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import PageMarketsIndex from '@/pages/markets/Index'
+// import PageMarketsIndex from '@/pages/markets/Index'
+import PageMarketsQuote from '@/pages/markets/quote/Index'
+import PageMarketsMarket from '@/pages/markets/quote/base/Index'
 
 import PageBalancesIndex from '@/pages/balances/Index'
 
@@ -26,17 +29,17 @@ Vue.use(Router)
 
 export default new Router({
   linkActiveClass: 'active',
-  scrollBehavior (to, from, savedPosition) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (savedPosition) {
-          resolve(savedPosition)
-        } else {
-          resolve({ x: 0, y: 0 })
-        }
-      }, 100)
-    })
-  },
+  // scrollBehavior (to, from, savedPosition) {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       if (savedPosition) {
+  //         resolve(savedPosition)
+  //       } else {
+  //         resolve({ x: 0, y: 0 })
+  //       }
+  //     }, 100)
+  //   })
+  // },
   mode: 'history',
   fallback: false,
   routes: [
@@ -96,7 +99,24 @@ export default new Router({
     {
       path: '/markets',
       name: 'Markets',
-      component: PageMarketsIndex
+      component: PageMarketsIndex,
+      children: [
+        {
+          path: '', // Matches: /markets
+          component: PageMarketsQuote,
+          name: 'Quote ID'
+        },
+        {
+          path: ':quoteId', // Matches: /markets/BTC
+          component: PageMarketsQuote,
+          name: 'Quote ID'
+        }
+      ]
+    },
+    {
+      path: '/markets/:quoteId/:baseId', // Matches: /markets/BTC/XRP
+      name: 'Market',
+      component: PageMarketsMarket
     },
     {
       path: '/settings',

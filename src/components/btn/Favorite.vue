@@ -19,11 +19,11 @@ export default {
   },
   computed: {
     fillColor () {
-      if (this.active) return '#ef8a62'
+      if (this.active) return '#ffb53f'
       return this.fill || '#ccc'
     },
     strokeColor () {
-      if (this.active) return '#ef8a62'
+      if (this.active) return '#ffb53f'
       return this.stroke || '#ccc'
     }
   }

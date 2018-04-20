@@ -17,8 +17,8 @@ describe('components/btn/Favorite.vue', () => {
       active: true
     })
     expect(component.vm.active).toBe(true)
-    expect(component.vm.fillColor).toBe('#ef8a62')
-    expect(component.vm.strokeColor).toBe('#ef8a62')
+    expect(component.vm.fillColor).toBe('#ffb53f')
+    expect(component.vm.strokeColor).toBe('#ffb53f')
   })
 
   it('should return the fill color correctly', () => {

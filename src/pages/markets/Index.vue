@@ -1,13 +1,13 @@
 <template>
-  <div id="markets">
-    <!-- <div class="page-header">
-      <h1 class="h3 mb-3 text-center">Markets</h1>
-    </div> -->
+  <div id="page-markets">
     <div class="row justify-content-center">
-      <div class="col-md-5 mb-4">
+      <div class="col-lg-5 mb-4">
         <CardMarketsFavorites></CardMarketsFavorites>
       </div>
-      <div class="col-md-7">
+      <div class="col-lg-7">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
         <CardMarkets></CardMarkets>
       </div>
     </div>

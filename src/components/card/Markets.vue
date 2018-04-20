@@ -3,7 +3,7 @@
 
     <div class="card-header">
       <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
-      <SubNav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="'all'"></SubNav>
+      <SubNav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="$route.params.quoteId"></SubNav>
       <div v-if="hasMarkets" class="input-icon mt-3">
         <span class="input-icon-addon">
           <i class="fe fe-user"></i>
@@ -41,6 +41,9 @@ import ListGroupItemMarket from '@/components/list-group-item/Market'
 
 export default {
   name: 'CardMarkets',
+  props: {
+    quoteId: String
+  },
   components: {
     CardLoading,
     CardEmpty,
@@ -50,13 +53,7 @@ export default {
   data () {
     return {
       marketIndex: null,
-      paginationLimit: 20,
-      subNavItems: [
-        { label: 'All', slug: 'all', uri: '/markets/all' },
-        { label: 'BTC', slug: 'btc', uri: '/markets/BTC' },
-        { label: 'ETH', slug: 'eth', uri: '/markets/ETH' },
-        { label: 'USDT', slug: 'usdt', uri: '/markets/USDT' }
-      ]
+      paginationLimit: 20
     }
   },
   computed: {
@@ -64,11 +61,29 @@ export default {
       isLoadingMarkets: 'markets/isLoading',
       hasMarkets: 'markets/hasMarkets',
       allMarkets: 'markets/allMarkets',
+      allQuoteMarkets: 'markets/allQuoteMarkets',
       totalMarkets: 'markets/totalMarkets',
       allTickers: 'tickers/allTickers',
       selectedExchange: 'exchanges/selected',
       userMarketFavorites: 'user/marketFavorites'
-    })
+    }),
+    subNavItems () {
+      let items = [
+        { label: 'All', slug: '', uri: '/markets' }
+      ]
+
+      Object.keys(this.allQuoteMarkets).forEach(key => {
+        items.push(
+          {
+            label: key,
+            slug: key.toLowerCase(),
+            uri: `/markets/${key}`
+          }
+        )
+      })
+
+      return items
+    }
   },
   methods: {
     isFavoriteMarket (symbol) {
@@ -85,9 +100,9 @@ export default {
     handleShowAllMarkets () {
       this.paginationLimit = 9999
     },
-    marketLink (quoteId, baseId) {
-      if (baseId && quoteId) return `/markets/${quoteId.toLowerCase()}/${baseId.toLowerCase()}`
-      return `/markets/${quoteId.toLowerCase()}`
+    marketLink (baseId, quoteId) {
+      if (baseId && quoteId) return `/markets/${quoteId}/${baseId}`
+      return `/markets/${quoteId}`
     }
   }
 }

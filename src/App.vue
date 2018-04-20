@@ -8,11 +8,11 @@
       <div class="page-main">
         <div class="page-content">
           <div class="container">
-            <transition name="fade" mode="out-in">
+            <!-- <transition name="fade" mode="out-in"> -->
               <!-- <keep-alive> -->
                 <router-view class="view"></router-view>
               <!-- </keep-alive> -->
-            </transition>
+            <!-- </transition> -->
             <ExchangeStatus></ExchangeStatus>
           </div>
         </div>

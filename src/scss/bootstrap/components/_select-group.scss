@@ -18,7 +18,21 @@
 	&:not(:last-child) .selectgroup-button {
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
-	}
+  }
+
+  &.active {
+    border-color: $primary;
+    z-index: 1;
+    color: $primary;
+    background: mix(#fff, $primary, 90%);
+
+    .selectgroup-button {
+      border-color: $primary;
+      z-index: 2;
+      color: $primary;
+      // box-shadow: $input-btn-focus-box-shadow;
+    }
+  }
 }
 
 .selectgroup-input {
@@ -51,19 +65,19 @@
 	line-height: 1.125rem;
 }
 
-.selectgroup-input:checked + .selectgroup-button {
-	border-color: $primary;
-	z-index: 1;
-	color: $primary;
-	background: mix(#fff, $primary, 90%)
-}
+// .selectgroup-input:checked + .selectgroup-button {
+// 	border-color: $primary;
+// 	z-index: 1;
+// 	color: $primary;
+// 	background: mix(#fff, $primary, 90%)
+// }
 
-.selectgroup-input:focus + .selectgroup-button {
-	border-color: $primary;
-	z-index: 2;
-	color: $primary;
-	box-shadow: $input-btn-focus-box-shadow;
-}
+// .selectgroup-input:focus + .selectgroup-button {
+// 	border-color: $primary;
+// 	z-index: 2;
+// 	color: $primary;
+// 	box-shadow: $input-btn-focus-box-shadow;
+// }
 
 .selectgroup-pills {
 	flex-wrap: wrap;

@@ -2,7 +2,7 @@
   <nav class="subnav">
     <div class="form-group m-0">
       <div class="selectgroup w-100">
-        <router-link :to="item.uri" class="selectgroup-item" v-for="item in items" :key="item.slug">
+        <router-link :to="item.uri" class="selectgroup-item" v-for="item in items" :key="item.slug" exact>
           <input type="radio" name="value" value="50" class="selectgroup-input" :checked="selected === item.slug">
           <span class="selectgroup-button">{{ item.label }}</span>
         </router-link>
