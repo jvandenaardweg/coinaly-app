@@ -11,7 +11,8 @@ export default {
         'LTC/BTC': true,
         'ADA/BTC': true
       },
-      'binance': {}
+      'binance': {},
+      'poloniex': {}
     }
   },
   mutations: {

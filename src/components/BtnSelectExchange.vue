@@ -6,6 +6,7 @@
     <div class="dropdown-menu dropdown-menu-right" :class="{'show': show }" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" @click.prevent="handleSwitch('binance')" v-show="selected !== 'binance'">Switch to: <strong>Binance</strong></a>
       <a class="dropdown-item" @click.prevent="handleSwitch('bittrex')" v-show="selected !== 'bittrex'">Switch to: <strong>Bittrex</strong></a>
+      <a class="dropdown-item" @click.prevent="handleSwitch('poloniex')" v-show="selected !== 'poloniex'">Switch to: <strong>Poloniex</strong></a>
       <div class="dropdown-divider"></div>
       <router-link to="/settings/exchanges" class="dropdown-item" @click.native="show = false">Exchange settings</router-link>
     </div>

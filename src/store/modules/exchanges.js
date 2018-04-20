@@ -15,6 +15,9 @@ export default {
       },
       'binance': {
         name: 'Binance'
+      },
+      'poloniex': {
+        name: 'Poloniex'
       }
     }
   },

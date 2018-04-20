@@ -17,7 +17,7 @@ function filterMarkets (array, symbol) {
 
 const intialState = {
   markets: {},
-  selectedFavorites: ['LTC/BTC', 'ADA/BTC'],
+  selectedFavorites: ['LTC/BTC'],
   isLoading: true,
   selectedMarket: initialSelectedMarket,
   priceIndexes: null
@@ -103,7 +103,7 @@ export default {
       if (!Object.keys(state.markets).length) return null
 
       return Object.keys(state.markets).reduce((obj, curKey) => {
-        obj[state.markets[curKey].quoteId] = state.markets[curKey].quoteId
+        obj[state.markets[curKey].quote] = state.markets[curKey].quote
         return obj
       }, {})
     },
@@ -111,7 +111,7 @@ export default {
       if (!Object.keys(state.markets).length) return null
 
       return Object.keys(state.markets).reduce((obj, curKey) => {
-        obj[state.markets[curKey].baseId] = state.markets[curKey].baseId
+        obj[state.markets[curKey].base] = state.markets[curKey].base
         return obj
       }, {})
     },

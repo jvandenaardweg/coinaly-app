@@ -7,7 +7,7 @@ export default {
   name: 'PageMarketsQuote',
   computed: {
     marketQuote () {
-      return (this.$route.params.quoteId) ? this.$route.params.quoteId : 'all'
+      return (this.$route.params.quote) ? this.$route.params.quote : 'all'
     }
   }
 }

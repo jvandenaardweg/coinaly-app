@@ -3,7 +3,7 @@
 
     <div class="card-header">
       <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
-      <SubNav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="$route.params.quoteId"></SubNav>
+      <SubNav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="$route.params.quote"></SubNav>
       <div v-if="hasMarkets" class="input-icon mt-3">
         <span class="input-icon-addon">
           <i class="fe fe-user"></i>
@@ -20,7 +20,7 @@
     </CardEmpty>
 
     <div class="list-group list-group-flush">
-      <router-link :to="marketLink(meta.baseId, meta.quoteId)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
+      <router-link :to="marketLink(meta.base, meta.quote)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
         <ListGroupItemMarket :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="false"></ListGroupItemMarket>
       </router-link>
     </div>
@@ -42,7 +42,7 @@ import ListGroupItemMarket from '@/components/list-group-item/Market'
 export default {
   name: 'CardMarkets',
   props: {
-    quoteId: String
+    quote: String
   },
   components: {
     CardLoading,
@@ -100,9 +100,9 @@ export default {
     handleShowAllMarkets () {
       this.paginationLimit = 9999
     },
-    marketLink (baseId, quoteId) {
-      if (baseId && quoteId) return `/markets/${quoteId}/${baseId}`
-      return `/markets/${quoteId}`
+    marketLink (base, quote) {
+      if (base && quote) return `/markets/${quote}/${base}`
+      return `/markets/${quote}`
     }
   }
 }

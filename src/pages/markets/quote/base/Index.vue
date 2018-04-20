@@ -1,5 +1,5 @@
 <template>
-  <p>page market {{ $route.params.quoteId }} {{ $route.params.baseId }}</p>
+  <p>page market {{ $route.params.quote }} {{ $route.params.base }}</p>
 </template>
 
 <script>

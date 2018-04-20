@@ -107,14 +107,14 @@ export default new Router({
           name: 'Quote ID'
         },
         {
-          path: ':quoteId', // Matches: /markets/BTC
+          path: ':quote', // Matches: /markets/BTC
           component: PageMarketsQuote,
           name: 'Quote ID'
         }
       ]
     },
     {
-      path: '/markets/:quoteId/:baseId', // Matches: /markets/BTC/XRP
+      path: '/markets/:quote/:base', // Matches: /markets/BTC/XRP
       name: 'Market',
       component: PageMarketsMarket
     },

@@ -12,7 +12,7 @@
   </CardEmpty>
 
   <div v-if="hasFavoriteMarkets" class="list-group list-group-flush">
-    <router-link :to="marketLink(meta.baseId, meta.quoteId)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allFavoriteMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
+    <router-link :to="marketLink(meta.base, meta.quote)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allFavoriteMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
       <ListGroupItemMarket :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="true"></ListGroupItemMarket>
     </router-link>
   </div>
@@ -63,9 +63,9 @@ export default {
         return false
       }
     },
-    marketLink (quoteId, baseId) {
-      if (baseId && quoteId) return `/markets/${quoteId.toLowerCase()}/${baseId.toLowerCase()}`
-      return `/markets/${quoteId.toLowerCase()}`
+    marketLink (base, quote) {
+      if (base && quote) return `/markets/${quote}/${base}`
+      return `/markets/${quote}`
     }
   }
 }

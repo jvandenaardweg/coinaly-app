@@ -1,7 +1,7 @@
 <template>
   <div class="market-item">
     <div class="market-item-symbol">
-      <img :src="iconLocation" :alt="baseId" />
+      <img :src="iconLocation" :alt="base" />
       <strong>
         {{ market.symbol }}
         <span class="text-muted text-truncate">
@@ -11,8 +11,8 @@
     </div>
     <div class="market-item-meta">
       <span v-if="!hideVolume" class="market-item-volume d-none d-sm-block">
-        {{ tickerBaseVolume | toFixed(0) | number }} {{ quoteId }}
-        <span class="text-muted">{{ tickerQuoteVolume | toFixed(0) | number }} {{ baseId }}</span>
+        {{ tickerBaseVolume | toFixed(0) | number }} {{ quote }}
+        <span class="text-muted">{{ tickerQuoteVolume | toFixed(0) | number }} {{ base }}</span>
       </span>
       <span class="market-item-price">
         {{ tickerLast }}
@@ -60,17 +60,17 @@ export default {
     isFavorite () {
       return Boolean(this.favorite) || false
     },
-    baseId () {
+    base () {
       return marketSymbolToBaseSymbol(this.market.symbol)
     },
     fullCurrencyName () {
-      return symbolToName(this.quoteId)
+      return symbolToName(this.quote)
     },
-    quoteId () {
+    quote () {
       return marketSymbolToQuoteSymbol(this.market.symbol)
     },
     iconLocation () {
-      return symbolIconLocation(this.quoteId)
+      return symbolIconLocation(this.quote)
     },
     tickerPercentage () {
       return (this.ticker) ? this.ticker.percentage : 0
