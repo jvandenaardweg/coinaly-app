@@ -2,11 +2,10 @@
   <div class="market-item">
     <div class="market-item-symbol">
       <img :src="iconLocation" :alt="base" />
-      <strong>
-        {{ market.symbol }}
-        <span class="text-muted text-truncate">
-          {{ fullCurrencyName }}
-        </span>
+      <strong>{{ market.base }}<span class="font-weight-normal text-muted">/{{ market.quote }}</span>
+      <span class="symbol-full text-muted text-truncate">
+        {{ fullCurrencyName }}
+      </span>
       </strong>
     </div>
     <div class="market-item-meta">
@@ -17,7 +16,7 @@
       <span class="market-item-price">
         {{ tickerLast }}
         <span class="text-muted">
-          -
+          {{ tickerFiatWorth | currency }}
         </span>
       </span>
       <PercentageBadge :percentage="tickerPercentage"></PercentageBadge>
@@ -83,6 +82,9 @@ export default {
     },
     tickerQuoteVolume () {
       return (this.ticker) ? this.ticker.quoteVolume : 0
+    },
+    tickerFiatWorth () {
+      return (this.ticker) ? 10 : '-'
     }
   }
 }
@@ -109,7 +111,7 @@ export default {
       margin-left: 0.5rem;
       text-align: left;
 
-      span {
+      .symbol-full {
         font-weight: normal;
         display: block;
         max-width: 70px;
@@ -135,7 +137,7 @@ export default {
   .market-item-price {
     text-align: right;
     margin-right: 1rem;
-    width: 80px;
+    width: 90px;
 
     span {
       display: block;

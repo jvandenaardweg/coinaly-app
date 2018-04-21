@@ -3,7 +3,7 @@
 
     <div class="card-header">
       <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
-      <SubNav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="$route.params.quote"></SubNav>
+      <sub-nav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="$route.params.quote"></sub-nav>
       <div v-if="hasMarkets" class="input-icon mt-3">
         <span class="input-icon-addon">
           <i class="fe fe-user"></i>
@@ -12,18 +12,16 @@
       </div>
     </div>
 
-    <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
+    <card-loading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></card-loading>
 
-    <CardEmpty
+    <card-empty
       :is-empty="!isLoadingMarkets && !hasMarkets"
       :text="'No markets available.'">
-    </CardEmpty>
+    </card-empty>
 
-    <div class="list-group list-group-flush">
-      <router-link :to="marketLink(meta.base, meta.quote)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
-        <ListGroupItemMarket :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="false"></ListGroupItemMarket>
-      </router-link>
-    </div>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
 
     <div class="card-footer" v-if="hasMarkets">
       <button type="button" class="btn btn-outline-primary btn-block btn-lg" @click.prevent="handleShowAllMarkets">Show all markets</button>
@@ -37,7 +35,6 @@ import { mapGetters } from 'vuex'
 import CardLoading from '@/components/card/CardPartialLoading'
 import CardEmpty from '@/components/card/CardPartialEmpty'
 import SubNav from '@/components/SubNav'
-import ListGroupItemMarket from '@/components/list-group-item/Market'
 
 export default {
   name: 'CardMarkets',
@@ -47,14 +44,7 @@ export default {
   components: {
     CardLoading,
     CardEmpty,
-    SubNav,
-    ListGroupItemMarket
-  },
-  data () {
-    return {
-      marketIndex: null,
-      paginationLimit: 20
-    }
+    SubNav
   },
   computed: {
     ...mapGetters({
@@ -62,10 +52,7 @@ export default {
       hasMarkets: 'markets/hasMarkets',
       allMarkets: 'markets/allMarkets',
       allQuoteMarkets: 'markets/allQuoteMarkets',
-      totalMarkets: 'markets/totalMarkets',
-      allTickers: 'tickers/allTickers',
-      selectedExchange: 'exchanges/selected',
-      userMarketFavorites: 'user/marketFavorites'
+      totalMarkets: 'markets/totalMarkets'
     }),
     subNavItems () {
       let items = [
@@ -86,9 +73,6 @@ export default {
     }
   },
   methods: {
-    isFavoriteMarket (symbol) {
-      return Boolean(this.userMarketFavorites[this.selectedExchange][symbol])
-    },
     isWithinPageLimit (index) {
       this.marketsIndex = index
       if (index < this.paginationLimit) {
@@ -99,10 +83,6 @@ export default {
     },
     handleShowAllMarkets () {
       this.paginationLimit = 9999
-    },
-    marketLink (base, quote) {
-      if (base && quote) return `/markets/${quote}/${base}`
-      return `/markets/${quote}`
     }
   }
 }

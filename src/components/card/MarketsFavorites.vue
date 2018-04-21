@@ -4,16 +4,16 @@
     <h2 class="h5 m-0">Favorite markets ({{ totalFavoriteMarkets }})</h2>
   </div>
 
-  <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
+  <card-loading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></card-loading>
 
-  <CardEmpty
+  <card-empty
     :is-empty="!isLoadingMarkets && !hasFavoriteMarkets"
     :text="'No favorite markets, yet!'">
-  </CardEmpty>
+  </card-empty>
 
   <div v-if="hasFavoriteMarkets" class="list-group list-group-flush">
     <router-link :to="marketLink(meta.base, meta.quote)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in allFavoriteMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
-      <ListGroupItemMarket :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="true"></ListGroupItemMarket>
+      <list-group-item-market :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="true"></list-group-item-market>
     </router-link>
   </div>
 
