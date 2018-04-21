@@ -103,7 +103,8 @@ export default {
       if (!Object.keys(state.markets).length) return null
 
       return Object.keys(state.markets).reduce((obj, curKey) => {
-        obj[state.markets[curKey].quote] = state.markets[curKey].quote
+        obj[state.markets[curKey].quote] = (obj[state.markets[curKey].quote] || 0) + 1
+        // Returning something like: {"BTC": 101} // 101 = total quote markets
         return obj
       }, {})
     },
@@ -111,7 +112,8 @@ export default {
       if (!Object.keys(state.markets).length) return null
 
       return Object.keys(state.markets).reduce((obj, curKey) => {
-        obj[state.markets[curKey].base] = state.markets[curKey].base
+        obj[state.markets[curKey].base] = (obj[state.markets[curKey].base] || 0) + 1
+        // Returning something like: {"ADA": 101} // 101 = total base markets
         return obj
       }, {})
     },
