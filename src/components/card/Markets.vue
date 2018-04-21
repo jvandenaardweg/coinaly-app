@@ -8,7 +8,7 @@
         <span class="input-icon-addon">
           <i class="fe fe-user"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Search markets...">
+        <input type="text" class="form-control" placeholder="Search markets..." v-model="searchQuery" @keyup="handleSearch">
       </div>
     </div>
 
@@ -45,6 +45,11 @@ export default {
     CardLoading,
     CardEmpty,
     SubNav
+  },
+  data () {
+    return {
+      searchQuery: null
+    }
   },
   computed: {
     ...mapGetters({
@@ -83,6 +88,9 @@ export default {
     },
     handleShowAllMarkets () {
       this.paginationLimit = 9999
+    },
+    handleSearch (event) {
+      console.log(this.searchQuery)
     }
   }
 }
