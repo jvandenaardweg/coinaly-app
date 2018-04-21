@@ -1,0 +1,5 @@
+{
+  "bittrex": ["LTC/BTC", "POWR/BTC"],
+  "binance": ["LTC/BTC", "ADA/BTC"],
+  "poloniex": ["LTC/BTC"]
+}
