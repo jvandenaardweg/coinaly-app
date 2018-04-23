@@ -12,7 +12,7 @@ export default {
   },
   computed: {
     marketQuote () {
-      return (this.$route.params.quote) ? this.$route.params.quote : 'all'
+      return (this.$route && this.$route.params.quote) ? this.$route.params.quote : 'all'
     }
   }
 }

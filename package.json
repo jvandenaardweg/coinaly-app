@@ -37,7 +37,7 @@
       "!**/node_modules/**"
     ],
     "coverageDirectory": "<rootDir>/test/unit/coverage",
-    "collectCoverage": false
+    "collectCoverage": true
   },
   "dependencies": {
     "@vue/test-utils": "^1.0.0-beta.14",
