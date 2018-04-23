@@ -31,7 +31,8 @@
 
 <script>
 import BtnRefresh from '@/components/btn/Refresh'
-import BtnSelectExchange from '@/components/Btn/SelectExchange'
+import BtnSelectExchange from '@/components/btn/SelectExchange'
+
 export default {
   name: 'NavBar',
   components: {
