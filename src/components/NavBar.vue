@@ -23,7 +23,7 @@
       </div>
       <div class="d-flex ml-auto">
         <BtnRefresh class="d-none d-sm-block"></BtnRefresh>
-        <BtnSelectExchange></BtnSelectExchange>
+        <btn-select-exchange></btn-select-exchange>
       </div>
     </div>
   </nav>
@@ -31,7 +31,7 @@
 
 <script>
 import BtnRefresh from '@/components/btn/Refresh'
-import BtnSelectExchange from '@/components/BtnSelectExchange'
+import BtnSelectExchange from '@/components/Btn/SelectExchange'
 export default {
   name: 'NavBar',
   components: {

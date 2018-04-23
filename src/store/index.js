@@ -1,17 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import SymbolsStore from './modules/symbols'
-import BalancesStore from './modules/balances'
-import MarketsStore from './modules/markets'
-import ExchangesStore from './modules/exchanges'
-import OrdersStore from './modules/orders'
-import DepositsStore from './modules/deposits'
-import WithdrawalsStore from './modules/withdrawals'
-import WebsocketsStore from './modules/websockets'
-import AuthorizationStore from './modules/authorization'
-import UserStore from './modules/user'
-import TickersStore from './modules/tickers'
+import SymbolsStore from '@/store/modules/symbols'
+import BalancesStore from '@/store/modules/balances'
+import MarketsStore from '@/store/modules/markets'
+import ExchangesStore from '@/store/modules/exchanges'
+import OrdersStore from '@/store/modules/orders'
+import WebsocketsStore from '@/store/modules/websockets'
+import AuthorizationStore from '@/store/modules/authorization'
+import UserStore from '@/store/modules/user'
+import TickersStore from '@/store/modules/tickers'
 
 Vue.use(Vuex)
 
@@ -22,8 +20,6 @@ export default new Vuex.Store({
     markets: MarketsStore,
     exchanges: ExchangesStore,
     orders: OrdersStore,
-    deposits: DepositsStore,
-    withdrawals: WithdrawalsStore,
     websockets: WebsocketsStore,
     authorization: AuthorizationStore,
     user: UserStore,

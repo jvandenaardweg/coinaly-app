@@ -1,11 +1,11 @@
 <template>
   <div class="card">
 
-    <CardLoading :isLoading="isEmpty && isLoading" :text="'Loading Balances...'"></CardLoading>
+    <CardLoading :isLoading="!hasCurrencies && isLoading" :text="'Loading Balances...'"></CardLoading>
 
-    <CardEmpty :isEmpty="isEmpty" :text="'No currencies available in your balance.'"></CardEmpty>
+    <CardEmpty :isEmpty="!hasCurrencies" :text="'No currencies available in your balance.'"></CardEmpty>
 
-    <ul v-if="!isEmpty" class="list-group list-group-flush">
+    <ul v-if="hasCurrencies" class="list-group list-group-flush">
       <li v-for="(meta, symbol, index) in allFilledCurrencies" :key="symbol" :id="`list-group-item-${symbol}`" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': isActive(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
           <img :src="symbolIconLocation(symbol)" :id="`list-group-item-icon-${symbol}`" width="18" class="mr-1" :alt="symbol" />
@@ -48,8 +48,7 @@ export default {
     ...mapGetters({
       allFilledCurrencies: 'balances/allFilledCurrencies',
       hasCurrencies: 'balances/hasCurrencies',
-      isLoading: 'balances/isLoading',
-      isEmpty: 'balances/isEmpty'
+      isLoading: 'balances/isLoading'
     }),
     routeUrl () {
       return `/${this.routeBase}/${this.currency}`

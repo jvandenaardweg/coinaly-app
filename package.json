@@ -54,6 +54,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.22.1",
     "moment-timezone": "^0.5.16",
+    "nock": "^9.2.5",
     "numeral": "^2.0.6",
     "promise.prototype.finally": "^3.1.0",
     "raven-js": "^3.24.2",
