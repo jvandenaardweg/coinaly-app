@@ -4,12 +4,7 @@
     <div class="card-header">
       <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
       <sub-nav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="$route.params.quote"></sub-nav>
-      <div v-if="hasMarkets" class="input-icon mt-3">
-        <span class="input-icon-addon">
-          <i class="fe fe-user"></i>
-        </span>
-        <input type="text" class="form-control" placeholder="Search markets..." v-model="searchQuery" @keyup="handleSearch">
-      </div>
+      <search v-if="hasMarkets" @search="handleSearch"></search>
     </div>
 
     <card-loading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></card-loading>
@@ -35,6 +30,7 @@ import { mapGetters } from 'vuex'
 import CardLoading from '@/components/card/CardPartialLoading'
 import CardEmpty from '@/components/card/CardPartialEmpty'
 import SubNav from '@/components/SubNav'
+import Search from '@/components/Search'
 
 export default {
   name: 'CardMarkets',
@@ -44,12 +40,8 @@ export default {
   components: {
     CardLoading,
     CardEmpty,
-    SubNav
-  },
-  data () {
-    return {
-      searchQuery: null
-    }
+    SubNav,
+    Search
   },
   computed: {
     ...mapGetters({
@@ -89,8 +81,8 @@ export default {
     handleShowAllMarkets () {
       this.paginationLimit = 9999
     },
-    handleSearch (event) {
-      console.log(this.searchQuery)
+    handleSearch (searchQuery) {
+      console.log('markets search', searchQuery)
     }
   }
 }
