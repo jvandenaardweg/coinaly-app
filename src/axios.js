@@ -10,8 +10,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 var axiosInstance = axios.create({
-  baseURL: baseUrl,
-  withCredentials: true
+  baseURL: baseUrl
+  // withCredentials: true
 })
 
 // axiosInstance.defaults.params = {}

@@ -9,6 +9,11 @@ In order to run this project locally, you need other project dependencies:
 
 See their GitHub repo's for installation instructions.
 
+## Update icons
+1. Download https://github.com/cjdowner/cryptocurrency-icons
+2. Put in `static/icons`
+3. Make sure manifest file is in `static/icons/manifest.json`, since this is used to determine by the code if there's an icon
+
 ## Build Setup
 
 ``` bash

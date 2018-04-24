@@ -1,6 +1,6 @@
 import store from '../index'
-// const marketMock = require('../../mocks/market.json')
-const marketsMock = require('../../mocks/markets.json')
+// import marketMock from '@/mocks/market.json'
+import marketsMock from '@/mocks/markets.json'
 
 describe('modules/markets.js', () => {
   beforeEach(() => {

@@ -6,4 +6,9 @@ describe('modules/symbols/getters.js', () => {
     expect(getters.name(state)['BTC']).toBe('Bitcoin')
     expect(getters.name(state)['ETH']).toBe('Ethereum')
   })
+
+  it('getter availableIcons should return an array of available icons', () => {
+    expect(typeof getters.availableIcons(state)).toBe('object')
+    expect(getters.availableIcons(state).length).toBeGreaterThan(100)
+  })
 })

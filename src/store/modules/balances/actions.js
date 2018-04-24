@@ -1,5 +1,5 @@
 import * as api from '@/api/balances'
-
+// import util from 'util'
 export default {
   async getAll ({ dispatch, commit, getters, rootGetters }, options) {
     commit('startLoading')
@@ -7,11 +7,15 @@ export default {
 
     try {
       const response = await api.getAllBalances(options, selectedExchange)
-      commit('addAll', response)
+      if (response) {
+        commit('addAll', response)
+        commit('stopLoading')
+      }
+      return response
+    } catch (error) {
+      commit('addServerError', error.message)
       commit('stopLoading')
-    } catch (e) {
-      commit('addServerError', e)
-      commit('stopLoading')
+      return error
     }
   }
 }
