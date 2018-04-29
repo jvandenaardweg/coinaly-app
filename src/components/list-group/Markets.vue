@@ -1,7 +1,7 @@
 <template>
   <div class="list-group list-group-flush">
-    <router-link :to="marketLink(meta.base, meta.quote)" v-if="isWithinPageLimit(index)" v-for="(meta, symbol, index) in filteredMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
-      <ListGroupItemMarket :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="false"></ListGroupItemMarket>
+    <router-link :to="marketLink(meta.base, meta.quote)" v-if="!isLoading && isWithinPageLimit(index)" v-for="(meta, symbol, index) in filteredMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
+      <ListGroupItemMarket :currency="currencies[meta.base]" :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="false"></ListGroupItemMarket>
     </router-link>
   </div>
 </template>
@@ -28,14 +28,20 @@ export default {
   computed: {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
+      isLoadingCurrencies: 'currencies/isLoading',
+      isLoadingTickers: 'tickers/isLoading',
       hasMarkets: 'markets/hasMarkets',
       allMarkets: 'markets/allMarkets',
       allQuoteMarkets: 'markets/allQuoteMarkets',
       totalMarkets: 'markets/totalMarkets',
       allTickers: 'tickers/allTickers',
       selectedExchange: 'exchanges/selected',
-      userMarketFavorites: 'user/marketFavorites'
+      userMarketFavorites: 'user/marketFavorites',
+      currencies: 'currencies/currency'
     }),
+    isLoading () {
+      return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers
+    },
     subNavItems () {
       let items = [
         { label: 'All', slug: '', uri: '/markets' }

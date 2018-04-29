@@ -37,7 +37,7 @@
       "!**/node_modules/**"
     ],
     "coverageDirectory": "<rootDir>/test/unit/coverage",
-    "collectCoverage": true
+    "collectCoverage": false
   },
   "dependencies": {
     "@vue/test-utils": "^1.0.0-beta.14",
@@ -46,6 +46,7 @@
     "bootstrap": "^4.1.0",
     "chart.js": "^2.7.2",
     "cryptocurrencies": "^3.0.1",
+    "cryptocurrency-icons": "git+https://github.com/cjdowner/cryptocurrency-icons.git",
     "eslint-plugin-jest": "^21.15.1",
     "feather-icons": "^4.7.0",
     "jest": "^22.4.3",

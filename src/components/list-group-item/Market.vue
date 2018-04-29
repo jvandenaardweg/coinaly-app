@@ -4,7 +4,7 @@
       <img :src="iconLocation" :alt="base" />
       <strong>{{ market.base }}<span class="font-weight-normal text-muted">/{{ market.quote }}</span>
       <span class="symbol-full text-muted text-truncate">
-        {{ fullCurrencyName }}
+        {{ currencyName }}
       </span>
       </strong>
     </div>
@@ -37,6 +37,7 @@ export default {
       type: Object,
       required: true
     },
+    currency: Object,
     ticker: Object,
     favorite: Boolean,
     hideVolume: Boolean
@@ -62,14 +63,22 @@ export default {
     base () {
       return marketSymbolToBaseSymbol(this.market.symbol)
     },
-    fullCurrencyName () {
-      return symbolToName(this.quote)
+    currencyName () {
+      if (this.currency) {
+        return this.currency.name
+      } else {
+        return null
+      }
     },
     quote () {
       return marketSymbolToQuoteSymbol(this.market.symbol)
     },
     iconLocation () {
-      return symbolIconLocation(this.quote)
+      if (this.currency) {
+        return this.currency.iconLocation
+      } else {
+        return null
+      }
     },
     tickerPercentage () {
       return (this.ticker) ? this.ticker.percentage : 0

@@ -20,7 +20,7 @@ describe('modules/balances/actions.js', () => {
   //   done()
   // })
 
-  it('action getAll should set all currencies from the API', async (done) => {
+  it('action getAll should set all balances from the API', async (done) => {
     nock('http://localhost:5000')
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',

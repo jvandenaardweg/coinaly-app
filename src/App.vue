@@ -38,6 +38,7 @@ export default {
   created () {
     // this.$store.commit('exchanges/setSelected', 'bittrex')
     this.$store.dispatch('markets/loadAll')
+    this.$store.dispatch('currencies/getAll')
 
     this.$store.dispatch('websockets/connect')
     this.$store.dispatch('websockets/subscribe')

@@ -8,5 +8,11 @@ export default {
     Object.keys(tickers).forEach((symbol, index) => {
       Vue.set(state.tickers, symbol, tickers[symbol])
     })
+  },
+  startLoading (state) {
+    Vue.set(state, 'isLoading', true)
+  },
+  stopLoading (state) {
+    Vue.set(state, 'isLoading', false)
   }
 }

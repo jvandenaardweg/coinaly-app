@@ -62,6 +62,9 @@ export default {
     },
     events: state => {
       return state.events
+    },
+    socket: state => {
+      return state.socket
     }
   },
   actions: {
@@ -89,6 +92,10 @@ export default {
       return state.socket.watch(channel, (data) => {
         console.log('watch:', data)
         commit('tickers/setTickers', data, { root: true })
+
+        if (rootState.tickers.isLoading) {
+          commit('tickers/stopLoading', null, { root: true })
+        }
       })
     },
 

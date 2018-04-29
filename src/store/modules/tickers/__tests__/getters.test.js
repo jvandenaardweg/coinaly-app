@@ -16,4 +16,14 @@ describe('modules/tickers/getters.js', () => {
     expect(getters.allTickers(state)['ADA/BTC']).toMatchObject(tickersMock['ADA/BTC'])
     expect(getters.allTickers(state)['BTC/USDT']).toMatchObject(tickersMock['BTC/USDT'])
   })
+
+  it('getter isLoading should return true when loading', () => {
+    state.isLoading = true
+    expect(getters.isLoading(state)).toBe(true)
+  })
+
+  it('getter isLoading should return false when not loading', () => {
+    state.isLoading = false
+    expect(getters.isLoading(state)).toBe(false)
+  })
 })

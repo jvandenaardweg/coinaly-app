@@ -8,11 +8,11 @@
     <ul v-if="hasCurrencies" class="list-group list-group-flush">
       <li v-for="(meta, symbol, index) in allFilledCurrencies" :key="symbol" :id="`list-group-item-${symbol}`" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': isActive(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
-          <img :src="symbolIconLocation(symbol)" :id="`list-group-item-icon-${symbol}`" width="18" class="mr-1" :alt="symbol" />
+          <img :src="currencyIconLocation(symbol)" :id="`list-group-item-icon-${symbol}`" width="18" class="mr-1" :alt="symbol" />
           <input type="radio" :id="`currency-${symbol}`" :ref="symbol" name="currency" v-model="currency" :value="symbol" class="custom-control-input">
           <label class="custom-control-label" :for="`currency-${symbol}`">
             <strong>{{ symbol }}</strong>
-            <span class="text-muted">(<span :id="`list-group-item-name-${symbol}`">{{ symbolToName(symbol) }}</span>)</span>
+            <span class="text-muted">(<span :id="`list-group-item-name-${symbol}`">{{ currencyName(symbol) }}</span>)</span>
           </label>
         </div>
         <span class="text-muted d-none d-sm-block"><span :id="`list-group-item-amount-${symbol}`">{{ meta.free | number }} {{ symbol }}</span></span>
@@ -48,7 +48,8 @@ export default {
     ...mapGetters({
       allFilledCurrencies: 'balances/allFilledCurrencies',
       hasCurrencies: 'balances/hasCurrencies',
-      isLoading: 'balances/isLoading'
+      isLoading: 'balances/isLoading',
+      currenciesCurrency: 'currencies/currency'
     }),
     routeUrl () {
       return `/${this.routeBase}/${this.currency}`
@@ -57,6 +58,12 @@ export default {
   methods: {
     symbolToName,
     symbolIconLocation,
+    currencyName (symbol) {
+      return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].name : null
+    },
+    currencyIconLocation (symbol) {
+      return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].iconLocation : null
+    },
     handleSelectedCurrency (symbol) {
       this.currency = symbol
     },

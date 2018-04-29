@@ -7,20 +7,13 @@
       <search v-if="hasMarkets" @search="handleSearch"></search>
     </div>
 
-    <card-loading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></card-loading>
+    <card-loading :is-loading="isLoading" :text="'Loading Markets...'"></card-loading>
 
-    <card-empty
-      :is-empty="!isLoadingMarkets && !hasMarkets"
-      :text="'No markets available.'">
-    </card-empty>
+    <card-empty :is-empty="!isLoadingMarkets && !hasMarkets" :text="'No markets available.'"></card-empty>
 
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
-
-    <div class="card-footer" v-if="hasMarkets">
-      <button type="button" class="btn btn-outline-primary btn-block btn-lg" @click.prevent="handleShowAllMarkets">Show all markets</button>
-    </div>
 
   </div>
 </template>
@@ -46,11 +39,16 @@ export default {
   computed: {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
+      isLoadingTickers: 'tickers/isLoading',
       hasMarkets: 'markets/hasMarkets',
       allMarkets: 'markets/allMarkets',
       allQuoteMarkets: 'markets/allQuoteMarkets',
-      totalMarkets: 'markets/totalMarkets'
+      totalMarkets: 'markets/totalMarkets',
+      isLoadingCurrencies: 'currencies/isLoading'
     }),
+    isLoading () {
+      return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers
+    },
     subNavItems () {
       let items = [
         { label: 'All', slug: '', uri: '/markets' }

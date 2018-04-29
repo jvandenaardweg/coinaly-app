@@ -9,8 +9,18 @@ describe('modules/tickers/mutations.js', () => {
     mutations.setTicker(state, tickerMock)
     expect(state.tickers).toMatchObject(tickerMock)
   })
+
   it('setTickers sets multiple tickers', () => {
     mutations.setTickers(state, tickersMock)
     expect(state.tickers).toMatchObject(tickersMock)
+  })
+  it('mutation startLoading should set isLoading to true', () => {
+    mutations.startLoading(state)
+    expect(state.isLoading).toBe(true)
+  })
+
+  it('mutation stopLoading should set isLoading to false', () => {
+    mutations.stopLoading(state)
+    expect(state.isLoading).toBe(false)
   })
 })
