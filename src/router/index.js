@@ -8,6 +8,8 @@ import PageMarketsMarket from '@/pages/markets/quote/base/Index'
 
 import PageBalancesIndex from '@/pages/balances/Index'
 
+import PageLoginIndex from '@/pages/login/Index'
+
 import PageSettingsIndex from '@/pages/settings/Index'
 import PageSettingsAccount from '@/pages/settings/account/Index'
 import PageSettingsExchanges from '@/pages/settings/exchanges/Index'
@@ -46,25 +48,40 @@ export default new Router({
     {
       path: '/',
       name: 'Balances',
-      component: PageBalancesIndex
+      component: PageBalancesIndex,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/buy',
       component: PageBuyIndex,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
           path: '',
           component: PageBuySelectQuoteCurrency,
-          name: 'Quote'
+          name: 'Quote',
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: ':quoteCurrency',
           component: PageBuySelectBaseCurrency,
-          name: 'Base'
+          name: 'Base',
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: ':quoteCurrency/:baseCurrency',
           component: PageBuySelectPricing,
+          meta: {
+            requiresAuth: true
+          },
           beforeEnter: (to, from, next) => {
             console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
             next()
@@ -75,16 +92,25 @@ export default new Router({
     {
       path: '/sell',
       component: PageSellIndex,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
           path: '',
           component: PageSellSelectQuoteCurrency,
-          name: 'Sell - Balance'
+          name: 'Sell - Balance',
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: ':quoteCurrency',
           component: PageSellSelectBaseCurrency,
-          name: 'Sell - Market'
+          name: 'Sell - Market',
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: ':quoteCurrency/:baseCurrency',
@@ -92,6 +118,9 @@ export default new Router({
           beforeEnter: (to, from, next) => {
             console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
             next()
+          },
+          meta: {
+            requiresAuth: true
           }
         }
       ]
@@ -100,33 +129,49 @@ export default new Router({
       path: '/markets',
       name: 'Markets',
       component: PageMarketsIndex,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
           path: '', // Matches: /markets
           component: PageMarketsQuote,
-          name: 'Quote ID'
+          name: 'Quote ID',
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: ':quote', // Matches: /markets/BTC
           component: PageMarketsQuote,
-          name: 'Quote ID'
+          name: 'Quote ID',
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     },
     {
       path: '/markets/:quote/:base', // Matches: /markets/BTC/XRP
       name: 'Market',
-      component: PageMarketsMarket
+      component: PageMarketsMarket,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/settings',
       component: PageSettingsIndex,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
           path: '',
           component: PageSettingsAccount,
           name: 'Account settings',
           meta: {
+            requiresAuth: true,
             slug: 'account'
           }
         },
@@ -135,6 +180,7 @@ export default new Router({
           component: PageSettingsExchanges,
           name: 'Exchange settings',
           meta: {
+            requiresAuth: true,
             slug: 'exchanges'
           }
         },
@@ -143,6 +189,7 @@ export default new Router({
           component: PageSettingsExchangesEdit,
           name: 'Exchange edit',
           meta: {
+            requiresAuth: true,
             slug: 'exchanges'
           }
         }
@@ -152,6 +199,11 @@ export default new Router({
       path: '/onboarding',
       name: 'Onboarding',
       component: PageOnboardingIndex
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: PageLoginIndex
     }
   ]
 })
