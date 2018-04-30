@@ -29,4 +29,9 @@ describe('modules/auth/getters.js', () => {
     expect(getters.token(state)).toBe('testtoken')
   })
 
+  it('getter error should return a error message if state.error is set', () => {
+    state.error = 'Sample error message'
+    expect(getters.error(state)).toBe('Sample error message')
+  })
+
 })

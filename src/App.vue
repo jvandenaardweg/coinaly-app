@@ -1,50 +1,13 @@
 <template>
   <div id="app">
-    <NavBar></NavBar>
-
-    <TabBar></TabBar>
-    <!-- <Sidebar></Sidebar> -->
-    <div class="page">
-      <div class="page-main">
-        <div class="page-content">
-          <div class="container">
-            <!-- <transition name="fade" mode="out-in"> -->
-              <!-- <keep-alive> -->
-                <router-view class="view"></router-view>
-              <!-- </keep-alive> -->
-            <!-- </transition> -->
-            <ExchangeStatus></ExchangeStatus>
-          </div>
-        </div>
-      </div>
-    </div>
+    <router-view class="view"></router-view>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
-import Sidebar from '@/components/Sidebar.vue'
-import ExchangeStatus from '@/components/ExchangeStatus.vue'
-import TabBar from '@/components/TabBar.vue'
 
 export default {
-  name: 'app',
-  components: {
-    NavBar,
-    Sidebar,
-    ExchangeStatus,
-    TabBar
-  },
-  created () {
-    // this.$store.commit('exchanges/setSelected', 'bittrex')
-    this.$store.dispatch('markets/loadAll')
-    this.$store.dispatch('currencies/getAll')
-
-    this.$store.dispatch('websockets/connect')
-    this.$store.dispatch('websockets/subscribe')
-    this.$store.dispatch('websockets/watch')
-    this.$store.dispatch('balances/getAll')
-  }
+  name: 'app'
 }
 </script>
 
@@ -58,8 +21,13 @@ export default {
 @import "./scss/bootstrap/components/select-group";
 @import "./scss/bootstrap/components/list-group";
 
+html, body {
+  height: 100%;
+}
+
 #app {
-  padding-bottom: 5rem;
+  // padding-bottom: 5rem;
+  height: 100%;
 }
 
 .page {
@@ -107,6 +75,7 @@ label {
   // max-width: 800px;
   // margin: 0 auto;
   position: relative;
+  height: 100%;
 }
 .fade-enter-active, .fade-leave-active {
   transition: all 100ms ease

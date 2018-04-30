@@ -28,4 +28,9 @@ describe('modules/auth/mutations.js', () => {
     mutations.setToken(state, 'testtoken')
     expect(state.token).toBe('testtoken')
   })
+
+  it('mutation setError sets state.error', () => {
+    mutations.setError(state, 'Some error happened.')
+    expect(state.error).toBe('Some error happened.')
+  })
 })

@@ -13,7 +13,8 @@ export default {
       }
       return response
     } catch (error) {
-      commit('addServerError', error.message)
+      const errorMessage = error.response.data.message || 'Unknown error'
+      commit('setError', errorMessage)
       commit('stopLoading')
       return error
     }

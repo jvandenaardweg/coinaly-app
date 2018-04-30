@@ -7,5 +7,8 @@ export default {
   },
   token: state => {
     return state.token
+  },
+  error: state => {
+    return state.error
   }
 }

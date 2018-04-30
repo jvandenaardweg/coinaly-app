@@ -15,5 +15,8 @@ export default {
   },
   setToken (state, token) {
     Vue.set(state, 'token', token)
+  },
+  setError (state, message) {
+    Vue.set(state, 'error', message)
   }
 }

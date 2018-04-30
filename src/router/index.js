@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import LayoutLogin from '@/layouts/Login'
+import LayoutSignup from '@/layouts/Signup'
+import LayoutDashboard from '@/layouts/Dashboard'
+
 import PageMarketsIndex from '@/pages/markets/Index'
 // import PageMarketsIndex from '@/pages/markets/Index'
 import PageMarketsQuote from '@/pages/markets/quote/Index'
@@ -9,6 +13,9 @@ import PageMarketsMarket from '@/pages/markets/quote/base/Index'
 import PageBalancesIndex from '@/pages/balances/Index'
 
 import PageLoginIndex from '@/pages/login/Index'
+import PageLoginForgot from '@/pages/login/forgot/Index'
+
+import PageSignupIndex from '@/pages/signup/Index'
 
 import PageSettingsIndex from '@/pages/settings/Index'
 import PageSettingsAccount from '@/pages/settings/account/Index'
@@ -48,150 +55,160 @@ export default new Router({
     {
       path: '/',
       name: 'Balances',
-      component: PageBalancesIndex,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/buy',
-      component: PageBuyIndex,
+      component: LayoutDashboard,
       meta: {
         requiresAuth: true
       },
       children: [
         {
           path: '',
-          component: PageBuySelectQuoteCurrency,
-          name: 'Quote',
+          name: 'Balances',
+          component: PageBalancesIndex,
           meta: {
             requiresAuth: true
           }
         },
         {
-          path: ':quoteCurrency',
-          component: PageBuySelectBaseCurrency,
-          name: 'Base',
-          meta: {
-            requiresAuth: true
-          }
-        },
-        {
-          path: ':quoteCurrency/:baseCurrency',
-          component: PageBuySelectPricing,
+          path: '/buy',
+          component: PageBuyIndex,
           meta: {
             requiresAuth: true
           },
-          beforeEnter: (to, from, next) => {
-            console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
-            next()
-          }
-        }
-      ]
-    },
-    {
-      path: '/sell',
-      component: PageSellIndex,
-      meta: {
-        requiresAuth: true
-      },
-      children: [
-        {
-          path: '',
-          component: PageSellSelectQuoteCurrency,
-          name: 'Sell - Balance',
-          meta: {
-            requiresAuth: true
-          }
+          children: [
+            {
+              path: '',
+              component: PageBuySelectQuoteCurrency,
+              name: 'Quote',
+              meta: {
+                requiresAuth: true
+              }
+            },
+            {
+              path: ':quoteCurrency',
+              component: PageBuySelectBaseCurrency,
+              name: 'Base',
+              meta: {
+                requiresAuth: true
+              }
+            },
+            {
+              path: ':quoteCurrency/:baseCurrency',
+              component: PageBuySelectPricing,
+              meta: {
+                requiresAuth: true
+              },
+              beforeEnter: (to, from, next) => {
+                console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
+                next()
+              }
+            }
+          ]
         },
         {
-          path: ':quoteCurrency',
-          component: PageSellSelectBaseCurrency,
-          name: 'Sell - Market',
+          path: '/sell',
+          component: PageSellIndex,
           meta: {
             requiresAuth: true
-          }
-        },
-        {
-          path: ':quoteCurrency/:baseCurrency',
-          component: PageSellSelectPricing,
-          beforeEnter: (to, from, next) => {
-            console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
-            next()
           },
+          children: [
+            {
+              path: '',
+              component: PageSellSelectQuoteCurrency,
+              name: 'Sell - Balance',
+              meta: {
+                requiresAuth: true
+              }
+            },
+            {
+              path: ':quoteCurrency',
+              component: PageSellSelectBaseCurrency,
+              name: 'Sell - Market',
+              meta: {
+                requiresAuth: true
+              }
+            },
+            {
+              path: ':quoteCurrency/:baseCurrency',
+              component: PageSellSelectPricing,
+              beforeEnter: (to, from, next) => {
+                console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
+                next()
+              },
+              meta: {
+                requiresAuth: true
+              }
+            }
+          ]
+        },
+        {
+          path: '/markets',
+          name: 'Markets',
+          component: PageMarketsIndex,
           meta: {
             requiresAuth: true
-          }
-        }
-      ]
-    },
-    {
-      path: '/markets',
-      name: 'Markets',
-      component: PageMarketsIndex,
-      meta: {
-        requiresAuth: true
-      },
-      children: [
+          },
+          children: [
+            {
+              path: '', // Matches: /markets
+              component: PageMarketsQuote,
+              name: 'Quote ID',
+              meta: {
+                requiresAuth: true
+              }
+            },
+            {
+              path: ':quote', // Matches: /markets/BTC
+              component: PageMarketsQuote,
+              name: 'Quote ID',
+              meta: {
+                requiresAuth: true
+              }
+            }
+          ]
+        },
         {
-          path: '', // Matches: /markets
-          component: PageMarketsQuote,
-          name: 'Quote ID',
+          path: '/markets/:quote/:base', // Matches: /markets/BTC/XRP
+          name: 'Market',
+          component: PageMarketsMarket,
           meta: {
             requiresAuth: true
           }
         },
         {
-          path: ':quote', // Matches: /markets/BTC
-          component: PageMarketsQuote,
-          name: 'Quote ID',
+          path: '/settings',
+          component: PageSettingsIndex,
           meta: {
             requiresAuth: true
-          }
-        }
-      ]
-    },
-    {
-      path: '/markets/:quote/:base', // Matches: /markets/BTC/XRP
-      name: 'Market',
-      component: PageMarketsMarket,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/settings',
-      component: PageSettingsIndex,
-      meta: {
-        requiresAuth: true
-      },
-      children: [
-        {
-          path: '',
-          component: PageSettingsAccount,
-          name: 'Account settings',
-          meta: {
-            requiresAuth: true,
-            slug: 'account'
-          }
-        },
-        {
-          path: 'exchanges',
-          component: PageSettingsExchanges,
-          name: 'Exchange settings',
-          meta: {
-            requiresAuth: true,
-            slug: 'exchanges'
-          }
-        },
-        {
-          path: 'exchanges/:edit',
-          component: PageSettingsExchangesEdit,
-          name: 'Exchange edit',
-          meta: {
-            requiresAuth: true,
-            slug: 'exchanges'
-          }
+          },
+          children: [
+            {
+              path: '',
+              component: PageSettingsAccount,
+              name: 'Account settings',
+              meta: {
+                requiresAuth: true,
+                slug: 'account'
+              }
+            },
+            {
+              path: 'exchanges',
+              component: PageSettingsExchanges,
+              name: 'Exchange settings',
+              meta: {
+                requiresAuth: true,
+                slug: 'exchanges'
+              }
+            },
+            {
+              path: 'exchanges/:edit',
+              component: PageSettingsExchangesEdit,
+              name: 'Exchange edit',
+              meta: {
+                requiresAuth: true,
+                slug: 'exchanges'
+              }
+            }
+          ]
         }
       ]
     },
@@ -203,7 +220,31 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: PageLoginIndex
+      component: LayoutLogin,
+      children: [
+        {
+          path: '',
+          name: 'Login',
+          component: PageLoginIndex
+        },
+        {
+          path: '/login/forgot',
+          name: 'Forgot Password',
+          component: PageLoginForgot
+        }
+      ]
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: LayoutSignup,
+      children: [
+        {
+          path: '',
+          name: 'Signup',
+          component: PageSignupIndex
+        }
+      ]
     }
   ]
 })
