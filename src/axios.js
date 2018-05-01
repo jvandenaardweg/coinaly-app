@@ -12,7 +12,6 @@ if (process.env.NODE_ENV === 'production') {
 var axiosInstance = axios.create({
   baseURL: baseUrl,
   timeout: 5000
-  // withCredentials: true
 })
 
 if (window.localStorage) {
@@ -21,8 +20,5 @@ if (window.localStorage) {
 } else {
   delete axios.defaults.headers.common['authorization']
 }
-
-// axiosInstance.defaults.params = {}
-// axiosInstance.defaults.params['exchange'] = 'bittrex' // This needs to change when we add more exchanges
 
 module.exports = axiosInstance
