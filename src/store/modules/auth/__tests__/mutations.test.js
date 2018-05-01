@@ -33,4 +33,14 @@ describe('modules/auth/mutations.js', () => {
     mutations.setError(state, 'Some error happened.')
     expect(state.error).toBe('Some error happened.')
   })
+
+  it('mutation removeError sets state.error to null', () => {
+    mutations.removeError(state)
+    expect(state.error).toBe(null)
+  })
+
+  it('mutation removeToken sets state.token to null', () => {
+    mutations.removeToken(state)
+    expect(state.token).toBe(null)
+  })
 })

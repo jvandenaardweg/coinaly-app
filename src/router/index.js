@@ -54,7 +54,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Balances',
       component: LayoutDashboard,
       meta: {
         requiresAuth: true
@@ -62,7 +61,7 @@ export default new Router({
       children: [
         {
           path: '',
-          name: 'Balances',
+          name: 'Balances Index',
           component: PageBalancesIndex,
           meta: {
             requiresAuth: true
@@ -78,7 +77,7 @@ export default new Router({
             {
               path: '',
               component: PageBuySelectQuoteCurrency,
-              name: 'Quote',
+              name: 'Buy Quote',
               meta: {
                 requiresAuth: true
               }
@@ -86,7 +85,7 @@ export default new Router({
             {
               path: ':quoteCurrency',
               component: PageBuySelectBaseCurrency,
-              name: 'Base',
+              name: 'Buy Base',
               meta: {
                 requiresAuth: true
               }
@@ -142,7 +141,6 @@ export default new Router({
         },
         {
           path: '/markets',
-          name: 'Markets',
           component: PageMarketsIndex,
           meta: {
             requiresAuth: true
@@ -151,7 +149,7 @@ export default new Router({
             {
               path: '', // Matches: /markets
               component: PageMarketsQuote,
-              name: 'Quote ID',
+              name: 'Markets Quote',
               meta: {
                 requiresAuth: true
               }
@@ -159,7 +157,7 @@ export default new Router({
             {
               path: ':quote', // Matches: /markets/BTC
               component: PageMarketsQuote,
-              name: 'Quote ID',
+              name: 'Markets Quote ID',
               meta: {
                 requiresAuth: true
               }
@@ -219,7 +217,6 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'Login',
       component: LayoutLogin,
       children: [
         {
@@ -236,7 +233,6 @@ export default new Router({
     },
     {
       path: '/signup',
-      name: 'Signup',
       component: LayoutSignup,
       children: [
         {

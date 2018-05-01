@@ -6,5 +6,8 @@ export default {
   },
   setOnline (state, ticker) {
     Vue.set(state, 'isOnline', true)
+  },
+  setUser (state, user) {
+    Vue.set(state, 'user', user)
   }
 }

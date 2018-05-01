@@ -29,6 +29,14 @@ if (window) {
 
 sync(store, router)
 
+// Make sure the user is logged in when a token is present in localStorage
+if (window.localStorage) {
+  const savedToken = localStorage.getItem('token')
+  if (savedToken) {
+    store.dispatch('auth/setOnLoadAuth', savedToken)
+  }
+}
+
 // Make sure the user is logged in, if not, present a login page
 router.beforeEach((to, from, next) => {
   const isAuthenticated = store.getters['auth/isAuthenticated']

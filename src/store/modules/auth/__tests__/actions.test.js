@@ -29,6 +29,7 @@ describe('modules/auth/actions.js', () => {
     expect(context.commit).toHaveBeenCalledWith('startLoading')
     expect(context.commit).toHaveBeenCalledWith('setAuthenticated')
     expect(context.commit).toHaveBeenCalledWith('setToken', mockAuthLogin.token)
+    expect(context.commit).toHaveBeenCalledWith('user/setUser', mockAuthLogin.user, { root: true })
     expect(context.commit).toHaveBeenCalledWith('stopLoading')
     done()
   })
@@ -112,8 +113,25 @@ describe('modules/auth/actions.js', () => {
     const result = await actions.login(context, examplePayload)
     expect(result.response.data).toMatchObject(mockResponse)
     expect(context.commit).toHaveBeenCalledWith('startLoading')
+    expect(context.commit).toHaveBeenCalledWith('removeError')
     expect(context.commit).toHaveBeenCalledWith('setError', mockResponse.message)
     expect(context.commit).toHaveBeenCalledWith('stopLoading')
+    done()
+  })
+
+  it('action logout should log the user out of the app', async (done) => {
+    await actions.logout(context)
+    expect(context.commit).toHaveBeenCalledWith('removeToken')
+    expect(context.commit).toHaveBeenCalledWith('unsetAuthenticated')
+    done()
+  })
+
+  it('action setOnLoadAuth should set the logged in user', async (done) => {
+    const exampleToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyNzUzM2Q4LTRhNmQtNDQ4OC05NzRhLTRmYmQzNjFiOWMxNSIsImVtYWlsIjoiam9yZHl2YW5kZW5hYXJkd2VnQGdtYWlsLmNvbSIsImlhdCI6MTUyNTE2NjU1MH0.L-ttaXXws8FA_b2jPUWpLBddeuLjcNJaYzJraOQl_8g'
+    await actions.setOnLoadAuth(context, exampleToken)
+    expect(context.commit).toHaveBeenCalledWith('setAuthenticated')
+    expect(context.commit).toHaveBeenCalledWith('setToken', exampleToken)
+    expect(context.commit).toHaveBeenCalledWith('user/setUser', mockAuthLogin.user, { root: true })
     done()
   })
 })

@@ -4,5 +4,8 @@ export default {
   },
   marketFavorites: state => {
     return state.marketFavorites
+  },
+  user: state => {
+    return state.user
   }
 }

@@ -5,45 +5,19 @@
       <input type="email" class="form-control" id="email" placeholder="Your e-mail address">
     </div>
     <div class="form-group">
+      <label for="password" class="d-flex">New password <button type="button" class="btn btn-sm btn-outline-secondary ml-auto">View</button></label>
+      <input type="password" class="form-control" id="password" placeholder="Your new password">
+    </div>
+
+    <hr />
+
+    <div class="form-group">
       <label for="fiat">Preferred fiat currency</label>
       <select class="custom-select" id="fiat" v-model="fiat">
         <option :value="'usd'" selected>USD (US Dollar)</option>
         <option :value="'eur'">EUR (Euro)</option>
       </select>
     </div>
-    <!-- <hr /> -->
-    <!-- <div class="form-group">
-      <label for="exchange">Active exchange</label>
-      <select class="custom-select" id="exchange" v-model="exchange">
-        <option :value="null" disabled>Select an exchange</option>
-        <option value="bittrex">Bittrex</option>
-        <option value="binance">Binance</option>
-      </select>
-    </div>
-    <hr />
-    <div class="form-group">
-      <label for="api-key">API Key</label>
-      <input type="text" class="form-control" id="api-key" placeholder="[exchange] API Key">
-    </div>
-    <div class="form-group">
-      <label for="api-secret">API Secret</label>
-      <input type="text" class="form-control" id="api-secret" placeholder="[exchange] API Secret">
-    </div> -->
-
-
-    <!-- <hr />
-    <h2 class="h4">Exchanges (2)</h2>
-    <ul class="list-group list-group-flush mb-5">
-      <li class="list-group-item d-flex align-items-center">
-        <strong>Bittrex</strong>
-        <div class="ml-auto"><button type="button" class="btn btn-sm btn-primary">Edit</button></div>
-      </li>
-      <li class="list-group-item d-flex align-items-center">
-        <strong>Binance</strong>
-        <div class="ml-auto"><button type="button" class="btn btn-sm btn-primary">Edit</button></div>
-      </li>
-    </ul> -->
-
 
     <button type="submit" class="btn btn-success btn-block btn-lg" :disabled="disabled">{{ submitLabel }}</button>
 

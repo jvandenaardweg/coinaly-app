@@ -9,6 +9,7 @@
       <a class="dropdown-item" @click.prevent="handleSwitch('poloniex')" v-show="selected !== 'poloniex'">Switch to: <strong>Poloniex</strong></a>
       <div class="dropdown-divider"></div>
       <router-link to="/settings/exchanges" class="dropdown-item" @click.native="show = false">Exchange settings</router-link>
+      <button type="button" class="dropdown-item" @click.prevent="handleClickLogout">Logout</button>
     </div>
   </div>
 </template>
@@ -35,6 +36,10 @@ export default {
     }
   },
   methods: {
+    handleClickLogout (event) {
+      this.$store.dispatch('auth/logout')
+      window.location.reload()
+    },
     async handleSwitch (exchangeSlug) {
       this.isLoading = true
       this.show = false
