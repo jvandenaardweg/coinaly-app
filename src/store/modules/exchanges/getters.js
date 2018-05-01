@@ -3,6 +3,10 @@ export default {
     return state.selected
   },
   selectedName (state) {
-    return state.available[state.selected].name
+    if (state.available[state.selected]) {
+      return state.available[state.selected].name
+    } else {
+      return null
+    }
   }
 }

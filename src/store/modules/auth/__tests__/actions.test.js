@@ -9,7 +9,6 @@ const context = {
 }
 
 describe('modules/auth/actions.js', () => {
-
   it('action login should set the user logged in on success', async (done) => {
     const examplePayload = {
       email: 'jordyvandenaardweg@gmail.com',
@@ -126,9 +125,9 @@ describe('modules/auth/actions.js', () => {
     done()
   })
 
-  it('action setOnLoadAuth should set the logged in user', async (done) => {
+  it('action setOnLoad should set the logged in user', async (done) => {
     const exampleToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyNzUzM2Q4LTRhNmQtNDQ4OC05NzRhLTRmYmQzNjFiOWMxNSIsImVtYWlsIjoiam9yZHl2YW5kZW5hYXJkd2VnQGdtYWlsLmNvbSIsImlhdCI6MTUyNTE2NjU1MH0.L-ttaXXws8FA_b2jPUWpLBddeuLjcNJaYzJraOQl_8g'
-    await actions.setOnLoadAuth(context, exampleToken)
+    await actions.setOnLoad(context, exampleToken)
     expect(context.commit).toHaveBeenCalledWith('setAuthenticated')
     expect(context.commit).toHaveBeenCalledWith('setToken', exampleToken)
     expect(context.commit).toHaveBeenCalledWith('user/setUser', mockAuthLogin.user, { root: true })

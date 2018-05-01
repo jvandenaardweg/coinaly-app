@@ -14,6 +14,7 @@ describe('components/SupportChat.vue', () => {
 
   it('renders a correct default label', () => {
     expect(component.vm.buttonLabel).toBe(`Need help? Let's have a chat.`)
+    expect(component.find('button').text()).toBe(`Need help? Let's have a chat.`)
   })
 
   it('renders a correct custom label', () => {
@@ -21,6 +22,15 @@ describe('components/SupportChat.vue', () => {
       label: 'Fancy a chat?'
     })
     expect(component.vm.buttonLabel).toBe(`Fancy a chat?`)
+    expect(component.find('button').text()).toBe(`Fancy a chat?`)
+  })
+
+  it('renders a correct custom color', () => {
+    component.setProps({
+      color: 'primary'
+    })
+    expect(component.vm.btnClass).toBe('btn btn-outline-primary')
+    expect(component.find('button').classes()).toContain('btn-outline-primary')
   })
 
   it('renders a button', () => {

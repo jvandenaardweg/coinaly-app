@@ -1,6 +1,6 @@
 <template>
   <div class="text-center pt-7">
-    <button type="button" class="btn btn-link" @click.prevent="handleClick" ref="chatButton">{{ buttonLabel }}</button>
+    <button type="button" :class="btnClass" @click.prevent="handleClick" ref="chatButton">{{ buttonLabel }}</button>
   </div>
 </template>
 
@@ -10,11 +10,17 @@ export default {
   props: {
     label: {
       type: String
+    },
+    color: {
+      type: String
     }
   },
   computed: {
     buttonLabel () {
       return (this.label) ? this.label : `Need help? Let's have a chat.`
+    },
+    btnClass () {
+      return (this.color) ? `btn btn-outline-${this.color}` : 'btn btn-outline-light'
     }
   },
   methods: {

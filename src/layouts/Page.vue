@@ -1,11 +1,9 @@
 <template>
-  <div class="layout-signup">
+  <div class="layout-page">
+    <nav-bar></nav-bar>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="text-center">
-            <logo fill="#ffffff" :size="70"></logo>
-          </div>
           <router-view></router-view>
           <support-chat></support-chat>
         </div>
@@ -15,25 +13,22 @@
 </template>
 
 <script>
-import Logo from '@/components/Logo'
 import SupportChat from '@/components/SupportChat'
+import NavBar from '@/components/NavBar'
 
 export default {
-  name: 'LayoutSignup',
+  name: 'LayoutPage',
   components: {
-    Logo,
+    NavBar,
     SupportChat
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../scss/bootstrap/setting";
 
-.layout-signup {
-  padding-top: 3rem;
-  background-color: $dark-blue;
-  height: 100%;
+.layout-page {
+  padding-top: 5rem;
 }
 </style>
-

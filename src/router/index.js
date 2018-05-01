@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import LayoutLogin from '@/layouts/Login'
 import LayoutSignup from '@/layouts/Signup'
 import LayoutDashboard from '@/layouts/Dashboard'
+import LayoutPage from '@/layouts/Page'
 
 import PageMarketsIndex from '@/pages/markets/Index'
 // import PageMarketsIndex from '@/pages/markets/Index'
@@ -16,6 +17,7 @@ import PageLoginIndex from '@/pages/login/Index'
 import PageLoginForgot from '@/pages/login/forgot/Index'
 
 import PageSignupIndex from '@/pages/signup/Index'
+import PageSignupSuccessIndex from '@/pages/signup/success/Index'
 
 import PageSettingsIndex from '@/pages/settings/Index'
 import PageSettingsAccount from '@/pages/settings/account/Index'
@@ -33,6 +35,10 @@ import PageSellSelectBaseCurrency from '@/pages/sell/SelectBaseCurrency.vue'
 import PageSellSelectPricing from '@/pages/sell/SelectPricing.vue'
 
 import PageOnboardingIndex from '@/pages/onboarding/Index.vue'
+
+import PagePrivacyIndex from '@/pages/privacy/Index.vue'
+
+import PageDisclaimerIndex from '@/pages/disclaimer/Index.vue'
 
 Vue.use(Router)
 
@@ -216,6 +222,28 @@ export default new Router({
       component: PageOnboardingIndex
     },
     {
+      path: '/privacy',
+      component: LayoutPage,
+      children: [
+        {
+          path: '',
+          name: 'Privacy',
+          component: PagePrivacyIndex
+        }
+      ]
+    },
+    {
+      path: '/disclaimer',
+      component: LayoutPage,
+      children: [
+        {
+          path: '',
+          name: 'Disclaimer',
+          component: PageDisclaimerIndex
+        }
+      ]
+    },
+    {
       path: '/login',
       component: LayoutLogin,
       children: [
@@ -239,6 +267,11 @@ export default new Router({
           path: '',
           name: 'Signup',
           component: PageSignupIndex
+        },
+        {
+          path: '/signup/success',
+          name: 'Signup Success',
+          component: PageSignupSuccessIndex
         }
       ]
     }

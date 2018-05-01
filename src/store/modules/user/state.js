@@ -2,6 +2,8 @@ const initialIsOnline = window.navigator.onLine
 
 export default {
   user: null,
+  isLoading: false,
+  error: null,
   isOnline: initialIsOnline,
   marketFavorites: {
     'bittrex': {

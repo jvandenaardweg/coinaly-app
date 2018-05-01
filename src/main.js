@@ -33,7 +33,7 @@ sync(store, router)
 if (window.localStorage) {
   const savedToken = localStorage.getItem('token')
   if (savedToken) {
-    store.dispatch('auth/setOnLoadAuth', savedToken)
+    store.dispatch('auth/setOnLoad', savedToken)
   }
 }
 

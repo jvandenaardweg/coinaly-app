@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard">
-    <NavBar></NavBar>
-    <TabBar></TabBar>
+    <nav-bar></nav-bar>
+    <tab-bar></tab-bar>
     <div class="page">
       <div class="page-main">
         <div class="page-content">
@@ -11,7 +11,7 @@
                 <router-view class="view"></router-view>
               <!-- </keep-alive> -->
             <!-- </transition> -->
-            <ExchangeStatus></ExchangeStatus>
+            <exchange-status></exchange-status>
           </div>
         </div>
       </div>
@@ -21,7 +21,6 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import Sidebar from '@/components/Sidebar.vue'
 import ExchangeStatus from '@/components/ExchangeStatus.vue'
 import TabBar from '@/components/TabBar.vue'
 
@@ -29,7 +28,6 @@ export default {
   name: 'LayoutDashboard',
   components: {
     NavBar,
-    Sidebar,
     ExchangeStatus,
     TabBar
   },

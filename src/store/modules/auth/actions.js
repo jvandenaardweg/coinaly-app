@@ -30,7 +30,7 @@ export default {
     commit('removeToken')
   },
 
-  setOnLoadAuth ({ commit }, token) {
+  setOnLoad ({ commit }, token) {
     commit('setAuthenticated')
     commit('setToken', token)
     commit('user/setUser', jwtDecode(token), { root: true })

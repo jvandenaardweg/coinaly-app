@@ -7,5 +7,11 @@ export default {
   },
   user: state => {
     return state.user
+  },
+  isLoading: state => {
+    return state.isLoading
+  },
+  error: state => {
+    return state.error
   }
 }

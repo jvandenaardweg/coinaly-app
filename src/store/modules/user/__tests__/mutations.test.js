@@ -16,4 +16,23 @@ describe('modules/user/mutations.js', () => {
     mutations.setUser(state, mockAuthLogin.user)
     expect(state.user).toMatchObject(mockAuthLogin.user)
   })
+  it('startLoading sets state.isLoading to true', () => {
+    state.isLoading = false
+    mutations.startLoading(state)
+    expect(state.isLoading).toBe(true)
+  })
+  it('stopLoading sets state.isLoading to false', () => {
+    state.isLoading = true
+    mutations.stopLoading(state)
+    expect(state.isLoading).toBe(false)
+  })
+  it('setError sets state.error to a message', () => {
+    mutations.setError(state, 'An error happened')
+    expect(state.error).toBe('An error happened')
+  })
+  it('removeError sets state.error to null', () => {
+    state.error = 'Some error message'
+    mutations.removeError(state)
+    expect(state.error).toBe(null)
+  })
 })

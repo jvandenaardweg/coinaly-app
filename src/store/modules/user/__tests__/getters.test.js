@@ -12,9 +12,16 @@ describe('modules/user/getters.js', () => {
     state.isOnline = false
     expect(getters.isOnline(state)).toBe(false)
   })
-
   it('getter user should return the user', () => {
     state.user = mockAuthLogin.user
     expect(getters.user(state)).toMatchObject(mockAuthLogin.user)
+  })
+  it('getter isLoading should return true/false', () => {
+    state.isLoading = true
+    expect(getters.isLoading(state)).toBe(true)
+  })
+  it('getter error should return an error message', () => {
+    state.error = 'An error happened'
+    expect(getters.error(state)).toBe('An error happened')
   })
 })
