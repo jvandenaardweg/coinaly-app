@@ -1,12 +1,17 @@
 <template>
   <form>
-    <p>edit exchange {{ $route.params.edit }}</p>
+    <p>edit exchange {{ param }}</p>
 
   </form>
 </template>
 
 <script>
 export default {
-  name: 'PageSettingsExchangesEdit'
+  name: 'PageSettingsExchangesEdit',
+  computed: {
+    param () {
+      return (this.$route) ? this.$route.params.edit : null
+    }
+  }
 }
 </script>

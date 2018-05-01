@@ -4,7 +4,7 @@
       <div class="col-sm-10 col-md-8 col-lg-6 col-xl-6">
         <div class="card">
           <div class="card-header">
-            <SubNav :items="subNavItems" :selected="$route.meta.slug"></SubNav>
+            <SubNav :items="subNavItems" :selected="selected"></SubNav>
           </div>
           <div class="card-body">
             <transition>
@@ -42,6 +42,11 @@ export default {
           uri: '/settings/exchanges'
         }
       ]
+    }
+  },
+  computed: {
+    selected () {
+      return (this.$route && this.$route.meta.slug) ? this.$route.meta.slug : null
     }
   }
 }
