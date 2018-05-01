@@ -17,13 +17,6 @@ describe('helpers/symbols.js', () => {
     expect(symbolToName('UNKNOWNCRYPTO')).toBe(null)
   })
 
-  it('should return a array of cryptocurrency names', () => {
-    expect(symbolsToNames('XRP/BTC')).toEqual(expect.arrayContaining(['Ripple', 'Bitcoin']))
-    expect(symbolsToNames('XVG/BTC')).toEqual(expect.arrayContaining(['Verge', 'Bitcoin']))
-    expect(symbolsToNames('XVG')).toEqual(expect.arrayContaining(['Verge']))
-    expect(symbolsToNames('UNKNOWNCRYPTO')).toEqual(expect.arrayContaining([null]))
-    expect(symbolsToNames('')).toEqual(null)
-  })
 
   it('should return a correct icon file location', () => {
     expect(symbolIconLocation('XRP')).toBe('/static/icons/cryptocurrencies/svg/color/xrp.svg')

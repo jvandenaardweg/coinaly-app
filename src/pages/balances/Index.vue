@@ -18,10 +18,6 @@
 
     <div class="row justify-content-center">
       <div class="col">
-
-         <line-chart :data="chartData" :options="{responsive: true, maintainAspectRatio: true}"></line-chart>
-
-
         <div class="card mt-4">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">ADA/BTC</li>
@@ -41,29 +37,12 @@
 </template>
 
 <script>
-import LineChart from '@/components/charts/LineChart.js'
 import HorizontalScroller from '@/components/HorizontalScroller'
 
 export default {
   name: 'PageBalances',
   components: {
-    HorizontalScroller,
-    LineChart
-  },
-  computed: {
-    chartData () {
-      return {
-        data: [
-          {
-            x: 10,
-            y: 20
-          }, {
-            x: 15,
-            y: 10
-          }
-        ]
-      }
-    }
+    HorizontalScroller
   }
 }
 </script>

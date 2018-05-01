@@ -5,8 +5,6 @@
 </template>
 
 <script>
-const moment = require('moment-timezone')
-
 export default {
   name: 'TradingViewChart',
   props: ['exchange', 'baseCurrency', 'quoteCurrency'],
@@ -19,7 +17,9 @@ export default {
       return `${this.exchange}:${this.quoteCurrency}${this.baseCurrency}`
     },
     userTimezone () {
-      return moment.tz.guess() || 'Europe/Paris'
+      // Intl.DateTimeFormat might not be supported in all browsers
+      // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat
+      return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Paris'
     }
   },
   created () {

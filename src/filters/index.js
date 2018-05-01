@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import numeral from 'numeral'
-const moment = require('moment')
+// const moment = require('moment')
+import format from 'date-fns/format'
 
 Vue.filter('capitalize', function (value) {
   return value.toUpperCase()
@@ -17,7 +18,7 @@ Vue.filter('percentage', function (value) {
 })
 
 Vue.filter('readableDate', function (value) {
-  return moment(value).format('DD-MM-YYYY HH:mm:ss')
+  return format(value, 'DD-MM-YYYY HH:mm:ss')
 })
 
 Vue.filter('toFixed', function (value, decimals = 8) {
