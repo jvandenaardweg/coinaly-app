@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .layout-signup {
   padding-top: 1rem;
   background-color: $dark-blue;

@@ -7,13 +7,6 @@
             <logo fill="#ffffff" :size="70"></logo>
           </div>
           <router-view></router-view>
-          <!-- <div class="pt-6 text-center">
-            <router-link to="/signup" class="btn btn-outline-light">Create an account?</router-link>
-            &nbsp;
-            <router-link to="/login/forgot" class="btn btn-outline-light">Forgot password?</router-link>
-            &nbsp;
-            <router-link to="/login" class="btn btn-outline-light ml-auto" exact>Or just login?</router-link>
-          </div> -->
           <support-chat></support-chat>
         </div>
       </div>
