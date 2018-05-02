@@ -5,6 +5,7 @@ import LayoutLogin from '@/layouts/Login'
 import LayoutSignup from '@/layouts/Signup'
 import LayoutDashboard from '@/layouts/Dashboard'
 import LayoutPage from '@/layouts/Page'
+import LayoutOnboarding from '@/layouts/Onboarding'
 
 import PageMarketsIndex from '@/pages/markets/Index'
 // import PageMarketsIndex from '@/pages/markets/Index'
@@ -218,8 +219,14 @@ export default new Router({
     },
     {
       path: '/onboarding',
-      name: 'Onboarding',
-      component: PageOnboardingIndex
+      component: LayoutOnboarding,
+      children: [
+        {
+          path: '',
+          name: 'Onboarding',
+          component: PageOnboardingIndex
+        }
+      ]
     },
     {
       path: '/privacy',
