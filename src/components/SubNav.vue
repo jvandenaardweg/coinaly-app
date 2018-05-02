@@ -23,9 +23,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/bootstrap/setting";
-@import "~bootstrap/scss/mixins/breakpoints";
-
 .subnav {
   background-color: $white;
 

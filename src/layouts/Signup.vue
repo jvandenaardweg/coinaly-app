@@ -28,8 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/bootstrap/setting";
-
 .layout-signup {
   padding-top: 3rem;
   background-color: $dark-blue;

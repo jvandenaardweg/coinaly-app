@@ -76,9 +76,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/bootstrap/setting";
-@import "~bootstrap/scss/mixins/breakpoints";
-
 .list-group-item,
 label {
   cursor: pointer;

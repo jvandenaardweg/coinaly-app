@@ -32,6 +32,18 @@ exports.cssLoaders = function (options) {
           sourceMap: options.sourceMap
         })
       })
+
+      // This makes my vars and mixins avail throughout my app at a global level
+      if (loader === 'sass') {
+        loaders.push({
+          loader: 'sass-resources-loader',
+          options: {
+            resources: [
+              path.resolve(__dirname, '../src/scss/bootstrap/bootstrap.scss')
+            ]
+          }
+        })
+      }
     }
 
     // Extract CSS when that option is specified

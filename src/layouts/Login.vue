@@ -35,8 +35,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../scss/bootstrap/setting";
-
 .layout-login {
   padding-top: 3rem;
   background-color: $dark-blue;

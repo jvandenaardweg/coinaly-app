@@ -1,14 +1,14 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
-import router from './router'
+import App from '@/App'
+import router from '@/router'
 import WebFont from 'webfontloader'
-import store from './store'
+import store from '@/store'
 import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 import { sync } from 'vuex-router-sync'
-import './filters'
+import '@/filters'
 
 Vue.config.productionTip = false
 

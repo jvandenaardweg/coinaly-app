@@ -62,7 +62,6 @@ export default {
 
 
 <style lang="scss">
-@import "../scss/bootstrap/setting";
 .navbar {
   background-color: $blue;
   height: 3.75rem;

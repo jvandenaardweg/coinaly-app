@@ -26,8 +26,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../scss/bootstrap/setting";
-
 .layout-page {
   padding-top: 5rem;
 }

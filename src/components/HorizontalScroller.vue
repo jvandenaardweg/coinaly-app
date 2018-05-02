@@ -27,9 +27,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/bootstrap/setting";
-@import "~bootstrap/scss/mixins/breakpoints";
-
 .horizontal-scroller {
   overflow-x: auto;
   overflow-y: hidden;

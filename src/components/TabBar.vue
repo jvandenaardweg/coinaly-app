@@ -35,9 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/bootstrap/setting";
-@import "~bootstrap/scss/mixins/breakpoints";
-
 .nav {
   background-color: $white;
   border-top: 1px $border-color solid;

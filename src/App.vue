@@ -12,21 +12,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./scss/bootstrap/setting";
-@import "~bootstrap/scss/bootstrap";
-
-// Customizing bootstrap standard components a little bit
-@import "./scss/bootstrap/components/dropdown";
-@import "./scss/bootstrap/components/card";
-@import "./scss/bootstrap/components/select-group";
-@import "./scss/bootstrap/components/list-group";
-
 html, body {
   height: 100%;
 }
 
 #app {
-  // padding-bottom: 5rem;
   height: 100%;
 }
 

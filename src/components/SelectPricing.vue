@@ -183,7 +183,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../scss/bootstrap/setting";
 .zigzag {
   position: relative;
     padding: 1.5rem 1rem;
