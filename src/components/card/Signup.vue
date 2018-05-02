@@ -10,13 +10,13 @@
 
           <div class="form-group">
             <label>E-mail address</label>
-            <input class="form-control" type="email" name="email" autocomplete="email" v-model="email" placeholder="Your e-mail address" required />
+            <input class="form-control form-control-lg" type="email" name="email" autocomplete="email" v-model="email" placeholder="Your e-mail address" required />
           </div>
 
           <div class="form-group">
             <label>Password</label>
             <div class="input-group mb-3">
-              <input class="form-control" type="password" name="password" autocomplete="password" ref="inputPassword" v-model="password" placeholder="Your super secret password" required />
+              <input class="form-control form-control-lg" type="password" name="password" autocomplete="password" ref="inputPassword" v-model="password" placeholder="Your super secret password" required />
               <div class="input-group-append">
                 <button class="btn btn-outline-primary" type="button" @click.prevent="handleViewPassword">{{ viewPasswordLabel }}</button>
               </div>

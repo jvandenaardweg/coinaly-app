@@ -6,11 +6,11 @@
           <legend class="sr-only">Login</legend>
           <div class="form-group">
             <label class="d-flex">E-mail address <router-link to="/signup" class="ml-auto font-weight-normal text-muted"><u>No account yet?</u></router-link></label>
-            <input class="form-control" type="email" autocomplete="email" placeholder="Your e-mail address" ref="firstInput" v-model="email" required />
+            <input class="form-control form-control-lg" type="email" autocomplete="email" placeholder="Your e-mail address" ref="firstInput" v-model="email" required />
           </div>
           <div class="form-group">
             <label class="d-flex">Password <router-link to="/login/forgot" class="ml-auto font-weight-normal text-muted"><u>Forgot password?</u></router-link></label>
-            <input class="form-control" type="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" required />
+            <input class="form-control form-control-lg" type="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" required />
           </div>
           <div v-if="error" class="alert alert-danger">
             {{ error }}

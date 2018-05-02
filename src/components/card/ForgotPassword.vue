@@ -8,7 +8,7 @@
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
           <label>E-mail address</label>
-          <input class="form-control" type="email" autocomplete="email" placeholder="The e-mail address you signed up with" ref="firstInput" v-model="email" required />
+          <input class="form-control form-control-lg" type="email" autocomplete="email" placeholder="The e-mail address you signed up with" ref="firstInput" v-model="email" required />
         </div>
 
         <div v-if="error" class="alert alert-danger">
