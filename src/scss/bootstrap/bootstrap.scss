@@ -44,6 +44,7 @@
 @import "./components/card";
 @import "./components/select-group";
 @import "./components/list-group";
+@import "./components/form-control";
 
 .btn {
   font-weight: 600;
@@ -106,4 +107,10 @@ label {
 }
 .fade-enter, .fade-leave-active {
   opacity: 0;
+}
+
+.lead {
+  @include media-breakpoint-down(sm) {
+    font-size: inherit;
+  }
 }
