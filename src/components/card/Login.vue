@@ -1,16 +1,16 @@
 <template>
-  <div class="card border-0 shadow-sm">
-    <div class="card-body p-7">
+  <div class="card shadow-sm">
+    <div class="card-body">
       <form @submit.prevent="handleSubmit">
-        <fieldset>
+        <fieldset  :disabled="authIsLoading || isAuthenticated">
           <legend class="sr-only">Login</legend>
           <div class="form-group">
-            <label>E-mail address</label>
-            <input class="form-control" type="email" placeholder="Your e-mail address" ref="firstInput" v-model="email" />
+            <label class="d-flex">E-mail address <router-link to="/signup" class="ml-auto font-weight-normal text-muted"><u>No account yet?</u></router-link></label>
+            <input class="form-control" type="email" autocomplete="email" placeholder="Your e-mail address" ref="firstInput" v-model="email" required />
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input class="form-control" type="password" placeholder="Your super secret password" v-model="password" />
+            <label class="d-flex">Password <router-link to="/login/forgot" class="ml-auto font-weight-normal text-muted"><u>Forgot password?</u></router-link></label>
+            <input class="form-control" type="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" required />
           </div>
           <div v-if="error" class="alert alert-danger">
             {{ error }}
@@ -19,10 +19,6 @@
         </fieldset>
       </form>
     </div>
-    <!-- <div class="card-footer d-flex pl-7 pr-7">
-      <router-link to="/signup" class="btn btn-outline-secondary">Create an account</router-link>
-      <router-link to="/login/forgot" class="btn btn-outline-secondary ml-auto">Forgot password?</router-link>
-    </div> -->
   </div>
 </template>
 
@@ -71,3 +67,19 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.card {
+  border: 0;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 1.5rem;
+  }
+
+  .card-body {
+    @include media-breakpoint-up(sm) {
+      padding: 3rem;
+    }
+  }
+}
+</style>

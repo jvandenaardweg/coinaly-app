@@ -3,9 +3,13 @@
     <nav-bar></nav-bar>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-6">
-          <router-view></router-view>
-          <support-chat></support-chat>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <router-view></router-view>
+              <support-chat color="primary" label="Any questions? Let's have a chat."></support-chat>
+            </div>
+          </div>
         </div>
       </div>
     </div>

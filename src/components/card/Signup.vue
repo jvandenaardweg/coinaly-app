@@ -1,24 +1,24 @@
 <template>
-  <div class="card mt-5 border-0 shadow-sm">
-    <div class="card-body p-7">
-      <h1 class="h1 text-center">Get started</h1>
-      <p class="text-muted text-center">In order the get started, create your account first. You can setup your first exchange right after this.</p>
-
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="h1 text-center mb-3">Get started</h1>
+      <p class="text-center text-muted lead font-weight-normal">Create your free Coinaly account to make cryptocurrency trading easier and portfolio insights more helpful.</p>
+      <hr />
       <form @submit.prevent="handleSubmit">
         <fieldset :disabled="isLoading">
           <legend class="sr-only">Signup</legend>
 
           <div class="form-group">
             <label>E-mail address</label>
-            <input class="form-control" type="email" v-model="email" placeholder="Your e-mail address" required />
+            <input class="form-control" type="email" name="email" autocomplete="email" v-model="email" placeholder="Your e-mail address" required />
           </div>
 
           <div class="form-group">
             <label>Password</label>
             <div class="input-group mb-3">
-              <input class="form-control" type="password" ref="inputPassword" v-model="password" placeholder="Your super secret password" required />
+              <input class="form-control" type="password" name="password" autocomplete="password" ref="inputPassword" v-model="password" placeholder="Your super secret password" required />
               <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" @click.prevent="handleViewPassword" ref="buttonViewPassword">View</button>
+                <button class="btn btn-outline-primary" type="button" @click.prevent="handleViewPassword">{{ viewPasswordLabel }}</button>
               </div>
             </div>
           </div>
@@ -44,6 +44,10 @@
           <button type="submit" class="btn btn-success btn-lg btn-block">{{ submitButtonLabel }}</button>
         </fieldset>
       </form>
+
+      <div class="text-center mt-4">
+        <router-link to="/login" class="ml-auto font-weight-normal text-muted"><u>Already have an account?</u></router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +62,8 @@ export default {
       email: null,
       acceptedEmailOptIn: null,
       password: null,
-      acceptedPrivacyDisclaimer: null
+      acceptedPrivacyDisclaimer: null,
+      viewPasswordLabel: 'Verify'
     }
   },
   computed: {
@@ -88,15 +93,30 @@ export default {
     },
     handleViewPassword (event) {
       const $input = this.$refs.inputPassword
-      const $button = this.$refs.buttonViewPassword
       if ($input.getAttribute('type') === 'password') {
         $input.setAttribute('type', 'text')
-        $button.innerHTML = 'Hide'
+        this.viewPasswordLabel = 'Hide'
       } else {
         $input.setAttribute('type', 'password')
-        $button.innerHTML = 'View'
+        this.viewPasswordLabel = 'Verify'
       }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.card {
+  border: 0;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 1.5rem;
+  }
+
+  .card-body {
+    @include media-breakpoint-up(sm) {
+      padding: 3rem;
+    }
+  }
+}
+</style>

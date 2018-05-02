@@ -29,9 +29,13 @@ export default {
 
 <style lang="scss" scoped>
 .layout-signup {
-  padding-top: 3rem;
+  padding-top: 1rem;
   background-color: $dark-blue;
   height: 100%;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 3rem;
+  }
 }
 </style>
 

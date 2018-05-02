@@ -36,8 +36,12 @@ export default {
 
 <style lang="scss">
 .layout-login {
-  padding-top: 3rem;
   background-color: $dark-blue;
   height: 100%;
+  padding-top: 1rem;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 3rem;
+  }
 }
 </style>
