@@ -67,7 +67,7 @@ export default {
       const result = await this.$validator.validateAll()
       if (result) {
         await this.dispatchLogin()
-        this.redirectToHomepage()
+        if (!this.error) this.redirectToHomepage()
       }
     },
     async dispatchLogin () {
@@ -78,6 +78,7 @@ export default {
     },
     redirectToHomepage () {
       setTimeout(() => {
+        console.log('redir')
         this.$router.push('/')
       }, 2000)
     }

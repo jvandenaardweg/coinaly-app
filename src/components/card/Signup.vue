@@ -113,10 +113,8 @@ export default {
     async handleSubmit (event) {
       const result = await this.$validator.validateAll()
       if (result) {
-        const createdUser = await this.dispatchCreateUser()
-        if (createdUser.length) {
-          this.redirectToSuccess()
-        }
+        await this.dispatchCreateUser()
+        if (!this.error) this.redirectToSuccess()
       }
     },
     async dispatchCreateUser () {
