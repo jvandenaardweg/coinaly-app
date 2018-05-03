@@ -7,8 +7,11 @@ import WebFont from 'webfontloader'
 import store from '@/store'
 import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
+import VeeValidate from 'vee-validate'
 import { sync } from 'vuex-router-sync'
 import '@/filters'
+
+Vue.use(VeeValidate)
 
 Vue.config.productionTip = false
 

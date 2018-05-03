@@ -1,16 +1,23 @@
 <template>
   <div class="card shadow-sm">
     <div class="card-body">
+      <h1 class="h1 text-center mb-5">Log In</h1>
       <form @submit.prevent="handleSubmit">
-        <fieldset  :disabled="authIsLoading || isAuthenticated">
+        <fieldset :disabled="isDisabled">
           <legend class="sr-only">Login</legend>
           <div class="form-group">
             <label class="d-flex">E-mail address <router-link to="/signup" class="ml-auto font-weight-normal text-muted"><u>No account yet?</u></router-link></label>
-            <input class="form-control form-control-lg" type="email" autocomplete="email" placeholder="Your e-mail address" ref="firstInput" v-model="email" required />
+            <input class="form-control form-control-lg" :class="{ 'is-invalid': errors.has('email'), 'is-valid': email && !errors.has('email') }" type="email" name="email" autocomplete="email" placeholder="Your e-mail address" ref="firstInput" v-model="email" v-validate="'required|email'" />
+            <div v-show="errors.has('email')" ref="emailError" class="invalid-feedback">
+              {{ errors.first('email') }}
+            </div>
           </div>
           <div class="form-group">
             <label class="d-flex">Password <router-link to="/login/forgot" class="ml-auto font-weight-normal text-muted"><u>Forgot password?</u></router-link></label>
-            <input class="form-control form-control-lg" type="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" required />
+            <input class="form-control form-control-lg" :class="{ 'is-invalid': errors.has('password'), 'is-valid': email && !errors.has('password') }" type="password" name="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" v-validate="'required'" />
+            <div v-show="errors.has('password')" ref="passwordError"  class="invalid-feedback">
+              {{ errors.first('password') }}
+            </div>
           </div>
           <div v-if="error" class="alert alert-danger">
             {{ error }}
@@ -50,19 +57,29 @@ export default {
       } else {
         return 'Login'
       }
+    },
+    isDisabled () {
+      return this.authIsLoading || this.isAuthenticated
     }
   },
   methods: {
-    handleSubmit (event) {
-      this.$store.dispatch('auth/login', {
+    async handleSubmit (event) {
+      const result = await this.$validator.validateAll()
+      if (result) {
+        await this.dispatchLogin()
+        this.redirectToHomepage()
+      }
+    },
+    async dispatchLogin () {
+      return this.$store.dispatch('auth/login', {
         email: this.email,
         password: this.password
       })
-        .then(result => {
-          setTimeout(() => {
-            this.$router.push('/')
-          }, 2000)
-        })
+    },
+    redirectToHomepage () {
+      setTimeout(() => {
+        this.$router.push('/')
+      }, 2000)
     }
   }
 }
