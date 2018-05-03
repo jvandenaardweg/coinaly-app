@@ -13,6 +13,8 @@ export default {
       const errorMessage = (error.response) ? error.response.data.message : 'Oh oh, sorry for this. An unknown error occured, please try again later.'
       commit('setError', errorMessage)
       commit('stopLoading')
+      console.log('error')
+      return new Error('fail')
     }
   }
 }

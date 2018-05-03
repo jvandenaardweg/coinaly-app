@@ -14,8 +14,8 @@
           </div>
           <div class="form-group">
             <label class="d-flex">Password <router-link to="/login/forgot" class="ml-auto font-weight-normal text-muted"><u>Forgot password?</u></router-link></label>
-            <input class="form-control form-control-lg" :class="{ 'is-invalid': errors.has('password'), 'is-valid': email && !errors.has('password') }" type="password" name="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" v-validate="'required'" />
-            <div v-show="errors.has('password')" ref="passwordError"  class="invalid-feedback">
+            <input class="form-control form-control-lg" :class="{ 'is-invalid': errors.has('password'), 'is-valid': password && !errors.has('password') }" type="password" name="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" v-validate="'required'" />
+            <div v-show="errors.has('password')" ref="passwordError" class="invalid-feedback">
               {{ errors.first('password') }}
             </div>
           </div>

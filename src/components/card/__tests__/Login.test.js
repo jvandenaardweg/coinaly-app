@@ -53,12 +53,11 @@ describe('components/card/login.vue', () => {
       email: 'test@coinaly.io',
       password: 'testtest'
     })
+
     const dispatchLoginMock = jest.fn()
-    const redirectToHomepageMock = jest.fn()
-    // component.setMethods({ redirectToHomepage: redirectToHomepageMock })
+
     component.setMethods({ 
-      dispatchLogin: dispatchLoginMock,
-      redirectToHomepage: redirectToHomepageMock
+      dispatchLogin: dispatchLoginMock
     })
 
     component.find('form').trigger('submit')
@@ -66,11 +65,30 @@ describe('components/card/login.vue', () => {
     expect(dispatchLoginMock.mock.calls).toHaveLength(1)
   })
 
+  it('should redirect the user when form submits succesfully', async () => {
+    component.setData({
+      email: 'test@coinaly.io',
+      password: 'testtest'
+    })
+    component.find('form').trigger('submit')
+
+    const redirectToHomepageMock = jest.fn()
+    const dispatchLoginMock = jest.fn()
+
+    component.setMethods({ 
+      dispatchLogin: dispatchLoginMock,
+      redirectToHomepage: redirectToHomepageMock 
+    })
+    await flushPromises()
+    expect(redirectToHomepageMock.mock.calls).toHaveLength(1)
+  })
+
   it('should disable the form when loading', () => {
     store.commit('auth/startLoading')
     expect(component.vm.isDisabled).toBe(true)
     expect(component.find('form fieldset').attributes().disabled).toBe('disabled')
     store.commit('auth/stopLoading')
+    expect(component.find('form fieldset').attributes().disabled).toBe(undefined)
   })
 
   it('should disable the form when authenticated', () => {
@@ -78,6 +96,7 @@ describe('components/card/login.vue', () => {
     expect(component.vm.isDisabled).toBe(true)
     expect(component.find('form fieldset').attributes().disabled).toBe('disabled')
     store.commit('auth/unsetAuthenticated')
+    expect(component.find('form fieldset').attributes().disabled).toBe(undefined)
   })
 
   it('should render an error when authentication gives an error', () => {
@@ -118,7 +137,6 @@ describe('components/card/login.vue', () => {
     await flushPromises()
     expect(component.vm.errors.has('email')).toBe(true)
     expect(component.find({ref:'emailError'}).isVisible()).toBe(true)
-    expect(component.find({ref:'emailError'}).text()).toBe('The email field is required.')
   })
 
   it('should render an error when email is incorrect but form is submitted', async () => {
@@ -129,7 +147,6 @@ describe('components/card/login.vue', () => {
     await flushPromises()
     expect(component.vm.errors.has('email')).toBe(true)
     expect(component.find({ref:'emailError'}).isVisible()).toBe(true)
-    expect(component.find({ref:'emailError'}).text()).toBe('The email field must be a valid email.')
   })
 
   it('should render an error when password is empty but form is submitted', async () => {
@@ -137,24 +154,5 @@ describe('components/card/login.vue', () => {
     await flushPromises()
     expect(component.vm.errors.has('password')).toBe(true)
     expect(component.find({ref:'passwordError'}).isVisible()).toBe(true)
-    expect(component.find({ref:'passwordError'}).text()).toBe('The password field is required.')
-  })
-
-  it('should redirect the user when form submits succesfully', async () => {
-    component.setData({
-      email: 'test@coinaly.io',
-      password: 'testtest'
-    })
-    component.find('form').trigger('submit')
-
-    const redirectToHomepageMock = jest.fn()
-    const dispatchLoginMock = jest.fn()
-
-    component.setMethods({ 
-      dispatchLogin: dispatchLoginMock,
-      redirectToHomepage: redirectToHomepageMock 
-    })
-    await flushPromises()
-    expect(redirectToHomepageMock.mock.calls).toHaveLength(1)
   })
 })

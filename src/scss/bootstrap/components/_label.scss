@@ -1,0 +1,4 @@
+// Don't make labels on checkbox fields red when that field is invalid
+.is-invalid ~ label {
+    color: inherit !important;
+}
