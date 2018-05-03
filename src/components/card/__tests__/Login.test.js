@@ -1,8 +1,8 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
-import flushPromises from 'flush-promises';
+import flushPromises from 'flush-promises'
 import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'
-import CardLogin from '@/components/card/login.vue'
+import CardLogin from '@/components/card/Login.vue'
 
 import userModule from '@/store/modules/user'
 import authModule from '@/store/modules/auth'
@@ -12,7 +12,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 localVue.use(VeeValidate)
 
-describe('components/card/login.vue', () => {
+describe('components/card/Login.vue', () => {
   let component
   let store
 
@@ -56,7 +56,7 @@ describe('components/card/login.vue', () => {
 
     const dispatchLoginMock = jest.fn()
 
-    component.setMethods({ 
+    component.setMethods({
       dispatchLogin: dispatchLoginMock
     })
 
@@ -75,9 +75,9 @@ describe('components/card/login.vue', () => {
     const redirectToHomepageMock = jest.fn()
     const dispatchLoginMock = jest.fn()
 
-    component.setMethods({ 
+    component.setMethods({
       dispatchLogin: dispatchLoginMock,
-      redirectToHomepage: redirectToHomepageMock 
+      redirectToHomepage: redirectToHomepageMock
     })
     await flushPromises()
     expect(redirectToHomepageMock.mock.calls).toHaveLength(1)
