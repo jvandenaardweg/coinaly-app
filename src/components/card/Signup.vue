@@ -120,7 +120,7 @@ export default {
       }
     },
     async dispatchCreateUser () {
-      return await this.$store.dispatch('user/create', {
+      return this.$store.dispatch('user/create', {
         email: this.email,
         password: this.password,
         emailOptIn: this.acceptedEmailOptIn
