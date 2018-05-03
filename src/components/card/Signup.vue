@@ -10,15 +10,15 @@
 
           <div class="form-group">
             <label>E-mail address</label>
-            <input 
-              class="form-control form-control-lg" 
-              :class="{ 'is-invalid': errors.has('email'), 'is-valid': email && !errors.has('email') }" 
-              type="email" 
-              name="email" 
-              autocomplete="email" 
-              placeholder="Your e-mail address" 
-              ref="firstInput" 
-              v-model="email" 
+            <input
+              class="form-control form-control-lg"
+              :class="{ 'is-invalid': errors.has('email'), 'is-valid': email && !errors.has('email') }"
+              type="email"
+              name="email"
+              autocomplete="email"
+              placeholder="Your e-mail address"
+              ref="firstInput"
+              v-model="email"
               v-validate="'required|email'" />
             <invalid-feedback v-show="errors.has('email')" :message="errors.first('email')" ref="emailError"></invalid-feedback>
           </div>
@@ -26,23 +26,23 @@
           <div class="form-group">
             <label>Password</label>
             <div class="input-group mb-3">
-              <input 
-                class="form-control form-control-lg" 
-                :class="{ 'is-invalid': errors.has('password'), 'is-valid': password && !errors.has('password') }" 
-                type="password" 
-                name="password" 
-                autocomplete="current-password" 
-                placeholder="Your super secret password" 
-                ref="inputPassword" 
-                v-model="password" 
+              <input
+                class="form-control form-control-lg"
+                :class="{ 'is-invalid': errors.has('password'), 'is-valid': password && !errors.has('password') }"
+                type="password"
+                name="password"
+                autocomplete="current-password"
+                placeholder="Your super secret password"
+                ref="inputPassword"
+                v-model="password"
                 v-validate="'required'" />
               <div class="input-group-append">
                 <button class="btn btn-outline-primary" type="button" ref="buttonViewPassword" @click.prevent="handleViewPassword">{{ viewPasswordLabel }}</button>
               </div>
-              <invalid-feedback v-show="errors.has('password')" :message="errors.first('password')" ref="passwordError"></invalid-feedback>      
+              <invalid-feedback v-show="errors.has('password')" :message="errors.first('password')" ref="passwordError"></invalid-feedback>
             </div>
-            
-          </div>          
+
+          </div>
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
@@ -114,13 +114,13 @@ export default {
       const result = await this.$validator.validateAll()
       if (result) {
         const createdUser = await this.dispatchCreateUser()
-        if (createdUser) {
+        if (createdUser.length) {
           this.redirectToSuccess()
         }
       }
     },
-    dispatchCreateUser () {
-      return this.$store.dispatch('user/create', {
+    async dispatchCreateUser () {
+      return await this.$store.dispatch('user/create', {
         email: this.email,
         password: this.password,
         emailOptIn: this.acceptedEmailOptIn

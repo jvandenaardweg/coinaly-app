@@ -53,11 +53,14 @@ describe('components/card/Signup.vue', () => {
       password: 'testtest',
       privacyDisclaimer: true
     })
-    
-    const dispatchCreateUserMock = jest.fn()
 
-    component.setMethods({ 
-      dispatchCreateUser: dispatchCreateUserMock
+    const dispatchCreateUserMock = jest.fn()
+    dispatchCreateUserMock.mockResolvedValue(['user'])
+    const redirectToSuccessMock = jest.fn()
+
+    component.setMethods({
+      dispatchCreateUser: dispatchCreateUserMock,
+      redirectToSuccess: redirectToSuccessMock
     })
 
     component.find('form').trigger('submit')
@@ -74,10 +77,10 @@ describe('components/card/Signup.vue', () => {
     component.find('form').trigger('submit')
 
     const dispatchCreateUserMock = jest.fn()
-    dispatchCreateUserMock.mockResolvedValue(true)
+    dispatchCreateUserMock.mockResolvedValue(['user'])
     const redirectToSuccessMock = jest.fn()
 
-    component.setMethods({ 
+    component.setMethods({
       dispatchCreateUser: dispatchCreateUserMock,
       redirectToSuccess: redirectToSuccessMock
     })
