@@ -10,5 +10,8 @@ export default {
   },
   error: state => {
     return state.error
+  },
+  isVerified: state => {
+    return state.isVerified
   }
 }

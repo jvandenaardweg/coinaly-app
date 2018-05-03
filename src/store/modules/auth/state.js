@@ -1,5 +1,6 @@
 export default {
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: null,
+  isVerified: null,
   error: null
 }

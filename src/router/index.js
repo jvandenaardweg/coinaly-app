@@ -19,6 +19,7 @@ import PageLoginForgot from '@/pages/login/forgot/Index'
 
 import PageSignupIndex from '@/pages/signup/Index'
 import PageSignupSuccessIndex from '@/pages/signup/success/Index'
+import PageSignupVerifyIndex from '@/pages/signup/verify/Index'
 
 import PageSettingsIndex from '@/pages/settings/Index'
 import PageSettingsAccount from '@/pages/settings/account/Index'
@@ -40,6 +41,8 @@ import PageOnboardingIndex from '@/pages/onboarding/Index.vue'
 import PagePrivacyIndex from '@/pages/privacy/Index.vue'
 
 import PageDisclaimerIndex from '@/pages/disclaimer/Index.vue'
+
+import PageNotFound from '@/pages/not-found/Index.vue'
 
 Vue.use(Router)
 
@@ -279,6 +282,22 @@ export default new Router({
           path: '/signup/success',
           name: 'Signup Success',
           component: PageSignupSuccessIndex
+        },
+        {
+          path: '/signup/verify/:verificationCode',
+          name: 'Signup Verify',
+          component: PageSignupVerifyIndex
+        }
+      ]
+    },
+    {
+      path: '*',
+      component: LayoutPage,
+      children: [
+        {
+          path: '',
+          name: 'Not Found',
+          component: PageNotFound
         }
       ]
     }

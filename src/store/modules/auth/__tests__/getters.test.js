@@ -34,4 +34,9 @@ describe('modules/auth/getters.js', () => {
     expect(getters.error(state)).toBe('Sample error message')
   })
 
+  it('getter isVerified should return true if state.isVerified is set', () => {
+    state.isVerified = true
+    expect(getters.isVerified(state)).toBe(true)
+  })
+
 })

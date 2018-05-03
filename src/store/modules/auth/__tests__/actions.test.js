@@ -1,6 +1,8 @@
 import nock from 'nock'
 import actions from '@/store/modules/auth/actions'
+
 import mockAuthLogin from '@/mocks/auth-login.json'
+import mockAuthVerify from '@/mocks/auth-verify.json'
 
 const context = {
   dispatch: jest.fn(),
@@ -131,6 +133,27 @@ describe('modules/auth/actions.js', () => {
     expect(context.commit).toHaveBeenCalledWith('setAuthenticated')
     expect(context.commit).toHaveBeenCalledWith('setToken', exampleToken)
     expect(context.commit).toHaveBeenCalledWith('user/setUser', mockAuthLogin.user, { root: true })
+    done()
+  })
+
+  it('action verify should verify the users email address', async (done) => {
+    const examplePayload = {
+      verification: '1234AB5678CD'
+    }
+
+    nock('http://localhost:5000')
+      .defaultReplyHeaders({
+        'access-control-allow-origin': '*',
+        'access-control-allow-credentials': 'true'
+      })
+      .post('/auth/verify', examplePayload)
+      .reply(200, mockAuthVerify)
+
+    const result = await actions.verify(context, examplePayload.verification)
+    expect(result).toMatchObject(mockAuthVerify)
+    expect(context.commit).toHaveBeenCalledWith('startLoading')
+    expect(context.commit).toHaveBeenCalledWith('setVerified')
+    expect(context.commit).toHaveBeenCalledWith('stopLoading')
     done()
   })
 })

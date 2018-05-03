@@ -25,6 +25,25 @@ export default {
     }
   },
 
+  async verify ({ commit }, verificationCode) {
+    commit('startLoading')
+    commit('removeError')
+
+    try {
+      const response = await api.verify(verificationCode)
+      if (response) {
+        commit('stopLoading')
+        commit('setVerified')
+      }
+      return response
+    } catch (error) {
+      const errorMessage = (error.response) ? error.response.data.message : 'Oh oh, sorry for this. An unknown error occured, please try again later.'
+      commit('setError', errorMessage)
+      commit('stopLoading')
+      return error
+    }
+  },
+
   logout ({ commit }) {
     commit('unsetAuthenticated')
     commit('removeToken')

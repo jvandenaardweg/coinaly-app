@@ -7,3 +7,10 @@ export function login (email, password) {
   })
     .then(response => response.data)
 }
+
+export function verify (verificationCode) {
+  return axios.post('/auth/verify', {
+    verification: verificationCode
+  })
+    .then(response => response.data)
+}

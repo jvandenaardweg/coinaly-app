@@ -26,5 +26,8 @@ export default {
   },
   removeError (state) {
     Vue.set(state, 'error', null)
+  },
+  setVerified (state) {
+    Vue.set(state, 'isVerified', true)
   }
 }

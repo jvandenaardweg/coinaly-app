@@ -43,4 +43,9 @@ describe('modules/auth/mutations.js', () => {
     mutations.removeToken(state)
     expect(state.token).toBe(null)
   })
+
+  it('mutation setVerified sets state.isVerified to true', () => {
+    mutations.setVerified(state)
+    expect(state.isVerified).toBe(true)
+  })
 })
