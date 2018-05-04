@@ -13,10 +13,12 @@
       <div class="align-items-center d-sm-none">
         <h1 class="text-white m-0 h4">{{ routeName }}</h1>
       </div>
-      <div class="d-flex ml-auto">
-        <BtnRefresh class="d-none d-sm-block"></BtnRefresh>
+
+      <div v-if="isAuthenticated" class="d-flex ml-auto">
+        <btn-refresh class="d-none d-sm-block"></btn-refresh>
         <btn-select-exchange></btn-select-exchange>
       </div>
+
     </div>
   </nav>
 </template>
@@ -25,6 +27,7 @@
 import BtnRefresh from '@/components/btn/Refresh'
 import BtnSelectExchange from '@/components/btn/SelectExchange'
 import Logo from '@/components/Logo'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'NavBar',
@@ -33,12 +36,13 @@ export default {
     BtnSelectExchange,
     Logo
   },
-  data () {
-    return {
-      show: false
-    }
-  },
+  data: () => ({
+    show: false
+  }),
   computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated'
+    }),
     routeName () {
       if (this.$route && this.$route.name) return this.$route.name
     },
