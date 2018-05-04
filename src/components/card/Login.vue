@@ -34,6 +34,9 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'CardLogin',
+  $_veeValidate: {
+    validator: 'new'
+  },
   data () {
     return {
       email: null,

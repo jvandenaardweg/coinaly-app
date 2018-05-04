@@ -11,7 +11,12 @@ import VeeValidate from 'vee-validate'
 import { sync } from 'vuex-router-sync'
 import '@/filters'
 
-Vue.use(VeeValidate)
+// Reduce the memory footprint of VeeValidate by injecting it on a component basis
+// Use this in your component:
+// $_veeValidate: {
+//  validator: 'new'
+// },
+Vue.use(VeeValidate, { inject: false })
 
 Vue.config.productionTip = false
 

@@ -8,11 +8,12 @@ const context = {
   getters: jest.fn()
 }
 
-describe('modules/auth/actions.js', () => {
+describe('modules/user/actions.js', () => {
   it('action create should create a user in the database', async (done) => {
     const examplePayload = {
       email: 'info@coinaly.io',
-      password: 'testtest'
+      password: 'testtest',
+      emailOptIn: false
     }
 
     nock('http://localhost:5000')

@@ -46,7 +46,7 @@
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" v-model="acceptedEmailOptIn" id="email-optin">
+              <input type="checkbox" class="custom-control-input" v-model="emailOptIn" id="email-optin">
               <label class="custom-control-label font-weight-normal" for="email-optin">My e-mail address can be used to send Coinaly product updates about new features</label>
             </div>
           </div>
@@ -81,15 +81,18 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'CardSignup',
+  $_veeValidate: {
+    validator: 'new'
+  },
   components: {
     InvalidFeedback
   },
   data () {
     return {
       email: null,
-      acceptedEmailOptIn: null,
+      emailOptIn: false,
       password: null,
-      privacyDisclaimer: null,
+      privacyDisclaimer: false,
       viewPasswordLabel: 'Verify'
     }
   },
@@ -121,7 +124,7 @@ export default {
       return this.$store.dispatch('user/create', {
         email: this.email,
         password: this.password,
-        emailOptIn: this.acceptedEmailOptIn
+        emailOptIn: this.emailOptIn
       })
     },
     redirectToSuccess () {

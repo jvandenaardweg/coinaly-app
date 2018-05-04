@@ -7,7 +7,8 @@ describe('api/users.js', () => {
   it('should reply with a success message on success', async () => {
     const examplePayload = {
       email: 'jordyvandenaardweg@gmail.com',
-      password: 'testtest'
+      password: 'testtest',
+      emailOptIn: false
     }
 
     nock('http://localhost:5000')
@@ -18,7 +19,7 @@ describe('api/users.js', () => {
       .post('/users', examplePayload)
       .reply(200, mockCreateUser)
 
-    const result = await api.create(examplePayload.email, examplePayload.password)
+    const result = await api.create(examplePayload.email, examplePayload.password, examplePayload.emailOptIn)
     expect(result).toMatchObject(mockCreateUser)
   })
 })

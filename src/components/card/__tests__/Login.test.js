@@ -10,7 +10,7 @@ import authModule from '@/store/modules/auth'
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
-localVue.use(VeeValidate)
+localVue.use(VeeValidate, { inject: false })
 
 describe('components/card/Login.vue', () => {
   let component

@@ -9,7 +9,7 @@ import userModule from '@/store/modules/user'
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
-localVue.use(VeeValidate)
+localVue.use(VeeValidate, { inject: false })
 
 describe('components/card/Signup.vue', () => {
   let component

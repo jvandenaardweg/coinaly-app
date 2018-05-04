@@ -1,7 +1,8 @@
 {
   "message": "User created.",
   "user": {
-      "id": "e510913f-0b47-49ae-a1aa-b05ffaa49713",
-      "email": "info@coinaly.io"
+    "id": "e510913f-0b47-49ae-a1aa-b05ffaa49713",
+    "email": "info@coinaly.io",
+    "email_opt_in": false
   }
 }
