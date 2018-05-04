@@ -1,10 +1,9 @@
 <template>
   <div class="card shadow-sm">
-    <div class="card-body">
-      <h1 class="h1 text-center mb-3">Account created! 🎉</h1>
-      <p class="text-center text-muted lead font-weight-normal">Great to have you on board. We've send you an e-mail to verify your e-mail address.</p>
-      <p class="text-center">But you can already set up your first exchange.</p>
-      <router-link to="/onboarding" class="btn btn-primary btn-lg btn-block mt-7">Setup first exchange</router-link>
+    <div class="card-body text-center">
+      <h1 class="h1 mb-3">Account created! 🎉</h1>
+      <p class="text-muted lead font-weight-normal">Great to have you on board.</p>
+      <p class="mt-5 mb-0">Please check your e-mail inbox to verify your account.</p>
     </div>
   </div>
 </template>

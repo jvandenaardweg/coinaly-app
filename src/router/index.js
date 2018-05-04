@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import LayoutLogin from '@/layouts/Login'
-import LayoutSignup from '@/layouts/Signup'
+import LayoutFocus from '@/layouts/Focus'
 import LayoutDashboard from '@/layouts/Dashboard'
 import LayoutPage from '@/layouts/Page'
-import LayoutOnboarding from '@/layouts/Onboarding'
 
 import PageMarketsIndex from '@/pages/markets/Index'
 // import PageMarketsIndex from '@/pages/markets/Index'
@@ -222,7 +220,7 @@ export default new Router({
     },
     {
       path: '/onboarding',
-      component: LayoutOnboarding,
+      component: LayoutFocus,
       children: [
         {
           path: '',
@@ -255,7 +253,7 @@ export default new Router({
     },
     {
       path: '/login',
-      component: LayoutLogin,
+      component: LayoutFocus,
       children: [
         {
           path: '',
@@ -271,7 +269,7 @@ export default new Router({
     },
     {
       path: '/signup',
-      component: LayoutSignup,
+      component: LayoutFocus,
       children: [
         {
           path: '',

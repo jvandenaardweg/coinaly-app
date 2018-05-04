@@ -1,13 +1,13 @@
 <template>
-  <div class="layout-onboarding">
+  <div class="layout-focus">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="text-center">
-            <logo fill="#000000" :size="70"></logo>
+            <logo fill="#ffffff" :size="70"></logo>
           </div>
           <router-view></router-view>
-          <support-chat color="secondary"></support-chat>
+          <support-chat></support-chat>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@ import Logo from '@/components/Logo'
 import SupportChat from '@/components/SupportChat'
 
 export default {
-  name: 'LayoutOnboarding',
+  name: 'LayoutFocus',
   components: {
     Logo,
     SupportChat
@@ -28,7 +28,8 @@ export default {
 </script>
 
 <style lang="scss">
-.layout-onboarding {
+.layout-focus {
+  background-color: $dark-blue;
   height: 100%;
   padding-top: 1rem;
 

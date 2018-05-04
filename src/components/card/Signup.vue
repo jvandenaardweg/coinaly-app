@@ -12,6 +12,7 @@
             <label>E-mail address</label>
             <input
               class="form-control form-control-lg"
+              id="inputEmail"
               :class="{ 'is-invalid': errors.has('email'), 'is-valid': email && !errors.has('email') }"
               type="email"
               name="email"
@@ -28,6 +29,7 @@
             <div class="input-group mb-3">
               <input
                 class="form-control form-control-lg"
+                id="inputPassword"
                 :class="{ 'is-invalid': errors.has('password'), 'is-valid': password && !errors.has('password') }"
                 type="password"
                 name="password"
@@ -46,15 +48,15 @@
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" v-model="emailOptIn" id="email-optin">
-              <label class="custom-control-label font-weight-normal" for="email-optin">My e-mail address can be used to send Coinaly product updates about new features</label>
+              <input type="checkbox" class="custom-control-input" id="inputEmailOptIn" v-model="emailOptIn">
+              <label class="custom-control-label font-weight-normal" for="inputEmailOptIn">My e-mail address can be used to send Coinaly product updates about new features</label>
             </div>
           </div>
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" name="privacyDisclaimer" data-vv-as="Privacy Policy and Disclaimer" :class="{ 'is-invalid': errors.has('privacyDisclaimer')}" v-model="privacyDisclaimer" id="privacy-disclaimer" v-validate="'required'">
-              <label class="custom-control-label font-weight-normal" for="privacy-disclaimer">I agree with the <router-link to="/privacy">Privacy Policy</router-link> and <router-link to="/disclaimer">Disclaimer</router-link>.</label>
+              <input type="checkbox" class="custom-control-input" id="inputPrivacyDisclaimer" name="privacyDisclaimer" data-vv-as="Privacy Policy and Disclaimer" :class="{ 'is-invalid': errors.has('privacyDisclaimer')}" v-model="privacyDisclaimer" v-validate="'required'">
+              <label class="custom-control-label font-weight-normal" id="labelPrivacyDisclaimer" for="inputPrivacyDisclaimer">I agree with the <router-link to="/privacy" id="privacyLink">Privacy Policy</router-link> and <router-link to="/disclaimer" id="disclaimerLink">Disclaimer</router-link>.</label>
             </div>
             <invalid-feedback v-show="errors.has('privacyDisclaimer')" :message="errors.first('privacyDisclaimer')"></invalid-feedback>
           </div>
@@ -63,12 +65,12 @@
             {{ error }}
           </div>
 
-          <button type="submit" class="btn btn-success btn-lg btn-block">{{ submitLabel }}</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block" id="buttonSignup">{{ submitLabel }}</button>
         </fieldset>
       </form>
 
       <div class="text-center mt-4">
-        <router-link to="/login" class="ml-auto font-weight-normal text-muted"><u>Already have an account?</u></router-link>
+        <router-link to="/login" class="ml-auto font-weight-normal text-muted" id="loginLink"><u>Already have an account?</u></router-link>
       </div>
     </div>
   </div>
@@ -87,15 +89,13 @@ export default {
   components: {
     InvalidFeedback
   },
-  data () {
-    return {
-      email: null,
-      emailOptIn: false,
-      password: null,
-      privacyDisclaimer: false,
-      viewPasswordLabel: 'Verify'
-    }
-  },
+  data: () => ({
+    email: null,
+    emailOptIn: false,
+    password: null,
+    privacyDisclaimer: false,
+    viewPasswordLabel: 'Verify'
+  }),
   mounted () {
     this.$refs.firstInput.focus()
   },

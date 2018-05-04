@@ -3,6 +3,7 @@
     <div class="card-body">
       <h1 class="h1 text-center mb-3">{{ title }}</h1>
       <p class="text-center text-muted lead font-weight-normal">{{ subtitle }}</p>
+      <loader v-if="isLoading"></loader>
       <div v-if="error" class="alert alert-danger text-center">
         {{ error }}
       </div>
@@ -15,12 +16,14 @@
 
 <script>
 import SupportChat from '@/components/SupportChat'
+import Loader from '@/components/Loader'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'CardSignupVerify',
   components: {
-    SupportChat
+    SupportChat,
+    Loader
   },
   methods: {
     async verifyEmail () {
@@ -40,7 +43,11 @@ export default {
     }
   },
   mounted () {
-    this.verifyEmail()
+    this.$store.commit('auth/startLoading')
+    // Verify with a delay so the user doesnt see the loading flashing by
+    setTimeout(() => {
+      this.verifyEmail()
+    }, 1500)
   },
   computed: {
     ...mapGetters({
@@ -61,7 +68,7 @@ export default {
       if (this.isSuccess) {
         return `Account verified! 🎉`
       } else if (this.isBusy) {
-        return 'Verifying...'
+        return 'Verifying account...'
       } else {
         return 'Verification failed ☹️'
       }
@@ -77,7 +84,7 @@ export default {
     },
     paragraph () {
       if (this.isSuccess) {
-        return `But you can already set up your first exchange.`
+        return `You can now set up your first exchange.`
       } else if (this.isBusy) {
         return null
       } else {
