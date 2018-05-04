@@ -31,7 +31,7 @@ export default {
   name: 'CardForgotPassword',
   data () {
     return {
-      email: null,
+      email: this.$route.query.prefill || null,
       submitLabel: 'Reset password',
       error: null
     }

@@ -6,14 +6,14 @@
         <fieldset :disabled="isDisabled">
           <legend class="sr-only">Login</legend>
           <div class="form-group">
-            <label class="d-flex">E-mail address <router-link to="/signup" id="signupLink" class="ml-auto font-weight-normal text-muted"><u>No account yet?</u></router-link></label>
+            <label class="d-flex">E-mail address <router-link tabindex="-1" to="/signup" id="signupLink" class="ml-auto font-weight-normal text-muted"><u>No account yet?</u></router-link></label>
             <input class="form-control form-control-lg" id="inputEmail" :class="{ 'is-invalid': errors.has('email'), 'is-valid': email && !errors.has('email') }" type="email" name="email" autocomplete="email" placeholder="Your e-mail address" ref="firstInput" v-model="email" v-validate="'required|email'" />
-            <div v-show="errors.has('email')" ref="emailError" class="invalid-feedback">
+            <div v-show="errors.has('email') && fields.email.touched" ref="emailError" class="invalid-feedback">
               {{ errors.first('email') }}
             </div>
           </div>
           <div class="form-group">
-            <label class="d-flex">Password <router-link to="/login/forgot" id="passwordForgotLink" class="ml-auto font-weight-normal text-muted"><u>Forgot password?</u></router-link></label>
+            <label class="d-flex">Password <router-link tabindex="-1" :to="{ path: '/login/forgot', query: { prefill: email }}" id="passwordForgotLink" class="ml-auto font-weight-normal text-muted"><u>Forgot password?</u></router-link></label>
             <input class="form-control form-control-lg" id="inputPassword" :class="{ 'is-invalid': errors.has('password'), 'is-valid': password && !errors.has('password') }" type="password" name="password" autocomplete="current-password" placeholder="Your super secret password" v-model="password" v-validate="'required'" />
             <div v-show="errors.has('password')" ref="passwordError" class="invalid-feedback">
               {{ errors.first('password') }}
@@ -66,6 +66,9 @@ export default {
       if (result) {
         this.isLoading = true
         await this.dispatchLogin()
+        // TODO: on first load > GET /keys
+        // if user has no keys > redirect to onboarding
+        // else > redirect to homepage
         if (!this.error) this.redirectToHomepage()
         this.isLoading = false
       }
