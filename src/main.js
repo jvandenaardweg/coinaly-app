@@ -16,7 +16,9 @@ import '@/filters'
 // $_veeValidate: {
 //  validator: 'new'
 // },
-Vue.use(VeeValidate, { inject: false })
+Vue.use(VeeValidate, {
+  inject: false
+})
 
 Vue.config.productionTip = false
 
