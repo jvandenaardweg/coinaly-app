@@ -6,7 +6,6 @@ export default {
     commit('removeError')
 
     try {
-      console.log('dispatch', payload)
       const response = await api.create(payload.email, payload.password, payload.emailOptIn)
       if (response) {
         commit('stopLoading')
