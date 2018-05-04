@@ -13,7 +13,7 @@
     "test:e2e:login": "testcafe chrome test/e2e/login.test.js --app \"npm run dev\" --app-init-delay 10000 -S -s screenshots",
     "test:e2e:signup": "testcafe chrome test/e2e/signup.test.js --app \"npm run dev\" --app-init-delay 10000 -S -s screenshots",
     "test": "jest --coverage",
-    "test:watch": "jest --watch --notify",
+    "test:watch": "jest --watch",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "heroku-postbuild": "[ $NODE_ENV != test ] && npm run build || exit 0"
   },
@@ -32,11 +32,14 @@
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-vue"
     ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/test"
+    ],
     "collectCoverageFrom": [
-      "src/**/*.{js,vue}",
-      "!src/main.js",
-      "!src/router/index.js",
-      "!**/node_modules/**"
+      "<rootDir>/src/**/*.{js,vue}",
+      "!<rootDir>/src/main.js",
+      "!<rootDir>/src/router/index.js",
+      "!<rootDir>/**/node_modules/**"
     ],
     "coverageDirectory": "<rootDir>/test/unit/coverage",
     "collectCoverage": false

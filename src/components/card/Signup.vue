@@ -65,7 +65,7 @@
             {{ error }}
           </div>
 
-          <button type="submit" class="btn btn-success btn-lg btn-block" id="buttonSignup">{{ submitLabel }}</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block" :class="{ 'is-loading': isLoading }" id="buttonSignup">{{ submitLabel }}</button>
         </fieldset>
       </form>
 
@@ -94,19 +94,19 @@ export default {
     emailOptIn: false,
     password: null,
     privacyDisclaimer: false,
-    viewPasswordLabel: 'Verify'
+    viewPasswordLabel: 'Verify',
+    isLoading: false
   }),
   mounted () {
     this.$refs.firstInput.focus()
   },
   computed: {
     ...mapGetters({
-      isLoading: 'user/isLoading',
       error: 'user/error',
       user: 'user/user'
     }),
     submitLabel () {
-      return (this.isLoading) ? 'Creating account...' : 'Create account'
+      return 'Create account'
     },
     isDisabled () {
       return this.isLoading
@@ -116,8 +116,10 @@ export default {
     async handleSubmit (event) {
       const result = await this.$validator.validateAll()
       if (result) {
+        this.isLoading = true
         await this.dispatchCreateUser()
         if (!this.error) this.redirectToSuccess()
+        this.isLoading = false
       }
     },
     async dispatchCreateUser () {
@@ -128,7 +130,7 @@ export default {
       })
     },
     redirectToSuccess () {
-      this.$router.push('/signup/success')
+      if (this.$router) this.$router.push('/signup/success')
     },
     handleViewPassword (event) {
       const $input = this.$refs.inputPassword

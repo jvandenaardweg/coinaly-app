@@ -111,18 +111,6 @@ describe('components/card/Login.vue', () => {
     expect(component.vm.submitLabel).toBe('Login')
   })
 
-  it('should render the correct label when loading', () => {
-    store.commit('auth/startLoading')
-    expect(component.vm.submitLabel).toBe('Loading...')
-    store.commit('auth/stopLoading')
-  })
-
-  it('should render the correct label when authenticated', () => {
-    store.commit('auth/setAuthenticated')
-    expect(component.vm.submitLabel).toBe('Success! Welcome back!')
-    store.commit('auth/unsetAuthenticated')
-  })
-
   it('should set the focus to the first input field', () => {
     const firstInputElm = component.find({ref: 'firstInput'}).vnode.elm
     expect(document.activeElement === firstInputElm).toBe(true)

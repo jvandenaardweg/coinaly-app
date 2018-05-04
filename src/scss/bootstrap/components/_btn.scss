@@ -1,0 +1,46 @@
+.btn {
+  &.is-loading {
+    position: relative;
+    text-indent: -13337px;
+
+    &:after {
+      left: calc(50% - (1em / 2));
+      top: calc(50% - (1em / 2));
+      position: absolute;
+      -webkit-animation: spinAround .5s infinite linear;
+      animation: spinAround .5s infinite linear;
+      border: 2px solid $white;
+      border-radius: 290486px;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      content: "";
+      display: block;
+      height: 1em;
+      width: 1em;
+    }
+  }
+}
+
+@-webkit-keyframes spinAround {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0)
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg)
+  }
+}
+
+@keyframes spinAround {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0)
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg)
+  }
+}

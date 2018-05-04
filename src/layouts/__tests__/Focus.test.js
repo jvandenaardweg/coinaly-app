@@ -1,11 +1,11 @@
 import { shallow } from '@vue/test-utils'
-import Login from '@/layouts/Login.vue'
+import Focus from '@/layouts/Focus.vue'
 
-describe('layouts/Login.vue', () => {
+describe('layouts/Focus.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(Login, {
+    component = shallow(Focus, {
       stubs: ['router-link', 'router-view']
     })
   })

@@ -42,11 +42,15 @@ test('Should log a user in', async testController => {
     .typeText(emailInput, 'test@coinaly.io')
     .typeText(passwordInput, 'testtest')
     .click(button)
-    .expect(button.innerText).eql('Success! Welcome back!')
 
   const errorMessages = await Selector('.invalid-feedback')
   await testController
     .expect(errorMessages.count).eql(0)
+
+  const location = await getWindowLocation()
+
+  await testController
+    .expect(location.pathname).eql('/')
 })
 
 test('Should redirect the user to the signup page', async testController => {

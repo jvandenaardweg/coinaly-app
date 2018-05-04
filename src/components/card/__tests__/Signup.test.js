@@ -107,27 +107,19 @@ describe('components/card/Signup.vue', () => {
 
   it('should disable the form when loading', () => {
     store.commit('user/startLoading')
-    expect(component.vm.isDisabled).toBe(true)
+    component.setData({
+      isLoading: true
+    })
     expect(component.find('form fieldset').attributes().disabled).toBe('disabled')
-    store.commit('user/stopLoading')
+    component.setData({
+      isLoading: false
+    })
     expect(component.find('form fieldset').attributes().disabled).toBe(undefined)
   })
 
   it('should set the correct default label', () => {
     expect(component.vm.submitLabel).toBe('Create account')
   })
-
-  it('should set the correct label when loading', () => {
-    store.commit('user/startLoading')
-    expect(component.vm.submitLabel).toBe('Creating account...')
-    store.commit('user/stopLoading')
-  })
-
-  // it('should render the correct label when authenticated', () => {
-  //   store.commit('auth/setAuthenticated')
-  //   expect(component.vm.submitLabel).toBe('Success! Welcome back!')
-  //   store.commit('auth/unsetAuthenticated')
-  // })
 
   it('should set the focus to the first input field', () => {
     const firstInputElm = component.find({ref: 'firstInput'}).vnode.elm

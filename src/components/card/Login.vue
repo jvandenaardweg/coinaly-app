@@ -22,7 +22,7 @@
           <div v-if="error" class="alert alert-danger">
             {{ error }}
           </div>
-          <button type="submit" id="buttonLogin" class="btn btn-primary btn-lg btn-block" :class="{ 'btn-success': isAuthenticated }">{{ submitLabel }}</button>
+          <button type="submit" id="buttonLogin" class="btn btn-primary btn-lg btn-block" :class="{ 'is-loading': isLoading }">{{ submitLabel }}</button>
         </fieldset>
       </form>
     </div>
@@ -40,7 +40,8 @@ export default {
   data () {
     return {
       email: null,
-      password: null
+      password: null,
+      isLoading: false
     }
   },
   mounted () {
@@ -52,25 +53,21 @@ export default {
       isAuthenticated: 'auth/isAuthenticated',
       error: 'auth/error'
     }),
-    submitLabel () {
-      if (this.authIsLoading) {
-        return 'Loading...'
-      } else if (this.isAuthenticated) {
-        return 'Success! Welcome back!'
-      } else {
-        return 'Login'
-      }
-    },
     isDisabled () {
       return this.authIsLoading || this.isAuthenticated
+    },
+    submitLabel () {
+      return 'Login'
     }
   },
   methods: {
     async handleSubmit (event) {
       const result = await this.$validator.validateAll()
       if (result) {
+        this.isLoading = true
         await this.dispatchLogin()
         if (!this.error) this.redirectToHomepage()
+        this.isLoading = false
       }
     },
     async dispatchLogin () {
@@ -80,10 +77,7 @@ export default {
       })
     },
     redirectToHomepage () {
-      setTimeout(() => {
-        console.log('redir')
-        this.$router.push('/')
-      }, 2000)
+      if (this.$router) this.$router.push('/')
     }
   }
 }
