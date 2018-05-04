@@ -32,6 +32,8 @@ export default {
   background-color: $dark-blue;
   height: 100%;
   padding-top: 1rem;
+  padding-bottom: 5rem;
+  min-height: 100%;
 
   @include media-breakpoint-up(md) {
     padding-top: 3rem;
