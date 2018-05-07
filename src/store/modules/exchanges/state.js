@@ -5,6 +5,8 @@ Vue.use(VueCookie)
 const initialSelectedExchange = Vue.cookie.get('selectedExchange') || null
 
 export default {
+  exchanges: [],
+  isLoading: null,
   selected: initialSelectedExchange,
   available: {
     'bittrex': {

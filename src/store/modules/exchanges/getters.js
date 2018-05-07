@@ -1,4 +1,7 @@
 export default {
+  allExchanges (state) {
+    return state.exchanges
+  },
   selected (state) {
     return state.selected
   },
@@ -8,5 +11,8 @@ export default {
     } else {
       return null
     }
+  },
+  isLoading (state) {
+    return state.isLoading
   }
 }

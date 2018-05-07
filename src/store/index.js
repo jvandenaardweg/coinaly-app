@@ -5,6 +5,7 @@ import CurrenciesStore from '@/store/modules/currencies'
 import BalancesStore from '@/store/modules/balances'
 import MarketsStore from '@/store/modules/markets'
 import ExchangesStore from '@/store/modules/exchanges'
+import KeysStore from '@/store/modules/keys'
 import OrdersStore from '@/store/modules/orders'
 import WebsocketsStore from '@/store/modules/websockets'
 import AuthStore from '@/store/modules/auth'
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     balances: BalancesStore,
     markets: MarketsStore,
     exchanges: ExchangesStore,
+    keys: KeysStore,
     orders: OrdersStore,
     websockets: WebsocketsStore,
     auth: AuthStore,
