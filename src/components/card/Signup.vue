@@ -13,7 +13,7 @@
             <input
               class="form-control form-control-lg"
               id="inputEmail"
-              :class="{ 'is-invalid': errors.has('email'), 'is-valid': email && !errors.has('email') }"
+              :class="{ 'is-invalid': errors.has('email'), 'is-valid': fields.email && fields.email.valid && fields.email.validated }"
               type="email"
               name="email"
               autocomplete="email"
@@ -30,7 +30,7 @@
               <input
                 class="form-control form-control-lg"
                 id="inputPassword"
-                :class="{ 'is-invalid': errors.has('password'), 'is-valid': password && !errors.has('password') }"
+                :class="{ 'is-invalid': errors.has('password'), 'is-valid': fields.password && fields.password.valid && fields.password.validated }"
                 type="password"
                 name="password"
                 autocomplete="current-password"
