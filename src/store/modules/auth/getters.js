@@ -13,5 +13,8 @@ export default {
   },
   isVerified: state => {
     return state.isVerified
+  },
+  success: state => {
+    return state.success
   }
 }

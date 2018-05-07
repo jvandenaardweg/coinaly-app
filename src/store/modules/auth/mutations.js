@@ -29,5 +29,8 @@ export default {
   },
   setVerified (state) {
     Vue.set(state, 'isVerified', true)
+  },
+  setSuccess (state, message) {
+    Vue.set(state, 'success', message)
   }
 }

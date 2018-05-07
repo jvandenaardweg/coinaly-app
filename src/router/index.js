@@ -14,6 +14,7 @@ import PageBalancesIndex from '@/pages/balances/Index'
 
 import PageLoginIndex from '@/pages/login/Index'
 import PageLoginForgot from '@/pages/login/forgot/Index'
+import PageLoginForgotReset from '@/pages/login/forgot/Reset'
 
 import PageSignupIndex from '@/pages/signup/Index'
 import PageSignupSuccessIndex from '@/pages/signup/success/Index'
@@ -264,6 +265,11 @@ export default new Router({
           path: '/login/forgot',
           name: 'Forgot Password',
           component: PageLoginForgot
+        },
+        {
+          path: '/login/forgot/:resetToken',
+          name: 'Forgot Password Reset',
+          component: PageLoginForgotReset
         }
       ]
     },
@@ -282,7 +288,7 @@ export default new Router({
           component: PageSignupSuccessIndex
         },
         {
-          path: '/signup/verify/:verificationCode',
+          path: '/signup/verify/:verificationToken',
           name: 'Signup Verify',
           component: PageSignupVerifyIndex
         }

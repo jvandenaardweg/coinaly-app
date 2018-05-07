@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 import { Selector, ClientFunction } from 'testcafe'
 import http from 'http'
 
@@ -14,6 +16,10 @@ test('Title contains "Get started"', async testController => {
   const titleSelector = await Selector('h1')
   await testController.expect(titleSelector.innerText).eql('Get started')
 })
+.before( async testController => {
+  await deleteE2EUser()
+})
+
 
 test('Should show error messages when required fields are empty', async testController => {
   const button = await Selector('#buttonSignup')
@@ -31,8 +37,8 @@ test('Should show an error message when email already exists', async testControl
   const privacyInputLabel = await Selector('#labelPrivacyDisclaimer')
   const button = await Selector('#buttonSignup')
   await testController
-    .typeText(emailInput, 'test@coinaly.io')
-    .typeText(passwordInput, 'testtest')
+    .typeText(emailInput, 'e2e-login@coinaly.io')
+    .typeText(passwordInput, process.env.E2E_PASSWORD)
     .click(privacyInputLabel, {offsetX: 1, offsetY: 1})
     .click(button)
 
@@ -49,8 +55,8 @@ test('Should submit the form when everything is filled in correctly', async test
 
   // Fill in the form
   await testController
-    .typeText(emailInput, 'e2e-test@coinaly.io')
-    .typeText(passwordInput, 'testtest')
+    .typeText(emailInput, process.env.E2E_SIGNUP_EMAIL_ACCOUNT)
+    .typeText(passwordInput, process.env.E2E_PASSWORD)
     .click(privacyInputLabel, {offsetX: 1, offsetY: 1})
     .click(button)
 
@@ -71,8 +77,9 @@ test('Should show success when verification succeeds', async testController => {
 
   // Fill in the form
   await testController
-    .typeText(inputEmail, 'e2e-test@coinaly.io')
-    .typeText(inputPassword, '2LV[t2Pn?[3U9+Ym74L4j6Vj4PDe2^')
+    .wait(5000)
+    .typeText(inputEmail, process.env.E2E_SIGNUP_EMAIL_ACCOUNT)
+    .typeText(inputPassword, process.env.E2E_SIGNUP_PASSWORD_ACCOUNT)
     .click(button)
 
   // Find the new email
@@ -92,9 +99,6 @@ test('Should show success when verification succeeds', async testController => {
   await testController
     .expect(titleSelector.innerText).contains(`Account verified`)
 })
-.after( async testController => {
-  await deleteE2EUser()
-})
 
 test('Should show an error when verification failed', async testController => {
   await testController
@@ -109,38 +113,28 @@ test('Should show an error when verification failed', async testController => {
     .expect(alert.count).eql(1)
 })
 
-test('Should navigate the user to the privacy page when clicking the privacy link', async testController => {
-  const privacyLink = await Selector('#privacyLink')
-
+test('Should log a user in', async testController => {
   await testController
-    .click(privacyLink)
-  
-  const location = await getWindowLocation()
+    .navigateTo('/login')
 
+  const emailInput = await Selector('#inputEmail')
+  const passwordInput = await Selector('#inputPassword')
+  const button = await Selector('#buttonLogin')
   await testController
-    .expect(location.pathname).eql('/privacy')
-})
+    .typeText(emailInput, process.env.E2E_SIGNUP_EMAIL_ACCOUNT)
+    .typeText(passwordInput, process.env.E2E_PASSWORD)
+    .click(button)
 
-test('Should navigate the user to the disclaimer page when clicking the disclaimer link', async testController => {
-  const disclaimerLink = await Selector('#disclaimerLink')
-  
+  const errorMessages = await Selector('.invalid-feedback')
   await testController
-    .click(disclaimerLink)
-
-  const location = await getWindowLocation()
-
-  await testController
-    .expect(location.pathname).eql('/disclaimer')
-})
-
-test('Should navigate the user to the login page when clicking the login link', async testController => {
-  const loginLink = await Selector('#loginLink')
-  
-  await testController
-    .click(loginLink)
+    .expect(errorMessages.count).eql(0)
 
   const location = await getWindowLocation()
 
   await testController
-    .expect(location.pathname).eql('/login')
+    .expect(location.pathname).eql('/')
 })
+.after( async testController => {
+  await deleteE2EUser()
+})
+

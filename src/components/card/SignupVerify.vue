@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     async verifyEmail () {
-      await this.$store.dispatch('auth/verify', this.code)
+      await this.$store.dispatch('auth/verify', this.verificationToken)
       // 1. show loader
       // 2. verify email API call
       // 3. return message
@@ -91,9 +91,9 @@ export default {
         return 'Please have a chat with us when this keeps happening and we will work out a solution.'
       }
     },
-    code () {
+    verificationToken () {
       if (this.$route && this.$route.params) {
-        return this.$route.params.verificationCode
+        return this.$route.params.verificationToken
       } else {
         return null
       }

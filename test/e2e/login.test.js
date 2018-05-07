@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 import { Selector, ClientFunction } from 'testcafe'
 
 const getWindowLocation = ClientFunction(() => window.location)
@@ -26,7 +28,7 @@ test('Should show an error message when email does not exist', async testControl
   const button = await Selector('#buttonLogin')
   await testController
     .typeText(emailInput, 'does-not-exist@coinaly.io')
-    .typeText(passwordInput, 'testtest')
+    .typeText(passwordInput, process.env.E2E_PASSWORD)
     .click(button)
 
   const alert = await Selector('.alert')
@@ -39,8 +41,8 @@ test('Should log a user in', async testController => {
   const passwordInput = await Selector('#inputPassword')
   const button = await Selector('#buttonLogin')
   await testController
-    .typeText(emailInput, 'test@coinaly.io')
-    .typeText(passwordInput, 'testtest')
+    .typeText(emailInput, process.env.E2E_LOGIN_EMAIL_ACCOUNT)
+    .typeText(passwordInput, process.env.E2E_PASSWORD)
     .click(button)
 
   const errorMessages = await Selector('.invalid-feedback')

@@ -48,4 +48,9 @@ describe('modules/auth/mutations.js', () => {
     mutations.setVerified(state)
     expect(state.isVerified).toBe(true)
   })
+
+  it('mutation setSuccess sets state.success to a string', () => {
+    mutations.setSuccess(state, 'This is a success message')
+    expect(state.success).toBe('This is a success message')
+  })
 })

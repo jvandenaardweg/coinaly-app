@@ -1,0 +1,8 @@
+{
+  "message": "Success! An e-mail has been send to test@coinaly.io.",
+  "user": {
+      "id": "0616d912-2672-400f-aa81-2650bb4de6e5",
+      "email": "test@coinaly.io",
+      "activated_at": "2018-05-07T06:49:32.032Z"
+  }
+}
