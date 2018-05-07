@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 
 var axiosInstance = axios.create({
   baseURL: baseUrl,
-  timeout: 5000
+  timeout: 10000
 })
 
 if (window.localStorage) {

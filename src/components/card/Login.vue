@@ -73,7 +73,7 @@ export default {
         // TODO: on first load > GET /keys
         // if user has no keys > redirect to onboarding
         // else > redirect to homepage
-        if (!this.error) this.redirectToHomepage()
+        if (!this.error) this.redirect()
         this.isLoading = false
       }
     },
@@ -83,8 +83,15 @@ export default {
         password: this.password
       })
     },
-    redirectToHomepage () {
-      if (this.$router) this.$router.push('/')
+    redirect () {
+      if (this.$router && this.$route) {
+        const redirectPath = this.$route.query.redirect
+        if (redirectPath) {
+          this.$router.push(redirectPath)
+        } else {
+          this.$router.push('/')
+        }
+      }
     }
   }
 }

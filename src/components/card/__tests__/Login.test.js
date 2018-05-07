@@ -72,15 +72,15 @@ describe('components/card/Login.vue', () => {
     })
     component.find('form').trigger('submit')
 
-    const redirectToHomepageMock = jest.fn()
+    const redirectMock = jest.fn()
     const dispatchLoginMock = jest.fn()
 
     component.setMethods({
       dispatchLogin: dispatchLoginMock,
-      redirectToHomepage: redirectToHomepageMock
+      redirect: redirectMock
     })
     await flushPromises()
-    expect(redirectToHomepageMock.mock.calls).toHaveLength(1)
+    expect(redirectMock.mock.calls).toHaveLength(1)
   })
 
   it('should disable the form when loading', () => {

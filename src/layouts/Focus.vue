@@ -4,7 +4,9 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="text-center">
-            <logo fill="#ffffff" :size="70"></logo>
+            <router-link to="/">
+              <logo fill="#ffffff" :size="70"></logo>
+            </router-link>
           </div>
           <router-view></router-view>
           <support-chat></support-chat>

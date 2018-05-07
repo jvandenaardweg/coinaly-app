@@ -38,7 +38,7 @@ export default {
     },
     subscribe (state, channel) {
       Vue.set(state, 'subscribed', channel)
-      return state.socket.subscribe(channel)
+      // return state.socket.subscribe(channel)
     },
     watch (state, channel) {
       Vue.set(state, 'watching', channel)
@@ -102,7 +102,8 @@ export default {
     subscribe ({ state, commit, rootGetters }) {
       const selectedExchange = rootGetters['exchanges/selected']
       const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
-      return commit('subscribe', channel)
+      commit('subscribe', channel)
+      return state.socket.subscribe(channel)
     },
 
     unsubscribe ({ commit, rootGetters }) {

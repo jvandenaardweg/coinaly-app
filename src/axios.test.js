@@ -25,6 +25,6 @@ describe('axios.js', () => {
 
   it('sets the correct default timeout', () => {
     const axios = require('./axios')
-    expect(axios.defaults.timeout).toBe(5000)
+    expect(axios.defaults.timeout).toBe(10000)
   })
 })

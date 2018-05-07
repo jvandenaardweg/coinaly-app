@@ -4,3 +4,12 @@ export function getAllKeys () {
   return axios.get(`/keys`)
     .then(response => response.data)
 }
+
+export function createKey (apiKey, apiSecret, exchangeId) {
+  return axios.post(`/keys`, {
+    apiKey: apiKey,
+    apiSecret: apiSecret,
+    exchangeId: exchangeId
+  })
+    .then(response => response.data)
+}
