@@ -103,9 +103,10 @@ export default {
   },
   methods: {
     async handleSubmit (event) {
-      this.isLoading = true
       const result = await this.$validator.validateAll()
       if (result) {
+        this.isLoading = true
+
         // Save the API key/secret pair in the database
         await this.$store.dispatch('keys/createKey', {
           apiKey: this.apiKey,
