@@ -90,7 +90,7 @@ export default {
   computed: {
     ...mapGetters({
       keysError: 'keys/error',
-      allActiveExchanges: 'exchanges/allActiveExchanges' // TODO: get only active exchanges
+      allActiveExchanges: 'exchanges/allActiveExchanges'
     }),
     exchangePlaceholder () {
       return (this.exchange) ? this.exchange.name : 'exchange'
@@ -114,17 +114,12 @@ export default {
         })
 
         if (!this.keysError) {
-          // TODO: set user "onboarded=true"
           this.$store.commit('exchanges/setSelected', this.exchange.slug)
+
+          await this.$store.dispatch('websockets/subscribe') // Subscribes to the selected exchange ticker stream
+          await this.$store.dispatch('websockets/watch') // Watch the ticker stream for changes
+
           this.$router.push('/')
-          // await this.$store.dispatch('websockets/subscribe') // Subscribes to the selected exchange ticker stream
-          // await this.$store.dispatch('websockets/watch')
-          // TODO:
-          // 1. Save api key and secret (endpoint checks if key/secret pair is valid)
-          // 2. Set selected exchange to `this.exchange`
-          // 3. Start the websocket
-          // 4. Show the user's homepage
-          console.log('can now show homepage')
         }
         this.isLoading = false
       }

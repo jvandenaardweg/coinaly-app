@@ -55,9 +55,11 @@ describe('components/card/Login.vue', () => {
     })
 
     const dispatchLoginMock = jest.fn()
+    const dispatchGetMeMock = jest.fn()
 
     component.setMethods({
-      dispatchLogin: dispatchLoginMock
+      dispatchLogin: dispatchLoginMock,
+      dispatchGetMe: dispatchGetMeMock
     })
 
     component.find('form').trigger('submit')
@@ -74,10 +76,12 @@ describe('components/card/Login.vue', () => {
 
     const redirectMock = jest.fn()
     const dispatchLoginMock = jest.fn()
+    const dispatchGetMeMock = jest.fn()
 
     component.setMethods({
       dispatchLogin: dispatchLoginMock,
-      redirect: redirectMock
+      redirect: redirectMock,
+      dispatchGetMe: dispatchGetMeMock
     })
     await flushPromises()
     expect(redirectMock.mock.calls).toHaveLength(1)
@@ -124,7 +128,7 @@ describe('components/card/Login.vue', () => {
     component.find('form').trigger('submit')
     await flushPromises()
     expect(component.vm.errors.has('email')).toBe(true)
-    expect(component.find({ref:'emailError'}).isVisible()).toBe(true)
+    expect(component.find({ref: 'emailError'}).isVisible()).toBe(true)
   })
 
   it('should render an error when email is incorrect but form is submitted', async () => {
@@ -134,13 +138,13 @@ describe('components/card/Login.vue', () => {
     component.find('form').trigger('submit')
     await flushPromises()
     expect(component.vm.errors.has('email')).toBe(true)
-    expect(component.find({ref:'emailError'}).isVisible()).toBe(true)
+    expect(component.find({ref: 'emailError'}).isVisible()).toBe(true)
   })
 
   it('should render an error when password is empty but form is submitted', async () => {
     component.find('form').trigger('submit')
     await flushPromises()
     expect(component.vm.errors.has('password')).toBe(true)
-    expect(component.find({ref:'passwordError'}).isVisible()).toBe(true)
+    expect(component.find({ref: 'passwordError'}).isVisible()).toBe(true)
   })
 })

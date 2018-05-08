@@ -13,5 +13,8 @@ export default {
   },
   error: state => {
     return state.error
+  },
+  isOnboarded: state => {
+    return (state.user) ? state.user.onboarded : false
   }
 }

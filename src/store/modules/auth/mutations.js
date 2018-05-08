@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import axios from '../../../axios'
 
 export default {
   setAuthenticated (state) {
@@ -16,6 +17,7 @@ export default {
   setToken (state, token) {
     Vue.set(state, 'token', token)
     if (window.localStorage) localStorage.setItem('token', token)
+    if (axios) axios.defaults.headers.common['authorization'] = token
   },
   removeToken (state) {
     Vue.set(state, 'token', null)

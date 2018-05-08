@@ -8,3 +8,8 @@ export function create (email, password, emailOptIn) {
   })
     .then(response => response.data)
 }
+
+export function getMe () {
+  return axios.get('/users/me')
+    .then(response => response.data)
+}

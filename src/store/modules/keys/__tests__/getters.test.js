@@ -25,4 +25,14 @@ describe('modules/keys/getters.js', () => {
     expect(getters.keys(state)).toMatchObject(keysMock)
   })
 
+  it('getter hasKeys should return true when state.keys has items', () => {
+    state.keys = keysMock
+    expect(getters.hasKeys(state)).toBe(true)
+  })
+
+  it('getter hasKeys should return false when state.keys has no items', () => {
+    state.keys = null
+    expect(getters.hasKeys(state)).toBe(false)
+  })
+
 })

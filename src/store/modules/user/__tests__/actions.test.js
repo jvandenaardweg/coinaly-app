@@ -1,6 +1,8 @@
 import nock from 'nock'
 import actions from '@/store/modules/user/actions'
+
 import mockCreateUser from '@/mocks/create-user.json'
+import mockUsersMe from '@/mocks/users-me.json'
 
 const context = {
   dispatch: jest.fn(),
@@ -27,6 +29,22 @@ describe('modules/user/actions.js', () => {
     await actions.create(context, examplePayload)
     expect(context.commit).toHaveBeenCalledWith('startLoading')
     expect(context.commit).toHaveBeenCalledWith('setUser', mockCreateUser.user)
+    expect(context.commit).toHaveBeenCalledWith('stopLoading')
+    done()
+  })
+
+  it('action getMe should get the logged in user object', async (done) => {
+    nock('http://localhost:5000')
+      .defaultReplyHeaders({
+        'access-control-allow-origin': '*',
+        'access-control-allow-credentials': 'true'
+      })
+      .get('/users/me')
+      .reply(200, mockUsersMe)
+
+    await actions.getMe(context)
+    expect(context.commit).toHaveBeenCalledWith('startLoading')
+    expect(context.commit).toHaveBeenCalledWith('setUser', mockUsersMe)
     expect(context.commit).toHaveBeenCalledWith('stopLoading')
     done()
   })

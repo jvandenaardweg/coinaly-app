@@ -21,7 +21,7 @@
           <div v-if="error" class="alert alert-danger">
             {{ error }}
           </div>
-          
+
           <button type="submit" id="buttonLogin" class="btn btn-primary btn-lg btn-block" :class="{ 'is-loading': isLoading }">{{ submitLabel }}</button>
         </fieldset>
       </form>
@@ -55,7 +55,9 @@ export default {
     ...mapGetters({
       authIsLoading: 'auth/isLoading',
       isAuthenticated: 'auth/isAuthenticated',
-      error: 'auth/error'
+      error: 'auth/error',
+      hasKeys: 'keys/has',
+      isOnboarded: 'user/isOnboarded'
     }),
     isDisabled () {
       return this.authIsLoading || this.isAuthenticated
@@ -70,10 +72,14 @@ export default {
       if (result) {
         this.isLoading = true
         await this.dispatchLogin()
-        // TODO: on first load > GET /keys
-        // if user has no keys > redirect to onboarding
-        // else > redirect to homepage
-        if (!this.error) this.redirect()
+        await this.dispatchGetMe()
+        if (!this.error) {
+          if (this.isOnboarded) {
+            this.redirect('/')
+          } else {
+            this.redirect('/onboarding')
+          }
+        }
         this.isLoading = false
       }
     },
@@ -83,10 +89,16 @@ export default {
         password: this.password
       })
     },
-    redirect () {
+    async dispatchGetMe () {
+      return this.$store.dispatch('user/getMe')
+    },
+    redirect (path) {
       if (this.$router && this.$route) {
         const redirectPath = this.$route.query.redirect
-        if (redirectPath) {
+
+        if (path) {
+          this.$router.push(path)
+        } else if (redirectPath) {
           this.$router.push(redirectPath)
         } else {
           this.$router.push('/')

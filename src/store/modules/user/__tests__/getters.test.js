@@ -2,6 +2,7 @@ import getters from '@/store/modules/user/getters'
 import state from '@/store/modules/user/state'
 
 import mockAuthLogin from '@/mocks/auth-login.json'
+import mockUsersMe from '@/mocks/users-me.json'
 
 describe('modules/user/getters.js', () => {
   it('getter isOnline should return true when isOnline is true', () => {
@@ -23,5 +24,15 @@ describe('modules/user/getters.js', () => {
   it('getter error should return an error message', () => {
     state.error = 'An error happened'
     expect(getters.error(state)).toBe('An error happened')
+  })
+  it('getter isOnboarded should return false when user is not present in store', () => {
+    state.user = null
+    expect(getters.isOnboarded(state)).toBe(false)
+  })
+  it('getter isOnboarded should return true user.onboarded value', () => {
+    state.user = {
+      onboarded: true
+    }
+    expect(getters.isOnboarded(state)).toBe(true)
   })
 })
