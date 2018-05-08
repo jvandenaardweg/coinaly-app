@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container justify-content-center">
 
-      <span v-if="showBack" @click.prevent="handleBack">
+      <span v-if="showBack" @click.prevent="handleBack" class="btn btn-dark-blue mr-auto" style="padding:0;width:40px;height:40px;">
         <svg class="feather feather-chevron-left" width="25" height="25" fill="transparent" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#chevron-left"/></svg>
       </span>
 
@@ -49,7 +49,7 @@ export default {
     showBack () {
       if (this.$route && this.$route.path) {
         const splitted = this.$route.path.split('/')
-        if (splitted.length > 3) {
+        if (splitted.length > 2) {
           return true
         }
       }

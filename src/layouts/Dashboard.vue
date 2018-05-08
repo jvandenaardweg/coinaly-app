@@ -31,6 +31,9 @@ export default {
     ExchangeStatus,
     TabBar
   },
+  mounted () {
+    document.querySelector('body').classList.remove('bg-dark-blue')
+  },
   created () {
     // this.$store.commit('exchanges/setSelected', 'bittrex')
     this.$store.dispatch('markets/loadAll')

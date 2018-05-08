@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="btn btn-sm mr-3" @click.prevent="refreshBalances()">
+  <button type="button" class="btn btn-refresh btn-sm mr-3" @click.prevent="refreshBalances()">
     <svg class="feather feather-refresh-ccw" width="18" height="18" fill="transparent" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#refresh-ccw"/></svg>
   </button>
 </template>
@@ -29,8 +29,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.btn {
+<style lang="scss">
+.btn-refresh {
   border: 0;
   background: transparent;
   width: 40px;

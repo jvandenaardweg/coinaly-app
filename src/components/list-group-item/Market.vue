@@ -19,7 +19,7 @@
           {{ tickerFiatWorth | currency }}
         </span>
       </span>
-      <PercentageBadge :percentage="tickerPercentage"></PercentageBadge>
+      <percentage-badge :percentage="tickerPercentage"></percentage-badge>
       <BtnFavorite :active="isFavorite" class="ml-2" @click.native="handleClickFavorite"></BtnFavorite>
     </div>
   </div>

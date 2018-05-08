@@ -1,5 +1,6 @@
 <template>
   <div class="layout-focus">
+    <!-- <nav-bar></nav-bar> -->
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+// import NavBar from '@/components/NavBar'
 import Logo from '@/components/Logo'
 import SupportChat from '@/components/SupportChat'
 
@@ -24,7 +26,11 @@ export default {
   name: 'LayoutFocus',
   components: {
     Logo,
+    // NavBar,
     SupportChat
+  },
+  mounted () {
+    document.querySelector('body').classList.add('bg-dark-blue')
   }
 }
 </script>
@@ -32,10 +38,10 @@ export default {
 <style lang="scss">
 .layout-focus {
   background-color: $dark-blue;
-  height: 100%;
-  padding-top: 1rem;
+  // height: 100%;
+  padding-top: 5rem;
   padding-bottom: 5rem;
-  min-height: 100%;
+  // min-height: 100%;
 
   @include media-breakpoint-up(md) {
     padding-top: 3rem;

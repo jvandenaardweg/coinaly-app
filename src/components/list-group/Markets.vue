@@ -1,7 +1,7 @@
 <template>
   <div class="list-group list-group-flush">
     <router-link :to="marketLink(meta.base, meta.quote)" v-if="!isLoading && isWithinPageLimit(index)" v-for="(meta, symbol, index) in filteredMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
-      <ListGroupItemMarket :currency="currencies[meta.base]" :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="false"></ListGroupItemMarket>
+      <list-group-item-market :currency="currencies[meta.base]" :market="meta" :ticker="allTickers[symbol]" :favorite="isFavoriteMarket(symbol)" :hideVolume="false"></list-group-item-market>
     </router-link>
   </div>
 </template>
@@ -30,10 +30,8 @@ export default {
       isLoadingMarkets: 'markets/isLoading',
       isLoadingCurrencies: 'currencies/isLoading',
       isLoadingTickers: 'tickers/isLoading',
-      hasMarkets: 'markets/hasMarkets',
       allMarkets: 'markets/allMarkets',
       allQuoteMarkets: 'markets/allQuoteMarkets',
-      totalMarkets: 'markets/totalMarkets',
       allTickers: 'tickers/allTickers',
       selectedExchange: 'exchanges/selected',
       userMarketFavorites: 'user/marketFavorites',

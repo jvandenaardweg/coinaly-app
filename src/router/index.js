@@ -11,6 +11,8 @@ import PageMarketsQuote from '@/pages/markets/quote/Index'
 import PageMarketsMarket from '@/pages/markets/quote/base/Index'
 
 import PageBalancesIndex from '@/pages/balances/Index'
+import PageBalancesHome from '@/pages/balances/Home'
+import PageBalancesSymbol from '@/pages/balances/Symbol'
 
 import PageLoginIndex from '@/pages/login/Index'
 import PageLoginForgot from '@/pages/login/forgot/Index'
@@ -70,8 +72,24 @@ export default new Router({
       children: [
         {
           path: '',
-          name: 'Balances Index',
-          component: PageBalancesIndex
+          redirect: '/balances'
+        },
+        {
+          path: '/balances',
+          // name: 'Balances Index',
+          component: PageBalancesIndex,
+          children: [
+            {
+              path: '',
+              name: 'Balances home',
+              component: PageBalancesHome
+            },
+            {
+              path: ':symbol',
+              name: 'Balance',
+              component: PageBalancesSymbol
+            }
+          ]
         },
         {
           path: '/buy',

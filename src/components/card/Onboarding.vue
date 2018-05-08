@@ -10,18 +10,18 @@
 
           <div class="form-group">
             <label>Exchange</label>
-            <select class="form-control form-control-lg"
+            <select class="custom-select custom-select-lg"
               id="exchange"
-              :class="{ 'is-invalid': errors.has('exchangeId'), 'is-valid': exchangeId && !errors.has('exchangeId') }"
+              :class="{ 'is-invalid': errors.has('exchange'), 'is-valid': exchange && !errors.has('exchange') }"
               name="exchange"
               autocomplete="exchange-name"
-              v-model="exchangeId"
+              v-model="exchange"
               v-validate="'required'">
               <option :value="null" selected disabled>Select an exchange</option>
-              <option v-for="exchange in allExchanges" :value="exchange.id" :key="exchange.id">{{ exchange.name }}</option>
+              <option v-for="exchange in allActiveExchanges" :value="exchange" :key="exchange.id">{{ exchange.name }}</option>
               <option value="unavailable" disabled>More to come...</option>
             </select>
-            <invalid-feedback v-show="errors.has('exchangeId')" :message="errors.first('exchangeId')" ref="exchangeIdError"></invalid-feedback>
+            <invalid-feedback v-show="errors.has('exchange')" :message="errors.first('exchange')" ref="exchangeError"></invalid-feedback>
           </div>
 
           <div class="form-group">
@@ -55,7 +55,7 @@
             <invalid-feedback v-show="errors.has('apiSecret')" :message="errors.first('apiSecret')" ref="apiSecretError"></invalid-feedback>
           </div>
 
-          <button type="button" class="btn btn-link btn-block text-center mb-3">Where can I find my API key and secret?</button>
+          <button type="button" tabindex="-1" class="btn btn-link btn-block text-center mb-3">Where can I find my API key and secret?</button>
 
           <div v-if="keysError" class="alert alert-danger">
             {{ keysError }}
@@ -82,7 +82,7 @@ export default {
     InvalidFeedback
   },
   data: () => ({
-    exchangeId: null,
+    exchange: null,
     apiKey: null,
     apiSecret: null,
     isLoading: false
@@ -90,11 +90,10 @@ export default {
   computed: {
     ...mapGetters({
       keysError: 'keys/error',
-      allExchanges: 'exchanges/allExchanges' // TODO: get only active exchanges
+      allActiveExchanges: 'exchanges/allActiveExchanges' // TODO: get only active exchanges
     }),
     exchangePlaceholder () {
-      // return (this.exchange) ? this.exchange : 'exchange'
-      return 'exchange'
+      return (this.exchange) ? this.exchange.name : 'exchange'
     }
   },
   created () {
@@ -111,14 +110,15 @@ export default {
         await this.$store.dispatch('keys/createKey', {
           apiKey: this.apiKey,
           apiSecret: this.apiSecret,
-          exchangeId: this.exchangeId
+          exchangeId: this.exchange.id
         })
 
         if (!this.keysError) {
-          this.$store.commit('exchanges/setSelected', 'bittrex') // TODO: make dynamic
-
-          await this.$store.dispatch('websockets/subscribe') // Subscribes to the selected exchange ticker stream
-          await this.$store.dispatch('websockets/watch')
+          // TODO: set user "onboarded=true"
+          this.$store.commit('exchanges/setSelected', this.exchange.slug)
+          this.$router.push('/')
+          // await this.$store.dispatch('websockets/subscribe') // Subscribes to the selected exchange ticker stream
+          // await this.$store.dispatch('websockets/watch')
           // TODO:
           // 1. Save api key and secret (endpoint checks if key/secret pair is valid)
           // 2. Set selected exchange to `this.exchange`

@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .btn-favorite {
   padding: 0;
   height: 30px;

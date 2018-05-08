@@ -25,6 +25,9 @@ export default {
   components: {
     NavBar,
     SupportChat
+  },
+  mounted () {
+    document.querySelector('body').classList.remove('bg-dark-blue')
   }
 }
 </script>

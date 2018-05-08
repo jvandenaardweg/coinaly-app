@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown">
-    <button @click="show = !show" class="btn btn-dark-blue btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button @click="show = !show" class="btn btn-select btn-dark-blue btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{ switchStatus }}
     </button>
     <div class="dropdown-menu dropdown-menu-right" :class="{'show': show }" aria-labelledby="dropdownMenuButton">
@@ -59,8 +59,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.btn {
+<style lang="scss">
+.btn-select {
   // background: #22467B;
   // border-color: #22467B;
   outline: none;

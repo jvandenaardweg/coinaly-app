@@ -28,4 +28,14 @@ describe('modules/exchanges/getters.js', () => {
     state.isLoading = false
     expect(getters.isLoading(state)).toBe(false)
   })
+
+  it('getter allActiveExchanges should return a filtered array from state.exchanges where exchange.active is true', () => {
+    state.exchanges = mockExchangesAll
+
+    const activeExchanges = mockExchangesAll.filter(exchange => {
+      return exchange.active === true
+    })
+
+    expect(getters.allActiveExchanges(state)).toMatchObject(activeExchanges)
+  })
 })
