@@ -9,7 +9,7 @@
         @change="handleChange"
         :quoteCurrencyMarkets="quoteCurrencyMarkets"
         :allMarkets="allMarkets"
-        :allFilledCurrencies="allFilledCurrencies"
+        :allFilledBalances="allFilledBalances"
         :isLoadingMarkets="isLoadingMarkets"
         :previousBaseCurrency="previousBaseCurrency"
         :quoteCurrency="quoteCurrency"
@@ -44,7 +44,7 @@ export default {
   computed: {
     ...mapGetters({
       allCurrencies: 'balances/allCurrencies',
-      allFilledCurrencies: 'balances/allFilledCurrencies',
+      allFilledBalances: 'balances/allFilledBalances',
       allMarkets: 'markets/allMarkets',
       isLoadingMarkets: 'markets/isLoading'
     }),

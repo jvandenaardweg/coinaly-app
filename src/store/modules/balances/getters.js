@@ -8,19 +8,19 @@ function filterFilledCurrencies (currencies) {
 
 export default {
   hasCurrencies: state => {
-    return Object.keys(state.currencies).length > 0
+    return Object.keys(state.balances).length > 0
   },
   allCurrencies: state => {
-    return state.currencies
+    return state.balances
   },
   allCurrenciesTotal: state => {
-    return Object.keys(state.currencies).length
+    return Object.keys(state.balances).length
   },
-  allFilledCurrencies: state => {
-    return filterFilledCurrencies(state.currencies)
+  allFilledBalances: state => {
+    return filterFilledCurrencies(state.balances)
   },
-  allFilledCurrenciesTotal: state => {
-    return Object.keys(filterFilledCurrencies(state.currencies)).length
+  allFilledBalancesTotal: state => {
+    return Object.keys(filterFilledCurrencies(state.balances)).length
   },
   isLoading: state => {
     return state.isLoading

@@ -5,8 +5,15 @@
 
     <CardEmpty :isEmpty="!hasCurrencies" :text="'No currencies available in your balance.'"></CardEmpty>
 
-    <ul v-if="hasCurrencies" class="list-group list-group-flush">
-      <li v-for="(meta, symbol, index) in allFilledCurrencies" :key="symbol" :id="`list-group-item-${symbol}`" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': isActive(symbol) }" @click="setSelected(symbol)">
+    <div v-if="hasCurrencies" class="list-group list-group-flush">
+      <list-group-item-symbol-select
+        v-for="(meta, symbol, index) in allFilledBalances" :key="symbol"
+        :symbol="symbol"
+        :meta="meta.free"
+        :currency="currencies[symbol]">
+      </list-group-item-symbol-select>
+
+      <!-- <li v-for="(meta, symbol, index) in allFilledBalances" :key="symbol" :id="`list-group-item-${symbol}`" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': isActive(symbol) }" @click="setSelected(symbol)">
         <div class="custom-control custom-radio">
           <input type="radio" :id="`currency-${symbol}`" :ref="symbol" name="currency" v-model="currency" :value="symbol" class="custom-control-input">
           <label class="custom-control-label" :for="`currency-${symbol}`">
@@ -16,8 +23,8 @@
           </label>
         </div>
         <span class="text-muted d-none d-sm-block"><span :id="`list-group-item-amount-${symbol}`">{{ meta.free | number }} {{ symbol }}</span></span>
-      </li>
-    </ul>
+      </li> -->
+    </div>
 
     <div class="card-footer" :class="{ 'd-none d-sm-block': !currency }">
       <router-link class="btn btn-primary btn-lg btn-block" :to="routeUrl" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
@@ -27,6 +34,7 @@
 </template>
 
 <script>
+import ListGroupItemSymbolSelect from '@/components/list-group-item/SymbolSelect'
 import { symbolToName, symbolIconLocation } from '@/helpers/symbols'
 import { mapGetters } from 'vuex'
 import CardLoading from '@/components/card/CardPartialLoading'
@@ -37,7 +45,8 @@ export default {
   props: ['preselectedCurrency', 'nextStepAction', 'routeBase'],
   components: {
     CardLoading,
-    CardEmpty
+    CardEmpty,
+    ListGroupItemSymbolSelect
   },
   data () {
     return {
@@ -46,10 +55,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allFilledCurrencies: 'balances/allFilledCurrencies',
+      allFilledBalances: 'balances/allFilledBalances',
       hasCurrencies: 'balances/hasCurrencies',
       isLoading: 'balances/isLoading',
-      currenciesCurrency: 'currencies/currency'
+      currencies: 'currencies/currency'
     }),
     routeUrl () {
       return `/${this.routeBase}/${this.currency}`
@@ -76,31 +85,6 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.list-group-item,
-label {
-  cursor: pointer;
-  font-weight: normal;
-}
-
-.list-group-item {
-  &:not(.active) {
-    &:hover {
-      background-color: $light;
-    }
-  }
-}
-
-.card-footer {
-  @include media-breakpoint-only(xs) {
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-    position: fixed;
-    background: none;
-    left: 0;
-    width: 100%;
-    bottom: 3.5rem;
-    border: 0;
-  }
-}
+<style lang="scss">
+//
 </style>

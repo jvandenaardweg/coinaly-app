@@ -30,7 +30,7 @@ export default {
   name: 'SelectCurrency',
   props: [
     'quoteCurrencyMarkets',
-    'allFilledCurrencies',
+    'allFilledBalances',
     'isLoadingMarkets',
     'previousBaseCurrency',
     'nextStepAction',
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     isAvailable (marketSymbol) {
-      return Object.keys(this.allFilledCurrencies).includes(marketSymbol.split('/')[1])
+      return Object.keys(this.allFilledBalances).includes(marketSymbol.split('/')[1])
     },
     setSelected (marketName) {
       this.baseCurrency = this.marketNameToSymbol(marketName)
@@ -70,9 +70,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.list-group-item,
-label {
-  cursor: pointer;
-}
+<style lang="scss">
+
 </style>

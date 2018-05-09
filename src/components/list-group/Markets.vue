@@ -31,7 +31,6 @@ export default {
       isLoadingCurrencies: 'currencies/isLoading',
       isLoadingTickers: 'tickers/isLoading',
       allMarkets: 'markets/allMarkets',
-      allQuoteMarkets: 'markets/allQuoteMarkets',
       allTickers: 'tickers/allTickers',
       selectedExchange: 'exchanges/selected',
       userMarketFavorites: 'user/marketFavorites',
@@ -39,23 +38,6 @@ export default {
     }),
     isLoading () {
       return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers
-    },
-    subNavItems () {
-      let items = [
-        { label: 'All', slug: '', uri: '/markets' }
-      ]
-
-      Object.keys(this.allQuoteMarkets).forEach(key => {
-        items.push(
-          {
-            label: key,
-            slug: key.toLowerCase(),
-            uri: `/markets/${key}`
-          }
-        )
-      })
-
-      return items
     },
     filteredMarkets () {
       if (this.quote === 'all') {

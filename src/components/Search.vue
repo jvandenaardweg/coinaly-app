@@ -11,7 +11,10 @@
 export default {
   name: 'Search',
   props: {
-    placeholder: String
+    placeholder: {
+      type: String,
+      required: false
+    }
   },
   data () {
     return {

@@ -5,7 +5,9 @@ describe('pages/balances/Index.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PageBalancesIndex)
+    component = shallow(PageBalancesIndex, {
+      stubs: ['router-view']
+    })
   })
 
   it('renders a vue instance', () => {

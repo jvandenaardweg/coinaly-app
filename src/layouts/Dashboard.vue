@@ -7,9 +7,9 @@
         <div class="page-content">
           <div class="container">
             <!-- <transition name="fade" mode="out-in"> -->
-              <!-- <keep-alive> -->
+              <keep-alive>
                 <router-view class="view"></router-view>
-              <!-- </keep-alive> -->
+              </keep-alive>
             <!-- </transition> -->
             <exchange-status></exchange-status>
           </div>
@@ -34,7 +34,7 @@ export default {
   mounted () {
     document.querySelector('body').classList.remove('bg-dark-blue')
   },
-  created () {
+  beforeMount () {
     // this.$store.commit('exchanges/setSelected', 'bittrex')
     this.$store.dispatch('markets/loadAll')
     this.$store.dispatch('currencies/getAll')
@@ -43,6 +43,7 @@ export default {
     this.$store.dispatch('websockets/subscribe')
     this.$store.dispatch('websockets/watch')
     this.$store.dispatch('balances/getAll')
+    this.$store.dispatch('prices/getAllPrices')
   }
 }
 </script>

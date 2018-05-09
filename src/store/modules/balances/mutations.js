@@ -3,7 +3,7 @@ import Vue from 'vue'
 export default {
   addAll (state, items) {
     delete items.info
-    Vue.set(state, 'currencies', items)
+    Vue.set(state, 'balances', items)
   },
   startLoading (state) {
     Vue.set(state, 'isLoading', true)

@@ -49,6 +49,7 @@ export default {
         this.$store.commit('exchanges/setSelected', exchangeSlug),
         this.$store.dispatch('markets/loadAll'),
         this.$store.dispatch('balances/getAll'),
+        this.$store.dispatch('orders/getAllClosedOrders', exchangeSlug),
         this.$store.dispatch('websockets/subscribe'),
         this.$store.dispatch('websockets/watch')
       ])

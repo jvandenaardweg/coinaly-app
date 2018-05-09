@@ -98,15 +98,15 @@ export default new Router({
             {
               path: '',
               component: PageBuySelectQuoteCurrency,
-              name: 'Buy Quote'
+              name: 'Select base'
             },
             {
-              path: ':quoteCurrency',
+              path: ':baseSymbol',
               component: PageBuySelectBaseCurrency,
-              name: 'Buy Base'
+              name: 'Select quote'
             },
             {
-              path: ':quoteCurrency/:baseCurrency',
+              path: ':baseSymbol/:quoteSymbol',
               component: PageBuySelectPricing,
               beforeEnter: (to, from, next) => {
                 console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')

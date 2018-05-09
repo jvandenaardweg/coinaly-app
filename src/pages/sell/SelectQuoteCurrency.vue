@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center">
-    <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
+    <div class="col-sm-10 col-md-10 col-lg-6 col-xl-6">
       <div class="text-center">
         <h1 class="h3 mb-2">What are you selling?</h1>
         <p class="text-muted">The currencies below are what's in your current balance.</p>

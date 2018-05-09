@@ -1,6 +1,19 @@
 .list-group-item {
-    @include media-breakpoint-only(xs) {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
+  @include media-breakpoint-only(xs) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  &:hover {
+    .icon {
+      transform: translateX(5px);
     }
+  }
+
+  .icon {
+    margin-right: -0.4rem;
+    margin-left: 1rem;
+    transition: 250ms all;
+    position: relative;
+  }
 }

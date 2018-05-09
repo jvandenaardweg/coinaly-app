@@ -37,7 +37,7 @@
 //  @import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/utilities";
 //  @import "~bootstrap/scss/print";
- 
+
 
 // Overwrites
 @import "./components/dropdown";
@@ -92,6 +92,7 @@ label {
 
 .view {
   position: relative;
+  height: 100%;
 }
 .fade-enter-active, .fade-leave-active {
   transition: all 100ms ease

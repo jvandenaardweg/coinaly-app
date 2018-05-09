@@ -6,7 +6,7 @@ import balancesMock from '@/mocks/balances.json'
 describe('modules/balances/mutations.js', () => {
   it('mutation addAll sets all currencies', () => {
     mutations.addAll(state, balancesMock)
-    expect(state.currencies).toMatchObject(balancesMock)
+    expect(state.balances).toMatchObject(balancesMock)
   })
 
   it('mutation startLoading sets state.isLoading to true', () => {

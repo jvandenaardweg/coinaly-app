@@ -1,5 +1,5 @@
 export default {
-  currencies: {},
+  balances: {},
   isLoading: false,
   hasError: false,
   worth: [],

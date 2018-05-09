@@ -1,0 +1,142 @@
+[
+  {
+      "info": {
+          "OrderUuid": "ec631fc1-b4ad-4851-a551-871e090ed5f6",
+          "Exchange": "USDT-BTC",
+          "TimeStamp": "2018-04-11T14:03:16.077",
+          "OrderType": "LIMIT_BUY",
+          "Limit": 6956.99999999,
+          "Quantity": 0.19124109,
+          "QuantityRemaining": 0,
+          "Commission": 3.32616064,
+          "Price": 1330.4642631,
+          "PricePerUnit": 6956.99999984,
+          "IsConditional": false,
+          "Condition": "NONE",
+          "ConditionTarget": null,
+          "ImmediateOrCancel": false,
+          "Closed": "2018-04-11T14:03:23.467"
+      },
+      "id": "ec631fc1-b4ad-4851-a551-871e090ed5f6",
+      "timestamp": 1523455403467,
+      "lastTradeTimestamp": 1523455403467,
+      "symbol": "BTC/USDT",
+      "type": "limit",
+      "side": "buy",
+      "price": 6956.99999999,
+      "cost": 1330.4642631,
+      "average": 6956.99999984,
+      "amount": 0.19124109,
+      "filled": 0.19124109,
+      "remaining": 0,
+      "status": "closed",
+      "fee": {
+          "cost": 3.32616064
+      }
+  },
+  {
+      "info": {
+          "OrderUuid": "84f849d4-a922-4959-a002-d1a811c785e6",
+          "Exchange": "BTC-DGB",
+          "TimeStamp": "2018-04-11T14:04:46.517",
+          "OrderType": "LIMIT_BUY",
+          "Limit": 0.00000333,
+          "Quantity": 25000,
+          "QuantityRemaining": 0,
+          "Commission": 0.00020811,
+          "Price": 0.08324998,
+          "PricePerUnit": 0.00000332,
+          "IsConditional": false,
+          "Condition": "NONE",
+          "ConditionTarget": null,
+          "ImmediateOrCancel": false,
+          "Closed": "2018-04-11T14:04:46.687"
+      },
+      "id": "84f849d4-a922-4959-a002-d1a811c785e6",
+      "timestamp": 1523455486687,
+      "lastTradeTimestamp": 1523455486687,
+      "symbol": "DGB/BTC",
+      "type": "limit",
+      "side": "buy",
+      "price": 0.00000333,
+      "cost": 0.08324998,
+      "average": 0.00000332,
+      "amount": 25000,
+      "filled": 25000,
+      "remaining": 0,
+      "status": "closed",
+      "fee": {
+          "cost": 0.00020811
+      }
+  },
+  {
+      "info": {
+          "OrderUuid": "32ce5a2d-2a0d-4c12-89a8-6bf0c1b4cbe2",
+          "Exchange": "BTC-POWR",
+          "TimeStamp": "2018-04-11T14:05:03.407",
+          "OrderType": "LIMIT_BUY",
+          "Limit": 0.0000463,
+          "Quantity": 379.63578888,
+          "QuantityRemaining": 0,
+          "Commission": 0.00004394,
+          "Price": 0.01757712,
+          "PricePerUnit": 0.00004629,
+          "IsConditional": false,
+          "Condition": "NONE",
+          "ConditionTarget": null,
+          "ImmediateOrCancel": true,
+          "Closed": "2018-04-11T14:05:03.53"
+      },
+      "id": "32ce5a2d-2a0d-4c12-89a8-6bf0c1b4cbe2",
+      "timestamp": 1523455503530,
+      "lastTradeTimestamp": 1523455503530,
+      "symbol": "POWR/BTC",
+      "type": "limit",
+      "side": "buy",
+      "price": 0.0000463,
+      "cost": 0.01757712,
+      "average": 0.00004629,
+      "amount": 379.63578888,
+      "filled": 379.63578888,
+      "remaining": 0,
+      "status": "closed",
+      "fee": {
+          "cost": 0.00004394
+      }
+  },
+  {
+      "info": {
+          "OrderUuid": "ebfc68b1-b88c-421d-acba-d944838743dc",
+          "Exchange": "BTC-POWR",
+          "TimeStamp": "2018-04-12T19:34:50.64",
+          "OrderType": "LIMIT_BUY",
+          "Limit": 0.00004625,
+          "Quantity": 1944.57373297,
+          "QuantityRemaining": 0,
+          "Commission": 0.00022484,
+          "Price": 0.08993653,
+          "PricePerUnit": 0.00004624,
+          "IsConditional": false,
+          "Condition": "NONE",
+          "ConditionTarget": null,
+          "ImmediateOrCancel": true,
+          "Closed": "2018-04-12T19:34:50.72"
+      },
+      "id": "ebfc68b1-b88c-421d-acba-d944838743dc",
+      "timestamp": 1523561690720,
+      "lastTradeTimestamp": 1523561690720,
+      "symbol": "POWR/BTC",
+      "type": "limit",
+      "side": "buy",
+      "price": 0.00004625,
+      "cost": 0.08993653,
+      "average": 0.00004624,
+      "amount": 1944.57373297,
+      "filled": 1944.57373297,
+      "remaining": 0,
+      "status": "closed",
+      "fee": {
+          "cost": 0.00022484
+      }
+  }
+]

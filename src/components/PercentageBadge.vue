@@ -25,13 +25,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .percentage-badge {
   border-radius: 3px;
-  padding: 0.4rem 0;
+  padding: 0;
   color: #fff;
   font-weight: 600;
   width: 4rem;
+  height: 2.1rem;
+  line-height: 2.1rem;
   text-align: center;
 
   &.bg-light {

@@ -112,8 +112,12 @@ export default {
       if (!Object.keys(state.markets).length) return null
 
       return Object.keys(state.markets).reduce((obj, curKey) => {
-        obj[state.markets[curKey].base] = (obj[state.markets[curKey].base] || 0) + 1
-        // Returning something like: {"ADA": 101} // 101 = total base markets
+        // console.log(curKey)
+        if (!obj[state.markets[curKey].base]) {
+          obj[state.markets[curKey].base] = state.markets[curKey].quote
+        }
+
+        // Returning something like: {"ADA": "BTC"} // Where BTC is the symbol we can use to calculate the worth of one ADA
         return obj
       }, {})
     },

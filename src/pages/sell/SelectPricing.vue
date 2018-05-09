@@ -43,9 +43,9 @@ export default {
   computed: {
     ...mapGetters({
       allCurrencies: 'balances/allCurrencies',
-      allFilledCurrencies: 'balances/allFilledCurrencies',
+      allFilledBalances: 'balances/allFilledBalances',
       allCurrenciesTotal: 'balances/allCurrenciesTotal',
-      allFilledCurrenciesTotal: 'balances/allFilledCurrenciesTotal',
+      allFilledBalancesTotal: 'balances/allFilledBalancesTotal',
       allMarkets: 'markets/allMarkets'
     }),
     activeMarket () {
@@ -54,7 +54,7 @@ export default {
       })
     },
     activeBalance () {
-      return pickBy(this.allFilledCurrencies, (values, balanceSymbol) => {
+      return pickBy(this.allFilledBalances, (values, balanceSymbol) => {
         return balanceSymbol === this.quoteCurrency
       })
     },
