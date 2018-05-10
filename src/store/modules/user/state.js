@@ -1,8 +1,8 @@
-const initialIsOnline = window.navigator.onLine
+const initialIsOnline = window.navigator.onLine || null
 
 export default {
   user: null,
-  isLoading: false,
+  isLoading: null,
   error: null,
   isOnline: initialIsOnline,
   marketFavorites: {

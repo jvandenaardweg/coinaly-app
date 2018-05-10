@@ -5,7 +5,7 @@ Vue.use(VueCookie)
 const initialSelectedExchange = Vue.cookie.get('selectedExchange') || null
 
 export default {
-  exchanges: [],
+  exchanges: null,
   isLoading: null,
   selected: initialSelectedExchange,
   available: {

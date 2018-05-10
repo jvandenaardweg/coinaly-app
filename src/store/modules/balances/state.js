@@ -1,7 +1,7 @@
 export default {
   balances: {},
-  isLoading: false,
-  hasError: false,
+  isLoading: null,
+  hasError: null,
   worth: [],
   serverError: null
 }

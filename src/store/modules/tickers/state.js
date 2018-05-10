@@ -1,4 +1,4 @@
 export default {
   tickers: {},
-  isLoading: true
+  isLoading: null
 }

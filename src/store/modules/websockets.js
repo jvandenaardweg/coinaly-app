@@ -90,7 +90,7 @@ export default {
       commit('watch', channel)
 
       return state.socket.watch(channel, (data) => {
-        console.log('watch:', data)
+        // console.log('watch:', data)
         commit('tickers/setTickers', data, { root: true })
 
         if (rootState.tickers.isLoading) {

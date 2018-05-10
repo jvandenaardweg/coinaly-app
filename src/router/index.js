@@ -49,17 +49,17 @@ Vue.use(Router)
 
 export default new Router({
   linkActiveClass: 'active',
-  // scrollBehavior (to, from, savedPosition) {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       if (savedPosition) {
-  //         resolve(savedPosition)
-  //       } else {
-  //         resolve({ x: 0, y: 0 })
-  //       }
-  //     }, 100)
-  //   })
-  // },
+  scrollBehavior (to, from, savedPosition) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (savedPosition) {
+          resolve(savedPosition)
+        } else {
+          resolve({ x: 0, y: 0 })
+        }
+      }, 350) // page transition speed
+    })
+  },
   mode: 'history',
   fallback: false,
   routes: [

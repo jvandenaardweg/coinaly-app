@@ -1,4 +1,4 @@
 export default {
-  currencies: {},
+  currencies: null,
   isLoading: null
 }
