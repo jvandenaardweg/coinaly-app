@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-sm">
+  <div class="card card-padded shadow-sm">
     <div class="card-body">
       <h1 class="h1 text-center mb-3">{{ title }}</h1>
       <p class="text-center text-muted lead font-weight-normal">{{ subtitle }}</p>
@@ -102,18 +102,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.card {
-  border: 0;
-
-  @include media-breakpoint-up(sm) {
-    margin-top: 1.5rem;
-  }
-
-  .card-body {
-    @include media-breakpoint-up(sm) {
-      padding: 3rem;
-    }
-  }
-}
+<style lang="scss">
+//
 </style>

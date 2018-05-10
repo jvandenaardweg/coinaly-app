@@ -1,5 +1,7 @@
 <template>
-  <p>page market {{ market }}</p>
+  <div class="container">
+    <p>page market {{ market }}</p>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-sm">
+  <div class="card card-padded shadow-sm">
     <div class="card-body">
       <h1 class="h1 text-center mb-3">Reset your password</h1>
       <p class="text-center text-muted lead font-weight-normal">You can now reset your password</p>
@@ -41,7 +41,7 @@
       <a v-if="success" href="/login" class="btn btn-primary btn-lg btn-block">Go to login</a>
 
       <support-chat v-if="error" color="primary" label="Start support chat"></support-chat>
-      
+
       <div class="text-center mt-4" v-if="!success">
         <router-link to="/login" class="ml-auto font-weight-normal text-muted"><u>Return to login</u></router-link>
       </div>
@@ -112,18 +112,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.card {
-  border: 0;
-
-  @include media-breakpoint-up(sm) {
-    margin-top: 1.5rem;
-  }
-
-  .card-body {
-    @include media-breakpoint-up(sm) {
-      padding: 3rem;
-    }
-  }
-}
+<style lang="scss">
+//
 </style>

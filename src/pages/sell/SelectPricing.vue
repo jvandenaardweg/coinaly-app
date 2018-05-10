@@ -1,22 +1,25 @@
 <template>
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="text-left">
-        <h1 class="h2 mb-6">Sell {{ quoteCurrency }} for {{ baseCurrency }}</h1>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="text-left">
+          <h1 class="h2 mb-6">Sell {{ quoteCurrency }} for {{ baseCurrency }}</h1>
+        </div>
+        <SelectPricing
+          :activeMarket="activeMarket"
+          :activeBalance="activeBalance"
+          :quoteCurrency="quoteCurrency"
+          :baseCurrency="baseCurrency"
+          :marketSymbol="marketSymbol"
+          :routeBase="'sell'">
+        </SelectPricing>
       </div>
-      <SelectPricing
-        :activeMarket="activeMarket"
-        :activeBalance="activeBalance"
-        :quoteCurrency="quoteCurrency"
-        :baseCurrency="baseCurrency"
-        :marketSymbol="marketSymbol"
-        :routeBase="'sell'">
-      </SelectPricing>
-    </div>
-    <div class="col-md-7">
-      <TradingViewChart :exchange="`BITTREX`" :baseCurrency="baseCurrency" :quoteCurrency="quoteCurrency"></TradingViewChart>
+      <div class="col-md-7">
+        <TradingViewChart :exchange="`BITTREX`" :baseCurrency="baseCurrency" :quoteCurrency="quoteCurrency"></TradingViewChart>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>

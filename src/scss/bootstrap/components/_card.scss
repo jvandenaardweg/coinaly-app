@@ -1,4 +1,17 @@
 .card {
+  &.card-padded {
+    border: 0;
+
+    @include media-breakpoint-up(sm) {
+      margin-top: 1.5rem;
+    }
+
+    .card-body {
+      @include media-breakpoint-up(sm) {
+        padding: 3rem;
+      }
+    }
+  }
     .card-footer {
         margin-top: -1px;
     }

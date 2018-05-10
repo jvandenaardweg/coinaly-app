@@ -34,17 +34,17 @@ exports.cssLoaders = function (options) {
       })
     }
 
-    // This makes my vars and mixins avail throughout my app at a global level 
-    if (loader === 'sass') { 
-      loaders.push({ 
-        loader: 'sass-resources-loader', 
-        options: { 
-          resources: [ 
-            path.resolve(__dirname, '../src/scss/bootstrap/bootstrap.scss') 
-          ] 
-        } 
-      }) 
-    } 
+    // This makes my vars and mixins avail throughout my app at a global level
+    if (loader === 'sass') {
+      loaders.push({
+        loader: 'sass-resources-loader',
+        options: {
+          resources: [
+            path.resolve(__dirname, '../src/scss/bootstrap/bootstrap.scss')
+          ]
+        }
+      })
+    }
 
     // Extract CSS when that option is specified
     // (which is the case during production build)

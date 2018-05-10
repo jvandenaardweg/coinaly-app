@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .horizontal-scroller {
   overflow-x: auto;
   overflow-y: hidden;

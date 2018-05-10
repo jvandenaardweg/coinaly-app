@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-sm">
+  <div class="card card-padded shadow-sm">
     <div class="card-body">
       <h1 class="h1 text-center mb-5">Log In</h1>
       <form @submit.prevent="handleSubmit">
@@ -109,18 +109,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.card {
-  border: 0;
-
-  @include media-breakpoint-up(sm) {
-    margin-top: 1.5rem;
-  }
-
-  .card-body {
-    @include media-breakpoint-up(sm) {
-      padding: 3rem;
-    }
-  }
-}
+<style lang="scss">
+//
 </style>

@@ -91,11 +91,12 @@ label {
 }
 
 .view {
-  position: relative;
+  padding-top: 7rem;
+  // position: relative;
   height: 100%;
 }
 .fade-enter-active, .fade-leave-active {
-  transition: all 100ms ease
+  transition: opacity 100ms ease
 }
 .fade-enter, .fade-leave-active {
   opacity: 0;
@@ -105,4 +106,10 @@ label {
   @include media-breakpoint-down(sm) {
     font-size: inherit;
   }
+}
+
+
+.container {
+  left: 0;
+  right: 0;
 }

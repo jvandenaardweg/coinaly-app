@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-sm">
+  <div class="card card-padded shadow-sm">
     <div class="card-body">
       <h1 class="h1 text-center mb-3">Setup your first exchange</h1>
       <p class="text-center text-muted lead font-weight-normal">Your account is now set up. Let's add your first exchange to get started. You can always add more exchanges later.</p>
@@ -128,18 +128,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.card {
-  border: 0;
-
-  @include media-breakpoint-up(sm) {
-    margin-top: 1.5rem;
-  }
-
-  .card-body {
-    @include media-breakpoint-up(sm) {
-      padding: 3rem;
-    }
-  }
-}
+<style lang="scss">
+//
 </style>

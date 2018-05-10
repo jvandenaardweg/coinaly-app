@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav">
+  <nav class="nav nav-tabs">
     <router-link class="nav-link" to="/balances">
       <Icon name="trending-up"></Icon>
       <span>Balances</span>
@@ -34,89 +34,96 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nav {
-  background-color: $white;
-  border-top: 1px $border-color solid;
-  padding: 0;
-  text-align: center;
-  position: fixed;
-  width: 100%;
-  z-index: 100;
-  height: 3.5rem;
-  bottom: 0;
-  justify-content: space-around;
-
-  @include media-breakpoint-up(md) {
-    top: 3.75rem;
-    bottom: auto;
-    border-bottom: 1px $border-color solid;
-    border-top: 0;
-    justify-content: center;
-  }
-
-  .nav-link {
-    font-size: 0.7rem;
-    flex: 1 1 0;
-    width: 0;
+  &.nav-tabs {
+    background-color: $white;
+    border-top: 1px $border-color solid;
+    padding: 0;
     text-align: center;
-    padding-left: 0;
-    padding-right: 0;
-    color: $gray-500;
-    transition: 150ms all;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    height: 3.5rem;
+    bottom: 0;
+    justify-content: space-around;
 
     @include media-breakpoint-up(md) {
-      font-size: inherit;
-      padding: inherit;
-      align-self: center;
-      flex: inherit;
-      width: auto;
-      display: inline-block;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      border-right: 1px $gray-300 solid;
-      font-weight: 600;
+      top: 3.75rem;
+      bottom: auto;
+      border-bottom: 1px $border-color solid;
+      border-top: 0;
+      justify-content: center;
     }
 
-    &:hover {
+    .nav-link {
+      font-size: 0.7rem;
+      flex: 1 1 0;
+      width: 0;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+      color: $gray-500;
+      transition: 150ms all;
+      border: 0;
+      border-radius: 0;
+
       @include media-breakpoint-up(md) {
-        color: $gray-700;
+        font-size: inherit;
+        padding: inherit;
+        align-self: center;
+        flex: inherit;
+        width: auto;
+        display: inline-block;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        border-right: 1px $gray-300 solid;
+        font-weight: 600;
       }
-    }
 
-    &:last-child {
-      border-right: 0;
-    }
+      &:hover {
+        border-right-color: $gray-300;
+        @include media-breakpoint-up(md) {
+          color: $gray-700;
+        }
+      }
 
-    &.active {
-      color: $primary;
+      &:last-child {
+        border-right: 0;
+      }
+
+      &.active {
+        color: $primary;
+        background: transparent;
+
+        svg {
+          stroke: $primary;
+        }
+      }
 
       svg {
-        stroke: $primary;
+        stroke: $gray-500;
+        position: relative;
+        top: 3px;
+
+        @include media-breakpoint-up(md) {
+          margin-right: 0.4rem;
+        }
+      }
+
+      span {
+        display: block;
+        text-align: center;
+        bottom: -2px;
+        position: relative;
+
+        @include media-breakpoint-up(md) {
+          display: inline-block;
+          bottom: 1px;
+        }
       }
     }
 
-    svg {
-      stroke: $gray-500;
-      position: relative;
-      top: 3px;
-
-      @include media-breakpoint-up(md) {
-        margin-right: 0.4rem;
-      }
-    }
-
-    span {
-      display: block;
-      text-align: center;
-      bottom: -2px;
-      position: relative;
-
-      @include media-breakpoint-up(md) {
-        display: inline-block;
-        bottom: 1px;
-      }
-    }
   }
 }
 </style>

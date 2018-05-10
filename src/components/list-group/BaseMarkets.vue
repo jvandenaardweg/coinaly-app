@@ -1,29 +1,13 @@
 <template>
   <div class="list-group list-group-flush">
-    <!-- <router-link
-      :to="`buy/${symbol}`"
-      v-for="(meta, symbol, index) in markets"
-      :key="symbol"
-      :index="index"
-      class="list-group-item list-group-item-action"> -->
-
-      <list-group-item-symbol-select
-        v-for="(quoteSymbol, baseSymbol, index) in markets"
-        :key="baseSymbol"
-        :symbol="baseSymbol"
-        :meta="meta(baseSymbol, quoteSymbol)"
-        :currency="currencies[baseSymbol]"
-        >
-      </list-group-item-symbol-select>
-
-      <!-- <list-group-item-market-simple
-        :currency="currencies[symbol]"
-        :symbol="symbol"
-        :balance="balance(symbol)">
-      </list-group-item-market-simple> -->
-
-    <!-- </router-link> -->
-
+    <list-group-item-symbol-select
+      v-for="(quoteSymbol, baseSymbol, index) in markets"
+      :key="baseSymbol"
+      :symbol="baseSymbol"
+      :meta="meta(baseSymbol, quoteSymbol)"
+      :currency="currencies[baseSymbol]"
+      >
+    </list-group-item-symbol-select>
   </div>
 </template>
 
