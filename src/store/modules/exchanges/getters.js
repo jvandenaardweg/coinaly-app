@@ -3,9 +3,13 @@ export default {
     return state.exchanges
   },
   allActiveExchanges (state) {
-    return state.exchanges.filter(exchange => {
-      return exchange.active === true
-    })
+    if (state.exchanges) {
+      return state.exchanges.filter(exchange => {
+        return exchange.active === true
+      })
+    } else {
+      return null
+    }
   },
   selected (state) {
     return state.selected
