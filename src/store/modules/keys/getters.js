@@ -10,5 +10,8 @@ export default {
   },
   error: state => {
     return state.error
+  },
+  success: state => {
+    return state.success
   }
 }

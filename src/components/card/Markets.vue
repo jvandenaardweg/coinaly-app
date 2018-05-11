@@ -7,7 +7,8 @@
       <search v-if="hasMarkets" @search="handleSearch"></search>
     </div>
 
-    <card-loading :is-loading="isLoading" :text="'Loading Markets...'"></card-loading>
+    <loader v-if="isLoading"></loader>
+    <!-- <card-loading :is-loading="isLoading" :text="'Loading Markets...'"></card-loading> -->
 
     <card-empty :is-empty="!isLoadingMarkets && !hasMarkets" :text="'No markets available.'"></card-empty>
 
@@ -20,6 +21,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Loader from '@/components/Loader'
 import CardLoading from '@/components/card/CardPartialLoading'
 import CardEmpty from '@/components/card/CardPartialEmpty'
 import SubNav from '@/components/SubNav'
@@ -34,7 +36,8 @@ export default {
     CardLoading,
     CardEmpty,
     SubNav,
-    Search
+    Search,
+    Loader
   },
   computed: {
     ...mapGetters({

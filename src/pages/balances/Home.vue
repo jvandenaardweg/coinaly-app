@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import HorizontalScroller from '@/components/HorizontalScroller'
 import CardBalances from '@/components/card/Balances'
 import OrdersTimeline from '@/components/OrdersTimeline'
 import BalancesSummary from '@/components/BalancesSummary'
@@ -22,7 +21,6 @@ import BalancesSummary from '@/components/BalancesSummary'
 export default {
   name: 'PageBalances',
   components: {
-    HorizontalScroller,
     CardBalances,
     OrdersTimeline,
     BalancesSummary

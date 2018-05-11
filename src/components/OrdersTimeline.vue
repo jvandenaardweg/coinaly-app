@@ -1,6 +1,7 @@
 <template>
   <div class="orders-timeline">
-    <div v-if="isLoading">Loading orders...</div>
+    <loader v-if="isLoading"></loader>
+    <!-- <div v-if="isLoading">Loading orders...</div> -->
 
     <router-link
       v-if="!isLoading"
@@ -23,7 +24,7 @@
       </div>
     </router-link>
 
-    <div class="orders-timeline-footer">
+    <div class="orders-timeline-footer" v-if="!isLoading">
       <button type="button" class="btn btn-primary">Show more</button>
     </div>
   </div>
@@ -31,12 +32,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Loader from '@/components/Loader'
 import PercentageBadge from '@/components/PercentageBadge'
 
 export default {
   name: 'OrdersTimeline',
   components: {
-    PercentageBadge
+    PercentageBadge,
+    Loader
   },
   created () {
     this.$store.dispatch('orders/getAllClosedOrders', 'bittrex')

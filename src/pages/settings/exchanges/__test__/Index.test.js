@@ -2,11 +2,12 @@ import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import PageSettingsExchangesIndex from '@/pages/settings/exchanges/Index.vue'
 
-import exchangesModule from '@/store/modules/exchanges'
-
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
+
+import exchangesModule from '@/store/modules/exchanges'
+import keysModule from '@/store/modules/keys'
 
 describe('pages/settings/exchanges/Index.vue', () => {
   let component
@@ -15,7 +16,8 @@ describe('pages/settings/exchanges/Index.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
-        exchanges: exchangesModule
+        exchanges: exchangesModule,
+        keys: keysModule
       }
     })
 

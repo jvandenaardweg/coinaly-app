@@ -1,11 +1,11 @@
 import { shallow } from '@vue/test-utils'
-import HorizontalScroller from '@/components/HorizontalScroller.vue'
+import Loader from '@/components/Loader.vue'
 
-describe('components/HorizontalScroller.vue', () => {
+describe('components/Loader.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(HorizontalScroller)
+    component = shallow(Loader)
   })
 
   it('renders a vue instance', () => {

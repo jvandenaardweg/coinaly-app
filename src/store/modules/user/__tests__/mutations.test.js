@@ -35,4 +35,13 @@ describe('modules/user/mutations.js', () => {
     mutations.removeError(state)
     expect(state.error).toBe(null)
   })
+  it('setSuccess sets state.success to a message', () => {
+    mutations.setSuccess(state, 'This happened successfully!')
+    expect(state.success).toBe('This happened successfully!')
+  })
+  it('removeSuccess sets state.success to null', () => {
+    state.success = 'Some success message'
+    mutations.removeSuccess(state)
+    expect(state.success).toBe(null)
+  })
 })

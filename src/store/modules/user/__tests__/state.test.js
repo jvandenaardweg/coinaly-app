@@ -6,6 +6,7 @@ describe('modules/user/state.js', () => {
     expect(state.user).toBe(null)
     expect(state.isLoading).toBe(null)
     expect(state.error).toBe(null)
+    expect(state.success).toBe(null)
     expect(state.isOnline).toBe(true)
     expect(typeof state.marketFavorites).toBe('object')
   })

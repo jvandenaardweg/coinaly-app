@@ -4,6 +4,7 @@ export default {
   user: null,
   isLoading: null,
   error: null,
+  success: null,
   isOnline: initialIsOnline,
   marketFavorites: {
     'bittrex': {

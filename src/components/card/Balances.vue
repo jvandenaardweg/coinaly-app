@@ -1,7 +1,8 @@
 <template>
   <div class="card card-100-xs card-flat-top">
 
-    <card-loading :is-loading="isLoading" :text="'Loading Balances...'"></card-loading>
+    <loader v-if="isLoading"></loader>
+    <!-- <card-loading :is-loading="isLoading" :text="'Loading Balances...'"></card-loading> -->
 
     <card-empty :is-empty="!isLoadingBalances && !hasCurrencies" :text="'You have nothing in your balance, yet.'"></card-empty>
 
@@ -18,6 +19,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Loader from '@/components/Loader'
 import CardLoading from '@/components/card/CardPartialLoading'
 import CardEmpty from '@/components/card/CardPartialEmpty'
 import ListGroupBalances from '@/components/list-group/Balances'
@@ -27,7 +29,8 @@ export default {
   components: {
     CardLoading,
     CardEmpty,
-    ListGroupBalances
+    ListGroupBalances,
+    Loader
   },
   computed: {
     ...mapGetters({

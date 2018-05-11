@@ -35,4 +35,8 @@ describe('modules/user/getters.js', () => {
     }
     expect(getters.isOnboarded(state)).toBe(true)
   })
+  it('getter success should return user.success', () => {
+    state.success = 'Success message'
+    expect(getters.success(state)).toBe('Success message')
+  })
 })

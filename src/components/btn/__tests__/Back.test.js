@@ -12,7 +12,7 @@ describe('components/btn/Back.vue', () => {
     expect(component.isVueInstance()).toBe(true)
   })
 
-  it('should call method handleBack when clicked', () => {
+  it('should call method handleClick when clicked', () => {
 
     const handleClickMock = jest.fn()
     component.setMethods({ handleClick: handleClickMock })

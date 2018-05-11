@@ -3,6 +3,7 @@ import actions from '@/store/modules/user/actions'
 
 import mockCreateUser from '@/mocks/create-user.json'
 import mockUsersMe from '@/mocks/users-me.json'
+import mockUsersMeDelete from '@/mocks/me-delete.json'
 
 const context = {
   dispatch: jest.fn(),
@@ -45,6 +46,24 @@ describe('modules/user/actions.js', () => {
     await actions.getMe(context)
     expect(context.commit).toHaveBeenCalledWith('startLoading')
     expect(context.commit).toHaveBeenCalledWith('setUser', mockUsersMe)
+    expect(context.commit).toHaveBeenCalledWith('stopLoading')
+    done()
+  })
+
+  it('action deleteMe should delete the user from the database', async (done) => {
+    nock('http://localhost:5000')
+      .defaultReplyHeaders({
+        'access-control-allow-origin': '*',
+        'access-control-allow-credentials': 'true'
+      })
+      .delete('/users/me')
+      .reply(200, mockUsersMeDelete) 
+
+    await actions.getMe(context)
+    expect(context.commit).toHaveBeenCalledWith('startLoading')
+    expect(context.commit).toHaveBeenCalledWith('removeError')
+    expect(context.commit).toHaveBeenCalledWith('removeSuccess')
+    expect(context.commit).toHaveBeenCalledWith('setSuccess', mockUsersMeDelete.message)
     expect(context.commit).toHaveBeenCalledWith('stopLoading')
     done()
   })

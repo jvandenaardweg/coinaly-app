@@ -13,3 +13,12 @@ export function createKey (apiKey, apiSecret, exchangeId) {
   })
     .then(response => response.data)
 }
+
+export function updateKey (apiKey, apiSecret, exchangeId) {
+  return axios.patch(`/keys`, {
+    apiKey: apiKey,
+    apiSecret: apiSecret,
+    exchangeId: exchangeId
+  })
+    .then(response => response.data)
+}

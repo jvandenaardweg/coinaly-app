@@ -18,6 +18,8 @@ export default {
 }
 .loader {
   margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
@@ -28,8 +30,8 @@ export default {
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation: load8 900ms infinite linear;
-  animation: load8 900ms infinite linear;
+  -webkit-animation: load8 800ms infinite linear;
+  animation: load8 800ms infinite linear;
 }
 @-webkit-keyframes load8 {
   0% {

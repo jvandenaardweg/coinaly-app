@@ -15,5 +15,11 @@ export default {
   },
   removeError (state) {
     Vue.set(state, 'error', null)
+  },
+  setSuccess (state, message) {
+    Vue.set(state, 'success', message)
+  },
+  removeSuccess (state, message) {
+    Vue.set(state, 'success', null)
   }
 }

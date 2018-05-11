@@ -1,6 +1,6 @@
 <template>
-  <form @submit="handleSubmit" @change="handleChange" :disabled="disabled" :aria-disabled="disabled">
-    <div class="form-group">
+  <!-- <form @submit="handleSubmit" @change="handleChange" :disabled="disabled" :aria-disabled="disabled"> -->
+    <!-- <div class="form-group">
       <label for="exchange">Active exchange</label>
       <select class="custom-select" id="exchange" v-model="exchange">
         <option :value="null" disabled>Select an exchange</option>
@@ -8,32 +8,29 @@
         <option value="binance">Binance</option>
       </select>
     </div>
-    <hr />
-
+    <hr /> -->
+  <div>
     <h2 class="h4">Exchanges (2)</h2>
-    <ul class="list-group list-group-flush mb-5">
-      <li class="list-group-item d-flex align-items-center">
-        <strong>Bittrex</strong>
+    <ul class="list-group">
+      <li class="list-group-item d-flex align-items-center" v-for="key in keys" :key="key.slug">
+        <strong>{{ key.name }}</strong>
         <div class="ml-auto">
-          <router-link to="/settings/exchanges/bittrex" class="btn btn-sm btn-primary">Edit</router-link>
-          <button type="button" class="btn btn-sm btn-primary btn-danger">&times;</button>
-        </div>
-      </li>
-      <li class="list-group-item d-flex align-items-center">
-        <strong>Binance</strong>
-        <div class="ml-auto">
-          <router-link to="/settings/exchanges/binance" class="btn btn-sm btn-primary">Edit</router-link>
+          <router-link :to="`/settings/exchanges/edit/${key.slug}`" class="btn btn-sm btn-primary">Edit</router-link>
           <button type="button" class="btn btn-sm btn-primary btn-danger">&times;</button>
         </div>
       </li>
     </ul>
+    <router-link to="/settings/exchanges/add" class="btn btn-primary btn-lg btn-block">Add new exchange</router-link>
+  </div>
 
-    <button type="submit" class="btn btn-success btn-block btn-lg" :disabled="disabled">{{ submitLabel }}</button>
+    <!-- <button type="submit" class="btn btn-success btn-block btn-lg" :disabled="disabled">{{ submitLabel }}</button> -->
 
-  </form>
+  <!-- </form> -->
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PageSettingsExchanges',
   data () {
@@ -55,6 +52,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      keys: 'keys/keys'
+    }),
     submitLabel () {
       if (this.disabled) {
         return 'Saving settings...'

@@ -13,3 +13,8 @@ export function getMe () {
   return axios.get('/users/me')
     .then(response => response.data)
 }
+
+export function deleteMe () {
+  return axios.delete('/users/me')
+    .then(response => response.data)
+}

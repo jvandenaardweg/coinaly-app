@@ -85,6 +85,7 @@ export default {
   logout ({ commit }) {
     commit('unsetAuthenticated')
     commit('removeToken')
+    window.location.reload()
   },
 
   setOnLoad ({ commit }, token) {

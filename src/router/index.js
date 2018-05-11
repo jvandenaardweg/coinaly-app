@@ -26,6 +26,7 @@ import PageSettingsIndex from '@/pages/settings/Index'
 import PageSettingsAccount from '@/pages/settings/account/Index'
 import PageSettingsExchanges from '@/pages/settings/exchanges/Index'
 import PageSettingsExchangesEdit from '@/pages/settings/exchanges/Edit'
+import PageSettingsExchangesAdd from '@/pages/settings/exchanges/Add'
 
 import PageBuyIndex from '@/pages/buy/Index.vue'
 import PageBuySelectQuoteCurrency from '@/pages/buy/SelectQuoteCurrency.vue'
@@ -181,9 +182,17 @@ export default new Router({
               }
             },
             {
-              path: 'exchanges/:edit',
+              path: 'exchanges/edit/:exchangeSlug',
               component: PageSettingsExchangesEdit,
               name: 'Exchange edit',
+              meta: {
+                slug: 'exchanges'
+              }
+            },
+            {
+              path: 'exchanges/add',
+              component: PageSettingsExchangesAdd,
+              name: 'Exchange add',
               meta: {
                 slug: 'exchanges'
               }

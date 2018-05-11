@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import SelectExchange from '@/components/btn/SelectExchange.vue'
 
 import exchangesModule from '@/store/modules/exchanges'
+import keysModule from '@/store/modules/keys'
 
 const localVue = createLocalVue()
 
@@ -15,7 +16,8 @@ describe('components/btn/SelectExchange.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
-        exchanges: exchangesModule
+        exchanges: exchangesModule,
+        keys: keysModule
       }
     })
 

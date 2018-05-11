@@ -1,13 +1,11 @@
 <template>
   <div class="dropdown">
     <button @click="show = !show" class="btn btn-select btn-dark-blue btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{ switchStatus }}
+      {{ switchLabel }}
     </button>
     <div class="dropdown-menu dropdown-menu-right" :class="{'show': show }" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" @click.prevent="handleSwitch('binance')" v-show="selected !== 'binance'">Switch to: <strong>Binance</strong></a>
-      <a class="dropdown-item" @click.prevent="handleSwitch('bittrex')" v-show="selected !== 'bittrex'">Switch to: <strong>Bittrex</strong></a>
-      <a class="dropdown-item" @click.prevent="handleSwitch('poloniex')" v-show="selected !== 'poloniex'">Switch to: <strong>Poloniex</strong></a>
-      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" v-if="userAvailableExchanges" v-for="exchange in userAvailableExchanges" :key="exchange.id" @click.prevent="handleSwitch(exchange.slug)" v-show="selected !== exchange.slug">Switch to: <strong>{{ exchange.name }}</strong></a>
+      <div class="dropdown-divider" v-if="userAvailableExchanges.length > 1"></div>
       <router-link to="/settings/exchanges" class="dropdown-item" @click.native="show = false">Exchange settings</router-link>
       <button type="button" class="dropdown-item" @click.prevent="handleClickLogout">Logout</button>
     </div>
@@ -28,17 +26,37 @@ export default {
   computed: {
     ...mapGetters({
       selected: 'exchanges/selected',
-      selectedName: 'exchanges/selectedName'
+      selectedName: 'exchanges/selectedName',
+      activeExchanges: 'exchanges/allActiveExchanges',
+      keys: 'keys/keys'
     }),
-    switchStatus () {
+    switchLabel () {
       if (this.isLoading) return 'Switching...'
-      return this.selectedName
+      if (!this.isLoading && this.userAvailableExchanges) return this.selectedName
+      return 'Select exchange'
+    },
+    userAvailableExchanges () {
+      if (this.activeExchanges && this.keys) {
+        return this.activeExchanges.reduce((obj, exchange) => {
+          this.keys.map((key, index) => {
+            if (key.exchange_id === exchange.id) {
+              obj.push(exchange)
+            }
+          })
+          return obj
+        }, [])
+      } else {
+        return []
+      }
     }
+  },
+  created () {
+    this.$store.dispatch('exchanges/getAllExchanges')
+    this.$store.dispatch('keys/getAllKeys')
   },
   methods: {
     handleClickLogout (event) {
       this.$store.dispatch('auth/logout')
-      window.location.reload()
     },
     async handleSwitch (exchangeSlug) {
       this.isLoading = true
