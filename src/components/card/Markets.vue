@@ -3,7 +3,7 @@
 
     <div class="card-header">
       <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
-      <sub-nav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="$route.params.quote"></sub-nav>
+      <sub-nav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="selected"></sub-nav>
       <search v-if="hasMarkets" @search="handleSearch"></search>
     </div>
 
@@ -40,11 +40,10 @@ export default {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
       isLoadingTickers: 'tickers/isLoading',
+      isLoadingCurrencies: 'currencies/isLoading',
       hasMarkets: 'markets/hasMarkets',
-      allMarkets: 'markets/allMarkets',
       allQuoteMarkets: 'markets/allQuoteMarkets',
-      totalMarkets: 'markets/totalMarkets',
-      isLoadingCurrencies: 'currencies/isLoading'
+      totalMarkets: 'markets/totalMarkets'
     }),
     isLoading () {
       return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers
@@ -65,20 +64,13 @@ export default {
       })
 
       return items
+    },
+    selected () {
+      if (this.$route) return this.$route.params.quote
+      return null
     }
   },
   methods: {
-    isWithinPageLimit (index) {
-      this.marketsIndex = index
-      if (index < this.paginationLimit) {
-        return true
-      } else {
-        return false
-      }
-    },
-    handleShowAllMarkets () {
-      this.paginationLimit = 9999
-    },
     handleSearch (searchQuery) {
       console.log('markets search', searchQuery)
     }

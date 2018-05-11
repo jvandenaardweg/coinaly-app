@@ -3,6 +3,10 @@ import Vuex from 'vuex'
 import Markets from '@/components/card/Markets.vue'
 
 import marketsModule from '@/store/modules/markets'
+import currenciesModule from '@/store/modules/currencies'
+import tickersModule from '@/store/modules/tickers'
+
+import marketsMock from '@/mocks/markets.json'
 
 const localVue = createLocalVue()
 
@@ -15,7 +19,9 @@ describe('components/card/Markets.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
-        markets: marketsModule
+        markets: marketsModule,
+        currencies: currenciesModule,
+        tickers: tickersModule
       }
     })
 
@@ -28,5 +34,10 @@ describe('components/card/Markets.vue', () => {
 
   it('renders a vue instance', () => {
     expect(component.isVueInstance()).toBe(true)
+  })
+
+  it('renders the correct available markets', () => {
+    store.commit('markets/addAll', marketsMock)
+    expect(component.find('.h5').text()).toBe('Available markets (2)')
   })
 })

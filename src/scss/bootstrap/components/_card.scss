@@ -1,4 +1,11 @@
 .card {
+
+  &.card-flat-top {
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
   &.card-padded {
     border: 0;
 

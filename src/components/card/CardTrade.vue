@@ -8,9 +8,6 @@
       <h3 class="mb-1">&euro; 1.200,41</h3>
       <div class="text-muted">+ 21,61%</div>
     </div>
-    <!-- <div class="card-chart-bg">
-      <img src="http://placehold.it/500x200" class="img-fluid" />
-    </div> -->
   </div>
 </template>
 

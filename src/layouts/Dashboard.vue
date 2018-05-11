@@ -49,5 +49,7 @@ export default {
 </script>
 
 <style lang="scss">
-//
+#dashboard {
+  padding-bottom: 3rem;
+}
 </style>

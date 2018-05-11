@@ -2,7 +2,6 @@
   <div class="card">
     <form name="order" @submit.prevent="handleSubmit($event)">
       <div class="card-body">
-        <!-- {{ activeMarket }} -->
         <div class="form-row">
           <div class="form-group col-6">
             <label for="inputEmail4"><strong>Sell</strong></label>
@@ -24,9 +23,7 @@
           </div>
         </div>
 
-        <!-- <div class="alert alert-primary text-center"> -->
-          <p class="text-success text-center">You have <strong>{{ amountFreeInBalance | number }} {{ quoteCurrency }}</strong> available to sell</p>
-        <!-- </div> -->
+        <p class="text-success text-center">You have <strong>{{ amountFreeInBalance | number }} {{ quoteCurrency }}</strong> available to sell</p>
 
          <div class="form-group">
           <label for=""><strong>Limit or market order?</strong></label>

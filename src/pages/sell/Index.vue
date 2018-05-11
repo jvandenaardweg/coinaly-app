@@ -1,9 +1,5 @@
 <template>
-  <!-- <transition> -->
-    <!-- <keep-alive> -->
-      <router-view class="view"></router-view>
-    <!-- </keep-alive> -->
-  <!-- </transition> -->
+  <router-view class="view"></router-view>
 </template>
 
 <script>

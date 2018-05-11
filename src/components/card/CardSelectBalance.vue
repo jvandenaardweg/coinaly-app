@@ -12,18 +12,6 @@
         :meta="meta.free"
         :currency="currencies[symbol]">
       </list-group-item-symbol-select>
-
-      <!-- <li v-for="(meta, symbol, index) in allFilledBalances" :key="symbol" :id="`list-group-item-${symbol}`" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': isActive(symbol) }" @click="setSelected(symbol)">
-        <div class="custom-control custom-radio">
-          <input type="radio" :id="`currency-${symbol}`" :ref="symbol" name="currency" v-model="currency" :value="symbol" class="custom-control-input">
-          <label class="custom-control-label" :for="`currency-${symbol}`">
-            <img :src="currencyIconLocation(symbol)" :id="`list-group-item-icon-${symbol}`" width="18" class="mr-1" :alt="symbol" />
-            <strong>{{ symbol }}</strong>
-            <span class="text-muted">(<span :id="`list-group-item-name-${symbol}`">{{ currencyName(symbol) }}</span>)</span>
-          </label>
-        </div>
-        <span class="text-muted d-none d-sm-block"><span :id="`list-group-item-amount-${symbol}`">{{ meta.free | number }} {{ symbol }}</span></span>
-      </li> -->
     </div>
 
     <div class="card-footer" :class="{ 'd-none d-sm-block': !currency }">

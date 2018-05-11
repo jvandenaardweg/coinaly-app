@@ -13,7 +13,6 @@
         <strong>{{ order.symbol }}</strong>
         <div class="ml-auto d-flex">
           <span>$ 100.20</span>
-        <!-- <span class="text-muted ml-auto">Cost: {{ order.cost }} {{ order.symbol.split('/')[1] }}</span> -->
         <percentage-badge :percentage="5" class="ml-2"></percentage-badge>
         </div>
 
@@ -21,30 +20,12 @@
       <div>
         <div class="text-muted">{{ order.side }}: {{ order.amount }} {{ order.symbol.split('/')[0] }}</div>
         <div class="text-muted">cost: {{ order.cost }} {{ order.symbol.split('/')[1] }}</div>
-        <!-- <div class="badge badge-light">{{ order.side }}</div> -->
       </div>
     </router-link>
 
     <div class="orders-timeline-footer">
       <button type="button" class="btn btn-primary">Show more</button>
     </div>
-
-
-    <!-- <li class="orders-timeline-item">
-      <strong>BTC/USDT</strong>
-    </li>
-    <li class="orders-timeline-item">
-      <strong>BTC/USDT</strong>
-    </li>
-    <li class="orders-timeline-item">
-      <strong>BTC/USDT</strong>
-    </li>
-    <li class="orders-timeline-item">
-      <strong>BTC/USDT</strong>
-    </li>
-    <li class="orders-timeline-item">
-      <strong>BTC/USDT</strong>
-    </li> -->
   </div>
 </template>
 

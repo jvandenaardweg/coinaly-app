@@ -91,10 +91,18 @@ label {
 }
 
 .view {
-  padding-top: 7rem;
-  // position: relative;
+  padding-top: 3.780rem;
+  position: relative;
   height: 100%;
+  @include media-breakpoint-up(sm) {
+    padding-top: 6rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-top: 9rem
+  }
 }
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 100ms ease
 }
@@ -112,4 +120,18 @@ label {
 .container {
   left: 0;
   right: 0;
+}
+
+
+.view-slide {
+  transition: opacity 350ms cubic-bezier(.55,0,.1,1), transform 350ms cubic-bezier(.55,0,.1,1);
+  position: absolute;
+}
+.slide-left-enter, .slide-right-leave-to {
+  opacity: 0;
+  transform: translate(30px, 0);
+}
+.slide-left-leave-to, .slide-right-enter {
+  opacity: 0;
+  transform: translate(-30px, 0);
 }

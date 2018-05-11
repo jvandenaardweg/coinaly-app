@@ -9,17 +9,7 @@
       </select>
     </div>
     <hr />
-    <!-- <div class="form-group">
-      <label for="api-key">API Key</label>
-      <input type="text" class="form-control" id="api-key" placeholder="[exchange] API Key">
-    </div>
-    <div class="form-group">
-      <label for="api-secret">API Secret</label>
-      <input type="text" class="form-control" id="api-secret" placeholder="[exchange] API Secret">
-    </div>
 
-
-    <hr /> -->
     <h2 class="h4">Exchanges (2)</h2>
     <ul class="list-group list-group-flush mb-5">
       <li class="list-group-item d-flex align-items-center">
@@ -37,7 +27,6 @@
         </div>
       </li>
     </ul>
-
 
     <button type="submit" class="btn btn-success btn-block btn-lg" :disabled="disabled">{{ submitLabel }}</button>
 

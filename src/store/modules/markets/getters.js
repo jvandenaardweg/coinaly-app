@@ -21,7 +21,7 @@ export default {
     return state.favorites
   },
   allQuoteMarkets: state => {
-    if (!Object.keys(state.markets).length) return null
+    if (!state.markets || !Object.keys(state.markets).length) return null
 
     return Object.keys(state.markets).reduce((obj, curKey) => {
       obj[state.markets[curKey].quote] = (obj[state.markets[curKey].quote] || 0) + 1
@@ -30,7 +30,7 @@ export default {
     }, {})
   },
   allBaseMarkets: state => {
-    if (!Object.keys(state.markets).length) return null
+    if (!state.markets || !Object.keys(state.markets).length) return null
 
     return Object.keys(state.markets).reduce((obj, curKey) => {
       if (!obj[state.markets[curKey].base]) {

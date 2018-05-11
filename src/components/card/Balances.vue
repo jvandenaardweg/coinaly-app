@@ -1,9 +1,5 @@
 <template>
-  <div class="card card-100-xs">
-
-    <!-- <div class="card-header">
-      <h2 class="h5 m-0">Your balances on {{ selectedExchangeName }}</h2>
-    </div> -->
+  <div class="card card-100-xs card-flat-top">
 
     <card-loading :is-loading="isLoading" :text="'Loading Balances...'"></card-loading>
 

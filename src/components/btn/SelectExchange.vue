@@ -44,11 +44,16 @@ export default {
       this.isLoading = true
       this.show = false
 
+      // this.$store.commit('markets/addAll', null)
+      // this.$store.commit('balances/addAll', null)
+      // this.$store.commit('orders/addAllClosed', null)
+
       await Promise.all([
         this.$store.dispatch('websockets/unsubscribe'),
         this.$store.commit('exchanges/setSelected', exchangeSlug),
         this.$store.dispatch('markets/loadAll'),
         this.$store.dispatch('balances/getAll'),
+        this.$store.dispatch('exchanges/getAllExchanges'),
         this.$store.dispatch('orders/getAllClosedOrders', exchangeSlug),
         this.$store.dispatch('websockets/subscribe'),
         this.$store.dispatch('websockets/watch')
