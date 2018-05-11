@@ -16,7 +16,8 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "heroku-postbuild": "[ $NODE_ENV != test ] && npm run build || exit 0"
+    "heroku-postbuild": "[ $NODE_ENV != test ] && npm run build || exit 0",
+    "profile": "NODE_ENV=production webpack --verbose true --progress --profile --json --config build/webpack.prod.conf.js > compilation-stats.json"
   },
   "jest": {
     "moduleFileExtensions": [
