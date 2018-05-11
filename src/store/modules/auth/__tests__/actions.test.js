@@ -123,6 +123,7 @@ describe('modules/auth/actions.js', () => {
   })
 
   it('action logout should log the user out of the app', async (done) => {
+    window.location.reload = jest.fn()
     await actions.logout(context)
     expect(context.commit).toHaveBeenCalledWith('removeToken')
     expect(context.commit).toHaveBeenCalledWith('unsetAuthenticated')
