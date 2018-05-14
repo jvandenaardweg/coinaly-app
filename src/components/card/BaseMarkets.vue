@@ -31,6 +31,7 @@ import CardEmpty from '@/components/card/CardPartialEmpty'
 import ListGroupBaseMarkets from '@/components/list-group/BaseMarkets'
 import Search from '@/components/Search'
 import SubNav from '@/components/SubNav'
+import pickBy from 'lodash/pickBy'
 
 export default {
   name: 'CardBaseMarkets',
@@ -64,27 +65,27 @@ export default {
     }),
     isLoading () {
       return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers
+    },
+    availableBaseMarkets () {
+      if (this.allBaseMarkets && this.allFilledBalances) {
+        return pickBy(this.allBaseMarkets, (baseMarket, baseMarketSymbol) => {
+          // A market is available when atleast one or more balance symbols is present in the base markets object
+          return Object.keys(this.allFilledBalances).some(balanceSymbol => {
+            return baseMarket.includes(balanceSymbol)
+          })
+        })
+      }
+    },
+    unavailableBaseMarkets () {
+      if (this.allBaseMarkets && this.allFilledBalances) {
+        return pickBy(this.allBaseMarkets, (baseMarket, baseMarketSymbol) => {
+          // A market is unavailable when EVERY balance symbol is not present in the base markets object
+          return Object.keys(this.allFilledBalances).every(balanceSymbol => {
+            return !baseMarket.includes(balanceSymbol)
+          })
+        })
+      }
     }
   }
 }
 </script>
-
-<style lang="scss">
-// .list-group-item,
-// label {
-//   cursor: pointer;
-// }
-
-// .card-footer {
-//   @include media-breakpoint-only(xs) {
-//     padding-left: 0.75rem;
-//     padding-right: 0.75rem;
-//     position: fixed;
-//     background: none;
-//     left: 0;
-//     width: 100%;
-//     bottom: 0;
-//     border: 0;
-//   }
-// }
-</style>

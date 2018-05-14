@@ -18,7 +18,7 @@
 
     <span class="ml-auto text-muted">
       <span>
-        {{ meta }}
+        {{ meta }} {{ isBuyable }}
       </span>
     </span>
 
@@ -48,6 +48,10 @@ export default {
     },
     meta: {
       type: String,
+      required: false
+    },
+    isBuyable: {
+      type: Boolean,
       required: false
     }
   },

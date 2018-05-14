@@ -33,11 +33,10 @@ export default {
     if (!state.markets || !Object.keys(state.markets).length) return null
 
     return Object.keys(state.markets).reduce((obj, curKey) => {
-      if (!obj[state.markets[curKey].base]) {
-        obj[state.markets[curKey].base] = state.markets[curKey].quote
-      }
+      if (!obj[state.markets[curKey].base]) obj[state.markets[curKey].base] = []
+      obj[state.markets[curKey].base].push(state.markets[curKey].quote)
 
-      // Returning something like: {"ADA": "BTC"} // Where BTC is the symbol we can use to calculate the worth of one ADA
+      // Returning something like: {"ADA": ["BTC", "USDT"] } // Where BTC is the symbol we can use to calculate the worth of one ADA
       return obj
     }, {})
   },

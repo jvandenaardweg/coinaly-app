@@ -1,11 +1,12 @@
 <template>
   <div class="list-group list-group-flush">
     <list-group-item-symbol-select
-      v-for="(quoteSymbol, baseSymbol, index) in markets"
+      v-for="(quoteSymbols, baseSymbol, index) in markets"
       :key="baseSymbol"
       :symbol="baseSymbol"
-      :meta="meta(baseSymbol, quoteSymbol)"
+      :meta="meta(baseSymbol, quoteSymbols)"
       :currency="currency(baseSymbol)"
+      :isBuyable="isBuyable(quoteSymbols)"
       >
     </list-group-item-symbol-select>
   </div>
@@ -62,10 +63,21 @@ export default {
       if (this.ticker(baseSymbol, quoteSymbol)) return this.ticker(baseSymbol, quoteSymbol).last
       return 0
     },
-    meta (baseSymbol, quoteSymbol) {
-      const price = (this.tickerLast(baseSymbol, quoteSymbol) * this.prices[quoteSymbol].USD)
+    meta (baseSymbol, quoteSymbols) {
+      const firstQuoteSymbol = quoteSymbols[0] // We select the first. quoteSymbols is an array with market quote symbols, like: ['BTC', 'ETH', 'USDT']
+      const price = (this.tickerLast(baseSymbol, firstQuoteSymbol) * this.prices[firstQuoteSymbol].USD)
 
       return this.$options.filters.currency(price)
+    },
+    isBuyable (quoteSymbols) {
+      // TODO: Also check if balances.free meets the treshhold of a minimum order
+      if (quoteSymbols) {
+        return quoteSymbols.filter(symbol => {
+          return Object.keys(this.balances).includes(symbol)
+        }).length > 0
+      } else {
+        return false
+      }
     }
   }
 }
