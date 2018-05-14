@@ -1,4 +1,4 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import CardPartialLoading from '@/components/card/CardPartialLoading.vue'
 
 const sampleLoadingText = 'Currently loading data...'
@@ -7,7 +7,7 @@ describe('components/card/CardPartialLoading.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(CardPartialLoading, {
+    component = shallowMount(CardPartialLoading, {
       propsData: {
         isLoading: true,
         text: sampleLoadingText

@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Logo from '@/components/Logo.vue'
 
 describe('components/Logo.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(Logo)
+    component = shallowMount(Logo)
   })
 
   it('renders a vue instance', () => {

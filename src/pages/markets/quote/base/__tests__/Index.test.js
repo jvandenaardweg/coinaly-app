@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import PageMarketsMarket from '@/pages/markets/quote/base/Index.vue'
 
 describe('pages/markets/quote/base/Index.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PageMarketsMarket, {
+    component = shallowMount(PageMarketsMarket, {
       stubs: ['router-link', 'router-view']
     })
   })

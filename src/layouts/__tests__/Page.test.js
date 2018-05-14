@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Page from '@/layouts/Page.vue'
 
 describe('layouts/Page.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(Page, {
+    component = shallowMount(Page, {
       stubs: ['router-link', 'router-view']
     })
   })

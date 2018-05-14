@@ -1,11 +1,11 @@
 import BtnRefresh from '@/components/btn/Refresh.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('components/btn/Refresh.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(BtnRefresh)
+    component = shallowMount(BtnRefresh)
   })
 
   it('renders a vue instance', () => {

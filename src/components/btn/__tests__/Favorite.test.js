@@ -1,11 +1,11 @@
 import BtnFavorite from '@/components/btn/Favorite.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('components/btn/Favorite.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(BtnFavorite)
+    component = shallowMount(BtnFavorite)
   })
 
   it('renders a vue instance', () => {

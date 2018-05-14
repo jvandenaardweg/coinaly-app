@@ -1,4 +1,4 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import PercentageBadge from '@/components/PercentageBadge.vue'
 import '../../filters'
 
@@ -6,7 +6,7 @@ describe('components/Search.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PercentageBadge)
+    component = shallowMount(PercentageBadge)
   })
 
   it('renders a vue instance', () => {

@@ -1,11 +1,11 @@
 import PagePrivacyIndex from '@/pages/privacy/Index.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('pages/privacy/Index.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PagePrivacyIndex)
+    component = shallowMount(PagePrivacyIndex)
   })
 
   it('renders a vue instance', () => {

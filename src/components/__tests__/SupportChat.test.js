@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import SupportChat from '@/components/SupportChat.vue'
 
 describe('components/SupportChat.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(SupportChat)
+    component = shallowMount(SupportChat)
   })
 
   it('renders a vue instance', () => {

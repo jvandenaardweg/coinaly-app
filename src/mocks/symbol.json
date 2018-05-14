@@ -1,0 +1,7 @@
+{
+  "BTC": {
+    "id": "BTC",
+    "name": "Bitcoin",
+    "icon_uri": "/static/icons/cryptocurrencies/svg/color/btc.svg"
+  }
+}

@@ -20,7 +20,6 @@
 </template>
 
 <script>
-// import { symbolToName, marketSymbolToQuoteSymbol, marketSymbolToBaseSymbol, symbolIconLocation } from '@/helpers/symbols'
 import PercentageBadge from '@/components/PercentageBadge'
 import BtnFavorite from '@/components/btn/Favorite'
 import Icon from '@/components/Icon'

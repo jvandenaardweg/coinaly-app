@@ -10,13 +10,7 @@
       :actionLabel="'Select different currency'">
     </CardEmpty>
 
-    <ListGroupSelectMarkets
-      v-if="!isLoadingMarkets"
-      :markets="quoteCurrencyMarkets"
-      :balances="allFilledBalances"
-      :activeCurrency="baseCurrency"
-      @selectedCurrency="handleSelectedCurrency">
-    </ListGroupSelectMarkets>
+    [list markets]
 
     <div class="card-footer">
       <router-link class="btn btn-primary btn-lg btn-block" :to="routeUrl" :class="{'disabled': !baseCurrency}" :disabed="!baseCurrency">{{ nextStepAction }}</router-link>
@@ -28,7 +22,6 @@
 <script>
 import CardLoading from '@/components/card/CardPartialLoading'
 import CardEmpty from '@/components/card/CardPartialEmpty'
-import ListGroupSelectMarkets from '@/components/list-group/ListGroupSelectMarkets'
 
 export default {
   name: 'CardSelectMarket',
@@ -45,8 +38,7 @@ export default {
   ],
   components: {
     CardLoading,
-    CardEmpty,
-    ListGroupSelectMarkets
+    CardEmpty
   },
   data () {
     return {

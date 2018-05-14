@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Search from '@/components/Search.vue'
 
 describe('components/Search.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(Search)
+    component = shallowMount(Search)
   })
 
   it('renders a vue instance', () => {

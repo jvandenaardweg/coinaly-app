@@ -1,6 +1,6 @@
-// import { shallow } from '@vue/test-utils'
+// import { shallowMount } from '@vue/test-utils'
 import CardPartialEmpty from '@/components/card/CardPartialEmpty.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 const sampleEmptyText = 'This is empty...'
 
@@ -8,7 +8,7 @@ describe('components/card/CardPartialEmpty.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(CardPartialEmpty, {
+    component = shallowMount(CardPartialEmpty, {
       stubs: ['router-link', 'router-view'],
       propsData: {
         isEmpty: true,

@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import PageSettingsAccountIndex from '@/pages/settings/account/Index.vue'
 
@@ -19,7 +19,7 @@ describe('pages/settings/account/Index.vue', () => {
       }
     })
 
-    component = shallow(PageSettingsAccountIndex, {
+    component = shallowMount(PageSettingsAccountIndex, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

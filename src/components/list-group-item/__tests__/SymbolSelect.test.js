@@ -1,5 +1,5 @@
 import ListGroupItemSymbolSelect from '@/components/list-group-item/SymbolSelect.vue'
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 
 import VueRouter from 'vue-router'
 
@@ -12,7 +12,7 @@ describe('components/list-group-item/Market.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(ListGroupItemSymbolSelect, {
+    component = shallowMount(ListGroupItemSymbolSelect, {
       localVue,
       router,
       propsData: {

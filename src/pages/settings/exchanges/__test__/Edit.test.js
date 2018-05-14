@@ -1,5 +1,5 @@
 import PageSettingsExchangesEdit from '@/pages/settings/exchanges/Edit.vue'
-import { shallow, mount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, mount, createLocalVue } from '@vue/test-utils'
 import flushPromises from 'flush-promises'
 import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'

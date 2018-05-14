@@ -1,11 +1,11 @@
 import PageDisclaimerIndex from '@/pages/disclaimer/Index.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('pages/disclaimer/Index.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PageDisclaimerIndex)
+    component = shallowMount(PageDisclaimerIndex)
   })
 
   it('renders a vue instance', () => {

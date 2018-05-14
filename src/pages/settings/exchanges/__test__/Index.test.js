@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import PageSettingsExchangesIndex from '@/pages/settings/exchanges/Index.vue'
 
@@ -21,7 +21,7 @@ describe('pages/settings/exchanges/Index.vue', () => {
       }
     })
 
-    component = shallow(PageSettingsExchangesIndex, {
+    component = shallowMount(PageSettingsExchangesIndex, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

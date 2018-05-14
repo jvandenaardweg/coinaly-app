@@ -1,4 +1,4 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import TradingViewChart from '@/components/TradingViewChart.vue'
 
 const exampleQuoteCurrency = 'XVG'
@@ -9,7 +9,7 @@ describe('components/TradingViewChart.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(TradingViewChart, {
+    component = shallowMount(TradingViewChart, {
       stubs: ['router-link', 'router-view']
     })
   })

@@ -1,11 +1,11 @@
 import PageBalancesSymbol from '@/pages/balances/Symbol.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('pages/balances/Symbol.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PageBalancesSymbol, {
+    component = shallowMount(PageBalancesSymbol, {
       stubs: ['router-view']
     })
   })

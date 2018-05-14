@@ -1,11 +1,11 @@
 import BtnBack from '@/components/btn/Back.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('components/btn/Back.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(BtnBack)
+    component = shallowMount(BtnBack)
   })
 
   it('renders a vue instance', () => {

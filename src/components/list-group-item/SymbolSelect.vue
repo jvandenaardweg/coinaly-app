@@ -37,9 +37,6 @@ export default {
   data: () => ({
     selected: null
   }),
-  created () {
-    console.log(this.symbol, this.currency)
-  },
   props: {
     currency: {
       type: Object,

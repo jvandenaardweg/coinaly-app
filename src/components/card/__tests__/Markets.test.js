@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Markets from '@/components/card/Markets.vue'
 
@@ -25,7 +25,7 @@ describe('components/card/Markets.vue', () => {
       }
     })
 
-    component = shallow(Markets, {
+    component = shallowMount(Markets, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

@@ -51,7 +51,6 @@
     "axios": "^0.18.0",
     "babel-jest": "^22.4.3",
     "bootstrap": "^4.1.0",
-    "cryptocurrencies": "^3.0.1",
     "cryptocurrency-icons": "git+https://github.com/cjdowner/cryptocurrency-icons.git",
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",

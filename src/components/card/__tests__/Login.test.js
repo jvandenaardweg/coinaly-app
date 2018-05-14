@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import flushPromises from 'flush-promises'
 import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'
@@ -24,7 +24,7 @@ describe('components/card/Login.vue', () => {
       }
     })
 
-    component = shallow(CardLogin, {
+    component = shallowMount(CardLogin, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

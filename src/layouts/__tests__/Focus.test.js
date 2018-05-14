@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Focus from '@/layouts/Focus.vue'
 
 describe('layouts/Focus.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(Focus, {
+    component = shallowMount(Focus, {
       stubs: ['router-link', 'router-view']
     })
   })

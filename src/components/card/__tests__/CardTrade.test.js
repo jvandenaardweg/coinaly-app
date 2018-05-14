@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import CardTrade from '@/components/card/CardTrade.vue'
 
 describe('components/card/CardTrade.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(CardTrade)
+    component = shallowMount(CardTrade)
   })
 
   it('renders a vue instance', () => {

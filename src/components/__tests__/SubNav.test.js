@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import SubNav from '@/components/SubNav.vue'
 
 describe('components/SubNav.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(SubNav, {
+    component = shallowMount(SubNav, {
       stubs: ['router-link', 'router-view']
     })
   })

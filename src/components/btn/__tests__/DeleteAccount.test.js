@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import flushPromises from 'flush-promises'
 import DeleteAccount from '@/components/btn/DeleteAccount.vue'
@@ -22,7 +22,7 @@ describe('components/btn/DeleteAccount.vue', () => {
         }
       })
   
-      component = shallow(DeleteAccount, {
+      component = shallowMount(DeleteAccount, {
         store,
         localVue,
         stubs: ['router-link', 'router-view']

@@ -1,4 +1,4 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import CardSelectMarket from '@/components/card/CardSelectMarket.vue'
 import '@/filters'
 
@@ -8,7 +8,7 @@ describe('SelectMarket.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(CardSelectMarket, {
+    component = shallowMount(CardSelectMarket, {
       stubs: ['router-link', 'router-view']
     })
   })

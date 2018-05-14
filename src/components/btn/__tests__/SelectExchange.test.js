@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import SelectExchange from '@/components/btn/SelectExchange.vue'
 
@@ -21,7 +21,7 @@ describe('components/btn/SelectExchange.vue', () => {
       }
     })
 
-    component = shallow(SelectExchange, {
+    component = shallowMount(SelectExchange, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

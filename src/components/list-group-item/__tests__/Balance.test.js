@@ -1,6 +1,6 @@
-// import { shallow } from '@vue/test-utils'
+// import { shallowMount } from '@vue/test-utils'
 import ListGroupItemBalance from '@/components/list-group-item/Balance.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import '@/filters'
 
 import marketMock from '@/mocks/market.json'
@@ -10,7 +10,7 @@ describe('components/list-group-item/Market.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(ListGroupItemBalance, {
+    component = shallowMount(ListGroupItemBalance, {
       stubs: ['router-link', 'router-view'],
       propsData: {
         market: marketMock['BTC/USDT'],

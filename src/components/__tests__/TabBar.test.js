@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import TabBar from '@/components/TabBar.vue'
 
 describe('components/TabBar.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(TabBar, {
+    component = shallowMount(TabBar, {
       stubs: ['router-link']
     })
   })

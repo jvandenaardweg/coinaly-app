@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import NavBar from '@/components/NavBar.vue'
 
@@ -19,7 +19,7 @@ describe('components/NavBar.vue', () => {
       }
     })
 
-    component = shallow(NavBar, {
+    component = shallowMount(NavBar, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

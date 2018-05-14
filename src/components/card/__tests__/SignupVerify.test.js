@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import SignupVerify from '@/components/card/SignupVerify.vue'
 
@@ -19,7 +19,7 @@ describe('components/card/SignupVerify.vue', () => {
       }
     })
 
-    component = shallow(SignupVerify, {
+    component = shallowMount(SignupVerify, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

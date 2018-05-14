@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { symbolToName, marketSymbolToQuoteSymbol, marketSymbolToBaseSymbol, symbolIconLocation } from '@/helpers/symbols'
+import { marketSymbolToQuoteSymbol, marketSymbolToBaseSymbol } from '@/helpers/symbols'
 import PercentageBadge from '@/components/PercentageBadge'
 import BtnFavorite from '@/components/btn/Favorite'
 
@@ -47,10 +47,8 @@ export default {
     BtnFavorite
   },
   methods: {
-    symbolToName,
     marketSymbolToQuoteSymbol,
     marketSymbolToBaseSymbol,
-    symbolIconLocation,
     handleClickFavorite (event) {
       event.preventDefault()
       console.log('handle click fav')

@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import CardSelectBalance from '@/components/card/CardSelectBalance.vue'
 
@@ -19,7 +19,7 @@ describe('components/card/CardSelectBalance.vue', () => {
       }
     })
 
-    component = shallow(CardSelectBalance, {
+    component = shallowMount(CardSelectBalance, {
       store,
       localVue,
       stubs: ['router-link', 'router-view']

@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import EmptyState from '@/components/EmptyState.vue'
 
 describe('components/EmptyState.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(EmptyState)
+    component = shallowMount(EmptyState)
   })
 
   it('renders a vue instance', () => {

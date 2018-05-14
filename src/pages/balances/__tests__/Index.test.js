@@ -1,11 +1,11 @@
 import PageBalancesIndex from '@/pages/balances/Index.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('pages/balances/Index.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PageBalancesIndex, {
+    component = shallowMount(PageBalancesIndex, {
       stubs: ['router-view']
     })
   })

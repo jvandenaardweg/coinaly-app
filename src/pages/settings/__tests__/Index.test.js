@@ -1,11 +1,11 @@
 import PageSettingsIndex from '@/pages/settings/Index.vue'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('pages/settings/Index.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(PageSettingsIndex, {
+    component = shallowMount(PageSettingsIndex, {
       stubs: ['router-view']
     })
   })

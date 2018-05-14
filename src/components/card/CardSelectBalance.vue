@@ -23,7 +23,6 @@
 
 <script>
 import ListGroupItemSymbolSelect from '@/components/list-group-item/SymbolSelect'
-import { symbolToName, symbolIconLocation } from '@/helpers/symbols'
 import { mapGetters } from 'vuex'
 import CardLoading from '@/components/card/CardPartialLoading'
 import CardEmpty from '@/components/card/CardPartialEmpty'
@@ -53,8 +52,6 @@ export default {
     }
   },
   methods: {
-    symbolToName,
-    symbolIconLocation,
     currencyName (symbol) {
       return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].name : null
     },

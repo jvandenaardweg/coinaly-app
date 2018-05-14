@@ -1,11 +1,11 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Icon from '@/components/Icon.vue'
 
 describe('components/Icon.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallow(Icon)
+    component = shallowMount(Icon)
   })
 
   it('renders a vue instance', () => {
