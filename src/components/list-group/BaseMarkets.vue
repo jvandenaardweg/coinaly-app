@@ -5,7 +5,7 @@
       :key="baseSymbol"
       :symbol="baseSymbol"
       :meta="meta(baseSymbol, quoteSymbol)"
-      :currency="currencies[baseSymbol]"
+      :currency="currency(baseSymbol)"
       >
     </list-group-item-symbol-select>
   </div>
@@ -42,6 +42,16 @@ export default {
     }
   },
   methods: {
+    fallbackSymbol (symbol) {
+      return {
+        'icon_uri': '/static/icons/cryptocurrencies/svg/black/generic.svg',
+        'name': symbol,
+        'id': symbol
+      }
+    },
+    currency (symbol) {
+      return this.currencies[symbol] || this.fallbackSymbol(symbol)
+    },
     balance (symbol) {
       return this.balances[symbol] || { free: 0 }
     },

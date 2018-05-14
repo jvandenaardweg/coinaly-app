@@ -46,7 +46,7 @@ export default {
       allFilledBalances: 'balances/allFilledBalances',
       hasCurrencies: 'balances/hasCurrencies',
       isLoading: 'balances/isLoading',
-      currencies: 'currencies/currency'
+      currencies: 'symbols/symbols'
     }),
     routeUrl () {
       return `/${this.routeBase}/${this.currency}`
@@ -59,7 +59,7 @@ export default {
       return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].name : null
     },
     currencyIconLocation (symbol) {
-      return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].iconLocation : null
+      return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].icon_uri : null
     },
     handleSelectedCurrency (symbol) {
       this.currency = symbol

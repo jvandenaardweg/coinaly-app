@@ -55,10 +55,10 @@ export default {
       allFilledBalances: 'balances/allFilledBalances',
       allTickers: 'tickers/allTickers',
       prices: 'prices/prices',
-      currencies: 'currencies/currency',
+      currencies: 'symbols/symbols',
       isLoadingBalances: 'balances/isLoading',
       hasCurrencies: 'balances/hasCurrencies',
-      isLoadingCurrencies: 'currencies/isLoading',
+      isLoadingCurrencies: 'symbols/isLoading',
       isLoadingPrices: 'prices/isLoading',
       isLoadingTickers: 'tickers/isLoading'
     }),

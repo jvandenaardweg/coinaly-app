@@ -4,7 +4,7 @@
 
     <div>
       <img
-      :src="currency.iconLocation"
+      :src="currency.icon_uri"
       :id="`list-group-item-icon-${symbol}`"
       width="18"
       class="mr-1"
@@ -37,6 +37,9 @@ export default {
   data: () => ({
     selected: null
   }),
+  created () {
+    console.log(this.symbol, this.currency)
+  },
   props: {
     currency: {
       type: Object,

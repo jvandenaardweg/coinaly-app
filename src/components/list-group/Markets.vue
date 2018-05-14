@@ -28,13 +28,13 @@ export default {
   computed: {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
-      isLoadingCurrencies: 'currencies/isLoading',
+      isLoadingCurrencies: 'symbols/isLoading',
       isLoadingTickers: 'tickers/isLoading',
       allMarkets: 'markets/allMarkets',
       allTickers: 'tickers/allTickers',
       selectedExchange: 'exchanges/selected',
       userMarketFavorites: 'user/marketFavorites',
-      currencies: 'currencies/currency'
+      currencies: 'symbols/symbols'
     }),
     isLoading () {
       return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers

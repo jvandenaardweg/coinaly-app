@@ -1,11 +1,11 @@
-import * as api from '@/api/currencies'
+import * as api from '@/api/symbols'
 
 export default {
   async getAll ({ dispatch, commit, getters, rootGetters }, options) {
     commit('startLoading')
 
     try {
-      const response = await api.getAllCurrencies(options)
+      const response = await api.getAllSymbols(options)
       if (response) {
         commit('addAll', response)
         commit('stopLoading')

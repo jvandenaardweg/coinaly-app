@@ -35,13 +35,13 @@ export default {
   computed: {
     ...mapGetters({
       allFilledBalances: 'balances/allFilledBalances',
-      currencies: 'currencies/currency',
+      currencies: 'symbols/symbols',
       allTickers: 'tickers/allTickers',
       selectedExchangeName: 'exchanges/selectedName',
       isLoadingBalances: 'balances/isLoading',
       isLoadingTickers: 'tickers/isLoading',
       hasCurrencies: 'balances/hasCurrencies',
-      isLoadingCurrencies: 'currencies/isLoading',
+      isLoadingCurrencies: 'symbols/isLoading',
       prices: 'prices/prices',
       isLoadingPrices: 'prices/isLoading'
     }),

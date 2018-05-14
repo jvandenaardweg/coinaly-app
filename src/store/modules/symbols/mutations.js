@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
 export default {
-  addAll (state, currencies) {
-    Vue.set(state, 'currencies', currencies)
+  addAll (state, symbols) {
+    Vue.set(state, 'symbols', symbols)
   },
-  addOne (state, currency) {
-    Vue.set(state, 'currencies', currency)
+  addOne (state, symbol) {
+    Vue.set(state, 'symbols', symbol)
   },
   startLoading (state) {
     Vue.set(state, 'isLoading', true)

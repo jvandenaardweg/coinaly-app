@@ -30,9 +30,6 @@ export default {
   components: {
     ListGroupItemBalance
   },
-  created () {
-    console.log(this.tickers)
-  },
   props: {
     currencies: {
       type: Object,

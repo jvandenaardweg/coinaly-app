@@ -75,7 +75,7 @@ export default {
     },
     iconLocation () {
       if (this.currency) {
-        return this.currency.iconLocation
+        return this.currency.icon_uri
       } else {
         return null
       }

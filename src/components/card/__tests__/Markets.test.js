@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Markets from '@/components/card/Markets.vue'
 
 import marketsModule from '@/store/modules/markets'
-import currenciesModule from '@/store/modules/currencies'
+import symbolsModule from '@/store/modules/symbols'
 import tickersModule from '@/store/modules/tickers'
 
 import marketsMock from '@/mocks/markets.json'
@@ -20,7 +20,7 @@ describe('components/card/Markets.vue', () => {
     store = new Vuex.Store({
       modules: {
         markets: marketsModule,
-        currencies: currenciesModule,
+        symbols: symbolsModule,
         tickers: tickersModule
       }
     })

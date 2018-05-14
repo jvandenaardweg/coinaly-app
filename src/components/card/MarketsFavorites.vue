@@ -42,7 +42,7 @@ export default {
   computed: {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
-      isLoadingCurrencies: 'currencies/isLoading',
+      isLoadingCurrencies: 'symbols/isLoading',
       isLoadingTickers: 'tickers/isLoading',
       hasMarkets: 'markets/hasMarkets',
       selectedExchange: 'exchanges/selected',
@@ -51,7 +51,7 @@ export default {
       hasFavoriteMarkets: 'markets/hasFavoriteMarkets',
       userMarketFavorites: 'user/marketFavorites',
       allTickers: 'tickers/allTickers',
-      currencies: 'currencies/currency'
+      currencies: 'symbols/symbols'
     }),
     isLoading () {
       return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers

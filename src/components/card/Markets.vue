@@ -43,7 +43,7 @@ export default {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
       isLoadingTickers: 'tickers/isLoading',
-      isLoadingCurrencies: 'currencies/isLoading',
+      isLoadingCurrencies: 'symbols/isLoading',
       hasMarkets: 'markets/hasMarkets',
       allQuoteMarkets: 'markets/allQuoteMarkets',
       totalMarkets: 'markets/totalMarkets'

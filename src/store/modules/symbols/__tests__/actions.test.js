@@ -1,26 +1,26 @@
 import nock from 'nock'
-import actions from '@/store/modules/currencies/actions'
+import actions from '@/store/modules/symbols/actions'
 
-import mockCurrencies from '@/mocks/currencies.json'
+import mockSymbols from '@/mocks/symbols.json'
 
 const context = {
   commit: jest.fn()
 }
 
-describe('modules/currencies/actions.js', () => {
-  it('action getAll should set all currencies from the API', async (done) => {
+describe('modules/symbols/actions.js', () => {
+  it('action getAll should set all symbols from the API', async (done) => {
     nock('http://localhost:5000')
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
         'access-control-allow-credentials': 'true'
       })
-      .get('/currencies')
-      .reply(200, mockCurrencies)
+      .get('/symbols')
+      .reply(200, mockSymbols)
 
     const result = await actions.getAll(context, false)
-    expect(result).toMatchObject(mockCurrencies)
+    expect(result).toMatchObject(mockSymbols)
     expect(context.commit).toHaveBeenCalledWith('startLoading')
-    expect(context.commit).toHaveBeenCalledWith('addAll', mockCurrencies)
+    expect(context.commit).toHaveBeenCalledWith('addAll', mockSymbols)
     expect(context.commit).toHaveBeenCalledWith('stopLoading')
     done()
   })
