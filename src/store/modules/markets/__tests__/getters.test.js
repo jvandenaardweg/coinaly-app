@@ -65,8 +65,8 @@ describe('modules/markets/getters.js', () => {
   it('getter allBaseMarkets should return an object of base market symbols if state.markets is set', () => {
     state.markets = marketsMock
     const expected = {
-      'ADA': 'BTC',
-      'BTC': 'USDT'
+      'ADA': ['BTC'],
+      'BTC': ['USDT']
     }
     expect(getters.allBaseMarkets(state)).toMatchObject(expected)
   })
