@@ -26,4 +26,9 @@ describe('modules/tickers/getters.js', () => {
     state.isLoading = false
     expect(getters.isLoading(state)).toBe(false)
   })
+
+  it('getter getTickerBySymbol should return the ticker from a given symbol', () => {
+    state.tickers = tickerMock
+    expect(getters.getTickerBySymbol(state)('BTC/USDT')).toMatchObject(tickerMock['BTC/USDT'])
+  })
 })

@@ -81,7 +81,6 @@ export default {
     return 0
   },
   getQuoteMarketsBySymbolId: (state) => (symbolId) => {
-    // TODO: write test
     if (state.markets) {
       return pickBy(state.markets, (market, marketSymbolId) => {
         return market.baseId === symbolId
@@ -91,7 +90,6 @@ export default {
     }
   },
   getBaseMarketsBySymbolId: (state) => (symbolId) => {
-    // TODO: write test
     if (state.markets) {
       return pickBy(state.markets, (market, marketSymbolId) => {
         return market.quoteId === symbolId
@@ -101,7 +99,6 @@ export default {
     }
   },
   getMarketBySymbol: (state) => (symbol) => {
-    // TODO: write test
     if (state.markets) {
       return state.markets[symbol]
     } else {

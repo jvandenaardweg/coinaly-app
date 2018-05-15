@@ -119,4 +119,26 @@ describe('modules/markets/getters.js', () => {
     expect(getters.availableBaseMarkets(state, gettersMock, rootStateMock, rootGettersMock)).toMatchObject(expectedAvailableBaseMarkets)
   })
 
+  it('getter getMarketBySymbol should return the market from a given symbol', () => {
+    state.markets = marketsMock
+    expect(getters.getMarketBySymbol(state)('BTC/USDT')).toMatchObject(marketsMock['BTC/USDT'])
+  })
+
+  it('getter getBaseMarketsBySymbolId should return the base markets from a given symbol', () => {
+    state.markets = marketsMock
+    const expected = {
+      'ADA/BTC': marketsMock['ADA/BTC']
+    }
+    expect(getters.getBaseMarketsBySymbolId(state)('BTC')).toMatchObject(expected)
+  })
+
+  it('getter getQuoteMarketsBySymbolId should return the quote markets from a given symbol', () => {
+    state.markets = marketsMock
+    const expected = {
+      'BTC/USDT': marketsMock['BTC/USDT']
+    }
+    expect(getters.getBaseMarketsBySymbolId(state)('USDT')).toMatchObject(expected)
+  })
+
+
 })

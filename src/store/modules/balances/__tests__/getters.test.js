@@ -54,4 +54,9 @@ describe('modules/balances/getters.js', () => {
     expect(getters.serverError(state)).toBe('Example error')
   })
 
+  it('getter getBalanceBySymbol should return the balance from a given symbol', () => {
+    state.balances = balancesMock
+    expect(getters.getBalanceBySymbol(state)('BTC')).toMatchObject(balancesMock['BTC'])
+  })
+
 })
