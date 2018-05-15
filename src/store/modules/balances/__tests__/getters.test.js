@@ -28,8 +28,7 @@ describe('modules/balances/getters.js', () => {
 
   it('getter allFilledBalances should return currencies that are not empty', () => {
     state.balances = balancesMock
-    state.balances['BTC'].total = 10
-    const expected = {"BTC": {"free": 0, "total": 10, "used": 0}}
+    const expected = {'BTC': {'free': 2, 'total': 2, 'used': 0}}
     expect(getters.allFilledBalances(state)).toMatchObject(expected)
   })
 

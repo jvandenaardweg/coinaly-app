@@ -1,8 +1,8 @@
 import pickBy from 'lodash/pickBy'
 
-function filterFilledCurrencies (currencies) {
-  return pickBy(currencies, (currency, currencyName) => {
-    return currency.total > 0
+function filterFilledBalances (balances) {
+  return pickBy(balances, (balance, symbol) => {
+    return balance.total > 0
   })
 }
 
@@ -17,10 +17,10 @@ export default {
     return Object.keys(state.balances).length
   },
   allFilledBalances: state => {
-    return filterFilledCurrencies(state.balances)
+    return filterFilledBalances(state.balances)
   },
   allFilledBalancesTotal: state => {
-    return Object.keys(filterFilledCurrencies(state.balances)).length
+    return Object.keys(filterFilledBalances(state.balances)).length
   },
   isLoading: state => {
     return state.isLoading

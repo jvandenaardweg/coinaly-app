@@ -1,7 +1,11 @@
 import getters from '@/store/modules/markets/getters'
 import state from '@/store/modules/markets/state'
 
+import stateBalances from '@/store/modules/balances/state'
+import gettersBalances from '@/store/modules/balances/getters'
+
 import marketsMock from '@/mocks/markets.json'
+import balancesMock from '@/mocks/balances.json'
 
 describe('modules/markets/getters.js', () => {
 
@@ -81,6 +85,38 @@ describe('modules/markets/getters.js', () => {
   it('getter totalMarkets should return the total number of markets if state.markets is set', () => {
     state.markets = marketsMock
     expect(getters.totalMarkets(state)).toBe(2)
+  })
+
+  it('getter unavailableBaseMarkets should return the base market symbols which the user cannot buy', () => {
+    const rootStateMock = {}
+
+    state.markets = marketsMock
+    stateBalances.balances = balancesMock
+
+    const rootGettersMock = {'balances/allFilledBalances': gettersBalances.allFilledBalances(stateBalances)}
+    const gettersMock = {'allBaseMarkets': getters.allBaseMarkets(state)}
+
+    const expectedBalance = {'BTC': {'free': 2, 'total': 2, 'used': 0}}
+    const expectedUnavailableBaseMarkets = {'BTC': ['USDT']}
+
+    expect(gettersBalances.allFilledBalances(stateBalances)).toMatchObject(expectedBalance)
+    expect(getters.unavailableBaseMarkets(state, gettersMock, rootStateMock, rootGettersMock)).toMatchObject(expectedUnavailableBaseMarkets)
+  })
+
+  it('getter availableBasemarkets should return the base market symbols which the user can buy', () => {
+    const rootStateMock = {}
+
+    state.markets = marketsMock
+    stateBalances.balances = balancesMock
+
+    const rootGettersMock = {'balances/allFilledBalances': gettersBalances.allFilledBalances(stateBalances)}
+    const gettersMock = {'allBaseMarkets': getters.allBaseMarkets(state)}
+
+    const expectedBalance = {'BTC': {'free': 2, 'total': 2, 'used': 0}}
+    const expectedAvailableBaseMarkets = {'ADA': ['BTC']}
+
+    expect(gettersBalances.allFilledBalances(stateBalances)).toMatchObject(expectedBalance)
+    expect(getters.availableBaseMarkets(state, gettersMock, rootStateMock, rootGettersMock)).toMatchObject(expectedAvailableBaseMarkets)
   })
 
 })

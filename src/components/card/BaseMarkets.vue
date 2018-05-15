@@ -13,7 +13,7 @@
 
     <list-group-base-markets
       v-if="!isLoading"
-      :markets="allBaseMarkets"
+      :markets="markets"
       :currencies="currencies"
       :prices="prices"
       :tickers="allTickers"
@@ -31,7 +31,6 @@ import CardEmpty from '@/components/card/CardPartialEmpty'
 import ListGroupBaseMarkets from '@/components/list-group/BaseMarkets'
 import Search from '@/components/Search'
 import SubNav from '@/components/SubNav'
-import pickBy from 'lodash/pickBy'
 
 export default {
   name: 'CardBaseMarkets',
@@ -53,6 +52,8 @@ export default {
   computed: {
     ...mapGetters({
       allBaseMarkets: 'markets/allBaseMarkets',
+      availableBaseMarkets: 'markets/availableBaseMarkets',
+      unavailableBaseMarkets: 'markets/unavailableBaseMarkets',
       allFilledBalances: 'balances/allFilledBalances',
       allTickers: 'tickers/allTickers',
       prices: 'prices/prices',
@@ -66,24 +67,13 @@ export default {
     isLoading () {
       return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers
     },
-    availableBaseMarkets () {
-      if (this.allBaseMarkets && this.allFilledBalances) {
-        return pickBy(this.allBaseMarkets, (baseMarket, baseMarketSymbol) => {
-          // A market is available when atleast one or more balance symbols is present in the base markets object
-          return Object.keys(this.allFilledBalances).some(balanceSymbol => {
-            return baseMarket.includes(balanceSymbol)
-          })
-        })
-      }
-    },
-    unavailableBaseMarkets () {
-      if (this.allBaseMarkets && this.allFilledBalances) {
-        return pickBy(this.allBaseMarkets, (baseMarket, baseMarketSymbol) => {
-          // A market is unavailable when EVERY balance symbol is not present in the base markets object
-          return Object.keys(this.allFilledBalances).every(balanceSymbol => {
-            return !baseMarket.includes(balanceSymbol)
-          })
-        })
+    markets () {
+      if (this.$route.params.type === 'available') {
+        return this.availableBaseMarkets
+      } else if (this.$route.params.type === 'unavailable') {
+        return this.unavailableBaseMarkets
+      } else {
+        return this.allBaseMarkets
       }
     }
   }

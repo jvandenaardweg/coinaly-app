@@ -1,3 +1,5 @@
+import pickBy from 'lodash/pickBy'
+
 export default {
   allMarkets: state => {
     return state.markets
@@ -39,6 +41,34 @@ export default {
       // Returning something like: {"ADA": ["BTC", "USDT"] } // Where BTC is the symbol we can use to calculate the worth of one ADA
       return obj
     }, {})
+  },
+  unavailableBaseMarkets: (state, getters, rootState, rootGetters) => {
+    // Getter dependency: balances
+    const allFilledBalances = rootGetters['balances/allFilledBalances']
+    const allBaseMarkets = getters.allBaseMarkets
+
+    if (allBaseMarkets && allFilledBalances) {
+      return pickBy(allBaseMarkets, (baseMarket, baseMarketSymbol) => {
+        // A market is unavailable when EVERY balance symbol is not present in the base markets object
+        return Object.keys(allFilledBalances).every(balanceSymbol => {
+          return !baseMarket.includes(balanceSymbol)
+        })
+      })
+    }
+  },
+  availableBaseMarkets: (state, getters, rootState, rootGetters) => {
+    // Getter dependency: balances
+    const allFilledBalances = rootGetters['balances/allFilledBalances']
+    const allBaseMarkets = getters.allBaseMarkets
+
+    if (allBaseMarkets && allFilledBalances) {
+      return pickBy(allBaseMarkets, (baseMarket, baseMarketSymbol) => {
+        // A market is available when atleast one or more balance symbols is present in the base markets object
+        return Object.keys(allFilledBalances).some(balanceSymbol => {
+          return baseMarket.includes(balanceSymbol)
+        })
+      })
+    }
   },
   hasMarkets: state => {
     return (state.markets) ? Object.keys(state.markets).length > 0 : false
