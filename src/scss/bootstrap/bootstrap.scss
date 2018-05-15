@@ -42,7 +42,6 @@
 // Overwrites
 @import "./components/dropdown";
 @import "./components/card";
-@import "./components/select-group";
 @import "./components/list-group";
 @import "./components/form-control";
 @import "./components/label";
@@ -91,7 +90,7 @@ label {
 }
 
 .view {
-  padding-top: 3.780rem;
+  padding-top: 60px; // navbar height
   position: relative;
   height: 100%;
   @include media-breakpoint-up(sm) {

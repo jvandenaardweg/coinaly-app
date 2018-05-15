@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
 import TradingViewChart from '@/components/TradingViewChart.vue'
 
-const exampleQuoteCurrency = 'XVG'
-const exampleBaseCurrency = 'BTC'
+const exampleQuoteId = 'XVG'
+const exampleBaseId = 'BTC'
 const exampleExchangeName = 'BITTREX'
 
 describe('components/TradingViewChart.vue', () => {
@@ -10,7 +10,12 @@ describe('components/TradingViewChart.vue', () => {
 
   beforeEach(() => {
     component = shallowMount(TradingViewChart, {
-      stubs: ['router-link', 'router-view']
+      stubs: ['router-link', 'router-view'],
+      propsData: {
+        exchange: exampleExchangeName,
+        baseId: exampleBaseId,
+        quoteId: exampleQuoteId
+      }
     })
   })
 
@@ -18,36 +23,21 @@ describe('components/TradingViewChart.vue', () => {
     expect(component.isVueInstance()).toBe(true)
   })
 
-  it('should set the correct baseCurrency', () => {
-    component.setProps({
-      baseCurrency: exampleBaseCurrency
-    })
-    expect(component.props().baseCurrency).toBe(exampleBaseCurrency)
+  it('should set the correct baseId', () => {
+    expect(component.props().baseId).toBe(exampleBaseId)
   })
 
 
-  it('should set the correct quoteCurrency', () => {
-    component.setProps({
-      quoteCurrency: exampleQuoteCurrency
-    })
-    expect(component.props().quoteCurrency).toBe(exampleQuoteCurrency)
+  it('should set the correct quoteId', () => {
+    expect(component.props().quoteId).toBe(exampleQuoteId)
   })
 
   it('should set the correct exchange', () => {
-
-    component.setProps({
-      exchange: exampleExchangeName
-    })
     expect(component.props().exchange).toBe(exampleExchangeName)
   })
 
   it('should use the correct TradingView symbol naming', () => {
-    component.setProps({
-      exchange: exampleExchangeName,
-      quoteCurrency: exampleQuoteCurrency,
-      baseCurrency: exampleBaseCurrency
-    })
-    expect(component.vm.tradingViewSymbol).toBe(`${exampleExchangeName}:${exampleQuoteCurrency}${exampleBaseCurrency}`)
+    expect(component.vm.tradingViewSymbol).toBe(`${exampleExchangeName}:${exampleBaseId}${exampleQuoteId}`)
   })
 
   it('should generate a timezone name', () => {

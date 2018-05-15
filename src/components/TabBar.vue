@@ -16,6 +16,10 @@
       <Icon name="shopping-cart"></Icon>
       <span>Markets</span>
     </router-link>
+    <router-link class="nav-link" to="/wallets">
+      <Icon name="archive"></Icon>
+      <span>Wallets</span>
+    </router-link>
     <router-link class="nav-link" to="/settings">
       <Icon name="settings"></Icon>
       <span>Settings</span>
@@ -47,6 +51,7 @@ export default {
     height: 3.5rem;
     bottom: 0;
     justify-content: space-around;
+    border-bottom: 0;
 
     @include media-breakpoint-up(md) {
       top: 3.75rem;

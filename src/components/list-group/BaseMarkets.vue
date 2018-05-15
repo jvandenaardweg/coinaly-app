@@ -6,7 +6,6 @@
       :symbol="baseSymbol"
       :meta="meta(baseSymbol, quoteSymbols)"
       :currency="currency(baseSymbol)"
-      :isBuyable="isBuyable(quoteSymbols)"
       >
     </list-group-item-symbol-select>
   </div>
@@ -64,20 +63,12 @@ export default {
       return 0
     },
     meta (baseSymbol, quoteSymbols) {
+      let price = 0
       const firstQuoteSymbol = quoteSymbols[0] // We select the first. quoteSymbols is an array with market quote symbols, like: ['BTC', 'ETH', 'USDT']
-      const price = (this.tickerLast(baseSymbol, firstQuoteSymbol) * this.prices[firstQuoteSymbol].USD)
-
-      return this.$options.filters.currency(price)
-    },
-    isBuyable (quoteSymbols) {
-      // TODO: Also check if balances.free meets the treshhold of a minimum order
-      if (quoteSymbols) {
-        return quoteSymbols.filter(symbol => {
-          return Object.keys(this.balances).includes(symbol)
-        }).length > 0
-      } else {
-        return false
+      if (firstQuoteSymbol) {
+        price = (this.tickerLast(baseSymbol, firstQuoteSymbol) * this.prices[firstQuoteSymbol].USD)
       }
+      return this.$options.filters.currency(price)
     }
   }
 }

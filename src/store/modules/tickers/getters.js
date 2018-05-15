@@ -4,5 +4,12 @@ export default {
   },
   isLoading (state) {
     return state.isLoading
+  },
+  getTickerBySymbol: (state) => (symbol) => {
+    if (state.tickers && state.tickers[symbol]) {
+      return state.tickers[symbol]
+    } else {
+      return null
+    }
   }
 }

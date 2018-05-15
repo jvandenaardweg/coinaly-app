@@ -22,6 +22,10 @@ export default {
   allFilledBalancesTotal: state => {
     return Object.keys(filterFilledBalances(state.balances)).length
   },
+  getBalanceBySymbol: state => (symbol) => {
+    if (state.balances) return state.balances[symbol]
+    return null
+  },
   isLoading: state => {
     return state.isLoading
   },

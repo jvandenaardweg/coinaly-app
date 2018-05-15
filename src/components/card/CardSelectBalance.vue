@@ -9,7 +9,7 @@
       <list-group-item-symbol-select
         v-for="(meta, symbol, index) in allFilledBalances" :key="symbol"
         :symbol="symbol"
-        :meta="meta.free"
+        :meta="meta.free.toString()"
         :currency="currencies[symbol]">
       </list-group-item-symbol-select>
     </div>

@@ -70,6 +70,44 @@ export default {
       })
     }
   },
+  totalAvailableBaseMarkets: (state, getters) => {
+    // TODO: write test
+    if (getters.availableBaseMarkets) return Object.keys(getters.availableBaseMarkets).length
+    return 0
+  },
+  totalUnavailableBaseMarkets: (state, getters) => {
+    // TODO: write test
+    if (getters.unavailableBaseMarkets) return Object.keys(getters.unavailableBaseMarkets).length
+    return 0
+  },
+  getQuoteMarketsBySymbolId: (state) => (symbolId) => {
+    // TODO: write test
+    if (state.markets) {
+      return pickBy(state.markets, (market, marketSymbolId) => {
+        return market.baseId === symbolId
+      })
+    } else {
+      return null
+    }
+  },
+  getBaseMarketsBySymbolId: (state) => (symbolId) => {
+    // TODO: write test
+    if (state.markets) {
+      return pickBy(state.markets, (market, marketSymbolId) => {
+        return market.quoteId === symbolId
+      })
+    } else {
+      return null
+    }
+  },
+  getMarketBySymbol: (state) => (symbol) => {
+    // TODO: write test
+    if (state.markets) {
+      return state.markets[symbol]
+    } else {
+      return null
+    }
+  },
   hasMarkets: state => {
     return (state.markets) ? Object.keys(state.markets).length > 0 : false
   },

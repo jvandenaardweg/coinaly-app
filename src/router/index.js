@@ -29,8 +29,8 @@ import PageSettingsExchangesEdit from '@/pages/settings/exchanges/Edit'
 import PageSettingsExchangesAdd from '@/pages/settings/exchanges/Add'
 
 import PageBuyIndex from '@/pages/buy/Index.vue'
-import PageBuySelectQuoteCurrency from '@/pages/buy/SelectQuoteCurrency.vue'
-import PageBuySelectBaseCurrency from '@/pages/buy/SelectBaseCurrency.vue'
+import PageBuySelectQuote from '@/pages/buy/SelectQuote.vue'
+import PageBuySelectBase from '@/pages/buy/SelectBase.vue'
 import PageBuySelectPricing from '@/pages/buy/SelectPricing.vue'
 
 import PageSellIndex from '@/pages/sell/Index.vue'
@@ -98,21 +98,17 @@ export default new Router({
           children: [
             {
               path: '',
-              component: PageBuySelectQuoteCurrency,
+              component: PageBuySelectBase,
               name: 'Select base'
             },
             {
-              path: ':baseSymbol',
-              component: PageBuySelectBaseCurrency,
+              path: ':baseId',
+              component: PageBuySelectQuote,
               name: 'Select quote'
             },
             {
-              path: ':baseSymbol/:quoteSymbol',
-              component: PageBuySelectPricing,
-              beforeEnter: (to, from, next) => {
-                console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
-                next()
-              }
+              path: ':baseId/:quoteId',
+              component: PageBuySelectPricing
             }
           ]
         },

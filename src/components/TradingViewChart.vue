@@ -7,14 +7,27 @@
 <script>
 export default {
   name: 'TradingViewChart',
-  props: ['exchange', 'baseCurrency', 'quoteCurrency'],
+  props: {
+    exchange: {
+      type: String,
+      required: true
+    },
+    quoteId: {
+      type: String,
+      required: true
+    },
+    baseId: {
+      type: String,
+      required: true
+    }
+  },
   // Using empty data fixes some weird Jest coverage issues
   data () {
     return {}
   },
   computed: {
     tradingViewSymbol () {
-      return `${this.exchange}:${this.quoteCurrency}${this.baseCurrency}`
+      return `${this.exchange}:${this.baseId}${this.quoteId}`
     },
     userTimezone () {
       // Intl.DateTimeFormat might not be supported in all browsers

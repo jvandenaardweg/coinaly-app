@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`buy/${symbol}`"
+  <router-link :to="toPath"
     class="list-group-item list-group-item-action list-group-item-symbol-select">
 
     <div>
@@ -18,7 +18,7 @@
 
     <span class="ml-auto text-muted">
       <span>
-        {{ meta }} {{ isBuyable }}
+        {{ meta }}
       </span>
     </span>
 
@@ -49,10 +49,12 @@ export default {
     meta: {
       type: String,
       required: false
-    },
-    isBuyable: {
-      type: Boolean,
-      required: false
+    }
+  },
+  computed: {
+    toPath () {
+      if (this.$route.path) return this.$route.path + '/' + this.symbol
+      return null
     }
   },
   watch: {

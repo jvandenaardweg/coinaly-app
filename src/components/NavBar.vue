@@ -69,7 +69,7 @@ export default {
 .navbar {
   background-color: $blue;
   height: 3.75rem;
-  border: 0 !important;
+  border-bottom: 0 !important;
 }
 
 .navbar-nav {
