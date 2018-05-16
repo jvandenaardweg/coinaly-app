@@ -25,7 +25,7 @@ export default {
   },
   data () {
     return {
-      previousQuoteCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null,
+      previousQuoteId: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteId : null,
       subNavItems: [
         { label: 'All', uri: '', slug: 'all' },
         { label: 'Available', uri: 'available', slug: 'available' },

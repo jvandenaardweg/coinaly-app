@@ -14,6 +14,8 @@ import PageBalancesIndex from '@/pages/balances/Index'
 import PageBalancesHome from '@/pages/balances/Home'
 import PageBalancesSymbol from '@/pages/balances/Symbol'
 
+import PageWalletsIndex from '@/pages/wallets/Index'
+
 import PageLoginIndex from '@/pages/login/Index'
 import PageLoginForgot from '@/pages/login/forgot/Index'
 import PageLoginForgotReset from '@/pages/login/forgot/Reset'
@@ -123,18 +125,14 @@ export default new Router({
               name: 'Select balance'
             },
             {
-              path: ':quoteCurrency',
+              path: ':quoteId',
               component: PageSellSelectBaseCurrency,
               name: 'Select market'
             },
             {
-              path: ':quoteCurrency/:baseCurrency',
+              path: ':quoteId/:baseId',
               component: PageSellSelectPricing,
-              name: 'Create order',
-              beforeEnter: (to, from, next) => {
-                console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
-                next()
-              }
+              name: 'Create order'
             }
           ]
         },
@@ -196,6 +194,11 @@ export default new Router({
               }
             }
           ]
+        },
+        {
+          path: '/wallets',
+          name: 'Wallets',
+          component: PageWalletsIndex
         }
       ]
     },

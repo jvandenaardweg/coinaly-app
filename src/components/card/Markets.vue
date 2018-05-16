@@ -4,7 +4,7 @@
     <div class="card-header">
       <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
       <sub-nav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="selected"></sub-nav>
-      <search v-if="hasMarkets" @search="handleSearch"></search>
+      <search class="mt-3" v-if="hasMarkets" @search="handleSearch"></search>
     </div>
 
     <loader v-if="isLoading"></loader>

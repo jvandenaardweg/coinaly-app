@@ -1,5 +1,5 @@
 <template>
-  <div class="input-icon mt-3">
+  <div class="input-icon">
     <span class="input-icon-addon">
       <i class="fe fe-user"></i>
     </span>

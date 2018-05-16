@@ -3,19 +3,19 @@
     <div class="row justify-content-center">
       <div class="col-md-5">
         <div class="text-left">
-          <h1 class="h2 mb-6">Sell {{ quoteCurrency }} for {{ baseCurrency }}</h1>
+          <h1 class="h2 mb-6">Sell {{ quoteId }} for {{ baseId }}</h1>
         </div>
-        <SelectPricing
+        <select-pricing
           :activeMarket="activeMarket"
           :activeBalance="activeBalance"
-          :quoteCurrency="quoteCurrency"
-          :baseCurrency="baseCurrency"
+          :quoteId="quoteId"
+          :baseId="baseId"
           :marketSymbol="marketSymbol"
           :routeBase="'sell'">
-        </SelectPricing>
+        </select-pricing>
       </div>
       <div class="col-md-7">
-        <TradingViewChart :exchange="`BITTREX`" :baseCurrency="baseCurrency" :quoteCurrency="quoteCurrency"></TradingViewChart>
+        <TradingViewChart :exchange="`BITTREX`" :baseId="baseId" :quoteId="quoteId"></TradingViewChart>
       </div>
     </div>
   </div>
@@ -37,8 +37,8 @@ export default {
   data () {
     return {
       showSmartTradeInfo: false,
-      quoteCurrency: this.$route.params.quoteCurrency,
-      baseCurrency: this.$route.params.baseCurrency
+      quoteId: this.$route.params.quoteId,
+      baseId: this.$route.params.baseId
     }
   },
   computed: {
@@ -56,23 +56,23 @@ export default {
     },
     activeBalance () {
       return pickBy(this.allFilledBalances, (values, balanceSymbol) => {
-        return balanceSymbol === this.quoteCurrency
+        return balanceSymbol === this.quoteId
       })
     },
     marketSymbol () {
-      return `${this.quoteCurrency}/${this.baseCurrency}`
+      return `${this.quoteId}/${this.baseId}`
     },
-    baseCurrencyUppercased () {
-      return (this.baseCurrency) ? this.baseCurrency.toUpperCase() : null
+    baseIdUppercased () {
+      return (this.baseId) ? this.baseId.toUpperCase() : null
     },
-    baseCurrencyTitle () {
-      return (this.baseCurrency) ? this.baseCurrencyUppercased : '...?'
+    baseIdTitle () {
+      return (this.baseId) ? this.baseIdUppercased : '...?'
     }
   }
   // beforeRouteEnter (to, from, next) {
   //   // Check to see if market exists
   //   const markets = store.state.markets.markets
-  //   const marketSymbol = `${to.params.quoteCurrency}/${to.params.baseCurrency}`
+  //   const marketSymbol = `${to.params.quoteId}/${to.params.baseId}`
   //   const hasMarket = markets[marketSymbol]
   //   if (hasMarket) {
   //     next()

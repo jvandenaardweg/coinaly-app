@@ -3,7 +3,7 @@
 
     <div class="card-header">
       <sub-nav :items="subNavItems"></sub-nav>
-      <search placeholder="Search for a currency..." @search="handleSearch"></search>
+      <search class="mt-3" placeholder="Search for a currency..." @search="handleSearch"></search>
     </div>
 
     <loader v-if="isLoading"></loader>

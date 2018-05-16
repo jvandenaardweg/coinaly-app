@@ -42,6 +42,21 @@ export default {
       return obj
     }, {})
   },
+  allMarketSymbols: (state, getters) => {
+    // TODO: Write test
+    if (!state.markets || !Object.keys(state.markets).length) return null
+
+    const allBaseMarkets = Object.assign({}, getters.allBaseMarkets)
+    const allQuoteMarkets = Object.assign({}, getters.allQuoteMarkets)
+
+    // Returning an array with symbol id's, like: ["ADA", "BTC", "USDT"] etc...
+    return Object.keys(Object.assign(allQuoteMarkets, allBaseMarkets)).sort()
+  },
+  totalMarketSymbols: (state, getters) => {
+    // TODO: Write test
+    if (!getters.allMarketSymbols) return null
+    return getters.allMarketSymbols.length
+  },
   unavailableBaseMarkets: (state, getters, rootState, rootGetters) => {
     // Getter dependency: balances
     const allFilledBalances = rootGetters['balances/allFilledBalances']
