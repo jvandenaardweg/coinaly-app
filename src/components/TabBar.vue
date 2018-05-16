@@ -20,10 +20,6 @@
       <Icon name="archive"></Icon>
       <span>Wallets</span>
     </router-link>
-    <router-link class="nav-link" to="/settings">
-      <Icon name="settings"></Icon>
-      <span>Settings</span>
-    </router-link>
   </nav>
 </template>
 

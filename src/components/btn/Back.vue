@@ -1,5 +1,5 @@
 <template>
-  <button type="button" @click.prevent="handleClick" class="btn btn-dark-blue btn-back">
+  <button type="button" @click.prevent="handleClick" class="btn btn-dark-blue btn-back btn-square-sm">
     <svg class="feather feather-chevron-left" width="25" height="25" fill="transparent" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <use xlink:href="/static/icons/feather-icons/feather-sprite.svg#chevron-left"/>
     </svg>
@@ -21,8 +21,8 @@ export default {
 .btn {
   &.btn-back {
     padding:0;
-    width:40px;
-    height:40px;
+    // width:40px;
+    // height:40px;
     position: relative;
 
     &:hover {

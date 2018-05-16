@@ -19,6 +19,12 @@
       width: 1em;
     }
   }
+
+  &.btn-square-sm {
+    width: 36px;
+    height: 34px;
+    line-height: 32px;
+  }
 }
 
 @-webkit-keyframes spinAround {

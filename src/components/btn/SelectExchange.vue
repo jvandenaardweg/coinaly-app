@@ -88,6 +88,7 @@ export default {
   // background: #22467B;
   // border-color: #22467B;
   outline: none;
+  height: 34px;
 }
 
 .dropdown-item {

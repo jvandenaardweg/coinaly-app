@@ -15,6 +15,7 @@
       <div v-if="isAuthenticated" class="d-flex ml-auto">
         <btn-refresh class="d-none d-sm-block"></btn-refresh>
         <btn-select-exchange></btn-select-exchange>
+        <btn-settings class="ml-1"></btn-settings>
       </div>
 
     </div>
@@ -24,6 +25,7 @@
 <script>
 import BtnBack from '@/components/btn/Back'
 import BtnRefresh from '@/components/btn/Refresh'
+import BtnSettings from '@/components/btn/Settings'
 import BtnSelectExchange from '@/components/btn/SelectExchange'
 import Logo from '@/components/Logo'
 import { mapGetters } from 'vuex'
@@ -33,6 +35,7 @@ export default {
   components: {
     BtnRefresh,
     BtnSelectExchange,
+    BtnSettings,
     BtnBack,
     Logo
   },
