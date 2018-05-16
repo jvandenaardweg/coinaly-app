@@ -13,8 +13,7 @@
         :symbol="symbol"
         :price="prices[tickerQuote(symbol)]"
         :percentage="percentage(symbol)"
-        :tickerLast="tickerLast(symbol)"
-        :tickerQuote="tickerQuote(symbol)">
+        :tickerLast="tickerLast(symbol)">
       </list-group-item-balance>
 
     </router-link>
@@ -50,8 +49,10 @@ export default {
   },
   methods: {
     tickerQuote (symbol) {
-      const allBaseMarkets = this.$store.getters['markets/allBaseMarkets']
-      return allBaseMarkets[symbol]
+      // TODO: USDT will not return a base market, needs to be fixed
+      const baseMarket = this.$store.getters['markets/availableBaseMarkets'][symbol]
+      if (baseMarket) return baseMarket[0]
+      return null
     },
     balanceTicker (symbol) {
       return this.tickers[`${symbol}/${this.tickerQuote(symbol)}`]

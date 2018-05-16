@@ -40,10 +40,11 @@ export default {
       hasCurrencies: 'balances/hasCurrencies',
       isLoadingCurrencies: 'symbols/isLoading',
       prices: 'prices/prices',
-      isLoadingPrices: 'prices/isLoading'
+      isLoadingPrices: 'prices/isLoading',
+      isLoadingMarkets: 'markets/isLoading'
     }),
     isLoading () {
-      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices
+      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets
     },
     emptyText () {
       if (!this.isLoadingBalances && !this.hasCurrencies) return 'You have nothing in your balance, yet.'

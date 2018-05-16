@@ -47,10 +47,6 @@ export default {
       type: Number,
       required: false
     },
-    tickerQuote: {
-      type: String,
-      required: false
-    },
     percentage: {
       type: Number,
       required: false
