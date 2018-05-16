@@ -1,9 +1,9 @@
 <template>
   <div class="card">
 
-    <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
+    <Loader v-if="isLoadingMarkets"></Loader>
 
-    <CardEmpty :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardEmpty>
+    // <CardPartialEmpty :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardPartialEmpty>
 
     <ul v-if="hasMarkets" class="list-group list-group-flush">
       <li v-for="(meta, symbol, index) in quoteCurrencyMarkets" :key="symbol" :index="index" class="list-group-item d-flex justify-content-between align-items-center" :class="{'active': baseCurrency === marketNameToSymbol(symbol) }" @click="setSelected(symbol)">
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
+import Loader from '@/components/Loader'
+import CardPartialEmpty from '@/components/card/PartialEmpty'
 
 export default {
   name: 'SelectCurrency',
@@ -37,8 +37,8 @@ export default {
     'routeBase'
   ],
   components: {
-    CardLoading,
-    CardEmpty
+    Loader,
+    CardPartialEmpty
   },
   data () {
     return {

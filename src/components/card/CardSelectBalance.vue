@@ -1,9 +1,9 @@
 <template>
   <div class="card">
 
-    <card-loading :isLoading="!hasCurrencies && isLoading" :text="'Loading Balances...'"></card-loading>
+    <loader v-if="!hasCurrencies && isLoading"></loader>
 
-    <card-empty :text="emptyText"></card-empty>
+    <card-partial-empty :text="emptyText"></card-partial-empty>
 
     <div v-if="hasCurrencies" class="list-group list-group-flush">
       <list-group-item-symbol-select
@@ -24,15 +24,15 @@
 <script>
 import ListGroupItemSymbolSelect from '@/components/list-group-item/SymbolSelect'
 import { mapGetters } from 'vuex'
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
+import Loader from '@/components/Loader'
+import CardPartialEmpty from '@/components/card/PartialEmpty'
 
 export default {
   name: 'CardSelectBalance',
   props: ['preselectedCurrency', 'nextStepAction', 'routeBase'],
   components: {
-    CardLoading,
-    CardEmpty,
+    Loader,
+    CardPartialEmpty,
     ListGroupItemSymbolSelect
   },
   data () {

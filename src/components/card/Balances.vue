@@ -3,7 +3,7 @@
 
     <loader v-if="isLoading"></loader>
 
-    <card-empty :text="emptyText"></card-empty>
+    <card-partial-empty :text="emptyText"></card-partial-empty>
 
     <list-group-balances
       v-if="!isLoading"
@@ -19,15 +19,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import Loader from '@/components/Loader'
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
+import CardPartialEmpty from '@/components/card/PartialEmpty'
 import ListGroupBalances from '@/components/list-group/Balances'
 
 export default {
   name: 'CardBalances',
   components: {
-    CardLoading,
-    CardEmpty,
+    CardPartialEmpty,
     ListGroupBalances,
     Loader
   },

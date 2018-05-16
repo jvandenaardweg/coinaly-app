@@ -1,14 +1,14 @@
 <template>
   <div class="card">
 
-    <CardLoading :is-loading="isLoadingMarkets" :text="'Loading Markets...'"></CardLoading>
+    <loader v-if="isLoadingMarkets"></loader>
 
-    <CardEmpty
+    <CardPartialEmpty
       :is-empty="!isLoadingMarkets && !hasMarkets"
       :text="`No selling markets available for ${quoteCurrency}.`"
       :actionLink="'/sell'"
       :actionLabel="'Select different currency'">
-    </CardEmpty>
+    </CardPartialEmpty>
 
     [list markets]
 
@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
+import Loader from '@/components/Loader'
+import CardPartialEmpty from '@/components/card/PartialEmpty'
 
 export default {
   name: 'CardSelectMarket',
@@ -37,8 +37,8 @@ export default {
     'routeBase'
   ],
   components: {
-    CardLoading,
-    CardEmpty
+    Loader,
+    CardPartialEmpty
   },
   data () {
     return {

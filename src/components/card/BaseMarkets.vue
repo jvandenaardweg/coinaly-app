@@ -8,29 +8,26 @@
 
     <loader v-if="isLoading"></loader>
 
-    <card-empty
-      :is-empty="!isLoadingBalances && !hasSearchedMarkets"
-      :text="emptyText">
-    </card-empty>
+    <card-partial-empty :text="emptyText"></card-partial-empty>
 
-    <list-group-base-markets
-      v-if="!isLoading"
-      :markets="searchedMarkets"
-      :currencies="currencies"
-      :prices="prices"
-      :tickers="allTickers"
-      :balances="allFilledBalances">
-    </list-group-base-markets>
-
+    <div v-if="!isLoading" class="list-group list-group-flush">
+      <list-group-item-symbol-select
+        v-for="(quoteSymbols, baseSymbol, index) in searchedMarkets"
+        :key="baseSymbol"
+        :symbol="baseSymbol"
+        :meta="meta(baseSymbol, quoteSymbols)"
+        :currency="currency(baseSymbol)"
+        >
+      </list-group-item-symbol-select>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import Loader from '@/components/Loader'
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
-import ListGroupBaseMarkets from '@/components/list-group/BaseMarkets'
+import CardPartialEmpty from '@/components/card/PartialEmpty'
+import ListGroupItemSymbolSelect from '@/components/list-group-item/SymbolSelect'
 import Search from '@/components/Search'
 import SubNav from '@/components/SubNav'
 import pickBy from 'lodash/pickBy'
@@ -38,9 +35,8 @@ import pickBy from 'lodash/pickBy'
 export default {
   name: 'CardBaseMarkets',
   components: {
-    CardLoading,
-    CardEmpty,
-    ListGroupBaseMarkets,
+    CardPartialEmpty,
+    ListGroupItemSymbolSelect,
     Search,
     SubNav,
     Loader
@@ -51,14 +47,14 @@ export default {
   computed: {
     ...mapGetters({
       allBaseMarkets: 'markets/allBaseMarkets',
-      availableBaseMarkets: 'markets/availableBaseMarkets',
-      unavailableBaseMarkets: 'markets/unavailableBaseMarkets',
-      totalUnavailableBaseMarkets: 'markets/totalUnavailableBaseMarkets',
-      totalAvailableBaseMarkets: 'markets/totalAvailableBaseMarkets',
       allFilledBalances: 'balances/allFilledBalances',
       allTickers: 'tickers/allTickers',
       prices: 'prices/prices',
       currencies: 'symbols/symbols',
+      availableBaseMarkets: 'markets/availableBaseMarkets',
+      unavailableBaseMarkets: 'markets/unavailableBaseMarkets',
+      totalUnavailableBaseMarkets: 'markets/totalUnavailableBaseMarkets',
+      totalAvailableBaseMarkets: 'markets/totalAvailableBaseMarkets',
       hasCurrencies: 'balances/hasCurrencies',
       isLoadingMarkets: 'markets/isLoading',
       isLoadingBalances: 'balances/isLoading',
@@ -73,7 +69,7 @@ export default {
       ]
     },
     isLoading () {
-      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets
+      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets || this.isLoadingPrices
     },
     filtering () {
       return this.$route.query.filter
@@ -106,7 +102,7 @@ export default {
         return `No markets unavailable. You can already buy into ${this.totalAvailableBaseMarkets} available markets 😎`
       } else if (!this.totalAvailableBaseMarkets && this.filtering === 'available') {
         return 'There are no markets available to buy in to. You should transfer some currencies to your exchange\'s wallets.'
-      } else if (this.searchQuery) {
+      } else if (this.searchQuery && !this.hasSearchedMarkets) {
         return `No currencies found for <strong>${this.searchQuery}</strong>`
       } else {
         return null
@@ -116,6 +112,34 @@ export default {
   methods: {
     handleSearch (query) {
       this.searchQuery = query
+    },
+    fallbackSymbol (symbol) {
+      return {
+        'icon_uri': '/static/icons/cryptocurrencies/svg/black/generic.svg',
+        'name': symbol,
+        'id': symbol
+      }
+    },
+    currency (symbol) {
+      return this.currencies[symbol] || this.fallbackSymbol(symbol)
+    },
+    balance (symbol) {
+      return this.allFilledBalances[symbol] || { free: 0 }
+    },
+    ticker (baseSymbol, quoteSymbol) {
+      return this.allTickers[`${baseSymbol}/${quoteSymbol}`]
+    },
+    tickerLast (baseSymbol, quoteSymbol) {
+      if (this.ticker(baseSymbol, quoteSymbol)) return this.ticker(baseSymbol, quoteSymbol).last
+      return 0
+    },
+    meta (baseSymbol, quoteSymbols) {
+      let price = 0
+      const firstQuoteSymbol = quoteSymbols[0] // We select the first. quoteSymbols is an array with market quote symbols, like: ['BTC', 'ETH', 'USDT']
+      if (firstQuoteSymbol) {
+        price = (this.tickerLast(baseSymbol, firstQuoteSymbol) * this.prices[firstQuoteSymbol].USD)
+      }
+      return this.$options.filters.currency(price)
     }
   }
 }

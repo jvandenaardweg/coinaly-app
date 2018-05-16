@@ -8,9 +8,8 @@
     </div>
 
     <loader v-if="isLoading"></loader>
-    <!-- <card-loading :is-loading="isLoading" :text="'Loading Markets...'"></card-loading> -->
 
-    <card-empty :is-empty="!isLoadingMarkets && !hasMarkets" :text="'No markets available.'"></card-empty>
+    <card-partial-empty :text="emptyText"></card-partial-empty>
 
     <keep-alive>
       <router-view></router-view>
@@ -22,8 +21,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import Loader from '@/components/Loader'
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
+import CardPartialEmpty from '@/components/card/PartialEmpty'
 import SubNav from '@/components/SubNav'
 import Search from '@/components/Search'
 
@@ -33,8 +31,7 @@ export default {
     quote: String
   },
   components: {
-    CardLoading,
-    CardEmpty,
+    CardPartialEmpty,
     SubNav,
     Search,
     Loader
@@ -50,6 +47,10 @@ export default {
     }),
     isLoading () {
       return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers
+    },
+    emptyText () {
+      if (!this.isLoadingMarkets && !this.hasMarkets) return 'No markets available.'
+      return null
     },
     subNavItems () {
       let items = [

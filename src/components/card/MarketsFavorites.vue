@@ -4,12 +4,12 @@
     <h2 class="h5 m-0">Favorite markets ({{ totalFavoriteMarkets }})</h2>
   </div>
 
-  <card-loading :is-loading="isLoading" :text="'Loading Markets...'"></card-loading>
+  <loader v-if="isLoading"></loader>
 
-  <card-empty
+  <card-partial-empty
     :is-empty="!isLoadingMarkets && !hasFavoriteMarkets"
     :text="'No favorite markets, yet!'">
-  </card-empty>
+  </card-partial-empty>
 
   <div v-if="hasFavoriteMarkets" class="list-group list-group-flush">
     <router-link :to="marketLink(meta.base, meta.quote)" v-if="!isLoading && isWithinPageLimit(index)" v-for="(meta, symbol, index) in allFavoriteMarkets" :key="symbol" :index="index" class="list-group-item list-group-item-action">
@@ -22,15 +22,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
+import Loader from '@/components/Loader'
+import CardPartialEmpty from '@/components/card/PartialEmpty'
 import ListGroupItemMarket from '@/components/list-group-item/Market'
 
 export default {
   name: 'CardMarketsFavorites',
   components: {
-    CardLoading,
-    CardEmpty,
+    Loader,
+    CardPartialEmpty,
     ListGroupItemMarket
   },
   data () {

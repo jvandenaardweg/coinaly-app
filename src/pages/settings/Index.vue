@@ -20,9 +20,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CardLoading from '@/components/card/CardPartialLoading'
-import CardEmpty from '@/components/card/CardPartialEmpty'
-import Loader from '@/components/Loader'
 import SubNav from '@/components/SubNav'
 import BtnDeleteAccount from '@/components/btn/DeleteAccount'
 
@@ -30,9 +27,6 @@ export default {
   name: 'PageSettings',
   components: {
     SubNav,
-    CardLoading,
-    CardEmpty,
-    Loader,
     BtnDeleteAccount
   },
   data () {

@@ -2,26 +2,7 @@
   <div class="card">
     <form name="order" @submit.prevent="handleSubmit($event)">
       <div class="card-body">
-        <div class="form-row">
-          <div class="form-group col-6">
-            <label for="inputEmail4"><strong>{{ context }}</strong></label>
-            <div class="input-group">
-              <input type="text" class="form-control" :value="baseId" disabled>
-              <div class="input-group-append">
-                <router-link :to="`/${context}`" class="btn btn-light">Change</router-link>
-              </div>
-            </div>
-          </div>
-          <div class="form-group col-6">
-            <label for="inputEmail4"><strong>For</strong></label>
-            <div class="input-group">
-              <input type="text" class="form-control" :value="quoteId" disabled>
-              <div class="input-group-append">
-                <router-link :to="`/${context}/${baseId}`" class="btn btn-light">Change</router-link>
-              </div>
-            </div>
-          </div>
-        </div>
+
 
         <p class="text-success text-center">You have <strong>{{ amountFreeInBalance | number }} {{ baseId }}</strong> available to {{ context }}</p>
 
