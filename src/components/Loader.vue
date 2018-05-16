@@ -12,8 +12,8 @@ export default {
 .loader,
 .loader:after {
   border-radius: 50%;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   overflow: hidden;
 }
 .loader {
@@ -23,10 +23,10 @@ export default {
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
-  border-top: 0.4rem solid rgba($blue, 0.2);
-  border-right: 0.4rem solid rgba($blue, 0.2);
-  border-bottom: 0.4rem solid rgba($blue, 0.2);
-  border-left: 0.4rem solid $blue;
+  border-top: 0.3rem solid rgba($blue, 0.2);
+  border-right: 0.3rem solid rgba($blue, 0.2);
+  border-bottom: 0.3rem solid rgba($blue, 0.2);
+  border-left: 0.3rem solid $blue;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

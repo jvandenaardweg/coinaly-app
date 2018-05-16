@@ -2,9 +2,8 @@
   <div class="card card-100-xs card-flat-top">
 
     <loader v-if="isLoading"></loader>
-    <!-- <card-loading :is-loading="isLoading" :text="'Loading Balances...'"></card-loading> -->
 
-    <card-empty :is-empty="!isLoadingBalances && !hasCurrencies" :text="'You have nothing in your balance, yet.'"></card-empty>
+    <card-empty :text="emptyText"></card-empty>
 
     <list-group-balances
       v-if="!isLoading"
@@ -47,6 +46,10 @@ export default {
     }),
     isLoading () {
       return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices
+    },
+    emptyText () {
+      if (!this.isLoadingBalances && !this.hasCurrencies) return 'You have nothing in your balance, yet.'
+      return null
     }
   }
 }

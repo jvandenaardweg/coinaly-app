@@ -1,9 +1,9 @@
 <template>
   <div class="card">
 
-    <CardLoading :isLoading="!hasCurrencies && isLoading" :text="'Loading Balances...'"></CardLoading>
+    <card-loading :isLoading="!hasCurrencies && isLoading" :text="'Loading Balances...'"></card-loading>
 
-    <CardEmpty :isEmpty="!hasCurrencies" :text="'No currencies available in your balance.'"></CardEmpty>
+    <card-empty :text="emptyText"></card-empty>
 
     <div v-if="hasCurrencies" class="list-group list-group-flush">
       <list-group-item-symbol-select
@@ -49,6 +49,10 @@ export default {
     }),
     routeUrl () {
       return `/${this.routeBase}/${this.currency}`
+    },
+    emptyText () {
+      if (!this.hasCurrencies) return 'No currencies available in your balance.'
+      return null
     }
   },
   methods: {

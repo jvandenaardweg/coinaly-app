@@ -16,12 +16,10 @@
 
           <loader v-if="isLoading"></loader>
 
-          <!-- <card-empty
-            :is-empty="!isLoadingBalances && !hasSearchedMarkets"
-            :text="emptyText"
-            :actionLink="emptyActionLink"
-            :actionLabel="emptyActionLabel">
-          </card-empty> -->
+          <card-empty
+            :is-empty="!isLoading && !availableBalances"
+            :text="emptyText">
+          </card-empty>
 
           <div v-if="!isLoading" class="list-group list-group-flush">
             <list-group-item-symbol-select
@@ -81,19 +79,23 @@ export default {
     availableBalances () {
       // Determine the available balances based on the quote symbol ID's
       const quoteMarkets = this.getQuoteMarketsBySymbolId(this.baseId)
-      if (quoteMarkets) {
+      if (quoteMarkets && Object.keys(quoteMarkets).length) {
         return pickBy(this.allFilledBalances, (balance, symbolId) => {
           return Object.keys(quoteMarkets).some(marketSymbol => {
             return marketSymbol.includes(`/${symbolId}`)
           })
         })
       }
+      return null
     },
     quoteMarkets () {
       const quoteMarkets = this.getQuoteMarketsBySymbolId(this.baseId)
       return pickBy(quoteMarkets, (quoteMarket, quoteMarketSymbol) => {
         return Object.keys(this.allFilledBalances).includes(quoteMarket.quoteId)
       })
+    },
+    emptyText () {
+      return `You have no balance available to buy ${this.baseId} with.`
     }
   }
 }

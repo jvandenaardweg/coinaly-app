@@ -7,21 +7,12 @@
             <sub-nav :items="subNavItems" :selected="selected"></sub-nav>
           </div>
           <div class="card-body">
-            
-            <!-- <loader v-if="isLoading"></loader> -->
-            <!-- <card-loading :is-loading="isLoading" :text="'Loading...'"></card-loading> -->
-
-            <!-- <card-empty :is-empty="!isLoadingBalances && !hasCurrencies" :text="'You have nothing in your balance, yet.'"></card-empty> -->
-
-            <!-- <transition> -->
-              <keep-alive>
-                <router-view></router-view>
-              </keep-alive>
-            <!-- </transition> -->
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
           </div>
         </div>
         <btn-delete-account></btn-delete-account>
-        <!-- <button type="submit" class="btn btn-outline-secondary mt-5">Delete account</button> -->
       </div>
     </div>
   </div>

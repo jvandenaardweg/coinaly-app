@@ -90,6 +90,7 @@ export default {
     }
   },
   getBaseMarketsBySymbolId: (state) => (symbolId) => {
+    // symbolId String "BTC"
     if (state.markets) {
       return pickBy(state.markets, (market, marketSymbolId) => {
         return market.quoteId === symbolId
@@ -98,9 +99,10 @@ export default {
       return null
     }
   },
-  getMarketBySymbol: (state) => (symbol) => {
+  getMarketBySymbol: (state) => (marketSymbol) => {
+    // marketSymbol String "BTC/USDT"
     if (state.markets) {
-      return state.markets[symbol]
+      return state.markets[marketSymbol]
     } else {
       return null
     }

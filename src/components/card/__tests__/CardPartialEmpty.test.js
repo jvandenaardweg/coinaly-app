@@ -11,7 +11,6 @@ describe('components/card/CardPartialEmpty.vue', () => {
     component = shallowMount(CardPartialEmpty, {
       stubs: ['router-link', 'router-view'],
       propsData: {
-        isEmpty: true,
         text: sampleEmptyText
       }
     })
@@ -36,9 +35,9 @@ describe('components/card/CardPartialEmpty.vue', () => {
   //   expect(button.attributes().href).toBe('/sell')
   // })
 
-  it('does not render when not empty', () => {
+  it('does not render when text is not set', () => {
     component.setProps({
-      isEmpty: false
+      text: null
     })
     expect(component.isEmpty()).toBe(true)
   })

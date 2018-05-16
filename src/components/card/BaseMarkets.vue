@@ -10,9 +10,7 @@
 
     <card-empty
       :is-empty="!isLoadingBalances && !hasSearchedMarkets"
-      :text="emptyText"
-      :actionLink="emptyActionLink"
-      :actionLabel="emptyActionLabel">
+      :text="emptyText">
     </card-empty>
 
     <list-group-base-markets
@@ -48,9 +46,6 @@ export default {
     Loader
   },
   data: () => ({
-
-    emptyActionLink: null,
-    emptyActionLabel: null,
     searchQuery: null
   }),
   computed: {
@@ -110,13 +105,11 @@ export default {
       if (this.totalAvailableBaseMarkets && !this.totalUnavailableBaseMarkets && this.filtering === 'unavailable') {
         return `No markets unavailable. You can already buy into ${this.totalAvailableBaseMarkets} available markets 😎`
       } else if (!this.totalAvailableBaseMarkets && this.filtering === 'available') {
-        // this.emptyActionLink = '/wallets'
-        // this.emptyActionLabel = 'View wallets'
         return 'There are no markets available to buy in to. You should transfer some currencies to your exchange\'s wallets.'
       } else if (this.searchQuery) {
         return `No currencies found for <strong>${this.searchQuery}</strong>`
       } else {
-        return 'Nothing...'
+        return null
       }
     }
   },

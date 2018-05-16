@@ -84,7 +84,7 @@ export default {
     // },
 
     watch ({ state, commit, rootGetters, rootState }) {
-      console.log('go watch')
+      // console.log('go watch')
       const selectedExchange = rootGetters['exchanges/selected']
       const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
       commit('watch', channel)
