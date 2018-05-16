@@ -9,20 +9,26 @@
     <card-partial-empty :text="emptyText"></card-partial-empty>
 
     <div class="list-group list-group-flush" v-if="!isLoading">
-      <div class="list-group-item" v-for="symbol in searchedSymbols" :key="symbol">
-        <div class="d-flex">
+      <div class="list-group-item list-group-item-wallet" v-for="symbol in searchedSymbols" :key="symbol">
+        <div class="list-group-item-wallet-header">
           <div>
-            <img :src="currencyIconLocation(symbol)" width="18" />
+            <img class="mr-1" :src="currencyIconLocation(symbol)" width="18" :alt="symbol" />
             <strong>{{ symbol }}</strong>
             <span class="text-muted">{{ symbolName(symbol) }}</span>
           </div>
           <div class="ml-auto">
-            <button type="button" class="btn btn-outline-primary btn-sm ml-auto" @click.prevent="handleClick(symbol)">Deposit address</button>
+            <button type="button"
+              class="btn btn-outline-primary btn-sm ml-auto"
+              style="width: 120px"
+              :class="{'active': showAddress(symbol), 'active is-loading': IsLoadingSymbol(symbol) }"
+              @click.prevent="handleGetDepositAddress(symbol)">
+            Deposit address</button>
           </div>
         </div>
-        <div class="address" v-if="showAddress(symbol)">
-          <div class="form-group">
-            <input type="text" name="address" value="address" class="form-control" @click.prevent="handleInputClick">
+        <div class="list-group-item-wallet-footer" v-if="getAddressBySymbol(symbol)">
+          <div class="form-group m-0">
+            <input type="text" name="address" :value="getAddressBySymbol(symbol)" class="form-control" @click.prevent="handleInputClick">
+            <p class="text-success">Deposit address is copied to your clipboard!</p>
           </div>
         </div>
       </div>
@@ -45,7 +51,8 @@ export default {
   },
   data: () => ({
     searchQuery: null,
-    showSymbol: null
+    showSymbol: null,
+    loadingSymbol: null
   }),
   computed: {
     ...mapGetters({
@@ -54,7 +61,9 @@ export default {
       totalMarketSymbols: 'markets/totalMarketSymbols',
       currencies: 'symbols/symbols',
       isLoadingSymbols: 'symbols/isLoading',
-      getNameBySymbol: 'symbols/getNameBySymbol'
+      getNameBySymbol: 'symbols/getNameBySymbol',
+      getAddressBySymbol: 'deposits/getAddressBySymbol',
+      isLoadingDeposits: 'deposits/isLoading'
     }),
     isLoading () {
       return this.isLoadingSymbols || this.isLoadingMarkets
@@ -73,6 +82,9 @@ export default {
     }
   },
   methods: {
+    IsLoadingSymbol (symbol) {
+      return this.loadingSymbol === symbol
+    },
     currencyIconLocation (symbol) {
       return (this.currencies[symbol]) ? this.currencies[symbol].icon_uri : null
     },
@@ -84,25 +96,42 @@ export default {
     showAddress (symbol) {
       return this.showSymbol === symbol
     },
-    handleClick (symbol) {
+    async handleGetDepositAddress (symbol) {
+      this.loadingSymbol = symbol
+      await this.$store.dispatch('deposits/getDepositAddress', {
+        symbolId: symbol,
+        forceRefresh: false
+      })
       this.showSymbol = symbol
-      console.log('click')
-      window.alert('should copy to clipboard')
+      this.loadingSymbol = null
     },
     handleSearch (searchQuery) {
       this.searchQuery = searchQuery
     },
+    copyToClipboard (element) {
+      element.select()
+      document.execCommand('copy')
+    },
     handleInputClick (event) {
-      window.alert('should copy to clipboard')
+      this.copyToClipboard(event.target)
     }
   }
 }
 </script>
 
 <style lang="scss">
-.address {
-  // border-top: 1px $border-color solid;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
+.list-group-item-wallet {
+  .list-group-item-wallet-header {
+    display: flex;
+  }
+  .list-group-item-wallet-footer {
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+
+    p {
+      margin-bottom: 0;
+      margin-top: 0.5rem;
+    }
+  }
 }
 </style>

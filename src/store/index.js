@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import BalancesStore from '@/store/modules/balances'
+import DepositsStore from '@/store/modules/deposits'
 import MarketsStore from '@/store/modules/markets'
 import ExchangesStore from '@/store/modules/exchanges'
 import KeysStore from '@/store/modules/keys'
@@ -18,6 +19,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     balances: BalancesStore,
+    deposits: DepositsStore,
     markets: MarketsStore,
     exchanges: ExchangesStore,
     keys: KeysStore,
