@@ -93,7 +93,7 @@ export default {
         // console.log('watch:', data)
         commit('tickers/setTickers', data, { root: true })
 
-        if (rootState.tickers.isLoading) {
+        if (rootGetters['tickers/isLoading']) {
           commit('tickers/stopLoading', null, { root: true })
         }
       })

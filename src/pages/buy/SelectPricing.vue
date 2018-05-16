@@ -3,17 +3,18 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="text-left">
+        <!-- <div class="text-left">
           <h1 class="h2 mb-6">Buy {{ baseId }} with {{ quoteId }}</h1>
-        </div>
+        </div> -->
 
-        <SelectPricing
+        <card-select-pricing
           v-if="!isLoading"
           :market="market"
           :balance="balance"
           :ticker="ticker"
           :context="'buy'">
-        </SelectPricing>
+        </card-select-pricing>
+
       </div>
       <div class="col-md-6">
         <trading-view-chart :exchange="`BITTREX`" :quoteId="quoteId" :baseId="baseId"></trading-view-chart>
@@ -24,14 +25,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import SelectPricing from '@/components/SelectPricing'
+import CardSelectPricing from '@/components/card/SelectPricing'
 import TradingViewChart from '@/components/TradingViewChart'
 
 export default {
   name: 'PageBuySelectPricing',
   components: {
     TradingViewChart,
-    SelectPricing
+    CardSelectPricing
   },
   computed: {
     ...mapGetters({

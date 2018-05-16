@@ -1,21 +1,26 @@
 <template>
-  <div class="card">
+  <div class="card card-100-xs">
     <form name="order" @submit.prevent="handleSubmit($event)">
       <div class="card-body">
-
-
         <p class="text-success text-center">You have <strong>{{ amountFreeInBalance | number }} {{ baseId }}</strong> available to {{ context }}</p>
 
-         <div class="form-group">
-          <label for="">Limit or market order?</label>
-          <select class="form-control">
-            <option>Default select</option>
+        <div class="form-group">
+          <label>Order type</label>
+          <select class="custom-select custom-select-lg"
+            id="orderType"
+            :class="{ 'is-invalid': errors.has('orderType') }"
+            name="orderType"
+            v-model="orderType"
+            v-validate="'required'">
+            <option :value="'limit'">Limit (conditional, lower fee)</option>
+            <option :value="'market'">Market (instant, higher fee)</option>
           </select>
+          <invalid-feedback v-show="errors.has('orderType')" :message="errors.first('orderType')" ref="orderTypeError"></invalid-feedback>
         </div>
 
         <hr />
         <div class="form-group">
-          <label for="exampleInputEmail1">Your {{ context }} price for 1 {{ baseId }} (in {{ quoteId }})</label>
+          <label for="exampleInputEmail1">{{ labelPrice }}</label>
           <div class="mb-2">
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('last')">last</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('bid')">bid</button>
@@ -24,7 +29,7 @@
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('high')">24hr high</button>
           </div>
           <div class="input-group">
-            <input type="text" class="form-control" v-model="price" :placeholder="`Price for 1 ${baseId} in ${quoteId}`" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control form-control-lg" v-model="price" :placeholder="`Price for 1 ${baseId} in ${quoteId}`" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon2">{{ quoteId }}</span>
               <button class="btn btn-primary" type="button" @click.prevent="handleInputPriceAdjust('increase')">+</button>
@@ -46,7 +51,7 @@
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 100)">100%</button>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" v-model="amount" :placeholder="`Total ${baseId} for sale`" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control form-control-lg" v-model="amount" :placeholder="`Total ${baseId} for sale`" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon2">{{ baseId }}</span>
               <button class="btn btn-primary" type="button" @click.prevent="roundAmount()">Round</button>
@@ -85,8 +90,16 @@
 </template>
 
 <script>
+import InvalidFeedback from '@/components/form/InvalidFeedback'
+
 export default {
-  name: 'SelectPricing',
+  name: 'CardSelectPricing',
+  $_veeValidate: {
+    validator: 'new'
+  },
+  components: {
+    InvalidFeedback
+  },
   props: {
     market: {
       type: Object,
@@ -109,27 +122,39 @@ export default {
     }
   },
   data: () => ({
+    orderType: 'limit',
     price: null, // TODO: automatically convert "," to ".",
-    amount: null,
-    exchangeFees: {
-      bittrex: 0.0025 // 0.25%
-    }
+    amount: null
   }),
   computed: {
+    labelPrice () {
+      return `Your ${this.context} price for 1 ${this.baseId} (in ${this.quoteId})`
+    },
     quoteId () {
-      return this.market.quoteId
+      if (this.market) return this.market.quoteId
+      return null
     },
     baseId () {
-      return this.market.quoteId
+      if (this.market) return this.market.baseId
+      return null
+    },
+    fee () {
+      // TODO: is this correct?
+      if (this.orderType === 'limit') {
+        return this.market.maker
+      } else {
+        return this.market.taker
+      }
     },
     marketSymbol () {
       return this.market.symbol
     },
     amountFreeInBalance () {
-      return this.balance.free
+      if (this.balance) return this.balance.free
+      return 0
     },
     marketLast () {
-      return this.market[this.marketSymbol].last
+      return this.ticker.last
     },
     priceMarketDifference () {
       return this.price - this.marketLast
@@ -147,10 +172,10 @@ export default {
       }
     },
     totalPrice () {
-      return (this.price * this.amount) + ((this.price * this.amount) * this.exchangeFees['bittrex'])
+      return (this.price * this.amount) + ((this.price * this.amount) * this.fee)
     },
     totalFee () {
-      return (this.price * this.amount) * this.exchangeFees['bittrex']
+      return (this.price * this.amount) * this.fee
     },
     disableSubmitButton () {
       return !this.amountFreeInBalance || !this.price || !this.amount
@@ -163,12 +188,12 @@ export default {
       } else {
         // If we want to buy, the amount is related to the price we give for it
         const amount = (((this.amountFreeInBalance / this.price) / 100) * percentage)
-        this.exchangeFee = amount * this.exchangeFees['bittrex']
+        this.exchangeFee = amount * this.fee
         this.amount = (((this.amountFreeInBalance / this.price) / 100) * percentage) - this.exchangeFee
       }
     },
     handleSetMarketPrice (type) {
-      this.price = this.market[this.marketSymbol][type]
+      this.price = this.ticker[type]
     },
     handleInputPriceAdjust (type) {
       const price = parseFloat(this.price)
@@ -181,7 +206,14 @@ export default {
       this.amount = Math.floor(this.amount)
     },
     handleSubmit () {
-      console.log('Send this', 'amount', this.amount, 'price', this.price, 'market', this.marketSymbol)
+      const payload = {
+        orderType: this.orderType,
+        context: this.context,
+        amount: this.amount,
+        price: this.price,
+        market: this.marketSymbol
+      }
+      console.log('Send this', payload)
     }
   }
 }

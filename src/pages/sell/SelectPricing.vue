@@ -23,17 +23,15 @@
 </template>
 
 <script>
-import SelectPricing from '@/components/SelectPricing'
+import CardSelectPricing from '@/components/card/SelectPricing'
 import TradingViewChart from '@/components/TradingViewChart.vue'
 import { mapGetters } from 'vuex'
 import pickBy from 'lodash/pickBy'
-// import store from '../../store'
-// import router from '../../router'
 
 export default {
   name: 'PageSellSelectPricing',
   components: {
-    SelectPricing,
+    CardSelectPricing,
     TradingViewChart
   },
   data () {

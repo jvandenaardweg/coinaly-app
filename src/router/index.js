@@ -99,16 +99,17 @@ export default new Router({
             {
               path: '',
               component: PageBuySelectBase,
-              name: 'Select base'
+              name: 'Select market'
             },
             {
               path: ':baseId',
               component: PageBuySelectQuote,
-              name: 'Select quote'
+              name: 'Select balance'
             },
             {
               path: ':baseId/:quoteId',
-              component: PageBuySelectPricing
+              component: PageBuySelectPricing,
+              name: 'Create order'
             }
           ]
         },
@@ -119,16 +120,17 @@ export default new Router({
             {
               path: '',
               component: PageSellSelectQuoteCurrency,
-              name: 'Sell - Balance'
+              name: 'Select balance'
             },
             {
               path: ':quoteCurrency',
               component: PageSellSelectBaseCurrency,
-              name: 'Sell - Market'
+              name: 'Select market'
             },
             {
               path: ':quoteCurrency/:baseCurrency',
               component: PageSellSelectPricing,
+              name: 'Create order',
               beforeEnter: (to, from, next) => {
                 console.log('validate selected base currency and quote currency', to.params.baseCurrency, to.params.quoteCurrency, 'Is this pair tradeable? And has this user the quoteCurrency in his balance?')
                 next()

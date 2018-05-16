@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card card-100-xs">
 
     <loader v-if="!hasCurrencies && isLoading"></loader>
 
@@ -12,10 +12,6 @@
         :meta="meta.free.toString()"
         :currency="currencies[symbol]">
       </list-group-item-symbol-select>
-    </div>
-
-    <div class="card-footer" :class="{ 'd-none d-sm-block': !currency }">
-      <router-link class="btn btn-primary btn-lg btn-block" :to="routeUrl" :class="{'disabled': !currency}" :disabed="!currency">{{ nextStepAction }}</router-link>
     </div>
 
   </div>
@@ -51,7 +47,7 @@ export default {
       return `/${this.routeBase}/${this.currency}`
     },
     emptyText () {
-      if (!this.hasCurrencies) return 'No currencies available in your balance.'
+      if (!this.isLoading && !this.hasCurrencies) return 'No currencies available in your balance.'
       return null
     }
   },
