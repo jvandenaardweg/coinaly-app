@@ -6,7 +6,7 @@ describe('pages/balances/Symbol.vue', () => {
 
   beforeEach(() => {
     component = shallowMount(PageBalancesSymbol, {
-      stubs: ['router-view']
+      stubs: ['router-link', 'router-view']
     })
   })
 

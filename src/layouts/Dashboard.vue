@@ -16,6 +16,7 @@
         <!-- </div> -->
       <!-- </div> -->
     <!-- </div> -->
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -23,13 +24,15 @@
 import NavBar from '@/components/NavBar.vue'
 import ExchangeStatus from '@/components/ExchangeStatus.vue'
 import TabBar from '@/components/TabBar.vue'
+import PageFooter from '@/components/PageFooter.vue'
 
 export default {
   name: 'LayoutDashboard',
   components: {
     NavBar,
     ExchangeStatus,
-    TabBar
+    TabBar,
+    PageFooter
   },
   mounted () {
     document.querySelector('body').classList.remove('bg-dark-blue')

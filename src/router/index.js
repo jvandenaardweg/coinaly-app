@@ -84,7 +84,7 @@ export default new Router({
           children: [
             {
               path: '',
-              name: 'Balances home',
+              name: '',
               component: PageBalancesHome
             },
             {
