@@ -1,15 +1,35 @@
 <template>
   <div class="balances-summary">
     <div class="balances-summary-body">
-      <h1 class="h1">&euro; 12.035,51</h1>
-      <h2 class="h5">2.41231 BTC</h2>
+      <h1 class="h1">{{ totalPrice }}</h1>
+      <h2 class="h5" v-html="totalBTCPrice"></h2>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'BalancesSummary'
+  name: 'BalancesSummary',
+  computed: {
+    ...mapGetters({
+      totalBalancesPrices: 'balances/totalBalancesPrices',
+      getPriceBySymbol: 'prices/getPriceBySymbol',
+      isLoadingPrices: 'prices/isLoading'
+    }),
+    totalPrice () {
+      if (this.totalBalancesPrices) return this.$options.filters.currency(this.totalBalancesPrices)
+      return 'Loading...'
+    },
+    totalBTCPrice () {
+      if (this.totalBalancesPrices && !this.isLoadingPrices) {
+        return this.$options.filters.toFixed(this.totalBalancesPrices / this.getPriceBySymbol('BTC').USD) + ' BTC'
+      } else {
+        return '&nbsp;' // So an empty price (loading) won't make the layout move
+      }
+    }
+  }
 }
 </script>
 
@@ -38,7 +58,7 @@ export default {
     }
 
     h1 {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
       font-weight: bold;
     }
 

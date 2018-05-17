@@ -13,45 +13,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SelectMarketQuote from '@/components/SelectMarketQuote'
 import CardBaseMarkets from '@/components/card/BaseMarkets'
 
 export default {
   name: 'PageBuySelectBase',
   components: {
-    SelectMarketQuote,
     CardBaseMarkets
-  },
-  data () {
-    return {
-      previousQuoteId: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteId : null,
-      subNavItems: [
-        { label: 'All', uri: '', slug: 'all' },
-        { label: 'Available', uri: 'available', slug: 'available' },
-        { label: 'Unavailable', uri: 'unavailable', slug: 'unavailable' }
-      ]
-    }
-  },
-  computed: {
-    ...mapGetters({
-      allCurrencies: 'balances/allCurrencies',
-      allFilledBalances: 'balances/allFilledBalances',
-      allBaseMarkets: 'markets/allBaseMarkets',
-      allMarkets: 'markets/allMarkets',
-      isLoadingMarkets: 'markets/isLoading'
-    })
-  },
-  methods: {
-    isAvailable (marketSymbol) {
-      return Object.keys(this.allFilledBalances).includes(marketSymbol.split('/')[1])
-    },
-    iconName (marketSymbol) {
-      return marketSymbol.split('/')[0].toLowerCase()
-    },
-    handleChange (newBaseCurrency) {
-      this.baseCurrencyTitle = newBaseCurrency
-    }
   }
 }
 </script>

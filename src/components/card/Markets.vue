@@ -5,6 +5,7 @@
       <h2 class="h5 m-0">Available markets ({{ totalMarkets }})</h2>
       <sub-nav v-if="hasMarkets" class="mt-3" :items="subNavItems" :selected="selected"></sub-nav>
       <search class="mt-3" v-if="hasMarkets" @search="handleSearch"></search>
+      <sorting @sort="handleSort"></sorting>
     </div>
 
     <loader v-if="isLoading"></loader>
@@ -24,6 +25,7 @@ import Loader from '@/components/Loader'
 import CardPartialEmpty from '@/components/card/PartialEmpty'
 import SubNav from '@/components/SubNav'
 import Search from '@/components/Search'
+import Sorting from '@/components/Sorting'
 
 export default {
   name: 'CardMarkets',
@@ -34,7 +36,8 @@ export default {
     CardPartialEmpty,
     SubNav,
     Search,
-    Loader
+    Loader,
+    Sorting
   },
   computed: {
     ...mapGetters({
@@ -77,6 +80,9 @@ export default {
   methods: {
     handleSearch (searchQuery) {
       console.log('markets search', searchQuery)
+    },
+    handleSort (sortBy) {
+      console.log(sortBy)
     }
   }
 }
