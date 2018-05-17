@@ -47,7 +47,7 @@ export default {
       return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets
     },
     emptyText () {
-      if (!this.isLoadingBalances && !this.hasCurrencies) return 'You have nothing in your balance, yet.'
+      if (!this.isLoading && !this.hasCurrencies) return 'You have nothing in your balance, yet.'
       return null
     }
   }
