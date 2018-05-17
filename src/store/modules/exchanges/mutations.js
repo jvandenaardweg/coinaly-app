@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import initialState from '@/store/modules/exchanges/initialState'
 
 export default {
   addAll (state, exchanges) {
@@ -19,5 +20,11 @@ export default {
   },
   stopLoading (state) {
     Vue.set(state, 'isLoading', false)
+  },
+  resetState (state) {
+    const s = initialState()
+    Object.keys(s).forEach(key => {
+      state[key] = s[key]
+    })
   }
 }

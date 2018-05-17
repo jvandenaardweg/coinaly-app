@@ -1,17 +1,4 @@
-const initialIsOnline = window.navigator.onLine || null
+// Use initialState so we can reset the state, for example, when switching exchanges
+import initialState from '@/store/modules/user/initialState'
 
-export default {
-  user: null,
-  isLoading: null,
-  error: null,
-  success: null,
-  isOnline: initialIsOnline,
-  marketFavorites: {
-    'bittrex': {
-      'LTC/BTC': true,
-      'ADA/BTC': true
-    },
-    'binance': {},
-    'poloniex': {}
-  }
-}
+export default initialState()

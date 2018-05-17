@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import initialState from '@/store/modules/keys/initialState'
 
 export default {
   addAll (state, keys) {
@@ -21,5 +22,11 @@ export default {
   },
   removeSuccess (state, message) {
     Vue.set(state, 'success', null)
+  },
+  resetState (state) {
+    const s = initialState()
+    Object.keys(s).forEach(key => {
+      state[key] = s[key]
+    })
   }
 }

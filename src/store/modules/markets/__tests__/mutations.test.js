@@ -1,5 +1,6 @@
 import mutations from '@/store/modules/markets/mutations'
 import state from '@/store/modules/markets/state'
+import initialState from '@/store/modules/markets/initialState'
 
 import marketsMock from '@/mocks/markets.json'
 
@@ -33,5 +34,11 @@ describe('modules/markets/mutations.js', () => {
     const exampleFavorites = ['BTC/USDT', 'XRP/BTC', 'LTC/BTC']
     mutations.addFavorites(state, exampleFavorites)
     expect(state.favorites).toBe(exampleFavorites)
+  })
+
+  it('mutation resetState should set state to its default values', () => {
+    mutations.setError(state, 'Some error happened.') // Fill the store with something
+    mutations.resetState(state)
+    expect(state).toMatchObject(initialState())
   })
 })

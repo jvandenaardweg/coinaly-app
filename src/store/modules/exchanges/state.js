@@ -1,22 +1,4 @@
-import Vue from 'vue'
-import VueCookie from 'vue-cookie'
-Vue.use(VueCookie)
+// Use initialState so we can reset the state, for example, when switching exchanges
+import initialState from '@/store/modules/exchanges/initialState'
 
-const initialSelectedExchange = Vue.cookie.get('selectedExchange') || null
-
-export default {
-  exchanges: null,
-  isLoading: null,
-  selected: initialSelectedExchange,
-  available: {
-    'bittrex': {
-      name: 'Bittrex'
-    },
-    'binance': {
-      name: 'Binance'
-    },
-    'poloniex': {
-      name: 'Poloniex'
-    }
-  }
-}
+export default initialState()

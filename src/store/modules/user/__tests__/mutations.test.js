@@ -1,5 +1,6 @@
 import mutations from '@/store/modules/user/mutations'
 import state from '@/store/modules/user/state'
+import initialState from '@/store/modules/user/initialState'
 
 import mockAuthLogin from '@/mocks/auth-login.json'
 
@@ -43,5 +44,10 @@ describe('modules/user/mutations.js', () => {
     state.success = 'Some success message'
     mutations.removeSuccess(state)
     expect(state.success).toBe(null)
+  })
+  it('mutation resetState should set state to its default values', () => {
+    mutations.setUser(state, mockAuthLogin.user) // Fill the store with something
+    mutations.resetState(state)
+    expect(state).toMatchObject(initialState())
   })
 })

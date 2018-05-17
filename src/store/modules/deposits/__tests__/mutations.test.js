@@ -1,5 +1,6 @@
 import mutations from '@/store/modules/deposits/mutations'
 import state from '@/store/modules/deposits/state'
+import initialState from '@/store/modules/deposits/initialState'
 
 import depositsAddressMock from '@/mocks/deposits-address.json'
 
@@ -41,5 +42,11 @@ describe('modules/deposits/mutations.js', () => {
   it('mutation removeSuccess sets state.success to null', () => {
     mutations.removeSuccess(state)
     expect(state.success).toBe(null)
+  })
+
+  it('mutation resetState should set state to its default values', () => {
+    mutations.setError(state, 'Some error happened.') // Fill the store with something
+    mutations.resetState(state)
+    expect(state).toMatchObject(initialState())
   })
 })

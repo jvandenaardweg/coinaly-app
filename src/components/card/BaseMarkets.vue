@@ -4,6 +4,7 @@
     <div class="card-header">
       <sub-nav :items="subNavItems"></sub-nav>
       <search class="mt-3" placeholder="Search for a currency..." @search="handleSearch"></search>
+      <sorting @sort="handleSort"></sorting>
     </div>
 
     <loader v-if="isLoading"></loader>
@@ -31,6 +32,7 @@ import ListGroupItemSymbolSelect from '@/components/list-group-item/SymbolSelect
 import Search from '@/components/Search'
 import SubNav from '@/components/SubNav'
 import pickBy from 'lodash/pickBy'
+import Sorting from '@/components/Sorting'
 
 export default {
   name: 'CardBaseMarkets',
@@ -39,7 +41,8 @@ export default {
     ListGroupItemSymbolSelect,
     Search,
     SubNav,
-    Loader
+    Loader,
+    Sorting
   },
   data: () => ({
     searchQuery: null
@@ -110,6 +113,9 @@ export default {
     }
   },
   methods: {
+    handleSort (sortBy) {
+      console.log('handle sort', sortBy)
+    },
     handleSearch (query) {
       this.searchQuery = query
     },

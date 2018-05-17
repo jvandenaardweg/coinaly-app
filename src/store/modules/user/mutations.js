@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import initialState from '@/store/modules/user/initialState'
 
 export default {
   setOffline (state, ticker) {
@@ -27,5 +28,11 @@ export default {
   },
   removeSuccess (state) {
     Vue.set(state, 'success', null)
+  },
+  resetState (state) {
+    const s = initialState()
+    Object.keys(s).forEach(key => {
+      state[key] = s[key]
+    })
   }
 }

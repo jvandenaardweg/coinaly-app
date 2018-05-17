@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import initialState from '@/store/modules/balances/initialState'
 
 export default {
   addAll (state, items) {
@@ -19,5 +20,11 @@ export default {
   },
   addServerError (state, error) {
     Vue.set(state, 'serverError', error)
+  },
+  resetState (state) {
+    const s = initialState()
+    Object.keys(s).forEach(key => {
+      state[key] = s[key]
+    })
   }
 }

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import initialState from '@/store/modules/orders/initialState'
 
 export default {
   addAllClosed (state, orders) {
@@ -15,5 +16,11 @@ export default {
   },
   removeError (state) {
     Vue.set(state, 'error', null)
+  },
+  resetState (state) {
+    const s = initialState()
+    Object.keys(s).forEach(key => {
+      state[key] = s[key]
+    })
   }
 }

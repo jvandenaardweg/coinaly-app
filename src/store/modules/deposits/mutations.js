@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import initialState from '@/store/modules/deposits/initialState'
 
 export default {
   addAddress (state, address) {
@@ -21,5 +22,11 @@ export default {
   },
   removeSuccess (state, message) {
     Vue.set(state, 'success', null)
+  },
+  resetState (state) {
+    const s = initialState()
+    Object.keys(s).forEach(key => {
+      state[key] = s[key]
+    })
   }
 }

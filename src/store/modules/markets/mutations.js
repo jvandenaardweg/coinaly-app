@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import initialState from '@/store/modules/markets/initialState'
 
 export default {
   addAll (state, markets) {
@@ -18,5 +19,11 @@ export default {
   },
   removeError (state) {
     Vue.set(state, 'error', null)
+  },
+  resetState (state) {
+    const s = initialState()
+    Object.keys(s).forEach(key => {
+      state[key] = s[key]
+    })
   }
 }

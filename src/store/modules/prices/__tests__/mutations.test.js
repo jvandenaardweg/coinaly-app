@@ -1,5 +1,6 @@
 import mutations from '@/store/modules/prices/mutations'
 import state from '@/store/modules/prices/state'
+import initialState from '@/store/modules/prices/initialState'
 
 import mockPrices from '@/mocks/prices.json'
 
@@ -27,5 +28,11 @@ describe('modules/prices/mutations.js', () => {
   it('mutation removeError sets state.error to null', () => {
     mutations.removeError(state)
     expect(state.error).toBe(null)
+  })
+
+  it('mutation resetState should set state to its default values', () => {
+    mutations.setError(state, 'Some error happened.') // Fill the store with something
+    mutations.resetState(state)
+    expect(state).toMatchObject(initialState())
   })
 })

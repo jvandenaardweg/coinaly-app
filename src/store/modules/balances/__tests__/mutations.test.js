@@ -1,5 +1,6 @@
 import mutations from '@/store/modules/balances/mutations'
 import state from '@/store/modules/balances/state'
+import initialState from '@/store/modules/balances/initialState'
 
 import balancesMock from '@/mocks/balances.json'
 
@@ -32,5 +33,11 @@ describe('modules/balances/mutations.js', () => {
   it('mutation addServerError sets error message to state.serverError', () => {
     mutations.addServerError(state, 'Example error')
     expect(state.serverError).toBe('Example error')
+  })
+
+  it('mutation resetState should set state to its default values', () => {
+    mutations.addAll(state, balancesMock)
+    mutations.resetState(state)
+    expect(state).toMatchObject(initialState())
   })
 })

@@ -69,6 +69,8 @@ export default {
       await Promise.all([
         this.$store.dispatch('websockets/unsubscribe'),
         this.$store.commit('exchanges/setSelected', exchangeSlug),
+        this.$store.commit('deposits/resetState'),
+        this.$store.commit('balances/resetState'),
         this.$store.dispatch('markets/loadAll'),
         this.$store.dispatch('balances/getAll'),
         this.$store.dispatch('exchanges/getAllExchanges'),
@@ -85,8 +87,6 @@ export default {
 
 <style lang="scss">
 .btn-select {
-  // background: #22467B;
-  // border-color: #22467B;
   outline: none;
   height: 34px;
 }

@@ -82,6 +82,9 @@ export default {
     }
   },
   methods: {
+    handleSort (sort) {
+      console.log('sort by', sort)
+    },
     IsLoadingSymbol (symbol) {
       return this.loadingSymbol === symbol
     },
