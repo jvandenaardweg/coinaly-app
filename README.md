@@ -5,7 +5,8 @@ This repository is the frontend of Coinaly. In other words: "the dashboard".
 In order to run this project locally, you need other project dependencies:
 
 &#x21B3; [coinaly-socket](http://google.nl): Websocket server for realtime Exchange Tickers
-&#x21B3; [coinaly-api](http://google.nl): Rest API to talk with Exchange API's
+
+&#x21B3; [coinaly-api](http://google.nl): Rest API to talk with Exchange API's and our Postgreql database.
 
 See their GitHub repo's for installation instructions.
 
