@@ -33,6 +33,9 @@ export default {
   },
   mounted () {
     document.querySelector('body').classList.remove('bg-dark-blue')
+    if (window.$crisp) {
+      window.$crisp.push(['on', 'chat:initiated', this.hideCrispChat])
+    }
   },
   beforeMount () {
     // this.$store.commit('exchanges/setSelected', 'bittrex')
@@ -44,6 +47,11 @@ export default {
     this.$store.dispatch('websockets/watch')
     this.$store.dispatch('balances/getAll')
     this.$store.dispatch('prices/getAllPrices')
+  },
+  methods: {
+    hideCrispChat () {
+      window.$crisp.push(['do', 'chat:hide'])
+    }
   }
 }
 </script>
