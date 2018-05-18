@@ -19,4 +19,14 @@ describe('modules/symbols/getters.js', () => {
     state.isLoading = false
     expect(getters.isLoading(state)).toBe(false)
   })
+
+  it('getter getNameBySymbol should return the full name of a symbol if state.symbols is set', () => {
+    state.symbols = mockSymbols
+    expect(getters.getNameBySymbol(state)('BTC')).toBe('Bitcoin')
+  })
+
+  it('getter getNameBySymbol should return null if state.symbols is not set', () => {
+    state.symbols = null
+    expect(getters.getNameBySymbol(state)('BTC')).toBe(null)
+  })
 })
