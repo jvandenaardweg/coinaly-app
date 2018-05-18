@@ -34,4 +34,14 @@ describe('modules/prices/getters.js', () => {
     expect(getters.hasPrices(state)).toBe(false)
   })
 
+  it('getter getPriceBySymbol should return the price object found by symbolId if state.prices is set', () => {
+    state.prices = pricesMock
+    expect(getters.getPriceBySymbol(state)('BTC')).toMatchObject(pricesMock['BTC'])
+  })
+
+  it('getter getPriceBySymbol should return null if state.prices is not set', () => {
+    state.prices = null
+    expect(getters.getPriceBySymbol(state)('BTC')).toBe(null)
+  })
+
 })

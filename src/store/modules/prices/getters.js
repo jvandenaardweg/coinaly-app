@@ -6,7 +6,6 @@ export default {
     return (state.prices) ? (Object.keys(state.prices).length > 0) : false
   },
   getPriceBySymbol: (state) => (symbolId) => {
-    // TODO: write test
     if (state.prices) return state.prices[symbolId]
     return null
   },
