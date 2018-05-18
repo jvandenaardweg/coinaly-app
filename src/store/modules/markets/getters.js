@@ -43,7 +43,6 @@ export default {
     }, {})
   },
   allMarketSymbols: (state, getters) => {
-    // TODO: Write test
     if (!state.markets || !Object.keys(state.markets).length) return null
 
     const allBaseMarkets = Object.assign({}, getters.allBaseMarkets)
@@ -53,7 +52,6 @@ export default {
     return Object.keys(Object.assign(allQuoteMarkets, allBaseMarkets)).sort()
   },
   totalMarketSymbols: (state, getters) => {
-    // TODO: Write test
     if (!getters.allMarketSymbols) return null
     return getters.allMarketSymbols.length
   },
@@ -122,7 +120,6 @@ export default {
     return null
   },
   ohlcv: state => {
-    // TODO: Write test
     return state.ohlcv
   },
   hasMarkets: state => {

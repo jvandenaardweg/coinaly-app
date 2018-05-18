@@ -1,11 +1,13 @@
 import getters from '@/store/modules/markets/getters'
 import state from '@/store/modules/markets/state'
+import mutations from '@/store/modules/markets/mutations'
 
 import stateBalances from '@/store/modules/balances/state'
 import gettersBalances from '@/store/modules/balances/getters'
 
 import marketsMock from '@/mocks/markets.json'
 import balancesMock from '@/mocks/balances.json'
+import marketsOHLCV1dMock from '@/mocks/markets-ohlcv-1d.json'
 
 describe('modules/markets/getters.js', () => {
 
@@ -140,5 +142,34 @@ describe('modules/markets/getters.js', () => {
     expect(getters.getBaseMarketsBySymbolId(state)('USDT')).toMatchObject(expected)
   })
 
+  it('getter allMarketSymbols should return an array of all market symbols', () => {
+    state.markets = marketsMock
+    getters.allBaseMarkets = getters.allBaseMarkets(state)
+    getters.allQuoteMarkets = getters.allQuoteMarkets(state)
+    expect(getters.allMarketSymbols(state, getters)).toEqual(expect.arrayContaining(['ADA', 'BTC', 'USDT']))
+  })
+
+  it('getter totalMarketSymbols should return the total market symbols from the allMarketSymbols getter', () => {
+    state.markets = marketsMock
+    // getters.allBaseMarkets = getters.allBaseMarkets(state)
+    // getters.allQuoteMarkets = getters.allQuoteMarkets(state)
+    getters.allMarketSymbols = getters.allMarketSymbols(state, getters)
+    expect(getters.totalMarketSymbols(state, getters)).toBe(3)
+  })
+
+  it('getter ohlcv should return the ohlcv data per market', () => {
+    const payload = {
+      marketSymbol: 'BTC/USDT',
+      interval: '1d',
+      data: marketsOHLCV1dMock
+    }
+    mutations.addOHLCV(state, payload)
+
+    const expected = {
+      [payload.marketSymbol]: marketsOHLCV1dMock
+    }
+
+    expect(getters.ohlcv(state)).toMatchObject(expected)
+  })
 
 })
