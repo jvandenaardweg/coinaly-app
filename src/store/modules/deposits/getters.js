@@ -3,7 +3,6 @@ export default {
     return state.addresses
   },
   getAddressBySymbol: state => (symbol) => {
-    // TODO: write test
     if (state.addresses && state.addresses[symbol]) {
       return state.addresses[symbol].address
     } else {
