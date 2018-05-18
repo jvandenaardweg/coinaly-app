@@ -1,7 +1,21 @@
 import axios from '../axios'
 
 export function loadAllMarkets (forceRefresh = false, exchange) {
-  const forceRefreshParam = (forceRefresh) ? '?forceRefresh=true' : ''
-  return axios.get(`/exchanges/${exchange}/markets/load${forceRefreshParam}`).then(response => response.data)
-  // return Promise.resolve(require('@/services/api/mocks/balances.json'))
+  return axios.get(`/exchanges/${exchange}/markets/load`, {
+    params: {
+      forceRefresh: forceRefresh
+    }
+  })
+    .then(response => response.data)
+}
+
+export function getOHLCV (exchange, marketSymbol, interval, forceRefresh = false) {
+  return axios.get(`/exchanges/${exchange}/markets/ohlcv`, {
+    params: {
+      marketSymbol: marketSymbol,
+      interval: interval,
+      forceRefresh: forceRefresh
+    }
+  })
+    .then(response => response.data)
 }

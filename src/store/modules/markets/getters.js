@@ -118,9 +118,12 @@ export default {
     // marketSymbol String "BTC/USDT"
     if (state.markets) {
       return state.markets[marketSymbol]
-    } else {
-      return null
     }
+    return null
+  },
+  ohlcv: state => {
+    // TODO: Write test
+    return state.ohlcv
   },
   hasMarkets: state => {
     return (state.markets) ? Object.keys(state.markets).length > 0 : false

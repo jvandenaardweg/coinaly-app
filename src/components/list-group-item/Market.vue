@@ -16,7 +16,7 @@
       <span class="market-item-price">
         {{ tickerLast }}
         <span class="text-muted">
-          {{ tickerFiatWorth | currency }}
+          {{ tickerPrice | currency }}
         </span>
       </span>
       <percentage-badge :percentage="tickerPercentage"></percentage-badge>
@@ -40,7 +40,8 @@ export default {
     currency: Object,
     ticker: Object,
     favorite: Boolean,
-    hideVolume: Boolean
+    hideVolume: Boolean,
+    price: Object
   },
   components: {
     PercentageBadge,
@@ -82,7 +83,11 @@ export default {
       return (this.ticker) ? this.ticker.percentage : 0
     },
     tickerLast () {
-      return (this.ticker) ? this.ticker.last : '-'
+      if (this.ticker && this.market.quote === 'USDT') {
+        return this.$options.filters.toFixed(this.ticker.last, 4) // So we don't end up with super long price lengths, like: 8031.65394578 (for BTC)
+      } else {
+        return (this.ticker) ? this.ticker.last : '-'
+      }
     },
     tickerBaseVolume () {
       return (this.ticker) ? this.ticker.baseVolume : 0
@@ -90,8 +95,12 @@ export default {
     tickerQuoteVolume () {
       return (this.ticker) ? this.ticker.quoteVolume : 0
     },
-    tickerFiatWorth () {
-      return (this.ticker) ? 10 : '-'
+    tickerPrice () {
+      if (this.ticker) {
+        return this.price.USD * this.ticker.last
+      } else {
+        return (this.ticker) ? 10 : '-'
+      }
     }
   }
 }

@@ -153,7 +153,7 @@ export default new Router({
           ]
         },
         {
-          path: '/markets/:quote/:base', // Matches: /markets/BTC/XRP
+          path: '/markets/:quoteId/:baseId', // Matches: /markets/BTC/XRP
           name: 'Market',
           component: PageMarketsMarket
         },

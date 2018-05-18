@@ -3,6 +3,7 @@ import state from '@/store/modules/markets/state'
 import initialState from '@/store/modules/markets/initialState'
 
 import marketsMock from '@/mocks/markets.json'
+import marketsOHLCV1dMock from '@/mocks/markets-ohlcv-1d.json'
 
 describe('modules/markets/mutations.js', () => {
   it('mutation addAll add an array of keys to state.keys', () => {
@@ -40,5 +41,15 @@ describe('modules/markets/mutations.js', () => {
     mutations.setError(state, 'Some error happened.') // Fill the store with something
     mutations.resetState(state)
     expect(state).toMatchObject(initialState())
+  })
+
+  it('mutation addOHLCV should set state.ohlcv with a market ohlcv data array', () => {
+    const payload = {
+      marketSymbol: 'BTC/USDT',
+      interval: '1d',
+      data: marketsOHLCV1dMock
+    }
+    mutations.addOHLCV(state, payload)
+    expect(state.ohlcv[payload.marketSymbol]).toMatchObject(payload.data)
   })
 })

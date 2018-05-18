@@ -11,6 +11,9 @@ describe('api/markets.js', () => {
         'access-control-allow-credentials': 'true'
       })
       .get('/exchanges/bittrex/markets/load')
+      .query({
+        forceRefresh: false
+      })
       .reply(200, mockMarkets)
 
     const result = await api.loadAllMarkets(false, 'bittrex')

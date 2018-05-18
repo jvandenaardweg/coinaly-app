@@ -3,7 +3,11 @@ import initialState from '@/store/modules/deposits/initialState'
 
 export default {
   addAddress (state, address) {
-    state.addresses[address.currency] = address
+    const currency = address.currency
+    const dataObject = {
+      [currency]: address
+    }
+    Vue.set(state, 'addresses', dataObject)
   },
   startLoading (state) {
     Vue.set(state, 'isLoading', true)

@@ -25,5 +25,16 @@ export default {
     Object.keys(s).forEach(key => {
       state[key] = s[key]
     })
+  },
+  addOHLCV (state, payload) {
+    const marketSymbol = payload.marketSymbol
+    const dataObject = {
+      [marketSymbol]: payload.data
+    }
+    // Make a JSON object, so we can target the store directly with a marketSymbol to retrieve the data, like:
+    /*
+      "BTC/USDT": [[data]]
+    */
+    Vue.set(state, 'ohlcv', dataObject)
   }
 }
