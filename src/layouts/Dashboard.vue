@@ -63,10 +63,10 @@ export default {
     },
     loadInitialData () {
       this.$store.dispatch('markets/loadAll')
+      this.$store.dispatch('balances/getAll')
       this.$store.dispatch('websockets/connect')
       this.$store.dispatch('websockets/subscribe')
       this.$store.dispatch('websockets/watch')
-      this.$store.dispatch('balances/getAll')
     }
   },
   watch: {
@@ -76,6 +76,9 @@ export default {
       }
     },
     selectedExchange (newValue, oldValue) {
+      // If oldValue is null, it means the user has not yet have the selectedExchange in localStorage
+      // So when we got a newValue that is set, we can assume the "keys" watcher above has done it's job
+      // So we can safely load data that needs to know the exchange, like markets and balances
       if (oldValue === null && newValue) {
         this.loadInitialData()
       }
