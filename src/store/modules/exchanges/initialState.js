@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import VueCookie from 'vue-cookie'
-Vue.use(VueCookie)
+let initialSelectedExchange = null
 
-const initialSelectedExchange = Vue.cookie.get('selectedExchange') || null
+if (window.localStorage) {
+  initialSelectedExchange = window.localStorage.getItem('selectedExchange') || null
+}
 
 export default () => {
   return {

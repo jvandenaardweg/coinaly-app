@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import NavBar from '@/components/NavBar.vue'
 import ExchangeStatus from '@/components/ExchangeStatus.vue'
 import TabBar from '@/components/TabBar.vue'
@@ -34,26 +35,50 @@ export default {
     TabBar,
     PageFooter
   },
-  mounted () {
+  beforeMount () {
     document.querySelector('body').classList.remove('bg-dark-blue')
     if (window.$crisp) {
       window.$crisp.push(['on', 'chat:initiated', this.hideCrispChat])
     }
-  },
-  beforeMount () {
-    // this.$store.commit('exchanges/setSelected', 'bittrex')
-    this.$store.dispatch('markets/loadAll')
-    this.$store.dispatch('symbols/getAll')
 
-    this.$store.dispatch('websockets/connect')
-    this.$store.dispatch('websockets/subscribe')
-    this.$store.dispatch('websockets/watch')
-    this.$store.dispatch('balances/getAll')
+    // Use before mount for API calls that don't need additional data, like a selected exchange
     this.$store.dispatch('prices/getAllPrices')
+    this.$store.dispatch('symbols/getAll')
+    this.$store.dispatch('exchanges/getAllExchanges')
+    this.$store.dispatch('keys/getAllKeys')
+
+    if (this.selectedExchange) {
+      this.loadInitialData()
+    }
+  },
+  computed: {
+    ...mapGetters({
+      selectedExchange: 'exchanges/selected',
+      keys: 'keys/keys'
+    })
   },
   methods: {
     hideCrispChat () {
       window.$crisp.push(['do', 'chat:hide'])
+    },
+    loadInitialData () {
+      this.$store.dispatch('markets/loadAll')
+      this.$store.dispatch('websockets/connect')
+      this.$store.dispatch('websockets/subscribe')
+      this.$store.dispatch('websockets/watch')
+      this.$store.dispatch('balances/getAll')
+    }
+  },
+  watch: {
+    keys (newValue, oldValue) {
+      if (!this.selectedExchange) {
+        this.$store.commit('exchanges/setSelected', newValue[0].slug)
+      }
+    },
+    selectedExchange (newValue, oldValue) {
+      if (oldValue === null && newValue) {
+        this.loadInitialData()
+      }
     }
   }
 }

@@ -9,10 +9,8 @@ export default {
     const exchangeSlug = exchangeName.toLowerCase()
     Vue.set(state, 'selected', exchangeSlug)
 
-    if (process.env.NODE_ENV === 'production') {
-      Vue.cookie.set('selectedExchange', exchangeSlug, { expires: '99Y', domain: 'coinaly.io' })
-    } else {
-      Vue.cookie.set('selectedExchange', exchangeSlug, { expires: '99Y', domain: 'localhost' })
+    if (window.localStorage) {
+      window.localStorage.setItem('selectedExchange', exchangeSlug)
     }
   },
   startLoading (state) {

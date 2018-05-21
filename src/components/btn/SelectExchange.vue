@@ -50,10 +50,10 @@ export default {
       }
     }
   },
-  created () {
-    this.$store.dispatch('exchanges/getAllExchanges')
-    this.$store.dispatch('keys/getAllKeys')
-  },
+  // created () {
+  //   this.$store.dispatch('exchanges/getAllExchanges')
+  //   this.$store.dispatch('keys/getAllKeys')
+  // },
   methods: {
     handleClickLogout (event) {
       this.$store.dispatch('auth/logout')
