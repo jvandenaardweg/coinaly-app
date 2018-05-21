@@ -113,7 +113,7 @@ test('Should show an error when verification failed', async testController => {
     .expect(alert.count).eql(1)
 })
 
-test('Should log a user in', async testController => {
+test('Should log a user in and show onboarding', async testController => {
   await testController
     .navigateTo('/login')
 
@@ -125,14 +125,10 @@ test('Should log a user in', async testController => {
     .typeText(passwordInput, process.env.E2E_PASSWORD)
     .click(button)
 
-  const errorMessages = await Selector('.invalid-feedback')
-  await testController
-    .expect(errorMessages.count).eql(0)
-
   const location = await getWindowLocation()
 
   await testController
-    .expect(location.pathname).eql('/')
+    .expect(location.pathname).eql('/onboarding')
 })
 .after( async testController => {
   await deleteE2EUser()
