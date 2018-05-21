@@ -34,7 +34,7 @@ test('Should show error messages when required fields are empty', async testCont
 test('Should show an error message when email already exists', async testController => {
   const emailInput = await Selector('#inputEmail')
   const passwordInput = await Selector('#inputPassword')
-  const privacyInputLabel = await Selector('#labelPrivacyDisclaimer')
+  const privacyInputLabel = await Selector('#labelPrivacyTermsOfUse')
   const button = await Selector('#buttonSignup')
   await testController
     .typeText(emailInput, 'e2e-login@coinaly.io')
@@ -50,7 +50,7 @@ test('Should show an error message when email already exists', async testControl
 test('Should submit the form when everything is filled in correctly', async testController => {
   const emailInput = await Selector('#inputEmail')
   const passwordInput = await Selector('#inputPassword')
-  const privacyInputLabel = await Selector('#labelPrivacyDisclaimer')
+  const privacyInputLabel = await Selector('#labelPrivacyTermsOfUse')
   const button = await Selector('#buttonSignup')
 
   // Fill in the form
@@ -87,7 +87,7 @@ test('Should show success when verification succeeds', async testController => {
 
   await testController
     .doubleClick(firstNewMessage)
-  
+
   const messageBody = await Selector('#messagebody', {visibilityCheck: true})
   const verificationLink = await Selector('#verificationLink', {visibilityCheck: true}).getAttribute('href')
 

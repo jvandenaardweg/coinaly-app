@@ -44,7 +44,7 @@ import PageOnboardingIndex from '@/pages/onboarding/Index.vue'
 
 import PagePrivacyIndex from '@/pages/privacy/Index.vue'
 
-import PageDisclaimerIndex from '@/pages/disclaimer/Index.vue'
+import PageTermsOfUse from '@/pages/terms-of-use/Index.vue'
 
 import PageNotFound from '@/pages/not-found/Index.vue'
 
@@ -217,8 +217,11 @@ export default new Router({
       ]
     },
     {
-      path: '/privacy',
+      path: '/privacy-policy',
       component: LayoutPage,
+      meta: {
+        requiresAuth: false
+      },
       children: [
         {
           path: '',
@@ -228,13 +231,16 @@ export default new Router({
       ]
     },
     {
-      path: '/disclaimer',
+      path: '/terms-of-use',
       component: LayoutPage,
+      meta: {
+        requiresAuth: false
+      },
       children: [
         {
           path: '',
-          name: 'Disclaimer',
-          component: PageDisclaimerIndex
+          name: 'Terms of Use',
+          component: PageTermsOfUse
         }
       ]
     },

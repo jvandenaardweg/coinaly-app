@@ -37,7 +37,7 @@ describe('components/card/Signup.vue', () => {
     component.setData({
       email: 'test@coinaly.io',
       password: 'testtest',
-      privacyDisclaimer: true
+      privacyTermsOfUse: true
     })
     const handleSubmitMock = jest.fn()
     component.setMethods({ handleSubmit: handleSubmitMock })
@@ -51,7 +51,7 @@ describe('components/card/Signup.vue', () => {
     component.setData({
       email: 'test@coinaly.io',
       password: 'testtest',
-      privacyDisclaimer: true
+      privacyTermsOfUse: true
     })
 
     const dispatchCreateUserMock = jest.fn()
@@ -72,7 +72,7 @@ describe('components/card/Signup.vue', () => {
     component.setData({
       email: 'test@coinaly.io',
       password: 'testtest',
-      privacyDisclaimer: true
+      privacyTermsOfUse: true
     })
     component.find('form').trigger('submit')
 

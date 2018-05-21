@@ -55,10 +55,10 @@
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="inputPrivacyDisclaimer" name="privacyDisclaimer" data-vv-as="Privacy Policy and Disclaimer" :class="{ 'is-invalid': errors.has('privacyDisclaimer')}" v-model="privacyDisclaimer" v-validate="'required'">
-              <label class="custom-control-label font-weight-normal" id="labelPrivacyDisclaimer" for="inputPrivacyDisclaimer">I agree with the <router-link to="/privacy" id="privacyLink">Privacy Policy</router-link> and <router-link to="/disclaimer" id="disclaimerLink">Disclaimer</router-link>.</label>
+              <input type="checkbox" class="custom-control-input" id="inputPrivacyTermsOfUse" name="privacyTermsOfUse" data-vv-as="Privacy Policy and Terms of Use" :class="{ 'is-invalid': errors.has('privacyTermsOfUse')}" v-model="privacyTermsOfUse" v-validate="'required'">
+              <label class="custom-control-label font-weight-normal" id="labelPrivacyTermsOfUse" for="inputPrivacyTermsOfUse">I agree with the <router-link to="/privacy-policy" id="privacyLink">Privacy Policy</router-link> and <router-link to="/terms-of-use" id="termsOfUse">Terms of Use</router-link>.</label>
             </div>
-            <invalid-feedback v-show="errors.has('privacyDisclaimer')" :message="errors.first('privacyDisclaimer')"></invalid-feedback>
+            <invalid-feedback v-show="errors.has('privacyTermsOfUse')" :message="errors.first('privacyTermsOfUse')"></invalid-feedback>
           </div>
 
           <div v-if="error" class="alert alert-danger">
@@ -93,7 +93,7 @@ export default {
     email: null,
     emailOptIn: false,
     password: null,
-    privacyDisclaimer: false,
+    privacyTermsOfUse: false,
     viewPasswordLabel: 'Verify',
     isLoading: false
   }),

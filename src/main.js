@@ -51,10 +51,10 @@ if (window.localStorage) {
 // TODO: get logged in user, check if onboarding is already done, if not: show onboarding, if so, show dashboard
 router.beforeEach((to, from, next) => {
   const isAuthenticated = store.getters['auth/isAuthenticated']
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAuth = to.meta.requiresAuth
+  const isNotAllowed = (requiresAuth === true && !isAuthenticated)
 
-  // Redirect NOT LOGGED IN users to the login page
-  if (requiresAuth && !isAuthenticated) {
+  if (isNotAllowed) {
     next({
       path: '/login',
       query: {
@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
       }
     })
   // Redrect LOGGED IN users to the homepage if they want to enter a page that's for not logged in users only
-  } else if (requiresAuth === false && isAuthenticated) {
+  } else if (isAuthenticated && (to.path === '/login' || to.path === '/signup')) {
     next('/')
   } else {
     next()

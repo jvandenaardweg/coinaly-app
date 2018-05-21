@@ -2,20 +2,13 @@
   <div id="dashboard">
     <nav-bar></nav-bar>
     <tab-bar></tab-bar>
-    <!-- <div class="page"> -->
-      <!-- <div class="page-main"> -->
-        <!-- <div class="page-content"> -->
-          <!-- <div class="container"> -->
-            <!-- <transition name="fade" mode="out-in"> -->
-              <keep-alive>
-                <router-view class="view"></router-view>
-              </keep-alive>
-            <!-- </transition> -->
-            <exchange-status></exchange-status>
-          <!-- </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-    <!-- </div> -->
+
+    <keep-alive>
+      <router-view class="view"></router-view>
+    </keep-alive>
+
+    <exchange-status></exchange-status>
+
     <page-footer></page-footer>
   </div>
 </template>
@@ -37,6 +30,8 @@ export default {
   },
   beforeMount () {
     document.querySelector('body').classList.remove('bg-dark-blue')
+
+    // Hide crisp chat in the dashboard
     if (window.$crisp) {
       window.$crisp.push(['on', 'chat:initiated', this.hideCrispChat])
     }

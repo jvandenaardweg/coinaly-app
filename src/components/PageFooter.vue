@@ -2,8 +2,8 @@
   <div class="footer">
     <p>Made with <span>&hearts;</span> in Amsterdam.</p>
     <ul>
-      <li><router-link to="/privacy-policy">Privacy Policy</router-link></li>
-      <li><router-link to="/terms-of-use">Terms of Use</router-link></li>
+      <li><router-link to="/privacy-policy">Privacy</router-link></li>
+      <li><router-link to="/terms-of-use">Terms</router-link></li>
       <li><router-link to="/contact">Contact</router-link></li>
     </ul>
   </div>
