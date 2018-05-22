@@ -34,19 +34,19 @@ export default {
     },
     unsubscribe (state, channel) {
       Vue.set(state, 'subscribed', null)
-      return state.socket.unsubscribe(channel)
+      return window.socket.unsubscribe(channel)
     },
     subscribe (state, channel) {
       Vue.set(state, 'subscribed', channel)
-      // return state.socket.subscribe(channel)
+      // return window.socket.subscribe(channel)
     },
     watch (state, channel) {
       Vue.set(state, 'watching', channel)
-      // return state.socket.watch(channel)
+      // return window.socket.watch(channel)
     },
     unwatch (state, channel) {
       Vue.set(state, 'watching', null)
-      return state.socket.unwatch(channel)
+      return window.socket.unwatch(channel)
     }
   },
   getters: {
@@ -89,7 +89,7 @@ export default {
       const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
       commit('watch', channel)
 
-      return state.socket.watch(channel, (data) => {
+      return window.socket.watch(channel, (data) => {
         // console.log('watch:', data)
         commit('tickers/setTickers', data, { root: true })
 
@@ -103,7 +103,7 @@ export default {
       const selectedExchange = rootGetters['exchanges/selected']
       const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
       commit('subscribe', channel)
-      return state.socket.subscribe(channel)
+      return window.socket.subscribe(channel)
     },
 
     unsubscribe ({ commit, rootGetters }) {
@@ -113,8 +113,8 @@ export default {
     },
 
     connect ({ commit, rootGetters }) {
-      const socket = websocketConnect()
-      commit('addSocket', socket)
+      window.socket = websocketConnect()
+      // commit('addSocket', socket)
 
       // const selectedExchange = rootGetters['exchanges/selected']
       // const exchangeDataChannel = socket.subscribe(`TICKERS~${selectedExchange.toUpperCase()}~NEW`)
@@ -126,7 +126,7 @@ export default {
       //   // context.commit('addPriceIndexes', response.data)
       // })
 
-      socket.on('subscribe', function (channelname) {
+      window.socket.on('subscribe', function (channelname) {
         console.log('subscribe:' + channelname)
         commit('setEventOutput', {
           eventName: 'subscribe',
@@ -134,7 +134,7 @@ export default {
         })
       })
 
-      socket.on('connect', function (socket) {
+      window.socket.on('connect', function (socket) {
         console.log('connect:', socket)
         commit('setEventOutput', {
           eventName: 'connect',
@@ -142,7 +142,7 @@ export default {
         })
       })
 
-      socket.on('subscribeFail', function (channelname) {
+      window.socket.on('subscribeFail', function (channelname) {
         console.log('subscribeFail:' + channelname)
         commit('setEventOutput', {
           eventName: 'subscribeFail',
@@ -150,7 +150,7 @@ export default {
         })
       })
 
-      socket.on('unsubscribe', function (channelname) {
+      window.socket.on('unsubscribe', function (channelname) {
         console.log('unsubscribe:' + channelname)
         commit('setEventOutput', {
           eventName: 'unsubscribe',
@@ -158,7 +158,7 @@ export default {
         })
       })
 
-      socket.on('subscribeStateChange', function (data) {
+      window.socket.on('subscribeStateChange', function (data) {
         console.log('subscribeStateChange:' + JSON.stringify(data))
         commit('setEventOutput', {
           eventName: 'subscribeStateChange',
@@ -166,14 +166,14 @@ export default {
         })
       })
 
-      socket.on('message', function (data) {
+      window.socket.on('message', function (data) {
         // commit('setEventOutput', {
         //   eventName: 'message',
         //   eventData: 1
         // })
       })
 
-      socket.on('error', function (data) {
+      window.socket.on('error', function (data) {
         commit('setEventOutput', {
           eventName: 'error',
           eventData: data
@@ -181,7 +181,7 @@ export default {
         console.log('Socketcluster Error', data)
       })
 
-      socket.on('connect', function (data) {
+      window.socket.on('connect', function (data) {
         console.log('Socketcluster Connect', data)
         commit('removeEventOutput', 'error')
         commit('setEventOutput', {
@@ -190,7 +190,7 @@ export default {
         })
       })
 
-      socket.on('disconnect', function (data) {
+      window.socket.on('disconnect', function (data) {
         console.log('Socketcluster Disconnect', data)
         commit('setEventOutput', {
           eventName: 'disconnect',
@@ -198,7 +198,7 @@ export default {
         })
       })
 
-      socket.on('close', function (data) {
+      window.socket.on('close', function (data) {
         console.log('Socketcluster Close', data)
         commit('setEventOutput', {
           eventName: 'close',
@@ -206,7 +206,7 @@ export default {
         })
       })
 
-      socket.on('kickOut', function (data) {
+      window.socket.on('kickOut', function (data) {
         console.log('Socketcluster KickOut', data)
         commit('setEventOutput', {
           eventName: 'kickOut',

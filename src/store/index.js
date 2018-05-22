@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate' // Persist state for our PWA (so on reloads we persist state)
 
 import BalancesStore from '@/store/modules/balances'
 import DepositsStore from '@/store/modules/deposits'
@@ -30,5 +31,6 @@ export default new Vuex.Store({
     auth: AuthStore,
     user: UserStore,
     tickers: TickersStore
-  }
+  },
+  plugins: [createPersistedState()]
 })
