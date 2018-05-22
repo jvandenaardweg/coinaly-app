@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import LayoutFocus from '@/layouts/Focus'
-import LayoutDashboard from '@/layouts/Dashboard'
-import LayoutPage from '@/layouts/Page'
+// import LayoutFocus from '@/layouts/Focus'
+// import LayoutDashboard from '@/layouts/Dashboard'
+// import LayoutPage from '@/layouts/Page'
 
 import PageMarketsIndex from '@/pages/markets/Index'
 // import PageMarketsIndex from '@/pages/markets/Index'
@@ -47,6 +47,12 @@ import PagePrivacyIndex from '@/pages/privacy/Index.vue'
 import PageTermsOfUse from '@/pages/terms-of-use/Index.vue'
 
 import PageNotFound from '@/pages/not-found/Index.vue'
+
+// Use Webpack's code splitting, so signup users don't get the whole bundle
+// And loggedin users don't get authentication code, which they dont need anymore
+const LayoutFocus = () => import(/* webpackChunkName: "LayoutFocus" */ '@/layouts/Focus')
+const LayoutDashboard = () => import(/* webpackChunkName: "LayoutDashboard" */ '@/layouts/Dashboard')
+const LayoutPage = () => import(/* webpackChunkName: "LayoutPage" */ '@/layouts/Page')
 
 Vue.use(Router)
 
