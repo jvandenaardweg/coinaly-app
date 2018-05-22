@@ -2,17 +2,17 @@
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
 
-      <btn-back class="navbar-back" v-if="showBack"></btn-back>
+      <btn-back class="navbar-back" v-if="showBack" ref="navbarBack"></btn-back>
 
-      <router-link class="navbar-brand" v-if="!showBack" to="/" exact>
+      <router-link class="navbar-brand" v-if="!showBack" to="/" ref="navbarBrand" exact>
         <logo fill="#ffffff"></logo>
       </router-link>
 
-      <div class="navbar-title d-sm-none">
+      <div class="navbar-title d-sm-none" ref="navbarTitle">
         <h1 class="h4">{{ routeName }}</h1>
       </div>
 
-      <div class="navbar-authenticated" v-if="isAuthenticated">
+      <div class="navbar-authenticated" v-if="isAuthenticated" ref="navbarAuthenticated">
         <btn-refresh class="d-none d-sm-block"></btn-refresh>
         <btn-select-exchange></btn-select-exchange>
         <btn-settings class="ml-1"></btn-settings>
@@ -57,11 +57,6 @@ export default {
         }
       }
       return false
-    }
-  },
-  methods: {
-    handleBack () {
-      this.$router.go(-1)
     }
   }
 }
