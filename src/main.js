@@ -51,7 +51,7 @@ if (window.localStorage) {
 // TODO: get logged in user, check if onboarding is already done, if not: show onboarding, if so, show dashboard
 router.beforeEach((to, from, next) => {
   const isAuthenticated = store.getters['auth/isAuthenticated']
-  const requiresAuth = to.meta.requiresAuth
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const isNotAllowed = (requiresAuth === true && !isAuthenticated)
 
   if (isNotAllowed) {
