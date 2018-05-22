@@ -1,13 +1,14 @@
 <template>
-  <div class="dropdown">
-    <button @click="show = !show" class="btn btn-select btn-dark-blue btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div class="dropdown" v-click-outside="handleClickOutside">
+    <button @click.prevent="handleClickDropdownButton" class="btn btn-select btn-dark-blue btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{ switchLabel }}
     </button>
     <div class="dropdown-menu dropdown-menu-right" :class="{'show': show }" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" v-if="userAvailableExchanges" v-for="exchange in userAvailableExchanges" :key="exchange.id" @click.prevent="handleSwitch(exchange.slug)" v-show="selected !== exchange.slug">Switch to: <strong>{{ exchange.name }}</strong></a>
+      <a class="dropdown-item dropdown-item-exchange" v-if="userAvailableExchanges" v-for="exchange in userAvailableExchanges" :key="exchange.id" @click.prevent="handleSwitch(exchange.slug)" v-show="selected !== exchange.slug">Switch to: <strong>{{ exchange.name }}</strong></a>
       <div class="dropdown-divider" v-if="userAvailableExchanges.length > 1"></div>
-      <router-link to="/settings/exchanges" class="dropdown-item" @click.native="show = false">Exchange settings</router-link>
-      <button type="button" class="dropdown-item" @click.prevent="handleClickLogout">Logout</button>
+      <router-link to="/settings/exchanges" class="dropdown-item" @click.native="show = false" id="buttonExchangeSettings">Exchange settings</router-link>
+      <button type="button" class="dropdown-item" @click.prevent="handleClickReload" id="buttonReload">Reload</button>
+      <button type="button" class="dropdown-item" @click.prevent="handleClickLogout" id="buttonLogout">Logout</button>
     </div>
   </div>
 </template>
@@ -32,7 +33,7 @@ export default {
     }),
     switchLabel () {
       if (this.isLoading) return 'Switching...'
-      if (!this.isLoading && this.userAvailableExchanges) return this.selectedName
+      if (!this.isLoading && this.userAvailableExchanges && this.selectedName) return this.selectedName
       return 'Select exchange'
     },
     userAvailableExchanges () {
@@ -50,11 +51,16 @@ export default {
       }
     }
   },
-  // created () {
-  //   this.$store.dispatch('exchanges/getAllExchanges')
-  //   this.$store.dispatch('keys/getAllKeys')
-  // },
   methods: {
+    handleClickDropdownButton (event) {
+      this.show = !this.show
+    },
+    handleClickOutside (event) {
+      this.show = false
+    },
+    handleClickReload (event) {
+      window.location.reload()
+    },
     handleClickLogout (event) {
       this.$store.dispatch('auth/logout')
     },
@@ -62,10 +68,9 @@ export default {
       this.isLoading = true
       this.show = false
 
-      // this.$store.commit('markets/addAll', null)
-      // this.$store.commit('balances/addAll', null)
-      // this.$store.commit('orders/addAllClosed', null)
-
+      await this.loadAllData(exchangeSlug)
+    },
+    async loadAllData (exchangeSlug) {
       await Promise.all([
         this.$store.dispatch('websockets/unsubscribe'),
         this.$store.commit('exchanges/setSelected', exchangeSlug),

@@ -10,6 +10,9 @@ import RavenVue from 'raven-js/plugins/vue'
 import VeeValidate from 'vee-validate'
 import { sync } from 'vuex-router-sync'
 import '@/filters'
+import clickOutsideDirective from '@/directives/click-outside'
+
+Vue.use(clickOutsideDirective)
 
 // Reduce the memory footprint of VeeValidate by injecting it on a component basis
 // Use this in your component:
