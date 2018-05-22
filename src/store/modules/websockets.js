@@ -34,7 +34,6 @@ export default {
     },
     unsubscribe (state, channel) {
       Vue.set(state, 'subscribed', null)
-      return window.socket.unsubscribe(channel)
     },
     subscribe (state, channel) {
       Vue.set(state, 'subscribed', channel)
@@ -109,7 +108,8 @@ export default {
     unsubscribe ({ commit, rootGetters }) {
       const selectedExchange = rootGetters['exchanges/selected']
       const channel = `TICKERS~${selectedExchange.toUpperCase()}~NEW`
-      return commit('unsubscribe', channel)
+      commit('unsubscribe', channel)
+      return window.socket.unsubscribe(channel)
     },
 
     connect ({ commit, rootGetters }) {

@@ -37,14 +37,18 @@ export default {
     }
 
     // Use before mount for API calls that don't need additional data, like a selected exchange
-    this.$store.dispatch('prices/getAllPrices')
-    this.$store.dispatch('symbols/getAll')
-    this.$store.dispatch('exchanges/getAllExchanges')
-    this.$store.dispatch('keys/getAllKeys')
+    if (!this.keys) {
+      this.$store.dispatch('prices/getAllPrices')
+      this.$store.dispatch('symbols/getAll')
+      this.$store.dispatch('exchanges/getAllExchanges')
+      this.$store.dispatch('keys/getAllKeys')
 
-    if (this.selectedExchange) {
-      this.loadInitialData()
+      if (this.selectedExchange) {
+        this.loadInitialData()
+      }
     }
+
+    this.connectWebsocket()
   },
   computed: {
     ...mapGetters({
@@ -59,6 +63,8 @@ export default {
     loadInitialData () {
       this.$store.dispatch('markets/loadAll')
       this.$store.dispatch('balances/getAll')
+    },
+    connectWebsocket () {
       this.$store.dispatch('websockets/connect')
       this.$store.dispatch('websockets/subscribe')
       this.$store.dispatch('websockets/watch')

@@ -23,6 +23,10 @@ export function subscribe (socket, channel) {
   return socket.subscribe(channel)
 }
 
+export function unsubscribe (socket, channel) {
+  return socket.unsubscribe(channel)
+}
+
 export function watch (socket, channel) {
   return socket.watch(channel)
 }
