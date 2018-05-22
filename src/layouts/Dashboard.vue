@@ -72,6 +72,8 @@ export default {
   },
   watch: {
     keys (newValue, oldValue) {
+      // Watch for changes in the keys store
+      // When we have keys, and there's no selectedExchange, we just set the selectedExchange to the first
       if (!this.selectedExchange) {
         this.$store.commit('exchanges/setSelected', newValue[0].slug)
       }
