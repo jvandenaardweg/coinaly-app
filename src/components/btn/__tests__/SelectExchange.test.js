@@ -130,12 +130,4 @@ describe('components/btn/SelectExchange.vue', () => {
 
     expect(component.vm.handleClickReload).toHaveBeenCalledTimes(1)
   })
-
-  it('should go to the exchange settings page when clicking on the exchange settings link', async () => {
-    $buttonExchangeSettings.trigger('click')
-
-    await flushPromises()
-
-    expect(component.vm.handleClickReload).toHaveBeenCalledTimes(1)
-  })
 })
