@@ -1,18 +1,18 @@
 <template>
   <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container justify-content-center">
+    <div class="container">
 
-      <btn-back v-if="showBack" class="mr-auto"></btn-back>
+      <btn-back class="navbar-back" v-if="showBack"></btn-back>
 
-      <router-link v-if="!showBack" class="navbar-brand p-0 d-flex flex-row align-items-center mr-auto" to="/" exact>
+      <router-link class="navbar-brand" v-if="!showBack" to="/" exact>
         <logo fill="#ffffff"></logo>
       </router-link>
 
-      <div class="align-items-center d-sm-none">
-        <h1 class="text-white m-0 h4">{{ routeName }}</h1>
+      <div class="navbar-title d-sm-none">
+        <h1 class="h4">{{ routeName }}</h1>
       </div>
 
-      <div v-if="isAuthenticated" class="d-flex ml-auto">
+      <div class="navbar-authenticated" v-if="isAuthenticated">
         <btn-refresh class="d-none d-sm-block"></btn-refresh>
         <btn-select-exchange></btn-select-exchange>
         <btn-settings class="ml-1"></btn-settings>
@@ -73,6 +73,38 @@ export default {
   background-color: $blue;
   height: 3.75rem;
   border-bottom: 0 !important;
+
+  .container {
+    justify-content: center;
+  }
+
+  .navbar-back {
+    margin-right: auto;
+  }
+
+  .navbar-brand {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: auto;
+    margin-left: -7px;
+  }
+
+  .navbar-title {
+    position: absolute;
+    align-items: center;
+
+    h1 {
+      color: $white;
+      margin: 0;
+    }
+  }
+
+  .navbar-authenticated {
+    display: flex;
+    margin-left: auto;
+  }
 }
 
 .navbar-nav {
