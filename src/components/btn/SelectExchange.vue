@@ -59,7 +59,7 @@ export default {
       this.show = false
     },
     handleClickReload (event) {
-      window.location.reload()
+      window.location.reload(true)
     },
     handleClickLogout (event) {
       this.$store.dispatch('auth/logout')

@@ -30,3 +30,7 @@ export function unsubscribe (socket, channel) {
 export function watch (socket, channel) {
   return socket.watch(channel)
 }
+
+export function disconnect (socket, channel) {
+  return socket.disconnect(channel)
+}

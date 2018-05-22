@@ -10,6 +10,8 @@
     <exchange-status></exchange-status>
 
     <page-footer></page-footer>
+
+    <update-banner></update-banner>
   </div>
 </template>
 
@@ -19,6 +21,7 @@ import NavBar from '@/components/NavBar.vue'
 import ExchangeStatus from '@/components/ExchangeStatus.vue'
 import TabBar from '@/components/TabBar.vue'
 import PageFooter from '@/components/PageFooter.vue'
+import UpdateBanner from '@/components/UpdateBanner.vue'
 
 export default {
   name: 'LayoutDashboard',
@@ -26,7 +29,8 @@ export default {
     NavBar,
     ExchangeStatus,
     TabBar,
-    PageFooter
+    PageFooter,
+    UpdateBanner
   },
   beforeMount () {
     document.querySelector('body').classList.remove('bg-dark-blue')

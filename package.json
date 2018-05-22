@@ -50,6 +50,7 @@
     "@vue/test-utils": "^1.0.0-beta.16",
     "axios": "^0.18.0",
     "babel-jest": "^22.4.3",
+    "battery-friendly-timer": "^1.0.1",
     "bootstrap": "^4.1.0",
     "chart.js": "^2.7.2",
     "cryptocurrency-icons": "git+https://github.com/cjdowner/cryptocurrency-icons.git",

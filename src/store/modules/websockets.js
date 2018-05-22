@@ -112,6 +112,10 @@ export default {
       return window.socket.unsubscribe(channel)
     },
 
+    disconnect () {
+      window.socket.disconnect()
+    },
+
     connect ({ commit, rootGetters }) {
       window.socket = websocketConnect()
       // commit('addSocket', socket)
