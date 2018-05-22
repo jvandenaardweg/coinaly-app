@@ -71,9 +71,9 @@ export default {
   computed: {
     fetchUrl () {
       if (process.env.NODE_ENV === 'production') {
-        return 'https://app.coinaly.io/index.html'
+        return 'https://app.coinaly.io/index.html?ref=checkNewVersion'
       } else {
-        return 'http://localhost:8080/index.html'
+        return 'http://localhost:8080/index.html?ref=checkNewVersion'
       }
     }
   },
