@@ -89,6 +89,8 @@ export default {
   .navbar-title {
     position: absolute;
     align-items: center;
+    width: 100%;
+    text-align: center;
 
     h1 {
       color: $white;
