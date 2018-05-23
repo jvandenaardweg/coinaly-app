@@ -49,7 +49,8 @@ export default {
       return (this.symbols) ? this.$refs : null
     },
     isLoading () {
-      return this.isLoadingMarkets
+      // Only show loading indicator when we have no data
+      return this.isLoadingMarkets && !this.ohlcvData
     },
     tickerLast () {
       const ticker = this.getTickerBySymbol(this.marketSymbol)
@@ -115,7 +116,7 @@ export default {
         interval: '1h',
         forceRefresh: forceRefresh
       }
-      console.log(payload)
+      // console.log(payload)
       this.$store.dispatch('markets/getOHLCV', payload)
     }
   },
