@@ -1,7 +1,7 @@
 <template>
   <div class="update-banner" v-if="hasUpdate">
-    <div class="update-banner-message">
-      <h2 class="h3">Coinaly updated</h2>
+    <div class="update-banner-message" ref="updateBannerMessage">
+      <h2 class="h3" ref="updateBannerTitle">Coinaly updated</h2>
       <p>We have updated Coinaly recently. To enjoy the new features just use the button below.</p>
       <button type="button" class="btn btn-primary" @click.prevent="handleClick">Use new version</button>
     </div>
@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import timer from 'battery-friendly-timer'
-
+import axios from '../axios'
 // Resources used:
 // https://marmelab.com/blog/2016/08/29/auto-reload-spa-on-mobile-setinterval.html
 // https://github.com/marmelab/battery-friendly-timer
@@ -35,16 +34,15 @@ export default {
     }
   },
   beforeMount () {
-    this.interval = timer.setInterval(
-      () => fetch(this.fetchUrl)
+    this.interval = setInterval(
+      () => axios.get(this.fetchUrl)
         .then(response => {
           if (response.status !== 200) {
             throw new Error('offline')
           }
-          return response.text()
+          return response.data
         })
         .then(html => {
-          console.log(html)
           if (!this.previousHash) {
             this.previousHash = this.hash(html)
             return
@@ -64,8 +62,7 @@ export default {
         .catch(err => {
           console.log('Error fetching index.html to check for new release', err)
         }),
-      this.tryDelay,
-      this.forceDelay
+      this.tryDelay
     )
   },
   computed: {
