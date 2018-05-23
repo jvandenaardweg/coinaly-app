@@ -75,13 +75,25 @@ export default new Router({
     {
       path: '/',
       component: LayoutDashboard,
+      // beforeEnter: (to, from, next) => {
+      //   console.log('beforeEnter', to, from)
+      //   next()
+      // },
       meta: {
         requiresAuth: true
       },
       children: [
         {
-          path: '',
-          redirect: '/balances'
+          path: ''
+          // redirect: to => {
+          //   // console.log('redirect to', to)
+          //   if (!to.query.pwa) {
+          //     console.log('redirect to /balances')
+          //     return '/balances'
+          //   }
+          //   return null
+          // }
+          // redirect: '/balances'
         },
         {
           path: '/balances',

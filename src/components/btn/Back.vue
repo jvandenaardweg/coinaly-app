@@ -11,7 +11,8 @@ export default {
   name: 'BtnBack',
   methods: {
     handleClick () {
-      this.$router.go(-1)
+      console.log(this.$store.state.route)
+      this.$router.go(-2)
     }
   }
 }
