@@ -1,6 +1,7 @@
 {
   "short_name": "Coinaly",
-  "name": "Coinaly App",
+  "name": "Coinaly",
+  "description": "Powerful and easy to use trade interface for cryptocurrencies",
   "icons": [
     {
       "src": "/static/icons/favicons/android-icon-36x36.png",
@@ -48,7 +49,8 @@
       "type": "image/png"
      }
   ],
-  "start_url": "/index.html",
+  "start_url": "./",
+  "scope": ".",
   "display": "standalone",
   "background_color": "#2e63b1",
   "theme_color": "#2e63b1"

@@ -1,5 +1,6 @@
 const fs = require('fs')
 
+// See: https://github.com/vuejs/vue-cli/blob/dev/docs/config.md
 module.exports = {
   css: {
     loaderOptions: {
@@ -7,5 +8,15 @@ module.exports = {
         data: fs.readFileSync('./src/scss/bootstrap/_setting.scss', 'utf-8')
       }
     }
+  },
+  pwa: {
+    name: 'Coinaly',
+    themeColor: '#2e63b1',
+    msTileColor: '#2e63b1',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black'
+  },
+  devServer: {
+    port: 8080
   }
 }
