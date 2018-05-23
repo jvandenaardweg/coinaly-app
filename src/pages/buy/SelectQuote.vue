@@ -7,7 +7,7 @@
           <p class="text-muted">Which currency you want to use to buy {{ baseId }}?</p>
         </div>
 
-        <card-quote-markets :baseId="baseId"></card-quote-markets>
+        <card-balance-quote-markets :baseId="baseId"></card-balance-quote-markets>
 
       </div>
     </div>
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import CardQuoteMarkets from '@/components/card/QuoteMarkets'
+import CardBalanceQuoteMarkets from '@/components/card/BalanceQuoteMarkets'
 
 export default {
   name: 'PageBuySelectQuote',
   components: {
-    CardQuoteMarkets
+    CardBalanceQuoteMarkets
   },
   computed: {
     baseId () {

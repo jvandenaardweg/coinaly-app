@@ -7,7 +7,6 @@
           <p class="text-muted">The currencies below are what's in your current balance.</p>
         </div>
         <card-select-balance
-          :preselectedCurrency="preselectedCurrency"
           :nextStepAction="'Next step: Market'"
           :routeBase="'sell'">
         </card-select-balance>
@@ -20,14 +19,9 @@
 import CardSelectBalance from '@/components/card/CardSelectBalance'
 
 export default {
-  name: 'PageSellSelectQuoteCurrency',
+  name: 'PageSellSelectBase',
   components: {
     CardSelectBalance
-  },
-  data () {
-    return {
-      preselectedCurrency: (this.$store.state.route.from) ? this.$store.state.route.from.params.quoteCurrency : null
-    }
   }
 }
 </script>

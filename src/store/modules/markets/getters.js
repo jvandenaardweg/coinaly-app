@@ -83,6 +83,21 @@ export default {
       })
     }
   },
+  availableQuoteMarkets: (state, getters, rootState, rootGetters) => {
+    // TODO: write test
+    // Getter dependency: balances
+    const allFilledBalances = rootGetters['balances/allFilledBalances']
+    const allQuoteMarkets = getters.allQuoteMarkets
+
+    if (allQuoteMarkets && allFilledBalances) {
+      return pickBy(allQuoteMarkets, (quoteMarket, quoteMarketSymbol) => {
+        // A market is available when atleast one or more balance symbols is present in the base markets object
+        return Object.keys(allFilledBalances).some(balanceSymbol => {
+          return quoteMarketSymbol === balanceSymbol
+        })
+      })
+    }
+  },
   totalAvailableBaseMarkets: (state, getters) => {
     // TODO: write test
     if (getters.availableBaseMarkets) return Object.keys(getters.availableBaseMarkets).length

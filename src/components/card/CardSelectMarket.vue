@@ -5,7 +5,7 @@
 
     <CardPartialEmpty
       :is-empty="!isLoadingMarkets && !hasMarkets"
-      :text="`No selling markets available for ${quoteCurrency}.`"
+      :text="`No selling markets available for ${quoteId}.`"
       :actionLink="'/sell'"
       :actionLabel="'Select different currency'">
     </CardPartialEmpty>
@@ -31,7 +31,7 @@ export default {
     'allMarkets',
     'isLoadingMarkets',
     'previousBaseCurrency',
-    'quoteCurrency',
+    'quoteId',
     'nextStepAction',
     'currencySymbols',
     'routeBase'
@@ -51,7 +51,7 @@ export default {
       return Object.keys(this.quoteCurrencyMarkets).length > 0
     },
     routeUrl () {
-      return `/${this.routeBase}/${this.quoteCurrency}/${this.baseCurrency}`
+      return `/${this.routeBase}/${this.quoteId}/${this.baseCurrency}`
     }
   },
   methods: {

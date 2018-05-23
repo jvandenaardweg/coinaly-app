@@ -36,8 +36,8 @@ import PageBuySelectBase from '@/pages/buy/SelectBase.vue'
 import PageBuySelectPricing from '@/pages/buy/SelectPricing.vue'
 
 import PageSellIndex from '@/pages/sell/Index.vue'
-import PageSellSelectQuoteCurrency from '@/pages/sell/SelectQuoteCurrency.vue'
-import PageSellSelectBaseCurrency from '@/pages/sell/SelectBaseCurrency.vue'
+import PageSellSelectBase from '@/pages/sell/SelectBase.vue'
+import PageSellSelectQuote from '@/pages/sell/SelectQuote.vue'
 import PageSellSelectPricing from '@/pages/sell/SelectPricing.vue'
 
 import PageOnboardingIndex from '@/pages/onboarding/Index.vue'
@@ -107,12 +107,12 @@ export default new Router({
             {
               path: '',
               component: PageBuySelectBase,
-              name: 'Select market'
+              name: 'Select market (base)'
             },
             {
               path: ':baseId',
               component: PageBuySelectQuote,
-              name: 'Select balance'
+              name: 'Select balance (quote)'
             },
             {
               path: ':baseId/:quoteId',
@@ -127,16 +127,16 @@ export default new Router({
           children: [
             {
               path: '',
-              component: PageSellSelectQuoteCurrency,
-              name: 'Select balance'
+              component: PageSellSelectBase,
+              name: 'Select balance (base)'
             },
             {
-              path: ':quoteId',
-              component: PageSellSelectBaseCurrency,
-              name: 'Select market'
+              path: ':baseId',
+              component: PageSellSelectQuote,
+              name: 'Select market (quote)'
             },
             {
-              path: ':quoteId/:baseId',
+              path: ':baseId/:quoteId',
               component: PageSellSelectPricing,
               name: 'Create order'
             }
