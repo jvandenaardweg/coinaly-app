@@ -7,7 +7,7 @@
 
     <div v-if="hasCurrencies" class="list-group list-group-flush">
       <list-group-item-symbol-select
-        v-for="(meta, symbol, index) in allFilledBalances" :key="symbol"
+        v-for="(meta, symbol) in allFilledBalances" :key="symbol"
         :symbol="symbol"
         :meta="meta.free.toString()"
         :currency="currencies[symbol]">

@@ -14,7 +14,6 @@ const context = {
 }
 
 describe('modules/deposits/actions.js', () => {
-
   const payload = {
     symbolId: 'BTC',
     forceRefresh: false
@@ -41,5 +40,4 @@ describe('modules/deposits/actions.js', () => {
     expect(context.commit).toHaveBeenCalledWith('stopLoading')
     done()
   })
-
 })

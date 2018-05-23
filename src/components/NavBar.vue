@@ -62,7 +62,6 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
 .navbar {
   background-color: $blue;

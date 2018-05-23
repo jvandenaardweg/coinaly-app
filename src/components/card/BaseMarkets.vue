@@ -13,7 +13,7 @@
 
     <div v-if="!isLoading" class="list-group list-group-flush">
       <list-group-item-symbol-select
-        v-for="(quoteSymbols, baseSymbol, index) in searchedMarkets"
+        v-for="(quoteSymbols, baseSymbol) in searchedMarkets"
         :key="baseSymbol"
         :symbol="baseSymbol"
         :meta="meta(baseSymbol, quoteSymbols)"

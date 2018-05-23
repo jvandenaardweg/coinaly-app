@@ -4,7 +4,6 @@ import nock from 'nock'
 import depositsAddressMock from '@/mocks/deposits-address.json'
 
 describe('api/keys.js', () => {
-
   it('getDepositAddress should reply with an object', async () => {
     const exampleExchange = 'bittrex'
     const exampleSymbolId = 'BTC'

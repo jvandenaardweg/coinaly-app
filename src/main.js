@@ -9,7 +9,9 @@ import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 import VeeValidate from 'vee-validate'
 import { sync } from 'vuex-router-sync'
+import './registerServiceWorker'
 import '@/filters'
+import '@/scss/bootstrap/bootstrap.scss'
 import clickOutsideDirective from '@/directives/click-outside'
 
 Vue.use(clickOutsideDirective)
@@ -74,9 +76,7 @@ router.beforeEach((to, from, next) => {
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   store,
-  template: '<App/>',
-  components: { App }
-})
+  render: h => h(App)
+}).$mount('#app')

@@ -5,7 +5,6 @@ import mutations from '@/store/modules/deposits/mutations'
 import depositsAddressMock from '@/mocks/deposits-address.json'
 
 describe('modules/deposits/getters.js', () => {
-
   it('getter isLoading should return true when state.isLoading is true', () => {
     state.isLoading = true
     expect(getters.isLoading(state)).toBe(true)
@@ -38,5 +37,4 @@ describe('modules/deposits/getters.js', () => {
     mutations.addAddress(state, depositsAddressMock) // Fill the store with something
     expect(getters.getAddressBySymbol(state)('BTC')).toBe(depositsAddressMock.address)
   })
-
 })

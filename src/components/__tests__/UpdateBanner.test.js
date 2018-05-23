@@ -41,5 +41,4 @@ describe('components/UpdateBanner.vue', () => {
 
     expect(handleClickMock).toHaveBeenCalledTimes(1)
   })
-
 })

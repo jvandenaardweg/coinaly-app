@@ -16,6 +16,4 @@ describe('components/btn/Refresh.vue', () => {
   //   component.vm.isLoading = true
   //   expect(component.vm.refreshLabel).toBe(true)
   // })
-
-
 })

@@ -7,7 +7,6 @@ import mockAuthResetPassword from '@/mocks/auth-reset-password.json'
 import mockAuthResetToken from '@/mocks/auth-reset-token.json'
 
 describe('api/auth.js', () => {
-
   afterEach(() => {
     nock.cleanAll()
   })

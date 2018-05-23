@@ -4,15 +4,15 @@ import flushPromises from 'flush-promises'
 import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'
 
-const localVue = createLocalVue()
-
-localVue.use(Vuex)
-localVue.use(VeeValidate, { inject: false })
-
 import exchangesModule from '@/store/modules/exchanges'
 import keysModule from '@/store/modules/keys'
 
 import mockExchangesAll from '@/mocks/exchanges-all.json'
+
+const localVue = createLocalVue()
+
+localVue.use(Vuex)
+localVue.use(VeeValidate, { inject: false })
 
 const $route = {
   params: {

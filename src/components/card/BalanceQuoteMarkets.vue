@@ -7,7 +7,7 @@
 
     <div v-if="!isLoading" class="list-group list-group-flush">
       <list-group-item-symbol-select
-        v-for="(meta, symbol, index) in availableBalances"
+        v-for="(meta, symbol) in availableBalances"
         :key="symbol"
         :symbol="symbol"
         :meta="meta.free.toString()"

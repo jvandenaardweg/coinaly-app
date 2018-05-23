@@ -13,7 +13,6 @@ const context = {
 }
 
 describe('modules/balances/actions.js', () => {
-
   // afterEach((done) => {
   //   nock.cleanAll()
   //   nock.restore()
@@ -52,5 +51,4 @@ describe('modules/balances/actions.js', () => {
   //   expect(context.commit).toHaveBeenCalledWith('stopLoading')
   //   done()
   // })
-
 })

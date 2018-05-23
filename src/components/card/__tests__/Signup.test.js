@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import flushPromises from 'flush-promises';
+import flushPromises from 'flush-promises'
 import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'
 import Signup from '@/components/card/Signup.vue'
@@ -134,7 +134,7 @@ describe('components/card/Signup.vue', () => {
     component.find('form').trigger('submit')
     await flushPromises()
     expect(component.vm.errors.has('email')).toBe(true)
-    expect(component.find({ref:'emailError'}).isVisible()).toBe(true)
+    expect(component.find({ref: 'emailError'}).isVisible()).toBe(true)
   })
 
   it('should render an error when email is incorrect but form is submitted', async () => {
@@ -144,13 +144,13 @@ describe('components/card/Signup.vue', () => {
     component.find('form').trigger('submit')
     await flushPromises()
     expect(component.vm.errors.has('email')).toBe(true)
-    expect(component.find({ref:'emailError'}).isVisible()).toBe(true)
+    expect(component.find({ref: 'emailError'}).isVisible()).toBe(true)
   })
 
   it('should render an error when password is empty but form is submitted', async () => {
     component.find('form').trigger('submit')
     await flushPromises()
     expect(component.vm.errors.has('password')).toBe(true)
-    expect(component.find({ref:'passwordError'}).isVisible()).toBe(true)
+    expect(component.find({ref: 'passwordError'}).isVisible()).toBe(true)
   })
 })

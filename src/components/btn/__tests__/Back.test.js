@@ -13,12 +13,10 @@ describe('components/btn/Back.vue', () => {
   })
 
   it('should call method handleClick when clicked', () => {
-
     const handleClickMock = jest.fn()
     component.setMethods({ handleClick: handleClickMock })
 
     component.trigger('click')
     expect(handleClickMock.mock.calls).toHaveLength(1)
   })
-
 })

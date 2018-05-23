@@ -3,7 +3,6 @@ import state from '@/store/modules/auth/state'
 // import authLoginMock from '@/mocks/auth-login.json'
 
 describe('modules/auth/getters.js', () => {
-
   it('getter isLoading should return true when state.isLoading is true', () => {
     state.isLoading = true
     expect(getters.isLoading(state)).toBe(true)
@@ -43,5 +42,4 @@ describe('modules/auth/getters.js', () => {
     state.success = 'This is a success message'
     expect(getters.success(state)).toBe('This is a success message')
   })
-
 })

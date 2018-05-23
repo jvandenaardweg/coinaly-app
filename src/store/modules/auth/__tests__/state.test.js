@@ -1,7 +1,6 @@
 import state from '@/store/modules/auth/state'
 
 describe('modules/auth/state.js', () => {
-
   it('state has the correct initial state', () => {
     expect(state.isAuthenticated).toBe(false)
     expect(state.isLoading).toBe(null)

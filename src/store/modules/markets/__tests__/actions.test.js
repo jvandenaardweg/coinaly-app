@@ -17,7 +17,6 @@ const context = {
 
 describe('modules/markets/actions.js', () => {
   it('action loadAll should store all markets', async (done) => {
-
     nock('http://localhost:5000')
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
@@ -38,7 +37,6 @@ describe('modules/markets/actions.js', () => {
   })
 
   it('action getOHLCV should store OHLCV data per market symbol', async (done) => {
-
     const payload = {
       marketSymbol: 'BTC/USDT',
       interval: '1d',

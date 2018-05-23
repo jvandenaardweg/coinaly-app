@@ -27,7 +27,6 @@ describe('components/TradingViewChart.vue', () => {
     expect(component.props().baseId).toBe(exampleBaseId)
   })
 
-
   it('should set the correct quoteId', () => {
     expect(component.props().quoteId).toBe(exampleQuoteId)
   })

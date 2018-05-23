@@ -43,5 +43,4 @@ describe('modules/prices/getters.js', () => {
     state.prices = null
     expect(getters.getPriceBySymbol(state)('BTC')).toBe(null)
   })
-
 })

@@ -69,5 +69,4 @@ describe('components/NavBar.vue', () => {
     const $navbarTitle = component.find({ref: 'navbarTitle'})
     expect($navbarTitle.text()).toBe('BTC')
   })
-
 })

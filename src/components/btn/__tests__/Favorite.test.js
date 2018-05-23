@@ -39,5 +39,4 @@ describe('components/btn/Favorite.vue', () => {
     expect(component.vm.strokeColor).toBe('#ccc')
     expect(component.vm.fillColor).toBe('#ccc')
   })
-
 })

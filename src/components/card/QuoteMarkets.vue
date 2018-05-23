@@ -7,7 +7,7 @@
 
     <div v-if="!isLoading" class="list-group list-group-flush">
       <list-group-item-symbol-select
-        v-for="(meta, symbol, index) in quoteMarkets"
+        v-for="(meta, symbol) in quoteMarkets"
         :key="symbol"
         :symbol="meta.quoteId"
         :meta="tickerLast(symbol, meta.quoteId)"

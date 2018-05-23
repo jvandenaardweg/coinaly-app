@@ -4,7 +4,6 @@ import state from '@/store/modules/keys/state'
 import keysMock from '@/mocks/keys.json'
 
 describe('modules/keys/getters.js', () => {
-
   it('getter isLoading should return true when state.isLoading is true', () => {
     state.isLoading = true
     expect(getters.isLoading(state)).toBe(true)
@@ -34,5 +33,4 @@ describe('modules/keys/getters.js', () => {
     state.keys = null
     expect(getters.hasKeys(state)).toBe(false)
   })
-
 })

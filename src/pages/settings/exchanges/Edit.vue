@@ -7,30 +7,30 @@
       <div class="alert alert-info">Because your current {{ exchangeName }}  API key and secret are stored securely, we don't show them here for security reasons. 👍</div>
       <div class="form-group">
         <label class="d-flex">{{ exchangeName }} API Key</label>
-        <input 
-          class="form-control form-control-lg" 
-          id="inputApiKey" 
-          :class="{ 'is-invalid': errors.has('apiKey'), 'is-valid': apiKey && !errors.has('apiKey') }" 
-          type="text" 
-          name="apiKey" 
-          :placeholder="`Your ${exchangeName} API key`" 
-          ref="firstInput" 
-          v-model="apiKey" 
+        <input
+          class="form-control form-control-lg"
+          id="inputApiKey"
+          :class="{ 'is-invalid': errors.has('apiKey'), 'is-valid': apiKey && !errors.has('apiKey') }"
+          type="text"
+          name="apiKey"
+          :placeholder="`Your ${exchangeName} API key`"
+          ref="firstInput"
+          v-model="apiKey"
           v-validate="'required'" />
         <invalid-feedback v-show="errors.has('apiKey')" :message="errors.first('apiKey')" ref="apiKeyError"></invalid-feedback>
       </div>
 
       <div class="form-group">
         <label class="d-flex">{{ exchangeName }} API Secret</label>
-        <input 
-          class="form-control form-control-lg" 
-          id="inputApiSecret" 
-          :class="{ 'is-invalid': errors.has('apiSecret'), 'is-valid': apiSecret && !errors.has('apiSecret') }" 
-          type="text" 
-          name="apiSecret" 
-          :placeholder="`Your ${exchangeName} API secret`" 
-          ref="inputApiSecret" 
-          v-model="apiSecret" 
+        <input
+          class="form-control form-control-lg"
+          id="inputApiSecret"
+          :class="{ 'is-invalid': errors.has('apiSecret'), 'is-valid': apiSecret && !errors.has('apiSecret') }"
+          type="text"
+          name="apiSecret"
+          :placeholder="`Your ${exchangeName} API secret`"
+          ref="inputApiSecret"
+          v-model="apiSecret"
           v-validate="'required'" />
         <invalid-feedback v-show="errors.has('apiSecret')" :message="errors.first('apiSecret')" ref="apiSecretError"></invalid-feedback>
       </div>

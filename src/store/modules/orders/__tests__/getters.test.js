@@ -4,7 +4,6 @@ import state from '@/store/modules/orders/state'
 import mockOrdersClosed from '@/mocks/orders-closed.json'
 
 describe('modules/orders/getters.js', () => {
-
   it('getter isLoading should return true when state.isLoading is true', () => {
     state.isLoading = true
     expect(getters.isLoading(state)).toBe(true)
@@ -34,5 +33,4 @@ describe('modules/orders/getters.js', () => {
     state.closed = null
     expect(getters.hasClosed(state)).toBe(false)
   })
-
 })

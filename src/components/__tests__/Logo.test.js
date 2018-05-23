@@ -44,6 +44,4 @@ describe('components/Logo.vue', () => {
     })
     expect(component.vm.width).toBe(100)
   })
-
-
 })

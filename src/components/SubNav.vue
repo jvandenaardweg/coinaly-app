@@ -63,7 +63,6 @@ export default {
         border-color: $primary;
         z-index: 2;
         color: $primary;
-        // box-shadow: $input-btn-focus-box-shadow;
       }
     }
   }
@@ -97,20 +96,6 @@ export default {
     font-size: 1.125rem;
     line-height: 1.125rem;
   }
-
-  // .subnav-group-input:checked + .subnav-group-button {
-  // 	border-color: $primary;
-  // 	z-index: 1;
-  // 	color: $primary;
-  // 	background: mix(#fff, $primary, 90%)
-  // }
-
-  // .subnav-group-input:focus + .subnav-group-button {
-  // 	border-color: $primary;
-  // 	z-index: 2;
-  // 	color: $primary;
-  // 	box-shadow: $input-btn-focus-box-shadow;
-  // }
 
   .subnav-group-pills {
     flex-wrap: wrap;

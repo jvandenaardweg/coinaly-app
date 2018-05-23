@@ -10,7 +10,6 @@ import balancesMock from '@/mocks/balances.json'
 import marketsOHLCV1dMock from '@/mocks/markets-ohlcv-1d.json'
 
 describe('modules/markets/getters.js', () => {
-
   it('getter isLoading should return true when state.isLoading is true', () => {
     state.isLoading = true
     expect(getters.isLoading(state)).toBe(true)
@@ -171,5 +170,4 @@ describe('modules/markets/getters.js', () => {
 
     expect(getters.ohlcv(state)).toMatchObject(expected)
   })
-
 })

@@ -11,30 +11,29 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 describe('components/btn/DeleteAccount.vue', () => {
-    let component
-    let store
-  
-    beforeEach(() => {
-      store = new Vuex.Store({
-        modules: {
-          user: userModule,
-          auth: authModule
-        }
-      })
-  
-      component = shallowMount(DeleteAccount, {
-        store,
-        localVue,
-        stubs: ['router-link', 'router-view']
-      })
+  let component
+  let store
+
+  beforeEach(() => {
+    store = new Vuex.Store({
+      modules: {
+        user: userModule,
+        auth: authModule
+      }
     })
+
+    component = shallowMount(DeleteAccount, {
+      store,
+      localVue,
+      stubs: ['router-link', 'router-view']
+    })
+  })
 
   it('renders a vue instance', () => {
     expect(component.isVueInstance()).toBe(true)
   })
 
   it('should call method handleClick when clicked', async () => {
-
     const handleClickMock = jest.fn()
     component.setMethods({ handleClick: handleClickMock })
 
@@ -52,7 +51,7 @@ describe('components/btn/DeleteAccount.vue', () => {
 
     component.setMethods({
       dispatchDeleteAccount: dispatchDeleteAccountMock,
-      dispatchLogout: dispatchLogoutMock 
+      dispatchLogout: dispatchLogoutMock
     })
 
     component.find('button').trigger('click')
@@ -61,5 +60,4 @@ describe('components/btn/DeleteAccount.vue', () => {
     expect(dispatchDeleteAccountMock.mock.calls).toHaveLength(1)
     expect(dispatchLogoutMock.mock.calls).toHaveLength(1)
   })
-
 })
