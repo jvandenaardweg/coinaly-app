@@ -10,8 +10,8 @@
         v-for="(meta, symbol, index) in quoteMarkets"
         :key="symbol"
         :symbol="meta.quoteId"
-        :meta="tickerLast(symbol)"
-        :currency="currencies[meta.quoteId]"
+        :meta="tickerLast(symbol, meta.quoteId)"
+        :currency="symbols[meta.quoteId]"
         >
       </list-group-item-symbol-select>
     </div>
@@ -42,30 +42,28 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allBaseMarkets: 'markets/allBaseMarkets',
       getQuoteMarketsBySymbolId: 'markets/getQuoteMarketsBySymbolId',
       allTickers: 'tickers/allTickers',
-      prices: 'prices/prices',
-      currencies: 'symbols/symbols',
-      isLoadingMarkets: 'markets/isLoading',
-      isLoadingCurrencies: 'symbols/isLoading',
-      isLoadingPrices: 'prices/isLoading',
-      isLoadingTickers: 'tickers/isLoading'
+      symbols: 'symbols/symbols'
     }),
     isLoading () {
-      return this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets || this.isLoadingPrices
+      return !this.symbols || !this.allTickers || !this.quoteMarkets
     },
     quoteMarkets () {
       return this.getQuoteMarketsBySymbolId(this.baseId)
     },
     emptyText () {
-      if (!this.isLoading && !this.quoteMarkets) return `You have no balance available to buy ${this.baseId} with.`
+      if (!this.isLoading && !Object.keys(this.quoteMarkets).length) return `There are no markets available for ${this.baseId}.`
       return null
     }
   },
   methods: {
-    tickerLast (marketSymbol) {
-      return this.allTickers[marketSymbol].last.toString() + ' ' + marketSymbol.split('/')[1]
+    tickerLast (marketSymbol, quoteId) {
+      if (this.allTickers[marketSymbol]) {
+        return `${this.allTickers[marketSymbol].last.toString()} ${quoteId}`
+      } else {
+        return 'Loading...'
+      }
     }
   }
 }

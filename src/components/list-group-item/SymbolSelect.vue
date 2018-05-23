@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     toPath () {
-      if (this.$route.path) return this.$route.path + '/' + this.symbol
+      if (this.$route && this.$route.path) return this.$route.path + '/' + this.symbol
       return null
     }
   },
