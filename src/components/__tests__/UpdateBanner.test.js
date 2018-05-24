@@ -16,14 +16,14 @@ describe('components/UpdateBanner.vue', () => {
     component.setData({
       hasUpdate: false
     })
-    expect(component.find({ref: 'updateBannerMessage'}).exists()).toBe(false)
+    expect(component.find({ref: 'updateBannerMessage'}).isVisible()).toBe(false)
   })
 
   it('renders the message when hasUpdate is true', () => {
     component.setData({
       hasUpdate: true
     })
-    expect(component.find({ref: 'updateBannerMessage'}).exists()).toBe(true)
+    expect(component.find({ref: 'updateBannerMessage'}).isVisible()).toBe(true)
   })
 
   it('should reload the page when clicking the button', () => {
