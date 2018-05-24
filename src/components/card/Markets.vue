@@ -39,6 +39,10 @@ export default {
     Loader,
     Sorting
   },
+  data: () => ({
+    searchQuery: null,
+    sortBy: null
+  }),
   computed: {
     ...mapGetters({
       isLoadingMarkets: 'markets/isLoading',
@@ -79,10 +83,10 @@ export default {
   },
   methods: {
     handleSearch (searchQuery) {
-      console.log('markets search', searchQuery)
+      this.searchQuery = searchQuery
     },
     handleSort (sortBy) {
-      console.log(sortBy)
+      this.sortBy = sortBy
     }
   }
 }

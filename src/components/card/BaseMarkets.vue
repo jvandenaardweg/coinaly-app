@@ -45,7 +45,8 @@ export default {
     Sorting
   },
   data: () => ({
-    searchQuery: null
+    searchQuery: null,
+    sortBy: null
   }),
   computed: {
     ...mapGetters({
@@ -114,7 +115,7 @@ export default {
   },
   methods: {
     handleSort (sortBy) {
-      console.log('handle sort', sortBy)
+      this.sortBy = sortBy
     },
     handleSearch (query) {
       this.searchQuery = query

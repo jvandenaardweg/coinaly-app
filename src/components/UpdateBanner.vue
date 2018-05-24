@@ -19,7 +19,8 @@ export default {
   data: () => ({
     previousHash: null,
     hasUpdate: false,
-    interval: null
+    interval: null,
+    error: null
   }),
   props: {
     tryDelay: {
@@ -60,7 +61,7 @@ export default {
           }
         })
         .catch(err => {
-          console.log('Error fetching index.html to check for new release', err)
+          this.error = err
         }),
       this.tryDelay
     )

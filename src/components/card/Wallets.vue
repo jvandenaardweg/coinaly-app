@@ -83,6 +83,7 @@ export default {
   },
   methods: {
     handleSort (sort) {
+      // eslint-disable-next-line
       console.log('sort by', sort)
     },
     IsLoadingSymbol (symbol) {

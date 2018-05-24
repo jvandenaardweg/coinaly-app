@@ -52,6 +52,7 @@ export default {
     marketSymbolToBaseSymbol,
     handleClickFavorite (event) {
       event.preventDefault()
+      // eslint-disable-next-line
       console.log('handle click fav')
     }
   },

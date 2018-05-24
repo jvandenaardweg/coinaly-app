@@ -213,6 +213,8 @@ export default {
         price: this.price,
         market: this.marketSymbol
       }
+
+      // eslint-disable-next-line
       console.log('Send this', payload)
     }
   }

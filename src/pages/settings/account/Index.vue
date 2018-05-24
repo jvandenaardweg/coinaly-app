@@ -69,7 +69,6 @@ export default {
         this.$store.commit('exchanges/setSelected', this.exchange)
         this.$store.dispatch('balances/getAll', { forceRefresh: true })
           .then(response => {
-            console.log('done')
             this.saveSuccess = true
           })
           .finally(() => {
