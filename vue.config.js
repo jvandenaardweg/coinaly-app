@@ -18,5 +18,11 @@ module.exports = {
   },
   devServer: {
     port: 8080
+  },
+  pluginOptions: {
+    critical: {
+      width: 375,
+      height: 565
+    }
   }
 }
