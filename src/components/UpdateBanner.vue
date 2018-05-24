@@ -1,5 +1,5 @@
 <template>
-  <div class="update-banner" v-if="hasUpdate">
+  <div class="update-banner" v-show="hasUpdate">
     <div class="update-banner-message" ref="updateBannerMessage">
       <h2 class="h3" ref="updateBannerTitle">Coinaly updated</h2>
       <p>We have updated Coinaly recently. To enjoy the new features just use the button below.</p>

@@ -14,8 +14,8 @@ if (process.env.NODE_ENV === 'production') {
       console.log('Content has been cached for offline use.')
     },
     updated () {
-      console.log('New content is available; please refresh.')
-      window.location.reload(true);
+      console.log('New content is available; please refresh. (changed)')
+      document.querySelector('.update-banner').style.display = 'flex'
     },
     offline () {
       console.log('No internet connection found. App is running in offline mode.')
