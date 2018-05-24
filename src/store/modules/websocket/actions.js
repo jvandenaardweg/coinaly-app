@@ -9,6 +9,7 @@ export default {
     commit('watch', tickersChannel)
 
     return window.socket.watch(tickersChannel, (data) => {
+      console.log('WATCHHH')
       // Method to determine if websocket data is delayed
       // If so, we display a message to the user, so the user knows it is not seeing realtime data
       commit('removeDelayed')
@@ -29,6 +30,24 @@ export default {
     clearTimeout(timeout)
     const tickersChannel = rootGetters['exchanges/tickersChannel']
     console.log('Websocket Subscribe:', tickersChannel)
+
+    // Set initial ticker data
+    // Initial ticker data (cache) is send as a first message when subscribing to the websocket channel
+    // So we can instantly populate the ticker store
+    window.socket.on('message', (data) => {
+      try {
+        const jsonData = JSON.parse(data)
+        if (jsonData.event === tickersChannel) {
+          commit('tickers/setTickers', jsonData.data, { root: true })
+
+          if (rootGetters['tickers/isLoading']) {
+            commit('tickers/stopLoading', null, { root: true })
+          }
+        }
+      } catch (err) {
+        // console.log('errorrr', err)
+      }
+    })
     commit('subscribe', tickersChannel)
     return window.socket.subscribe(tickersChannel)
   },

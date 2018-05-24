@@ -13,7 +13,8 @@ export default {
       }
       return response
     } catch (error) {
-      commit('addServerError', error.message)
+      const errorMessage = (error.response) ? error.response.data.message : 'We could not get your balance from the exchange. Please try again later.'
+      commit('setError', errorMessage)
       commit('stopLoading')
       return error
     }

@@ -48,9 +48,9 @@ describe('modules/balances/getters.js', () => {
     expect(getters.isLoading(state)).toBe(false)
   })
 
-  it('getter serverError should return the server error message', () => {
-    state.serverError = 'Example error'
-    expect(getters.serverError(state)).toBe('Example error')
+  it('getter error should return an error message', () => {
+    state.error = 'An error happened'
+    expect(getters.error(state)).toBe('An error happened')
   })
 
   it('getter getBalanceBySymbol should return the balance from a given symbol', () => {

@@ -4,7 +4,7 @@
       <div class="card-body">
         <p class="text-success text-center">You have <strong>{{ amountFreeInBalance | number }} {{ baseId }}</strong> available to {{ context }}</p>
 
-        <div class="form-group">
+        <div class="form-group mb-5">
           <label>Order type</label>
           <select class="custom-select custom-select-lg"
             id="orderType"
@@ -18,10 +18,10 @@
           <invalid-feedback v-show="errors.has('orderType')" :message="errors.first('orderType')" ref="orderTypeError"></invalid-feedback>
         </div>
 
-        <hr />
-        <div class="form-group">
+        <!-- <hr /> -->
+        <div class="form-group mb-5">
           <label for="exampleInputEmail1">{{ labelPrice }}</label>
-          <div class="mb-2">
+          <div class="buttons">
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('last')">last</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('bid')">bid</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('ask')">ask</button>
@@ -39,11 +39,11 @@
           <small id="emailHelp" class="form-text text-muted" v-if="price" v-html="belowOrAboveCurrentMarket"></small>
         </div>
 
-        <hr />
+        <!-- <hr /> -->
 
-        <div class="form-group">
+        <div class="form-group mb-5">
           <label>Amount of {{ baseId }}</label>
-          <div class="mb-2">
+          <div class="buttons">
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 10)">10%</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 25)">25%</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 50)">50%</button>
@@ -59,7 +59,7 @@
           </div>
         </div>
 
-        <hr />
+        <!-- <hr /> -->
 
         <div class="zigzag">
           <ul class="list-unstyled">
@@ -257,6 +257,32 @@ export default {
     height: 6px;
     transform: rotate(180deg);
   }
+}
 
+.btn-outline-secondary {
+  border-color: $border-color;
+  margin-right: -1px;
+  border-radius: 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: stretch;
+  margin-bottom: 10px;
+
+  .btn {
+    width: 100%;
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+
+    &:last-child {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
 }
 </style>

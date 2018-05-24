@@ -14,15 +14,18 @@ export default {
   name: 'BalancesSummary',
   computed: {
     ...mapGetters({
+      balancesError: 'balances/error',
       totalBalancesPrices: 'balances/totalBalancesPrices',
       getPriceBySymbol: 'prices/getPriceBySymbol',
       isLoadingPrices: 'prices/isLoading'
     }),
     totalPrice () {
+      if (this.balancesError) return 'Error'
       if (this.totalBalancesPrices) return this.$options.filters.currency(this.totalBalancesPrices)
       return 'Loading...'
     },
     totalBTCPrice () {
+      if (this.balancesError) return this.balancesError
       if (this.totalBalancesPrices && !this.isLoadingPrices) {
         return this.$options.filters.toFixed(this.totalBalancesPrices / this.getPriceBySymbol('BTC').USD) + ' BTC'
       } else {

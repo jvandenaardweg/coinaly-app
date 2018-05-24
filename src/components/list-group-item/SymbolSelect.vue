@@ -12,7 +12,7 @@
 
       <strong>{{ symbol }}</strong>
 
-      <span class="text-muted font-weight-normal">(<span :id="`list-group-item-name-${symbol}`">{{ currency.name }}</span>)</span>
+      <span class="text-muted font-weight-normal ml-1">(<span :id="`list-group-item-name-${symbol}`">{{ currency.name }}</span>)</span>
 
     </div>
 

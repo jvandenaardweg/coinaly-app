@@ -148,7 +148,7 @@ export default {
     text-align: right;
     margin-right: 1rem;
     width: 90px;
-    transition: all 250ms;
+    transition: color 250ms;
 
     &.is-negative {
       color: $danger;

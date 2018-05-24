@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate' // Persist state for our PWA (so on reloads we persist state)
+// import createPersistedState from 'vuex-persistedstate' // Persist state for our PWA (so on reloads we persist state)
 
 import BalancesStore from '@/store/modules/balances'
 import DepositsStore from '@/store/modules/deposits'
@@ -31,6 +31,13 @@ export default new Vuex.Store({
     user: UserStore,
     websocket: WebsocketStore,
     tickers: TickersStore
-  },
-  plugins: [createPersistedState()]
+  }
+  // plugins: [createPersistedState({
+  //   paths: [
+  //     'balances.balances',
+  //     'symbols.symbols',
+  //     'prices.prices',
+  //     'keys.keys'
+  //   ]
+  // })]
 })

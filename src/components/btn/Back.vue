@@ -38,7 +38,7 @@ export default {
       left: 0;
       right: 0;
       margin: auto;
-      transition: 250ms all;
+      transition: 250ms transform;
     }
   }
 }

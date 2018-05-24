@@ -20,19 +20,14 @@ describe('modules/balances/mutations.js', () => {
     expect(state.isLoading).toBe(false)
   })
 
-  it('mutation setError sets state.hasError to true', () => {
-    mutations.setError(state)
-    expect(state.hasError).toBe(true)
+  it('mutation setError sets state.error to a message', () => {
+    mutations.setError(state, 'An error happened')
+    expect(state.error).toBe('An error happened')
   })
-
-  it('mutation removeError sets state.hasError to false', () => {
+  it('mutation removeError sets state.error to null', () => {
+    state.error = 'Some error message'
     mutations.removeError(state)
-    expect(state.hasError).toBe(false)
-  })
-
-  it('mutation addServerError sets error message to state.serverError', () => {
-    mutations.addServerError(state, 'Example error')
-    expect(state.serverError).toBe('Example error')
+    expect(state.error).toBe(null)
   })
 
   it('mutation resetState should set state to its default values', () => {

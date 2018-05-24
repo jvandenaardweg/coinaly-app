@@ -65,7 +65,7 @@ export default {
       padding-left: 0;
       padding-right: 0;
       color: $gray-500;
-      transition: 150ms all;
+      transition: 150ms color;
       border: 0;
       border-radius: 0;
       font-weight: 600;

@@ -29,8 +29,8 @@ export default {
   isLoading: state => {
     return state.isLoading
   },
-  serverError: state => {
-    return state.serverError
+  error: state => {
+    return state.error
   },
   allBalancePrices: (state, getters, rootState, rootGetters) => {
     // TODO: write test

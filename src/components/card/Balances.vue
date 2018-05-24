@@ -32,6 +32,7 @@ export default {
   computed: {
     ...mapGetters({
       allFilledBalances: 'balances/allFilledBalances',
+      balancesError: 'balances/error',
       currencies: 'symbols/symbols',
       allTickers: 'tickers/allTickers',
       selectedExchangeName: 'exchanges/selectedName',
@@ -47,6 +48,7 @@ export default {
       return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets
     },
     emptyText () {
+      if (this.balancesError) return this.balancesError
       if (!this.isLoading && !this.hasCurrencies) return 'You have nothing in your balance, yet.'
       return null
     }

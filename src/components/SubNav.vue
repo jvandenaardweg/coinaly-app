@@ -38,9 +38,16 @@ export default {
   .subnav-group-item {
     flex-grow: 1;
     position: relative;
+    margin-right: -1px;
+
+    &:hover {
+      .subnav-group-button {
+        color: $black;
+      }
+    }
 
     & + & {
-      margin-left: -1px;
+      margin-right: -1px;
     }
 
     &:not(:first-child) .subnav-group-button {
@@ -88,6 +95,7 @@ export default {
     font-size: $font-size-base;
     line-height: $input-btn-line-height;
     min-width: $input-height;
+    transition: 250ms color;
   }
 
   .subnav-group-button-icon {

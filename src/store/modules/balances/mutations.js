@@ -12,14 +12,11 @@ export default {
   stopLoading (state) {
     Vue.set(state, 'isLoading', false)
   },
-  setError (state) {
-    Vue.set(state, 'hasError', true)
+  setError (state, error) {
+    Vue.set(state, 'error', error)
   },
   removeError (state) {
-    Vue.set(state, 'hasError', false)
-  },
-  addServerError (state, error) {
-    Vue.set(state, 'serverError', error)
+    Vue.set(state, 'error', null)
   },
   resetState (state) {
     const s = initialState()
