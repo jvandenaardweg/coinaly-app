@@ -10,7 +10,7 @@ import KeysStore from '@/store/modules/keys'
 import OrdersStore from '@/store/modules/orders'
 import PricesStore from '@/store/modules/prices'
 import SymbolsStore from '@/store/modules/symbols'
-import WebsocketsStore from '@/store/modules/websockets'
+import WebsocketStore from '@/store/modules/websocket'
 import AuthStore from '@/store/modules/auth'
 import UserStore from '@/store/modules/user'
 import TickersStore from '@/store/modules/tickers'
@@ -27,9 +27,9 @@ export default new Vuex.Store({
     orders: OrdersStore,
     prices: PricesStore,
     symbols: SymbolsStore,
-    websockets: WebsocketsStore,
     auth: AuthStore,
     user: UserStore,
+    websocket: WebsocketStore,
     tickers: TickersStore
   },
   plugins: [createPersistedState()]

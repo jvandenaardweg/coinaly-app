@@ -72,7 +72,7 @@ export default {
     },
     async loadAllData (exchangeSlug) {
       await Promise.all([
-        this.$store.dispatch('websockets/unsubscribe'),
+        this.$store.dispatch('websocket/unsubscribe'),
         this.$store.commit('exchanges/setSelected', exchangeSlug),
         this.$store.commit('deposits/resetState'),
         this.$store.commit('balances/resetState'),
@@ -83,8 +83,8 @@ export default {
         this.$store.dispatch('balances/getAll'),
         this.$store.dispatch('exchanges/getAllExchanges'),
         this.$store.dispatch('orders/getAllClosedOrders', exchangeSlug),
-        this.$store.dispatch('websockets/subscribe'),
-        this.$store.dispatch('websockets/watch')
+        this.$store.dispatch('websocket/subscribe'),
+        this.$store.dispatch('websocket/watch')
       ])
 
       this.isLoading = false

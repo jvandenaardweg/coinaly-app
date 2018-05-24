@@ -57,7 +57,7 @@ export default {
 
             // Disconnect the user from the websocket, it needs to reload
             // So, making sure the code does not error because we updated the websocket data
-            this.$store.dispatch('websockets/disconnect')
+            this.$store.dispatch('websocket/disconnect')
           }
         })
         .catch(err => {

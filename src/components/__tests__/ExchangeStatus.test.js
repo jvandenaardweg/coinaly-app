@@ -2,7 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import ExchangeStatus from '@/components/ExchangeStatus.vue'
 
-import websocketsModule from '@/store/modules/websockets'
+import websocketModule from '@/store/modules/websocket'
 import userModule from '@/store/modules/user'
 
 const localVue = createLocalVue()
@@ -16,7 +16,7 @@ describe('components/ExchangeStatus.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
-        websockets: websocketsModule,
+        websocket: websocketModule,
         user: userModule
       }
     })

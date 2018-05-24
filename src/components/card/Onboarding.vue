@@ -98,7 +98,7 @@ export default {
   },
   created () {
     this.$store.dispatch('exchanges/getAllExchanges')
-    this.$store.dispatch('websockets/connect')
+    this.$store.dispatch('websocket/connect')
   },
   methods: {
     async handleSubmit (event) {
@@ -116,8 +116,8 @@ export default {
         if (!this.keysError) {
           this.$store.commit('exchanges/setSelected', this.exchange.slug)
 
-          await this.$store.dispatch('websockets/subscribe') // Subscribes to the selected exchange ticker stream
-          await this.$store.dispatch('websockets/watch') // Watch the ticker stream for changes
+          await this.$store.dispatch('websocket/subscribe') // Subscribes to the selected exchange ticker stream
+          await this.$store.dispatch('websocket/watch') // Watch the ticker stream for changes
 
           this.$router.push('/')
         }

@@ -14,6 +14,10 @@ export default {
   selected (state) {
     return state.selected
   },
+  tickersChannel (state) {
+    if (state.selected) return `TICKERS~${state.selected.toUpperCase()}~NEW`
+    return null
+  },
   selectedName (state) {
     if (state.available[state.selected]) {
       return state.available[state.selected].name

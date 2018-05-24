@@ -69,9 +69,9 @@ export default {
       this.$store.dispatch('balances/getAll')
     },
     connectWebsocket () {
-      this.$store.dispatch('websockets/connect')
-      this.$store.dispatch('websockets/subscribe')
-      this.$store.dispatch('websockets/watch')
+      this.$store.dispatch('websocket/connect')
+      this.$store.dispatch('websocket/subscribe')
+      this.$store.dispatch('websocket/watch')
     }
   },
   watch: {
