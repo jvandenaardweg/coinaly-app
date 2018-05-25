@@ -9,7 +9,6 @@ export default {
     commit('watch', tickersChannel)
 
     return window.socket.watch(tickersChannel, (data) => {
-      console.log('WATCHHH')
       // Method to determine if websocket data is delayed
       // If so, we display a message to the user, so the user knows it is not seeing realtime data
       commit('removeDelayed')
