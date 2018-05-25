@@ -1,20 +1,25 @@
 <template>
   <div class="balance-item">
     <div class="balance-item-symbol">
-      <img :src="iconLocation" :alt="symbol" />
+      <img :src="iconLocation" :alt="symbolId" />
       <div>
-        <strong>{{ symbol }}</strong>
+        <strong>{{ symbolId }}</strong>
         <span class="symbol-full text-muted text-truncate">
           {{ balance.total }}
         </span>
       </div>
     </div>
     <div class="balance-item-meta">
-      <span class="balance-item-price" :class="{'is-positive': changeIsPositive === true, 'is-negative': changeIsPositive === false }">
+      <div class="balance-item-price" :class="{'is-positive': changeIsPositive === true, 'is-negative': changeIsPositive === false }">
         {{ totalPriceUSD | currency }}
-      </span>
-      <percentage-badge :percentage="percentage"></percentage-badge>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" :style="{'width': '25%', 'background-color': symbolColor }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <!-- <progress value="20" max="100"></progress> -->
+      <!-- <div>test</div> -->
     </div>
+    <percentage-badge :percentage="percentage"></percentage-badge>
     <icon name="chevron-right"></icon>
   </div>
 </template>
@@ -31,11 +36,11 @@ export default {
       type: Object,
       required: true
     },
-    symbol: {
+    symbolId: {
       type: String,
       required: true
     },
-    currency: {
+    symbol: {
       type: Object,
       required: true
     },
@@ -62,8 +67,8 @@ export default {
   }),
   computed: {
     iconLocation () {
-      if (this.currency) {
-        return this.currency.icon_uri
+      if (this.symbol) {
+        return this.symbol.icon_uri
       } else {
         return null
       }
@@ -71,6 +76,10 @@ export default {
     totalPriceUSD () {
       if (this.price) return (this.balance.total * this.tickerLast) * this.price.USD
       return 0
+    },
+    symbolColor () {
+      if (this.symbol.color) return this.symbol.color
+      return '#999999'
     }
   },
   watch: {
@@ -131,8 +140,22 @@ export default {
   }
 
   .balance-item-meta {
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
+    text-align: right;
+    margin-right: 1rem;
+    width: 65px;
+
+    @include media-breakpoint-up(md) {
+      width: 120px;
+    }
+
+    .progress {
+      width: 100%;
+      margin-top: 3px;
+      height: 4px;
+      transform: rotate(180deg);
+    }
   }
 
   .balance-item-volume {
@@ -145,10 +168,11 @@ export default {
   }
 
   .balance-item-price {
-    text-align: right;
-    margin-right: 1rem;
-    width: 90px;
+    // text-align: right;
+    // margin-right: 1rem;
+
     transition: color 250ms;
+    font-weight: 600;
 
     &.is-negative {
       color: $danger;

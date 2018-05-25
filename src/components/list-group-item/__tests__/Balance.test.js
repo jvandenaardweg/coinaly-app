@@ -5,20 +5,18 @@ import '@/filters'
 
 import marketMock from '@/mocks/market.json'
 import balanceMock from '@/mocks/balance.json'
+import symbolMock from '@/mocks/symbol.json'
 
-describe('components/list-group-item/Market.vue', () => {
+describe('components/list-group-item/Balance.vue', () => {
   let component
 
   beforeEach(() => {
     component = shallowMount(ListGroupItemBalance, {
       stubs: ['router-link', 'router-view'],
       propsData: {
-        market: marketMock['BTC/USDT'],
         balance: balanceMock['BTC'],
-        symbol: 'BTC',
-        currency: {
-          name: 'Bitcoin'
-        },
+        symbolId: 'BTC',
+        symbol: symbolMock['BTC'],
         price: {
           USD: 9000
         },

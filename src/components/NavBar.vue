@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg fixed-top">
+  <nav class="navbar fixed-top">
     <div class="container">
 
       <btn-back class="navbar-back" v-if="showBack" ref="navbarBack"></btn-back>
@@ -70,6 +70,11 @@ export default {
 
   .container {
     justify-content: center;
+
+    @include media-breakpoint-only(xs) {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   .navbar-back {

@@ -1,35 +1,8 @@
 import Chart from 'chart.js'
-import { generateChart } from 'vue-chartjs'
-
-Chart.defaults.LineWithLine = Chart.defaults.line
-Chart.controllers.LineWithLine = Chart.controllers.line.extend({
-  draw: function (ease) {
-    Chart.controllers.line.prototype.draw.call(this, ease)
-
-    if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
-      var activePoint = this.chart.tooltip._active[0]
-      var ctx = this.chart.ctx
-      var x = activePoint.tooltipPosition().x
-      var topY = this.chart.scales['y-axis-0'].top
-      var bottomY = this.chart.scales['y-axis-0'].bottom
-
-      // draw line
-      ctx.save()
-      ctx.beginPath()
-      ctx.moveTo(x, topY)
-      ctx.lineTo(x, bottomY)
-      ctx.lineWidth = 2
-      ctx.strokeStyle = '#07C'
-      ctx.stroke()
-      ctx.restore()
-    }
-  }
-})
-
-const CustomLine = generateChart('custom-line', 'LineWithLine')
+import { Doughnut } from 'vue-chartjs'
 
 export default {
-  extends: CustomLine,
+  extends: Doughnut,
   props: {
     labels: {
       type: Array,
@@ -80,10 +53,10 @@ export default {
       labels: this.labels,
       datasets: [
         {
-          type: 'line',
+          type: 'doughnut',
           label: null,
           data: this.data,
-          backgroundColor: this.chartBackgroundColor,
+          backgroundColor: ['red', 'green', 'yellow', 'orange', 'blue', 'purple', 'gray', 'darkgray', 'black', 'brown'],
           borderColor: this.borderColor,
           borderWidth: this.borderWidth
         }
@@ -92,7 +65,8 @@ export default {
     {
       height: this.height,
       legend: {
-        display: false
+        display: true,
+        position: 'bottom'
       },
       tooltips: {
         enabled: this.tooltips,
@@ -109,7 +83,10 @@ export default {
           hoverRadius: 5
         }
       },
-      animation: 0,
+      animation: {
+        animateScale: false,
+        animateRotate: true
+      },
       scales: {
         xAxes: [{
           display: false,

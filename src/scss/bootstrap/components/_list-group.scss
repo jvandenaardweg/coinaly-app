@@ -15,5 +15,9 @@
     margin-left: 1rem;
     transition: 250ms all;
     position: relative;
+
+    @include media-breakpoint-only(xs) {
+      margin-left: 0.5rem;
+    }
   }
 }
