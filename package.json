@@ -21,12 +21,16 @@
     "test:e2e:signup": "testcafe chrome tests/e2e/signup.test.js -S -s screenshots",
     "test:e2e:forgotpassword": "testcafe chrome tests/e2e/forgot-password.test.js -S -s screenshots",
     "lint:fix": "eslint --fix src/** --ignore-pattern '*.test.js'",
-    "heroku-postbuild": "[ $NODE_ENV != test ] && yarn build || exit 0"
+    "heroku-postbuild": "[ $NODE_ENV != test ] && yarn build || exit 0",
+    "update-icons": "yarn icons:update && yarn icons:copy",
+    "icons:update": "yarn add cjdowner/cryptocurrency-icons#master",
+    "icons:copy": "cpx \"./node_modules/cryptocurrency-icons/svg/**\" ./public/static/icons/cryptocurrencies/svg"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "chart.js": "^2.7.2",
+    "cryptocurrency-icons": "cjdowner/cryptocurrency-icons#master",
     "date-fns": "^1.29.0",
     "jwt-decode": "^2.2.0",
     "numeral": "^2.0.6",
@@ -54,6 +58,7 @@
     "@vue/test-utils": "^1.0.0-beta.16",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
+    "cpx": "^1.5.0",
     "dotenv": "^5.0.1",
     "flush-promises": "^1.0.0",
     "nock": "^9.2.6",
