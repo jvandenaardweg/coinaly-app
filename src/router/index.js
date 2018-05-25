@@ -95,8 +95,6 @@ const PageTermsOfUse = () => import(/* webpackChunkName: "PageTermsOfUse" */ '@/
 
 const PageNotFound = () => import(/* webpackChunkName: "PageNotFound" */ '@/pages/not-found/Index.vue')
 
-
-
 Vue.use(Router)
 
 export default new Router({
