@@ -137,7 +137,7 @@ export default new Router({
               component: PageBalancesHome
             },
             {
-              path: ':symbol',
+              path: ':symbolId',
               name: 'Balance',
               component: PageBalancesSymbol
             }
