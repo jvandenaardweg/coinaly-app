@@ -9,12 +9,14 @@
       </strong>
     </div>
     <div class="market-item-meta">
-      <span v-if="!hideVolume" class="market-item-volume d-none d-sm-block">
+      <span v-if="!hideVolume" class="market-item-volume text-muted d-none d-sm-block">
         {{ tickerBaseVolume | toFixed(0) | number }} {{ quote }}
         <span class="text-muted">{{ tickerQuoteVolume | toFixed(0) | number }} {{ base }}</span>
       </span>
       <span class="market-item-price">
-        {{ tickerLast }}
+        <span class="market-item-ticker">
+          {{ tickerLast }}
+        </span>
         <span class="text-muted">
           {{ tickerPrice | currency }}
         </span>
@@ -159,6 +161,10 @@ export default {
     span {
       display: block;
     }
+  }
+
+  .market-item-ticker {
+    font-weight: 600;
   }
 }
 </style>

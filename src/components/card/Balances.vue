@@ -17,6 +17,7 @@
           :symbol="symbol(symbolId)"
           :symbolId="symbolId"
           :balance="balance"
+          :balancePercentage="balancePercentage(symbolId)"
           :price="price(symbolId)"
           :percentage="percentage(symbolId)"
           :tickerLast="tickerLast(symbolId)">
@@ -43,6 +44,8 @@ export default {
   computed: {
     ...mapGetters({
       allFilledBalances: 'balances/allFilledBalances',
+      allBalancePrices: 'balances/allBalancePrices',
+      totalBalancesPrices: 'balances/totalBalancesPrices',
       hasCurrencies: 'balances/hasCurrencies',
       balancesError: 'balances/error',
       symbols: 'symbols/symbols',
@@ -73,7 +76,20 @@ export default {
       return null
     },
     price (symbolId) {
-      return this.prices[this.tickerQuote(symbolId)]
+      if (this.allBalancePrices) return this.allBalancePrices[symbolId]
+      return null
+    },
+    balancePercentage (symbolId) {
+      const price = this.price(symbolId)
+      if (price && this.totalBalancesPrices) {
+        const percentage = ((price / this.totalBalancesPrices) * 100)
+        if (percentage < 2) {
+          return 2
+        } else {
+          return percentage
+        }
+      }
+      return null
     },
     symbol (symbolId) {
       return this.symbols[symbolId]

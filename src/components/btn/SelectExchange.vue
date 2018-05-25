@@ -82,7 +82,7 @@ export default {
         this.$store.dispatch('markets/loadAll'),
         this.$store.dispatch('balances/getAll'),
         this.$store.dispatch('exchanges/getAllExchanges'),
-        this.$store.dispatch('orders/getAllClosedOrders', exchangeSlug),
+        // this.$store.dispatch('orders/getAllClosedOrders', exchangeSlug),
         this.$store.dispatch('websocket/subscribe'),
         this.$store.dispatch('websocket/watch')
       ])

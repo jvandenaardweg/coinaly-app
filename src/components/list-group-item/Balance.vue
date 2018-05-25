@@ -11,10 +11,10 @@
     </div>
     <div class="balance-item-meta">
       <div class="balance-item-price" :class="{'is-positive': changeIsPositive === true, 'is-negative': changeIsPositive === false }">
-        {{ totalPriceUSD | currency }}
+        {{ price | currency }}
       </div>
       <div class="progress">
-        <div class="progress-bar" role="progressbar" :style="{'width': '25%', 'background-color': symbolColor }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar" role="progressbar" :style="{'width': `${balancePercentage}%`, 'background-color': symbolColor }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       <!-- <progress value="20" max="100"></progress> -->
       <!-- <div>test</div> -->
@@ -36,6 +36,11 @@ export default {
       type: Object,
       required: true
     },
+    balancePercentage: {
+      type: Number,
+      required: false,
+      default: 0
+    },
     symbolId: {
       type: String,
       required: true
@@ -45,16 +50,19 @@ export default {
       required: true
     },
     price: {
-      type: Object,
-      required: false
+      type: Number,
+      required: false,
+      default: 0
     },
     tickerLast: {
       type: Number,
-      required: false
+      required: false,
+      default: 0
     },
     percentage: {
       type: Number,
-      required: false
+      required: false,
+      default: 0
     }
   },
   components: {
@@ -73,17 +81,13 @@ export default {
         return null
       }
     },
-    totalPriceUSD () {
-      if (this.price) return (this.balance.total * this.tickerLast) * this.price.USD
-      return 0
-    },
     symbolColor () {
       if (this.symbol.color) return this.symbol.color
       return '#999999'
     }
   },
   watch: {
-    totalPriceUSD (newValue, oldValue) {
+    price (newValue, oldValue) {
       // if (newValue < oldValue) console.log('down')
       // if (newValue > oldValue) console.log('up')
       // if (newValue === oldValue) console.log('neutral')
@@ -152,7 +156,7 @@ export default {
 
     .progress {
       width: 100%;
-      margin-top: 3px;
+      margin-top: 5px;
       height: 4px;
       transform: rotate(180deg);
     }
@@ -173,6 +177,7 @@ export default {
 
     transition: color 250ms;
     font-weight: 600;
+    margin-top: -3px;
 
     &.is-negative {
       color: $danger;

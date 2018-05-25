@@ -7,7 +7,13 @@
       </div>
       <loader v-if="isLoading"></loader>
     </div>
-    <line-chart v-if="!isLoading" :labels="timestamps" :data="closes" :height="150"></line-chart>
+    <line-chart
+    v-if="!isLoading"
+    :labels="timestamps"
+    :data="closes"
+    :backgroundColor="chartBackgroundColor"
+    :borderColor="chartBorderColor"
+    :height="150"></line-chart>
   </div>
 </template>
 
@@ -45,8 +51,13 @@ export default {
       isLoadingSymbols: 'symbols/isLoading',
       getTickerBySymbol: 'tickers/getTickerBySymbol'
     }),
-    iconColor () {
-      return (this.symbols) ? this.$refs : null
+    chartBackgroundColor () {
+      if (this.symbols) return this.symbols[this.baseId].color
+      return null
+    },
+    chartBorderColor () {
+      if (this.symbols) return this.symbols[this.baseId].color
+      return null
     },
     isLoading () {
       // Only show loading indicator when we have no data

@@ -17,9 +17,7 @@ describe('components/list-group-item/Balance.vue', () => {
         balance: balanceMock['BTC'],
         symbolId: 'BTC',
         symbol: symbolMock['BTC'],
-        price: {
-          USD: 9000
-        },
+        price: 18000,
         tickerLast: 1,
         tickerQuote: 'USDT',
         percentage: 0
@@ -39,7 +37,6 @@ describe('components/list-group-item/Balance.vue', () => {
   })
 
   it('renders the correct total worth in USD', () => {
-    expect(component.vm.totalPriceUSD).toBe(18000)
     expect(component.find('.balance-item-price').text()).toBe('$18,000.00')
   })
 })
