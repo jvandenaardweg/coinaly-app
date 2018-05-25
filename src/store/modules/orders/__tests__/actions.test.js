@@ -6,7 +6,10 @@ import mockOrdersClosed from '@/mocks/orders-closed.json'
 const context = {
   dispatch: jest.fn(),
   commit: jest.fn(),
-  getters: jest.fn()
+  getters: jest.fn(),
+  rootGetters: {
+    'exchanges/selected': 'bittrex'
+  }
 }
 
 describe('modules/orders/actions.js', () => {
@@ -21,7 +24,7 @@ describe('modules/orders/actions.js', () => {
       .get(`/exchanges/${exchangeSlug}/orders/closed`)
       .reply(200, mockOrdersClosed)
 
-    const result = await actions.getAllClosedOrders(context, exchangeSlug)
+    const result = await actions.getAllClosedOrders(context)
     expect(result).toMatchObject(mockOrdersClosed)
     expect(context.commit).toHaveBeenCalledWith('startLoading')
     expect(context.commit).toHaveBeenCalledWith('removeError')

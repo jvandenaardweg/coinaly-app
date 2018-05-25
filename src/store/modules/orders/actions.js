@@ -1,12 +1,13 @@
 import * as api from '@/api/orders'
 
 export default {
-  async getAllClosedOrders ({ commit }, exchangeSlug) {
+  async getAllClosedOrders ({ commit, rootGetters }, symbolId = null) {
     commit('startLoading')
     commit('removeError')
 
     try {
-      const response = await api.getAllClosedOrders(exchangeSlug)
+      const selectedExchange = rootGetters['exchanges/selected']
+      const response = await api.getAllClosedOrders(selectedExchange, symbolId)
       if (response) {
         commit('addAllClosed', response)
         commit('stopLoading')
