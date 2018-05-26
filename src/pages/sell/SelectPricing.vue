@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div class="text-left">
           <h1 class="h2 mb-6">Sell {{ quoteId }} for {{ baseId }}</h1>
         </div>
@@ -14,7 +14,7 @@
           :routeBase="'sell'">
         </select-pricing>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-8">
         <TradingViewChart :exchange="`BITTREX`" :baseId="baseId" :quoteId="quoteId"></TradingViewChart>
       </div>
     </div>

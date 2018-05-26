@@ -2,7 +2,7 @@
 
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-6 col-lg-5">
         <!-- <div class="text-left">
           <h1 class="h2 mb-6">Buy {{ baseId }} with {{ quoteId }}</h1>
         </div> -->
@@ -16,7 +16,7 @@
         </card-select-pricing>
 
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-lg-7">
         <trading-view-chart :exchange="`BITTREX`" :quoteId="quoteId" :baseId="baseId"></trading-view-chart>
       </div>
     </div>
