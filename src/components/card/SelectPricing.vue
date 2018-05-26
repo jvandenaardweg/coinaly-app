@@ -1,9 +1,80 @@
 <template>
-  <div class="card card-100-xs">
-    <form name="order" @submit.prevent="handleSubmit($event)">
+  <form name="order" @submit.prevent="handleSubmit($event)">
+    <div class="card">
       <div class="card-body">
-        <p class="text-success text-center">You have <strong>{{ amountFreeInBalance | number }} {{ baseId }}</strong> available to {{ context }}</p>
+        <!-- <p class="text-success text-center">You have <strong>{{ amountFreeInBalance | number }} {{ baseId }}</strong> available to {{ context }}</p> -->
 
+        <div class="form-group m-0">
+          <label class="d-block text-center mb-2">Amount of {{ baseId }}</label>
+          <div class="d-flex">
+            <btn-control label="-"></btn-control>
+            <input-large class="ml-5 mr-5" name="amount" :label="baseId" placeholder="..."></input-large>
+            <btn-control label="+"></btn-control>
+          </div>
+          <invalid-feedback message="You cannot buy this amount. The maximum amount for your given price (0.012312313) is 2500" ref="orderTypeError"></invalid-feedback>
+          <div class="buttons mt-5">
+            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 10)">10%</button>
+            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 25)">25%</button>
+            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 50)">50%</button>
+            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 75)">75%</button>
+            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 100)">100%</button>
+            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="roundAmount()">Round</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="seperator"></div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group m-0">
+        <label class="d-block text-center mb-2">Your price of 1 {{ baseId }} in {{ quoteId }} (limit)</label>
+        <div class="d-flex">
+          <btn-control label="-"></btn-control>
+          <input-large class="ml-5 mr-5" name="price" :label="quoteId" placeholder="..."></input-large>
+          <btn-control label="+"></btn-control>
+        </div>
+        <small class="form-text text-muted">Your price is <strong>10% below</strong> the current market price.</small>
+        <!-- <invalid-feedback message="You cannot buy this amount. The maximum amount for your given price (0.012312313) is 2500" ref="orderTypeError"></invalid-feedback> -->
+        <div class="buttons mt-5">
+          <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('last')">last</button>
+          <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('bid')">bid</button>
+          <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('ask')">ask</button>
+          <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('low')">low</button>
+          <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('high')">high</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seperator"></div>
+
+  <div class="zigzag">
+          <ul class="list-unstyled">
+            <li class="d-flex">
+              <span class="font-weight-bold">Total {{ baseId }}:</span>
+              <span class="ml-auto">{{ amount | number }} {{ baseId }}</span>
+            </li>
+            <li class="d-flex pt-2">
+              <span class="font-weight-bold">Price per {{ baseId }}:</span>
+              <span class="ml-auto"> {{ price }} {{ quoteId }}</span>
+            </li>
+            <li class="d-flex pt-2 pb-2">
+              <span class="font-weight-bold">Exchange fee:</span>
+              <span class="ml-auto">{{ totalFee | toFixed }} {{ quoteId }}</span>
+            </li>
+            <li class="d-flex border-top pt-2">
+              <span class="font-weight-bold">You get:</span>
+              <span class="ml-auto">{{ totalPrice | toFixed }} {{ quoteId }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+  <button type="button" class="btn btn-secondary">Advanced options</button>
+
+  <div class="card card-100-xs">
+    <div class="card-body">
         <div class="form-group mb-5">
           <label>Order type</label>
           <select class="custom-select custom-select-lg"
@@ -44,7 +115,7 @@
         <div class="form-group mb-5">
           <label>Amount of {{ baseId }}</label>
           <div class="buttons">
-            <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 10)">10%</button>
+            <button type="button" class="btn btn-outline-light btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 10)">10%</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 25)">25%</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 50)">50%</button>
             <button type="button" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage('sell', 75)">75%</button>
@@ -85,11 +156,13 @@
       <div class="card-footer">
         <button type="submit" class="btn btn-success btn-lg btn-block" :class="{'disabled': disableSubmitButton}" :disabed="disableSubmitButton">{{ context }} {{ baseId }} for {{ quoteId }}</button>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </template>
 
 <script>
+import BtnControl from '@/components/btn/Control'
+import InputLarge from '@/components/form/InputLarge'
 import InvalidFeedback from '@/components/form/InvalidFeedback'
 
 export default {
@@ -98,7 +171,9 @@ export default {
     validator: 'new'
   },
   components: {
-    InvalidFeedback
+    InvalidFeedback,
+    BtnControl,
+    InputLarge
   },
   props: {
     market: {
@@ -259,30 +334,34 @@ export default {
   }
 }
 
-.btn-outline-secondary {
-  border-color: $border-color;
-  margin-right: -1px;
-  border-radius: 0;
-}
-
 .buttons {
   display: flex;
-  justify-content: stretch;
-  margin-bottom: 10px;
+  justify-content: center;
+  // margin-bottom: 10px;
 
   .btn {
     width: 100%;
-    border-radius: 0;
+    // border-color: $border-color;
+    margin-right: 2px;
+    margin-left: 2px;
+    // border-radius: 0;
 
-    &:first-child {
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
-    }
+    // &:first-child {
+    //   border-top-left-radius: $border-radius;
+    //   border-bottom-left-radius: $border-radius;
+    // }
 
-    &:last-child {
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
+    // &:last-child {
+    //   border-top-right-radius: $border-radius;
+    //   border-bottom-right-radius: $border-radius;
+    // }
   }
+}
+
+.seperator {
+  background:$gray-400;
+  width:2px;
+  height:15px;
+  margin:0 auto;
 }
 </style>
