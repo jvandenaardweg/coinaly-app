@@ -2,6 +2,7 @@ import getters from '@/store/modules/prices/getters'
 import state from '@/store/modules/prices/state'
 
 import pricesMock from '@/mocks/prices.json'
+import mockPricesHistory from '@/mocks/prices-history.json'
 
 describe('modules/prices/getters.js', () => {
   it('getter isLoading should return true when state.isLoading is true', () => {
@@ -42,5 +43,10 @@ describe('modules/prices/getters.js', () => {
   it('getter getPriceBySymbol should return null if state.prices is not set', () => {
     state.prices = null
     expect(getters.getPriceBySymbol(state)('BTC')).toBe(null)
+  })
+
+  it('getter history should return the price history of a symbol', () => {
+    state.history = mockPricesHistory
+    expect(getters.history(state)).toMatchObject(mockPricesHistory)
   })
 })

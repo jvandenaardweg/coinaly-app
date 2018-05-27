@@ -3,11 +3,17 @@ import state from '@/store/modules/prices/state'
 import initialState from '@/store/modules/prices/initialState'
 
 import mockPrices from '@/mocks/prices.json'
+import mockPricesHistory from '@/mocks/prices-history.json'
 
 describe('modules/prices/mutations.js', () => {
   it('addAll adds all prices', () => {
     mutations.addAll(state, mockPrices)
     expect(state.prices).toMatchObject(mockPrices)
+  })
+
+  it('addAllHistory adds all prices history', () => {
+    mutations.addAllHistory(state, mockPricesHistory)
+    expect(state.history).toMatchObject(mockPricesHistory)
   })
 
   it('mutation startLoading sets state.isLoading to true', () => {

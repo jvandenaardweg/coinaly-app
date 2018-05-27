@@ -1,20 +1,20 @@
 <template>
   <div class="balances-summary">
     <div class="balances-summary-body">
-      <h1 class="h1">{{ totalPrice }}</h1>
-      <h2 class="h5" v-html="totalBTCPrice"></h2>
+      <h1 class="h1">{{ totalPriceReadable }}</h1>
+      <h2 class="h5" v-html="totalBTCPriceReadable"></h2>
     </div>
     <div class="balances-summary-chart">
       <line-chart
         class="balances-summary-line-chart"
-        v-if="!isLoading"
-        :labels="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-        :data="[100, 80, 90, 30, 50, 40, 30, 20, 10, 20, 100, 80, 90, 30, 50, 40, 30, 20, 10, 20]"
+        v-if="chartIsReady"
+        :labels="timestamps"
+        :data="closes"
         :height="120"
         backgroundColor="rgba(0,0,0,0.2)"
         borderColor="transparent"
         :borderWidth="2"
-        :tooltips="false"
+        :tooltips="true"
         ></line-chart>
     </div>
   </div>
@@ -23,11 +23,21 @@
 <script>
 import { mapGetters } from 'vuex'
 import LineChart from '@/components/charts/Line.js'
+import format from 'date-fns/format'
 
 export default {
   name: 'BalancesSummary',
   components: {
     LineChart
+  },
+  mounted () {
+    // TODO: this method should fire every x minutes
+    // So the user sees his balance update in "real time"
+    this.$store.dispatch('prices/getAllPricesHistory', {
+      baseId: 'BTC',
+      quoteId: 'USD',
+      interval: '1m'
+    })
   },
   computed: {
     ...mapGetters({
@@ -35,24 +45,72 @@ export default {
       totalBalancesPrices: 'balances/totalBalancesPrices',
       getPriceBySymbol: 'prices/getPriceBySymbol',
       isLoadingPrices: 'prices/isLoading',
-      isLoadingBalances: 'balances/isLoading'
+      isLoadingBalances: 'balances/isLoading',
+      pricesHistory: 'prices/history'
     }),
     isLoading () {
       return this.isLoadingPrices || this.isLoadingBalances
     },
+    hasError () {
+      return this.balancesError
+    },
+    chartIsReady () {
+      return this.timestamps && this.closes
+    },
     totalPrice () {
       if (this.balancesError) return 'Error'
       if (this.totalBalancesPrices) return this.$options.filters.currency(this.totalBalancesPrices)
-      return 'Loading...'
+      return null
     },
     totalBTCPrice () {
       if (this.balancesError) return this.balancesError
       if (this.totalBalancesPrices && !this.isLoadingPrices) {
-        return this.$options.filters.toFixed(this.totalBalancesPrices / this.getPriceBySymbol('BTC').USD) + ' BTC'
+        return this.$options.filters.toFixed(this.totalBalancesPrices / this.getPriceBySymbol('BTC').USD)
       } else {
-        return '&nbsp;' // So an empty price (loading) won't make the layout move
+        return null // So an empty price (loading) won't make the layout move
+      }
+    },
+    totalPriceReadable () {
+      if (this.totalPrice) {
+        return `${this.totalPrice}`
+      } else {
+        return 'Loading...'
+      }
+    },
+    totalBTCPriceReadable () {
+      if (this.totalBTCPrice) {
+        return `${this.totalBTCPrice} BTC`
+      } else {
+        return 'Getting balance from the exchange'
+      }
+    },
+    timestamps () {
+      if (this.pricesHistory['BTC/USD']) {
+        return this.pricesHistory['BTC/USD'].map(data => {
+          const jsTimestamp = (data.time * 1000)
+          return this.formatTimestamp(jsTimestamp)
+        })
+      } else {
+        return null
+      }
+    },
+    closes () {
+      if (this.totalBTCPrice && this.pricesHistory['BTC/USD']) {
+        return this.pricesHistory['BTC/USD'].map(data => {
+          return (data.close * this.totalBTCPrice)
+        })
+      } else {
+        return null
       }
     }
+  },
+  methods: {
+    formatTimestamp (timestamp) {
+      return format(
+        timestamp,
+        'D MMM'
+      )
+    },
   }
 }
 </script>
@@ -110,6 +168,36 @@ export default {
 
       canvas {
         height: 120px !important;
+      }
+    }
+  }
+
+  .chart-filter {
+    position: absolute;
+    bottom: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.5;
+
+    li {
+      margin-left: 5px;
+      margin-right: 5px;
+
+      button {
+        background: none;
+        color: $white;
+        // text-decoration: underline;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
       }
     }
   }

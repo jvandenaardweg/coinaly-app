@@ -10,7 +10,7 @@ describe('api/exchanges.js', () => {
         'access-control-allow-origin': '*',
         'access-control-allow-credentials': 'true'
       })
-      .get('/exchanges/all')
+      .get('/exchanges')
       .reply(200, mockExchangesAll)
 
     const result = await api.getAllExchanges()

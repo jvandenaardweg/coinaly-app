@@ -13,7 +13,7 @@ import './registerServiceWorker'
 import '@/filters'
 import '@/scss/bootstrap/bootstrap.scss'
 import clickOutsideDirective from '@/directives/click-outside'
-
+// import './websocket/socket-io'
 Vue.use(clickOutsideDirective)
 
 // Reduce the memory footprint of VeeValidate by injecting it on a component basis

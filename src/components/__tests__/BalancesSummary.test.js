@@ -36,7 +36,7 @@ describe('components/BalancesSummary.vue', () => {
     expect(component.find('h1').text()).toBe('Loading...')
   })
 
-  it('renders an empty element for the additional pricing', () => {
-    expect(component.find('h2').text()).toBe('')
+  it('renders a loading text for the additional pricing', () => {
+    expect(component.find('h2').text()).toBe('Getting balance from the exchange')
   })
 })

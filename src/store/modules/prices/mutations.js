@@ -5,6 +5,9 @@ export default {
   addAll (state, prices) {
     Vue.set(state, 'prices', prices)
   },
+  addAllHistory (state, data) {
+    Vue.set(state, 'history', data)
+  },
   startLoading (state) {
     Vue.set(state, 'isLoading', true)
   },
