@@ -15,7 +15,7 @@ export default {
     return state.selected
   },
   tickersChannel (state) {
-    if (state.selected) return `TICKERS~${state.selected.toUpperCase()}~NEW`
+    if (state.selected) return `TICKERS~${state.selected.toUpperCase()}`
     return null
   },
   selectedName (state) {
