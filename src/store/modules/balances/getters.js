@@ -36,6 +36,7 @@ export default {
     // TODO: write test
     const getPriceBySymbol = rootGetters['prices/getPriceBySymbol']
     const baseMarkets = rootGetters['markets/allBaseMarkets']
+    const quoteMarkets = rootGetters['markets/allQuoteMarkets']
     const getTickerBySymbol = rootGetters['tickers/getTickerBySymbol']
     const isLoadingTickers = rootGetters['tickers/isLoading']
     const isLoadingPrices = rootGetters['prices/isLoading']
@@ -43,15 +44,39 @@ export default {
     const filledBalances = getters.allFilledBalances
 
     if (!isLoadingPrices && !isLoadingMarkets && filledBalances && !isLoadingTickers) {
-      return Object.keys(filledBalances).reduce((obj, baseSymbol) => {
-        const quoteSymbol = baseMarkets[baseSymbol]
-        if (quoteSymbol) {
-          const ticker = getTickerBySymbol(`${baseSymbol}/${quoteSymbol[0]}`)
-          const tickerLast = (ticker) ? ticker.last : 0 // Like: 0.001231231
-          const price = getPriceBySymbol(quoteSymbol[0]).USD // Like: 8913
-          const totalInBalance = filledBalances[baseSymbol].total // Like: 0.123123
-          obj[baseSymbol] = totalInBalance * (price * tickerLast)
+      return Object.keys(filledBalances).reduce((obj, symbolId) => {
+        let marketSymbol
+        let priceSymbol
+        let quoteId
+        let baseId
+        let price
+        let totalInBalance
+        let ticker
+        let tickerLast
+
+        // Determine the proper baseId and quoteId for the balance symbol
+        // Example: If symbolId is "BTC", we look up the first quoteMarket for that symbol
+        // If we cannot find the symbolId in the baseMarkets (for example for "USDT"), we find the baseId in the quoteMarkets array, returning "BTC" in this context
+        //   so baseId becomes "BTC" and quoteId becomes "USDT"
+        baseId = (baseMarkets[symbolId]) ? symbolId : null
+        quoteId = (baseMarkets[symbolId]) ? baseMarkets[symbolId][0] : symbolId
+
+        marketSymbol = `${baseId}/${quoteId}`
+
+        // If we have a baseId, we calculate the price using the last ticker to calculate the worth
+        // If we don't have a baseId, it's probably USDT or something similar, we just use the global average price to calculate the worth
+        if (baseId) {
+          ticker = getTickerBySymbol(marketSymbol)
+          tickerLast = (ticker) ? ticker.last : 0 // Like: 0.001231231
+          price = getPriceBySymbol(quoteId).USD // Like: 8913
+          totalInBalance = filledBalances[symbolId].total // Like: 0.123123
+          obj[symbolId] = totalInBalance * (price * tickerLast)
+        } else {
+          totalInBalance = filledBalances[symbolId].total // Like: 0.123123
+          price = getPriceBySymbol(quoteId).USD // Like: 8913
+          obj[symbolId] = totalInBalance * price
         }
+
         return obj // Returning something like: {"BTC": 8913} // 8913 = USD
       }, {})
     } else {

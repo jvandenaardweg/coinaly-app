@@ -58,16 +58,16 @@ describe('modules/markets/getters.js', () => {
   // it('getter isFavoriteMarket should return true if state.favorites has market symbols', () => {
   // })
 
-  it('getter allQuoteMarkets should return an object of quote market symbols if state.markets is set', () => {
+  it('getter allQuoteMarkets should return an object of quote market symbols containing an arrays of baseId\'s if state.markets is set', () => {
     state.markets = marketsMock
     const expected = {
-      'BTC': 1,
-      'USDT': 1
+      'BTC': ['ADA'],
+      'USDT': ['BTC']
     }
     expect(getters.allQuoteMarkets(state)).toMatchObject(expected)
   })
 
-  it('getter allBaseMarkets should return an object of base market symbols if state.markets is set', () => {
+  it('getter allBaseMarkets should return an object of base market symbols containing an array of quoteId\'s if state.markets is set', () => {
     state.markets = marketsMock
     const expected = {
       'ADA': ['BTC'],

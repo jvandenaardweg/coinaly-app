@@ -26,8 +26,11 @@ export default {
     if (!state.markets || !Object.keys(state.markets).length) return null
 
     return Object.keys(state.markets).reduce((obj, curKey) => {
-      obj[state.markets[curKey].quote] = (obj[state.markets[curKey].quote] || 0) + 1
-      // Returning something like: {"BTC": 101} // 101 = total quote markets
+      if (!obj[state.markets[curKey].quote]) obj[state.markets[curKey].quote] = []
+      obj[state.markets[curKey].quote].push(state.markets[curKey].base)
+
+      // obj[state.markets[curKey].quote] = (obj[state.markets[curKey].quote] || 0) + 1
+      // Returning something like: {"BTC": ["USDT", "ETH"]}
       return obj
     }, {})
   },
