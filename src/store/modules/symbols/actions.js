@@ -2,19 +2,19 @@ import * as api from '@/api/symbols'
 
 export default {
   async getAll ({ dispatch, commit, getters, rootGetters }, options) {
-    commit('startLoading')
-
     try {
+      commit('startLoading')
       const response = await api.getAllSymbols(options)
       if (response) {
         commit('addAll', response)
-        commit('stopLoading')
       }
       return response
     } catch (error) {
-      commit('addServerError', error.message)
-      commit('stopLoading')
+      const errorMessage = (error.response) ? error.response.data.message : 'We could not get the symbols information. Please try again later.'
+      commit('setError', error.message)
       return error
+    } finally {
+      commit('stopLoading')
     }
   }
 }

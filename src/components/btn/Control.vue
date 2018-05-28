@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="btn btn-primary btn-control">{{ label }}</button>
+  <button type="button" class="btn btn-primary btn-control" tabindex="-1">{{ label }}</button>
 </template>
 
 <script>
@@ -25,6 +25,7 @@ export default {
     font-size: 1.5rem;
     font-weight: $font-weight-bold;
     text-align: center;
+    flex: 0 0 40px;
   }
 }
 </style>

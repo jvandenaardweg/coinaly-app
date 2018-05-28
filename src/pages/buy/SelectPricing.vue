@@ -2,7 +2,7 @@
 
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-5">
+      <div class="col-md-6 col-lg-4">
         <!-- <div class="text-left">
           <h1 class="h2 mb-6">Buy {{ baseId }} with {{ quoteId }}</h1>
         </div> -->
@@ -12,11 +12,12 @@
           :market="market"
           :balance="balance"
           :ticker="ticker"
+          :prices="prices"
           :context="'buy'">
         </card-select-pricing>
 
       </div>
-      <div class="col-md-6 col-lg-7">
+      <div class="col-md-6 col-lg-8">
         <trading-view-chart :exchange="`BITTREX`" :quoteId="quoteId" :baseId="baseId"></trading-view-chart>
       </div>
     </div>
@@ -41,7 +42,8 @@ export default {
       isLoadingTickers: 'tickers/isLoading',
       getTickerBySymbol: 'tickers/getTickerBySymbol',
       getMarketBySymbol: 'markets/getMarketBySymbol',
-      getBalanceBySymbol: 'balances/getBalanceBySymbol'
+      getBalanceBySymbol: 'balances/getBalanceBySymbol',
+      prices: 'prices/prices'
     }),
     isLoading () {
       return this.isLoadingBalances || this.isLoadingMarkets || this.isLoadingTickers

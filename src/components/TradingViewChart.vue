@@ -47,7 +47,7 @@ export default {
         'theme': 'Light',
         'style': '1',
         'locale': 'en',
-        'toolbar_bg': '#f1f3f6',
+        'toolbar_bg': '#fff',
         'enable_publishing': false,
         'save_image': false,
         'hideideas': true,
@@ -116,6 +116,7 @@ export default {
 
 <style lang="scss">
 .chart {
+  background: $white;
 //   padding: 0;
 //   height: 400px;
 //   position: fixed;

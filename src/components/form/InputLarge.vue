@@ -1,14 +1,34 @@
 <template>
-  <div class="input-large">
-    <input type="text" class="input-large" :name="name" :placeholder="placeholder" />
-    <div class="input-large-help">{{ label }}</div>
+  <div class="form-control-bold">
+    <input type="text" class="form-control"
+      :id="`inputLarge-${name}`"
+      :name="name"
+      :placeholder="placeholder"
+      :value="value"
+      :min="min"
+      autocomplete="off"
+      @validate="$emit('validate', $event.target.value)"
+      @input="$emit('input', returnNumber($event.target.value))" />
+
+    <label class="form-control-bold-label" :for="`inputLarge-${name}`">{{ label }}</label>
   </div>
 </template>
 
 <script>
 export default {
   name: 'InputLarge',
+  $_veeValidate: {
+    validator: 'new'
+  },
   props: {
+    value: {
+      type: [String, Number],
+      required: false
+    },
+    min: {
+      type: Number,
+      required: false
+    },
     name: {
       type: String,
       required: true
@@ -21,12 +41,18 @@ export default {
       type: String,
       required: true
     }
+  },
+  methods: {
+    returnNumber (value) {
+      // Makes sure we return a Number instead of a String
+      return +value
+    }
   }
 }
 </script>
 
 <style lang="scss">
-.input-large {
+.form-control-bold {
   width: 100%;
 
   input {
@@ -39,9 +65,19 @@ export default {
     padding: 0;
     width: 100%;
     text-align: center;
+    border-radius: 0;
+    height: 40px;
+
+    &.is-invalid ~ .form-control-bold-label {
+      color: $gray-500 !important;
+    }
 
     &:focus {
       outline: none;
+      color: $primary;
+      border-color: inherit;
+      // border-bottom: 1px $border-color solid;
+      box-shadow: none;
     }
 
     &::placeholder {
@@ -51,7 +87,7 @@ export default {
     }
   }
 
-  .input-large-help {
+  .form-control-bold-label {
     font-weight: normal;
     display: block;
     text-align: center;

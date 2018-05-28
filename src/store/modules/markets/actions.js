@@ -2,9 +2,8 @@ import * as api from '../../../api/markets'
 
 export default {
   async loadAll ({ commit, rootGetters }) {
-    commit('startLoading')
-
     try {
+      commit('startLoading')
       const selectedExchange = rootGetters['exchanges/selected']
       const response = await api.loadAllMarkets(false, selectedExchange)
 
@@ -14,10 +13,11 @@ export default {
       }
       return response
     } catch (error) {
-      const errorMessage = (error.response) ? error.response.data.message : 'Oh oh, sorry for this. An unknown error occured, please try again later.'
+      const errorMessage = (error.response) ? error.response.data.message : 'We could not get the markets information. Please try again later.'
       commit('setError', errorMessage)
-      commit('stopLoading')
       return error
+    } finally {
+      commit('stopLoading')
     }
   },
 
@@ -42,7 +42,7 @@ export default {
       }
       return response
     } catch (error) {
-      const errorMessage = (error.response) ? error.response.data.message : 'Oh oh, sorry for this. An unknown error occured, please try again later.'
+      const errorMessage = (error.response) ? error.response.data.message : 'We could not get the markets OHLCV information. Please try again later.'
       commit('setError', errorMessage)
       commit('stopLoading')
       return error

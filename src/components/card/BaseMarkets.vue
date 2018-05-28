@@ -64,7 +64,8 @@ export default {
       isLoadingBalances: 'balances/isLoading',
       isLoadingCurrencies: 'symbols/isLoading',
       isLoadingPrices: 'prices/isLoading',
-      isLoadingTickers: 'tickers/isLoading'
+      isLoadingTickers: 'tickers/isLoading',
+      marketsError: 'markets/error'
     }),
     subNavItems () {
       return [
@@ -108,6 +109,8 @@ export default {
         return 'There are no markets available to buy in to. You should transfer some currencies to your exchange\'s wallets.'
       } else if (this.searchQuery && !this.hasSearchedMarkets) {
         return `No currencies found for <strong>${this.searchQuery}</strong>`
+      } else if (this.marketsError) {
+        return this.marketsError
       } else {
         return null
       }

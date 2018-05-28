@@ -6,12 +6,12 @@
           <h1 class="h2 mb-6">Sell {{ quoteId }} for {{ baseId }}</h1>
         </div>
         <select-pricing
-          :activeMarket="activeMarket"
-          :activeBalance="activeBalance"
-          :quoteId="quoteId"
-          :baseId="baseId"
-          :marketSymbol="marketSymbol"
-          :routeBase="'sell'">
+          v-if="!isLoading"
+          :market="market"
+          :balance="balance"
+          :ticker="ticker"
+          :prices="prices"
+          :context="'sell'">
         </select-pricing>
       </div>
       <div class="col-md-8">
@@ -26,7 +26,6 @@
 import CardSelectPricing from '@/components/card/SelectPricing'
 import TradingViewChart from '@/components/TradingViewChart.vue'
 import { mapGetters } from 'vuex'
-import pickBy from 'lodash/pickBy'
 
 export default {
   name: 'PageSellSelectPricing',
@@ -34,39 +33,36 @@ export default {
     CardSelectPricing,
     TradingViewChart
   },
-  data () {
-    return {
-      showSmartTradeInfo: false,
-      quoteId: this.$route.params.quoteId,
-      baseId: this.$route.params.baseId
-    }
-  },
   computed: {
     ...mapGetters({
-      allCurrencies: 'balances/allCurrencies',
-      allFilledBalances: 'balances/allFilledBalances',
-      allCurrenciesTotal: 'balances/allCurrenciesTotal',
-      allFilledBalancesTotal: 'balances/allFilledBalancesTotal',
-      allMarkets: 'markets/allMarkets'
+      isLoadingBalances: 'balances/isLoading',
+      isLoadingMarkets: 'markets/isLoading',
+      isLoadingTickers: 'tickers/isLoading',
+      getTickerBySymbol: 'tickers/getTickerBySymbol',
+      getMarketBySymbol: 'markets/getMarketBySymbol',
+      getBalanceBySymbol: 'balances/getBalanceBySymbol',
+      prices: 'prices/prices'
     }),
-    activeMarket () {
-      return pickBy(this.allMarkets, (values, marketSymbol) => {
-        return marketSymbol === this.marketSymbol
-      })
+    isLoading () {
+      return this.isLoadingBalances || this.isLoadingMarkets || this.isLoadingTickers
     },
-    activeBalance () {
-      return pickBy(this.allFilledBalances, (values, balanceSymbol) => {
-        return balanceSymbol === this.quoteId
-      })
+    balance () {
+      return this.getBalanceBySymbol(this.quoteId)
     },
     marketSymbol () {
-      return `${this.quoteId}/${this.baseId}`
+      return this.baseId + '/' + this.quoteId
     },
-    baseIdUppercased () {
-      return (this.baseId) ? this.baseId.toUpperCase() : null
+    market () {
+      return this.getMarketBySymbol(this.marketSymbol)
     },
-    baseIdTitle () {
-      return (this.baseId) ? this.baseIdUppercased : '...?'
+    baseId () {
+      return this.$route.params.baseId
+    },
+    quoteId () {
+      return this.$route.params.quoteId
+    },
+    ticker () {
+      return this.getTickerBySymbol(this.marketSymbol)
     }
   }
   // beforeRouteEnter (to, from, next) {

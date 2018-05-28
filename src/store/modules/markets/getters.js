@@ -62,7 +62,7 @@ export default {
     // Getter dependency: balances
     const allFilledBalances = rootGetters['balances/allFilledBalances']
     const allBaseMarkets = getters.allBaseMarkets
-
+    // TODO: add a check if balance is < [marketSymbol].limits.amount.min
     if (allBaseMarkets && allFilledBalances) {
       return pickBy(allBaseMarkets, (baseMarket, baseMarketSymbol) => {
         // A market is unavailable when EVERY balance symbol is not present in the base markets object
@@ -76,10 +76,10 @@ export default {
     // Getter dependency: balances
     const allFilledBalances = rootGetters['balances/allFilledBalances']
     const allBaseMarkets = getters.allBaseMarkets
-
+    // TODO: add a check if balance is > [marketSymbol].limits.amount.min
     if (allBaseMarkets && allFilledBalances) {
       return pickBy(allBaseMarkets, (baseMarket, baseMarketSymbol) => {
-        // A market is available when atleast one or more balance symbols is present in the base markets object
+        // A market is available when at least one or more balance symbols is present in the base markets object
         return Object.keys(allFilledBalances).some(balanceSymbol => {
           return baseMarket.includes(balanceSymbol)
         })
@@ -94,7 +94,7 @@ export default {
 
     if (allQuoteMarkets && allFilledBalances) {
       return pickBy(allQuoteMarkets, (quoteMarket, quoteMarketSymbol) => {
-        // A market is available when atleast one or more balance symbols is present in the base markets object
+        // A market is available when at least one or more balance symbols is present in the base markets object
         return Object.keys(allFilledBalances).some(balanceSymbol => {
           return quoteMarketSymbol === balanceSymbol
         })

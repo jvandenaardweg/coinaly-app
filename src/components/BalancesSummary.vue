@@ -116,7 +116,7 @@ export default {
         timestamp,
         'D MMM'
       )
-    },
+    }
   }
 }
 </script>

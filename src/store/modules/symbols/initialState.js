@@ -1,6 +1,7 @@
 export default () => {
   return {
     symbols: null,
-    isLoading: null
+    isLoading: null,
+    error: null
   }
 }

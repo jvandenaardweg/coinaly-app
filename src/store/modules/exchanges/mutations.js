@@ -19,6 +19,12 @@ export default {
   stopLoading (state) {
     Vue.set(state, 'isLoading', false)
   },
+  setError (state, message) {
+    Vue.set(state, 'error', message)
+  },
+  removeError (state) {
+    Vue.set(state, 'error', null)
+  },
   resetState (state) {
     const s = initialState()
     Object.keys(s).forEach(key => {

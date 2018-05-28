@@ -2,19 +2,19 @@ import * as api from '@/api/exchanges'
 
 export default {
   async getAllExchanges ({ commit }) {
-    commit('startLoading')
-
     try {
+      commit('startLoading')
       const response = await api.getAllExchanges()
       if (response) {
         commit('addAll', response)
-        commit('stopLoading')
       }
       return response
     } catch (error) {
-      commit('addServerError', error.message)
-      commit('stopLoading')
+      const errorMessage = (error.response) ? error.response.data.message : 'We could not get the exchanges information. Please try again later.'
+      commit('setError', error.message)
       return error
+    } finally {
+      commit('stopLoading')
     }
   }
 }

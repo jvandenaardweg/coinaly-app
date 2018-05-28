@@ -8,6 +8,7 @@ export default () => {
   return {
     exchanges: null,
     isLoading: null,
+    error: null,
     selected: initialSelectedExchange,
     available: {
       'bittrex': {
