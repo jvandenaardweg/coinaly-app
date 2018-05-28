@@ -7,7 +7,7 @@ function filterFilledBalances (balances) {
 }
 
 export default {
-  hasCurrencies: state => {
+  hasBalances: state => {
     return Object.keys(state.balances).length > 0
   },
   allCurrencies: state => {

@@ -1,11 +1,11 @@
 <template>
   <div class="card card-100-xs">
 
-    <loader v-if="!hasCurrencies && isLoading"></loader>
+    <loader v-if="!hasBalances && isLoading"></loader>
 
     <card-partial-empty :text="emptyText"></card-partial-empty>
 
-    <div v-if="hasCurrencies" class="list-group list-group-flush">
+    <div v-if="hasBalances" class="list-group list-group-flush">
       <list-group-item-symbol-select
         v-for="(meta, symbol) in allFilledBalances" :key="symbol"
         :symbol="symbol"
@@ -39,7 +39,7 @@ export default {
   computed: {
     ...mapGetters({
       allFilledBalances: 'balances/allFilledBalances',
-      hasCurrencies: 'balances/hasCurrencies',
+      hasBalances: 'balances/hasBalances',
       isLoading: 'balances/isLoading',
       currencies: 'symbols/symbols'
     }),
@@ -47,7 +47,7 @@ export default {
       return `/${this.routeBase}/${this.currency}`
     },
     emptyText () {
-      if (!this.isLoading && !this.hasCurrencies) return 'No currencies available in your balance.'
+      if (!this.isLoading && !this.hasBalances) return 'No currencies available in your balance.'
       return null
     }
   },

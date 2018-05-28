@@ -3,13 +3,13 @@ import state from '@/store/modules/balances/state'
 import balancesMock from '@/mocks/balances.json'
 
 describe('modules/balances/getters.js', () => {
-  it('getter hasCurrencies should return false when there are no currencies', () => {
-    expect(getters.hasCurrencies(state)).toBe(false)
+  it('getter hasBalances should return false when there are no currencies', () => {
+    expect(getters.hasBalances(state)).toBe(false)
   })
 
-  it('getter hasCurrencies should return true when there are currencies', () => {
+  it('getter hasBalances should return true when there are currencies', () => {
     state.balances = balancesMock
-    expect(getters.hasCurrencies(state)).toBe(true)
+    expect(getters.hasBalances(state)).toBe(true)
   })
 
   it('getter allCurrencies should return all the currencies', () => {

@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="btn btn-refresh btn-sm mr-3" @click.prevent="refreshBalances()">
+  <button type="button" class="btn btn-refresh btn-sm mr-3" :class="{'is-loading': isLoading }" @click.prevent="refreshBalances()">
     <svg class="feather feather-refresh-ccw" width="18" height="18" fill="transparent" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#refresh-ccw"/></svg>
   </button>
 </template>
@@ -9,21 +9,43 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'BtnRefresh',
+  data: () => ({
+    isLoading: false,
+    isDisabled: false,
+    timeout: 10000
+  }),
   computed: {
-    ...mapGetters({
-      isLoading: 'balances/isLoading'
-    }),
     refreshLabel () {
       if (this.isLoading) {
         return 'Getting Balances...'
       } else {
         return 'Refresh Balances'
       }
+    },
+    timeoutSeconds () {
+      return (this.timeout / 1000)
     }
   },
   methods: {
-    refreshBalances () {
-      this.$store.dispatch('balances/getAll', {forceRefresh: true})
+    async refreshBalances () {
+      if (!this.isDisabled) {
+        this.isLoading = true
+        try {
+          await this.$store.dispatch('balances/getAll', {forceRefresh: true})
+          this.activateTimeout()
+        } finally {
+          this.isDisabled = true
+          this.isLoading = false
+        }
+      } else {
+        // TODO: Temporary, we should handle this more friendly
+        window.alert(`Please wait ${this.timeoutSeconds} seconds before syncing your balance again.`)
+      }
+    },
+    activateTimeout () {
+      setTimeout(() => {
+        this.isDisabled = false
+      }, this.timeout)
     }
   }
 }
@@ -34,5 +56,11 @@ export default {
   border: 0;
   background: transparent;
   width: 40px;
+
+  &:focus {
+    outline: none;
+  }
 }
+
+// @keyframes spin { 100% { transform:rotate(360deg); } }
 </style>

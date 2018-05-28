@@ -3,7 +3,11 @@
 
     <loader v-if="isLoading"></loader>
 
-    <card-partial-empty :text="emptyText"></card-partial-empty>
+    <card-partial-empty
+    :text="emptyText"
+    actionLink="/wallets"
+    actionLabel="View deposit wallets"
+    ></card-partial-empty>
 
     <div class="list-group list-group-flush" v-if="!isLoading">
       <router-link
@@ -46,7 +50,7 @@ export default {
       allFilledBalances: 'balances/allFilledBalances',
       allBalancePrices: 'balances/allBalancePrices',
       totalBalancesPrices: 'balances/totalBalancesPrices',
-      hasCurrencies: 'balances/hasCurrencies',
+      hasBalances: 'balances/hasBalances',
       balancesError: 'balances/error',
       symbols: 'symbols/symbols',
       allTickers: 'tickers/allTickers',
@@ -64,7 +68,7 @@ export default {
     },
     emptyText () {
       if (this.balancesError) return this.balancesError
-      if (!this.isLoading && !this.hasCurrencies) return 'You have nothing in your balance, yet.'
+      if (!this.isLoading && !this.hasBalances) return 'You have nothing in your balance, yet.'
       return null
     }
   },

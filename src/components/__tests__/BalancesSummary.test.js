@@ -4,6 +4,7 @@ import BalancesSummary from '@/components/BalancesSummary.vue'
 
 import balancesModule from '@/store/modules/balances'
 import pricesModule from '@/store/modules/prices'
+import '@/filters'
 
 const localVue = createLocalVue()
 

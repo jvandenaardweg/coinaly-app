@@ -42,6 +42,8 @@ export default {
   computed: {
     ...mapGetters({
       balancesError: 'balances/error',
+      hasBalances: 'balances/hasBalances',
+      allFilledBalancesTotal: 'balances/allFilledBalancesTotal',
       totalBalancesPrices: 'balances/totalBalancesPrices',
       getPriceBySymbol: 'prices/getPriceBySymbol',
       isLoadingPrices: 'prices/isLoading',
@@ -72,7 +74,9 @@ export default {
     },
     totalPriceReadable () {
       if (this.totalPrice) {
-        return `${this.totalPrice}`
+        return this.totalPrice
+      } else if (!this.hasBalances && !this.isLoading) {
+        return this.$options.filters.currency('0')
       } else {
         return 'Loading...'
       }
@@ -80,6 +84,8 @@ export default {
     totalBTCPriceReadable () {
       if (this.totalBTCPrice) {
         return `${this.totalBTCPrice} BTC`
+      } else if (!this.hasBalances && !this.isLoading) {
+        return '0 BTC'
       } else {
         return 'Getting balance from the exchange'
       }

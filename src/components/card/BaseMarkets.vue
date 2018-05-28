@@ -59,7 +59,7 @@ export default {
       unavailableBaseMarkets: 'markets/unavailableBaseMarkets',
       totalUnavailableBaseMarkets: 'markets/totalUnavailableBaseMarkets',
       totalAvailableBaseMarkets: 'markets/totalAvailableBaseMarkets',
-      hasCurrencies: 'balances/hasCurrencies',
+      hasBalances: 'balances/hasBalances',
       isLoadingMarkets: 'markets/isLoading',
       isLoadingBalances: 'balances/isLoading',
       isLoadingCurrencies: 'symbols/isLoading',
