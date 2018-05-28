@@ -318,7 +318,7 @@ export default {
           const decimals = priceString.split('.')[1].length || this.marketPrecisionPrice // Determine the amount of decimals in the price, so we can increase/decrease the correct decimals
           const power = Math.pow(0.1, decimals) // Increase/decrease by what amount
           const newPrice = (type === 'increase' ? parseFloat(price + power).toFixed(decimals) : parseFloat(price - power).toFixed(decimals))
-          this.price = newPrice
+          this.price = +newPrice
         } else {
           this.price = (type === 'increase') ? price + 1 : price - 1
         }
