@@ -61,6 +61,7 @@
     "cpx": "^1.5.0",
     "dotenv": "^5.0.1",
     "flush-promises": "^1.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "nock": "^9.2.6",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",

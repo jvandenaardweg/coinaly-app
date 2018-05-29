@@ -5,7 +5,6 @@
       :name="name"
       :placeholder="placeholder"
       :value="value"
-      :min="min"
       autocomplete="off"
       @validate="$emit('validate', $event.target.value)"
       @input="$emit('input', returnNumber($event.target.value))" />
@@ -25,10 +24,6 @@ export default {
       type: [String, Number],
       required: false
     },
-    min: {
-      type: Number,
-      required: false
-    },
     name: {
       type: String,
       required: true
@@ -44,6 +39,7 @@ export default {
   },
   methods: {
     returnNumber (value) {
+      console.log(value)
       // Makes sure we return a Number instead of a String
       return +value
     }

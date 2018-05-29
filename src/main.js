@@ -13,6 +13,7 @@ import './registerServiceWorker'
 import '@/filters'
 import '@/scss/bootstrap/bootstrap.scss'
 import clickOutsideDirective from '@/directives/click-outside'
+require('isomorphic-fetch')
 // import './websocket/socket-io'
 Vue.use(clickOutsideDirective)
 

@@ -1,7 +1,12 @@
 .btn {
   &.is-loading {
     position: relative;
-    text-indent: -13337px;
+    // text-indent: -13337px;
+    color: transparent;
+
+    svg {
+      opacity: 0;
+    }
 
     &:after {
       left: calc(50% - (1em / 2));

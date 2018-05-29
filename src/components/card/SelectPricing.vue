@@ -1,5 +1,5 @@
 <template>
-  <form name="order" @submit.prevent="handleSubmit($event)">
+  <form name="order" @submit.prevent="handleSubmit($event)" :disabled="isCreating">
     <div class="card">
       <div class="card-body">
         <p class="text-center m-0">You have <strong>{{ amountFreeInBalance | number }} {{ quoteId }}</strong> available.</p>
@@ -10,23 +10,26 @@
 
     <div class="card">
       <div class="card-body">
-        <div class="form-group m-0">
-          <label class="d-block text-center mb-2">Your price of 1 {{ baseId }} in {{ quoteId }} <span class="badge badge-secondary">limit</span></label>
-          <div class="d-flex justify-content-between">
-            <btn-control label="-" @click.native="handleInputPriceAdjust('decrease')" :disabled="!price"></btn-control>
-            <input-large class="ml-3 mr-3" name="price" :label="quoteId" v-model="price" placeholder="" v-validate="priceValidationRules"></input-large>
-            <btn-control label="+" @click.native="handleInputPriceAdjust('increase')" :disabled="!price"></btn-control>
+        <fieldset :disabled="isCreating">
+          <legend class="sr-only">Price</legend>
+          <div class="form-group m-0">
+            <label class="d-block text-center mb-2">Your price of 1 {{ baseId }} in {{ quoteId }} <span class="badge badge-secondary">limit</span></label>
+            <div class="d-flex justify-content-between">
+              <btn-control label="-" @click.native="handleInputPriceAdjust('decrease')" :disabled="!price"></btn-control>
+              <input-large class="ml-3 mr-3" name="price" :label="quoteId" v-model="price" placeholder="" v-validate="priceValidationRules"></input-large>
+              <btn-control label="+" @click.native="handleInputPriceAdjust('increase')" :disabled="!price"></btn-control>
+            </div>
+            <invalid-feedback v-if="errors.first('price')" :message="errors.first('price')" ref="orderPriceError" class="text-center"></invalid-feedback>
+            <div class="buttons mt-5">
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('last')">last</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('bid')">bid</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('ask')">ask</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('low')">low</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('high')">high</button>
+            </div>
+            <small class="form-text text-muted mt-3 text-center" v-html="belowOrAboveCurrentMarket"></small>
           </div>
-          <invalid-feedback v-if="errors.first('price')" :message="errors.first('price')" ref="orderPriceError" class="text-center"></invalid-feedback>
-          <div class="buttons mt-5">
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('last')">last</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('bid')">bid</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('ask')">ask</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('low')">low</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleSetMarketPrice('high')">high</button>
-          </div>
-           <small class="form-text text-muted mt-3 text-center" v-html="belowOrAboveCurrentMarket"></small>
-        </div>
+        </fieldset>
       </div>
     </div>
 
@@ -34,23 +37,26 @@
 
     <div class="card">
       <div class="card-body">
-        <div class="form-group m-0">
-          <label class="d-block text-center mb-2">Amount of {{ baseId }} to {{ context }}</label>
-          <div class="d-flex">
-            <!-- <btn-control label="-" @click.native="handleInputPriceAdjust('decrease')"></btn-control> -->
-            <input-large class="ml-5 mr-5" name="amount" :label="baseId" v-model="amount" placeholder=""  v-validate="amountValidationRules"></input-large>
-            <!-- <btn-control label="+" @click.native="handleInputPriceAdjust('increase')"></btn-control> -->
+        <fieldset :disabled="isCreating">
+          <legend class="sr-only">Amount</legend>
+          <div class="form-group m-0">
+            <label class="d-block text-center mb-2">Amount of {{ baseId }} to {{ side }}</label>
+            <div class="d-flex">
+              <!-- <btn-control label="-" @click.native="handleInputPriceAdjust('decrease')"></btn-control> -->
+              <input-large class="ml-5 mr-5" name="amount" :label="baseId" v-model="amount" placeholder="" v-validate="amountValidationRules"></input-large>
+              <!-- <btn-control label="+" @click.native="handleInputPriceAdjust('increase')"></btn-control> -->
+            </div>
+            <invalid-feedback v-if="errors.first('amount')" :message="errors.first('amount')" ref="orderAmountError" class="text-center"></invalid-feedback>
+            <div class="buttons mt-5">
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.10)">10%</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.25)">25%</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.50)">50%</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.75)">75%</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(1)">100%</button>
+              <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="roundAmount()" :disabled="!canUseRound">Round</button>
+            </div>
           </div>
-          <invalid-feedback v-if="errors.first('amount')" ref="orderAmountError" class="text-center"></invalid-feedback>
-          <div class="buttons mt-5">
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.10)">10%</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.25)">25%</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.50)">50%</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(0.75)">75%</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="handleInputAmountSetAmountPercentage(1)">100%</button>
-            <button type="button" tabindex="-1" class="btn btn-outline-secondary btn-sm" @click.prevent="roundAmount()" :disabled="!canUseRound">Round</button>
-          </div>
-        </div>
+        </fieldset>
       </div>
     </div>
 
@@ -58,10 +64,10 @@
 
     <div class="card bg-blue text-white">
       <div class="card-body">
-        <fieldset :disabled="isDisabled">
+        <fieldset :disabled="isCreating">
           <ul class="list-unstyled">
             <li class="d-flex">
-              <span class="font-weight-bold">Total {{ context }} {{ baseId }}:</span>
+              <span class="font-weight-bold">Total {{ side }} {{ baseId }}:</span>
               <span class="ml-auto">{{ correctedAmount | number }} {{ baseId }}</span>
             </li>
             <li class="d-flex pt-2">
@@ -81,7 +87,7 @@
               <span class="ml-auto">{{ amount | number }} {{ baseId }}</span>
             </li>
           </ul>
-          <button type="submit" class="btn btn-success btn-lg btn-block" :class="{'disabled': isDisabled}" :disabed="isDisabled">{{ context }} {{ baseId }} with {{ quoteId }}</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block" :class="{'disabled': isDisabled, 'is-loading': isCreating }" :disabed="isDisabled">{{ side }} {{ baseId }} with {{ quoteId }}</button>
         </fieldset>
       </div>
     </div>
@@ -121,7 +127,7 @@ export default {
       type: Object,
       required: true
     },
-    context: {
+    side: {
       type: String,
       required: true,
       validator: (value) => {
@@ -132,17 +138,18 @@ export default {
   data: () => ({
     orderType: 'limit',
     price: null,
-    amount: null
+    amount: null,
+    isCreating: null
   }),
   computed: {
     correctedPrice () {
       // We take the user input and make sure the price has the correct decimals the exchange expects
-      if (this.price) return +(this.price).toFixed(this.marketPrecisionPrice)
+      if (this.price) return +(parseFloat(this.price)).toFixed(this.marketPrecisionPrice)
       return 0
     },
     correctedAmount () {
       // We take the user input and make sure the amount has the correct decimals the exchange expects
-      if (this.amount) return +(this.amount).toFixed(this.marketPrecisionAmount)
+      if (this.amount) return +(parseFloat(this.amount)).toFixed(this.marketPrecisionAmount)
       return 0
     },
     canTrade () {
@@ -202,9 +209,6 @@ export default {
     fiatPricing () {
       return this.prices[this.quoteId]
     },
-    labelPrice () {
-      return `Your ${this.context} price for 1 ${this.baseId} (in ${this.quoteId})`
-    },
     quoteId () {
       if (this.market) return this.market.quoteId
       return null
@@ -257,7 +261,7 @@ export default {
       return this.totalPrice * this.fiatPricing.USD
     },
     labelTotalPrice () {
-      if (this.context === 'buy') {
+      if (this.side === 'buy') {
         return 'You pay:'
       } else {
         return 'You get:'
@@ -267,7 +271,7 @@ export default {
       return (this.price * this.amount) * this.fee
     },
     isDisabled () {
-      return this.errors.items.length || !this.price || !this.amount || !this.canTrade
+      return this.errors.items.length || !this.price || !this.amount || !this.canTrade || this.isCreating
     },
     canUseRound () {
       return this.amount > 1
@@ -287,7 +291,7 @@ export default {
             $scope.stopSell_order.total = Math.round($scope.stopSell_order.quantity * $scope.stopSell_order.curPrice * Math.pow(10, 8)) / Math.pow(10, 8)))
       */
       let amount
-      if (this.context === 'sell') {
+      if (this.side === 'sell') {
         this.amount = (this.amountFreeInBalance * percentage)
       } else {
          // If we want to buy, the amount is related to the price we give for it
@@ -329,30 +333,59 @@ export default {
     roundAmount () {
       if (this.canUseRound) this.amount = Math.floor(this.amount)
     },
-    handleSubmit () {
+    async handleSubmit () {
       if (this.canTrade) {
-        this.$validator.validateAll()
-        .then((result) => {
+        this.isCreating = true
+        try {
+          // Validate the form fields before submitting
+          const result = await this.$validator.validateAll()
           if (result) {
+            // The payload for the order creation
+            // Only contains data the API needs
+            // Need to make sure this is 100% correct
             const payload = {
-              orderType: this.orderType,
-              context: this.context,
+              side: this.side,
               amount: this.correctedAmount,
               price: this.correctedPrice,
-              market: this.marketSymbol
+              symbol: this.marketSymbol
             }
 
-            console.log('Send this', payload)
-            // eslint-disable-next-line
-            // alert('Form Submitted!');
-            return;
+            if (this.orderType === 'limit') {
+              await this.dispatchCreateLimitOrder(payload)
+            } else if (this.orderType === 'market') {
+              await this.dispatchCreateMarketOrder(payload)
+            }
           }
-
-          alert('Correct them errors!');
-        })
+        } catch (err) {
+          console.log('Error while creating order', err)
+        } finally {
+          this.isCreating = false
+        }
       } else {
         console.log('Cannot trade with', this.amount, this.price)
       }
+    },
+    async dispatchCreateLimitOrder (payload) {
+      try {
+        console.log('dispatch limit order', payload)
+        const result = await this.$store.dispatch('orders/createLimitOrder', payload)
+        if (result.id) this.redirectToOrder(result.id)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async dispatchCreateMarketOrder (payload) {
+      // TODO: still have to make this, does nothing for now
+      try {
+        console.log('dispatch market order', payload)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    redirectToOrder (orderId) {
+      this.$router.push({
+        path: `/orders/${orderId}`
+      })
     }
   }
 }
@@ -364,45 +397,14 @@ export default {
   padding: 1.5rem 1rem;
   background: $primary;
   color: $white;
-
-  // &:after {
-  //   background: linear-gradient(-45deg, #fff 4px, transparent 0), linear-gradient(45deg, #fff 4px, transparent 0);
-  //   background-position: left-bottom;
-  //   background-repeat: repeat-x;
-  //   background-size: 6px 6px;
-  //   content: " ";
-  //   display: block;
-  //   position: absolute;
-  //   bottom: 0px;
-  //   left: 0px;
-  //   width: 100%;
-  //   height: 6px;
-  // }
-
-  // &:before {
-  //   background: linear-gradient(-45deg, #fff 4px, transparent 0), linear-gradient(45deg, #fff 4px, transparent 0);
-  //   background-position: left-bottom;
-  //   background-repeat: repeat-x;
-  //   background-size: 6px 6px;
-  //   content: " ";
-  //   display: block;
-  //   position: absolute;
-  //   top: 0px;
-  //   left: 0px;
-  //   width: 100%;
-  //   height: 6px;
-  //   transform: rotate(180deg);
-  // }
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  // margin-bottom: 10px;
 
   .btn {
     width: 100%;
-    // border-color: $border-color;
     margin-right: 2px;
     margin-left: 2px;
 
@@ -412,17 +414,6 @@ export default {
       outline: none;
       box-shadow: none;
     }
-    // border-radius: 0;
-
-    // &:first-child {
-    //   border-top-left-radius: $border-radius;
-    //   border-bottom-left-radius: $border-radius;
-    // }
-
-    // &:last-child {
-    //   border-top-right-radius: $border-radius;
-    //   border-bottom-right-radius: $border-radius;
-    // }
   }
 }
 

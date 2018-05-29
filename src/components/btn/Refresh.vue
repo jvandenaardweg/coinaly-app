@@ -13,13 +13,6 @@ export default {
     timeout: 10000
   }),
   computed: {
-    refreshLabel () {
-      if (this.isLoading) {
-        return 'Getting Balances...'
-      } else {
-        return 'Refresh Balances'
-      }
-    },
     timeoutSeconds () {
       return (this.timeout / 1000)
     }
@@ -29,7 +22,14 @@ export default {
       if (!this.isDisabled) {
         this.isLoading = true
         try {
-          await this.$store.dispatch('balances/getAll', {forceRefresh: true})
+          await Promise.all([
+            this.$store.dispatch('balances/getAll', {forceRefresh: true}),
+            this.$store.dispatch('orders/getAllOpenOrders', {forceRefresh: true}),
+            this.$store.dispatch('orders/getAllClosedOrders', {forceRefresh: true})
+          ])
+          // await this.$store.dispatch('balances/getAll', {forceRefresh: true})
+          // await this.$store.dispatch('orders/getAllOpenOrders', {forceRefresh: true})
+          // await this.$store.dispatch('orders/getAllClosedOrders', {forceRefresh: true})
           this.activateTimeout()
         } finally {
           this.isDisabled = true
@@ -37,7 +37,7 @@ export default {
         }
       } else {
         // TODO: Temporary, we should handle this more friendly
-        window.alert(`Please wait ${this.timeoutSeconds} seconds before syncing your balance again.`)
+        window.alert(`Please wait ${this.timeoutSeconds} seconds before syncing your balance and orders again.`)
       }
     },
     activateTimeout () {

@@ -1,0 +1,14 @@
+{
+  "info": {
+    "success": true,
+    "message": "",
+    "result": {
+      "uuid": "2a116a0d-3cde-4350-9c45-955e29ca2dc3"
+    }
+  },
+  "id": "2a116a0d-3cde-4350-9c45-955e29ca2dc3",
+  "symbol": "ADA/USDT",
+  "type": "limit",
+  "side": "buy",
+  "status": "open"
+}

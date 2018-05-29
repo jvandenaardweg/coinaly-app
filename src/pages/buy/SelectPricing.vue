@@ -13,7 +13,7 @@
           :balance="balance"
           :ticker="ticker"
           :prices="prices"
-          :context="'buy'">
+          :side="'buy'">
         </card-select-pricing>
 
       </div>

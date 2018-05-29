@@ -11,7 +11,7 @@
           :balance="balance"
           :ticker="ticker"
           :prices="prices"
-          :context="'sell'">
+          :side="'sell'">
         </select-pricing>
       </div>
       <div class="col-md-8">

@@ -1,5 +1,4 @@
-var axios = require('axios')
-require('promise.prototype.finally')
+require('isomorphic-fetch')
 
 let baseUrl
 
@@ -11,14 +10,26 @@ if (process.env.NODE_ENV === 'production') {
 
 var axiosInstance = axios.create({
   baseURL: baseUrl,
-  timeout: 30000
+  timeout: 10000
 })
 
 if (window.localStorage) {
-  const token = localStorage.getItem('token')
-  axios.defaults.headers.common['authorization'] = token
+
 } else {
   delete axios.defaults.headers.common['authorization']
+}
+
+const request = function (url, method) {
+  let headers = null
+  const token = localStorage.getItem('token')
+  headers = new Headers({'Authorization': token})
+
+  const options = {
+    method: method,
+    headers: headers
+  }
+
+  return fetch(url, options)
 }
 
 module.exports = axiosInstance
