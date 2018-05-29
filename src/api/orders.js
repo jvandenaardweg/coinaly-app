@@ -8,3 +8,12 @@ export function getAllClosedOrders (exchangeSlug, symbolId = null) {
   })
     .then(response => response.data)
 }
+
+export function getAllOpenOrders (exchangeSlug, symbolId = null) {
+  return axios.get(`/exchanges/${exchangeSlug}/orders/open`, {
+    params: {
+      symbolId: symbolId
+    }
+  })
+    .then(response => response.data)
+}

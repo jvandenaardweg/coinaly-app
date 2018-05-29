@@ -30,7 +30,7 @@
     "amount": 0.09261539,
     "filled": 0.09261539,
     "remaining": 0,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 1.66244623,
       "currency": "USDT"
@@ -67,7 +67,7 @@
     "amount": 25000,
     "filled": 3736.7763771399987,
     "remaining": 21263.22362286,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 0.00004063,
       "currency": "BTC"
@@ -104,7 +104,7 @@
     "amount": 21263.22362286,
     "filled": 21263.22362286,
     "remaining": 0,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 0.00023013,
       "currency": "BTC"
@@ -141,7 +141,7 @@
     "amount": 2324.20952185,
     "filled": 1823.6184243599998,
     "remaining": 500.59109749,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 0.0001914,
       "currency": "BTC"
@@ -178,7 +178,7 @@
     "amount": 500.59109749,
     "filled": 159.23942461999997,
     "remaining": 341.35167287,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 0.00001663,
       "currency": "BTC"
@@ -215,7 +215,7 @@
     "amount": 341.35167287,
     "filled": 341.35167287,
     "remaining": 0,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 0.00003567,
       "currency": "BTC"
@@ -252,7 +252,7 @@
     "amount": 0.09848073,
     "filled": 0.09848073,
     "remaining": 0,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 1.76305126,
       "currency": "USDT"
@@ -289,7 +289,7 @@
     "amount": 0.01423282,
     "filled": 0.01423282,
     "remaining": 0,
-    "status": "closed",
+    "status": "open",
     "fee": {
       "cost": 0.25579935,
       "currency": "USDT"

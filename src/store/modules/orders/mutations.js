@@ -5,6 +5,10 @@ export default {
   addAllClosed (state, orders) {
     Vue.set(state, 'closed', orders)
   },
+  addAllOpen (state, orders) {
+    // TODO: Write test
+    Vue.set(state, 'open', orders)
+  },
   startLoading (state) {
     Vue.set(state, 'isLoading', true)
   },

@@ -79,6 +79,8 @@ const PageSellSelectBase = () => import(/* webpackChunkName: "PageSellSelectBase
 const PageSellSelectQuote = () => import(/* webpackChunkName: "PageSellSelectQuote" */ '@/pages/sell/SelectQuote.vue')
 const PageSellSelectPricing = () => import(/* webpackChunkName: "PageSellSelectPricing" */ '@/pages/sell/SelectPricing.vue')
 
+const PageOrdersIndex = () => import(/* webpackChunkName: "PageSellIndex" */ '@/pages/orders/Index.vue')
+
 // import PageOnboardingIndex from '@/pages/onboarding/Index.vue'
 
 const PageOnboardingIndex = () => import(/* webpackChunkName: "PageOnboardingIndex" */ '@/pages/onboarding/Index.vue')
@@ -246,6 +248,11 @@ export default new Router({
           path: '/wallets',
           name: 'Wallets',
           component: PageWalletsIndex
+        },
+        {
+          path: '/orders',
+          name: 'Orders',
+          component: PageOrdersIndex
         }
       ]
     },

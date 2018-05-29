@@ -4,6 +4,10 @@
       <Icon name="trending-up"></Icon>
       <span>Balances</span>
     </router-link>
+    <router-link class="nav-link" to="/orders">
+      <Icon name="package"></Icon>
+      <span>Orders</span>
+    </router-link>
     <router-link class="nav-link" to="/buy">
       <Icon name="download"></Icon>
       <span>Buy</span>

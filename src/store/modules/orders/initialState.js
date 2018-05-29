@@ -1,8 +1,7 @@
 export default () => {
   return {
-    orders: null,
-    closed: null,
-    open: null,
+    closed: [],
+    open: [],
     isLoading: null
   }
 }
