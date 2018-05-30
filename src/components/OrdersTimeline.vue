@@ -56,7 +56,7 @@
               <tr>
                 <td>{{ order.fee.cost }}</td>
                 <td>{{ order.remaining }}</td>
-                <td>{{ order.symbol }}</td>
+                <td><router-link :to="`/markets/${quoteId(order.symbol)}/${baseId(order.symbol)}`">{{ order.symbol }}</router-link></td>
               </tr>
             </tbody>
           </table>
