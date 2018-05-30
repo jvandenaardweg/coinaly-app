@@ -14,7 +14,10 @@ module.exports = {
     themeColor: '#2e63b1',
     msTileColor: '#2e63b1',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black'
+    appleMobileWebAppStatusBarStyle: 'black',
+    workboxOptions: {
+      skipWaiting: true
+    }
   },
   devServer: {
     port: 8080
