@@ -87,6 +87,9 @@
               <span class="ml-auto">{{ amount | number }} {{ baseId }}</span>
             </li>
           </ul>
+          <div class="alert alert-danger" v-if="localError">
+            {{ localError }}
+          </div>
           <button type="submit" class="btn btn-success btn-lg btn-block" :class="{'disabled': isDisabled, 'is-loading': isCreating }" :disabed="isDisabled">{{ side }} {{ baseId }} with {{ quoteId }}</button>
         </fieldset>
       </div>
@@ -139,7 +142,8 @@ export default {
     orderType: 'limit',
     price: null,
     amount: null,
-    isCreating: null
+    isCreating: null,
+    localError: null
   }),
   computed: {
     correctedPrice () {
@@ -279,22 +283,11 @@ export default {
   },
   methods: {
     handleInputAmountSetAmountPercentage (percentage) {
-
-      /*
-       if ($scope.userAssets) {
-            for (var o = 0; o < $scope.userAssets.length; o++)
-                r[$scope.userAssets[o].asset] = $scope.userAssets[o].free;
-            "limit" == n ? "buy" == t && $scope.buy_order.price ? ($scope.buy_order.quantity = floorToFixed(e * r[$scope.currentProduct.quoteAsset] / $scope.buy_order.price, $scope.currentProduct.qtyTick),
-            $scope.buy_order.total = Math.round($scope.buy_order.quantity * $scope.buy_order.price * Math.pow(10, 8)) / Math.pow(10, 8)) : "sell" == t && ($scope.sell_order.sell_quantity = floorToFixed(e * r[$scope.currentProduct.baseAsset], $scope.currentProduct.qtyTick),
-            $scope.sell_order.sell_total = Math.round($scope.sell_order.sell_quantity * $scope.sell_order.sell_price * Math.pow(10, 8)) / Math.pow(10, 8)) : "market" == n ? "buy" == t ? $scope.market_buy_order.quantity = floorToFixed(e * r[$scope.currentProduct.quoteAsset] / $scope.currentProduct.close, $scope.currentProduct.qtyTick) : $scope.market_sell_order.quantity = floorToFixed(e * r[$scope.currentProduct.baseAsset], $scope.currentProduct.qtyTick) : "stopLimit" == n && ("buy" == t ? $scope.stopBuy_order.price && ($scope.stopBuy_order.quantity = floorToFixed(e * r[$scope.currentProduct.quoteAsset] / $scope.stopBuy_order.price, $scope.currentProduct.qtyTick),
-            $scope.stopBuy_order.total = Math.round($scope.stopBuy_order.quantity * $scope.stopBuy_order.price * Math.pow(10, 8)) / Math.pow(10, 8)) : "sell" == t && ($scope.stopSell_order.quantity = floorToFixed(e * r[$scope.currentProduct.baseAsset], $scope.currentProduct.qtyTick),
-            $scope.stopSell_order.total = Math.round($scope.stopSell_order.quantity * $scope.stopSell_order.curPrice * Math.pow(10, 8)) / Math.pow(10, 8)))
-      */
       let amount
       if (this.side === 'sell') {
         this.amount = (this.amountFreeInBalance * percentage)
       } else {
-         // If we want to buy, the amount is related to the price we give for it
+        // If we want to buy, the amount is related to the price we give for it
         // amount = (this.amountFreeInBalance / this.price) * percentage
 
         // Round to floor, so we can be sure the amount is accepted by the exchange
@@ -334,6 +327,7 @@ export default {
       if (this.canUseRound) this.amount = Math.floor(this.amount)
     },
     async handleSubmit () {
+      this.localError = null
       if (this.canTrade) {
         this.isCreating = true
         try {
@@ -357,6 +351,7 @@ export default {
             }
           }
         } catch (err) {
+          this.localError = err
           console.log('Error while creating order', err)
         } finally {
           this.isCreating = false
@@ -367,12 +362,17 @@ export default {
     },
     async dispatchCreateLimitOrder (payload) {
       try {
-        console.log('dispatch limit order', payload)
         const result = await this.$store.dispatch('orders/createLimitOrder', payload)
-        if (result.id) this.redirectToOrder(result.id)
+        if (result.id) {
+          await this.dispatchGetAllOpenOrders()
+          this.redirectToOrder(result.id)
+        }
       } catch (err) {
-        console.log(err)
+        throw err
       }
+    },
+    dispatchGetAllOpenOrders () {
+      return this.$store.dispatch('orders/getAllOpenOrders', {forceRefresh: true})
     },
     async dispatchCreateMarketOrder (payload) {
       // TODO: still have to make this, does nothing for now
@@ -383,8 +383,10 @@ export default {
       }
     },
     redirectToOrder (orderId) {
+      // We ignore the orderId for now and just
       this.$router.push({
-        path: `/orders/${orderId}`
+        // path: `/orders/${orderId}`
+        path: `/orders`
       })
     }
   }

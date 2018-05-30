@@ -16,6 +16,7 @@
         v-for="(quoteSymbols, baseSymbol) in searchedMarkets"
         :key="baseSymbol"
         :symbol="baseSymbol"
+        :badges="badges(baseSymbol)"
         :meta="meta(baseSymbol, quoteSymbols)"
         :currency="currency(baseSymbol)"
         >
@@ -117,6 +118,13 @@ export default {
     }
   },
   methods: {
+    badges (symbolId) {
+      if (this.filtering === 'unavailable') {
+        return this.unavailableBaseMarkets[symbolId]
+      } else {
+        return this.availableBaseMarkets[symbolId]
+      }
+    },
     handleSort (sortBy) {
       this.sortBy = sortBy
     },

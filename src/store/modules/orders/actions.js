@@ -1,13 +1,15 @@
 import * as api from '@/api/orders'
 
 export default {
-  async getAllClosedOrders ({ commit, rootGetters }, symbolId = null) {
+  async getAllClosedOrders ({ commit, rootGetters }, payload) {
+    const forceRefresh = (payload) ? payload.forceRefresh : null
+
     try {
       commit('startLoading')
       commit('removeError')
 
       const selectedExchange = rootGetters['exchanges/selected']
-      const response = await api.getAllClosedOrders(selectedExchange, symbolId)
+      const response = await api.getAllClosedOrders(selectedExchange, forceRefresh)
       if (response) {
         commit('addAllClosed', response)
       }
@@ -21,12 +23,14 @@ export default {
     }
   },
 
-  async getAllOpenOrders ({ commit, rootGetters }, symbolId = null) {
+  async getAllOpenOrders ({ commit, rootGetters }, payload) {
+    const forceRefresh = (payload) ? payload.forceRefresh : null
+
     try {
       commit('startLoading')
       commit('removeError')
       const selectedExchange = rootGetters['exchanges/selected']
-      const response = await api.getAllOpenOrders(selectedExchange, symbolId)
+      const response = await api.getAllOpenOrders(selectedExchange, forceRefresh)
       if (response) {
         commit('addAllOpen', response)
       }

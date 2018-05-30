@@ -1,12 +1,12 @@
 <template>
-  <button type="button" class="btn btn-refresh btn-sm mr-3" :class="{'is-loading': isLoading }" @click.prevent="refreshBalances()">
+  <button type="button" class="btn btn-sync btn-sm mr-3" :class="{'is-loading': isLoading }" @click.prevent="handleClick()">
     <svg class="feather feather-refresh-ccw" width="18" height="18" fill="transparent" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#refresh-ccw"/></svg>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'BtnRefresh',
+  name: 'BtnSync',
   data: () => ({
     isLoading: false,
     isDisabled: false,
@@ -18,7 +18,7 @@ export default {
     }
   },
   methods: {
-    async refreshBalances () {
+    async handleClick () {
       if (!this.isDisabled) {
         this.isLoading = true
         try {
@@ -27,9 +27,6 @@ export default {
             this.$store.dispatch('orders/getAllOpenOrders', {forceRefresh: true}),
             this.$store.dispatch('orders/getAllClosedOrders', {forceRefresh: true})
           ])
-          // await this.$store.dispatch('balances/getAll', {forceRefresh: true})
-          // await this.$store.dispatch('orders/getAllOpenOrders', {forceRefresh: true})
-          // await this.$store.dispatch('orders/getAllClosedOrders', {forceRefresh: true})
           this.activateTimeout()
         } finally {
           this.isDisabled = true
@@ -50,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss">
-.btn-refresh {
+.btn-sync {
   border: 0;
   background: transparent;
   width: 40px;

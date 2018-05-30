@@ -1,55 +1,62 @@
 <template>
   <div class="container">
-    <p>show open orders and order history (if possible)</p>
-    <h2>Open</h2>
-     <div v-for="(order, index) in ordersOpen" :key="order.id">
-      {{ order.timestamp }} {{ order.side }} {{ order.symbol }} {{ order.id }} {{ order.price }}
-      <button type="button" class="btn btn-danger" :class="{'is-loading': isCancelling === order.id }" @click.prevent="handleClickDelete(order.id)">Delete</button>
+    <router-link to="/buy" class="btn btn-primary">Buy</router-link>
+    <router-link to="/sell" class="btn btn-primary">Sell</router-link>
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <orders-timeline :orders="ordersOpen" context="open"></orders-timeline>
+
+      </div>
+      <div class="col-md-6">
+        <orders-timeline :orders="ordersClosed" context="closed"></orders-timeline>
+      </div>
     </div>
-    <h2>Closed</h2>
-    <div v-for="(order, index) in ordersClosed" :key="order.id">
-      {{ order.timestamp }} {{ order.side }} {{ order.symbol }} {{ order.id }} {{ order.price }}
+
+    <div class="alert alert-danger" v-if="localError">
+      {{ localError }}
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import OrdersTimeline from '@/components/OrdersTimeline'
+import Search from '@/components/Search'
 
 export default {
   name: 'PageOrdersIndex',
+  components: {
+    OrdersTimeline,
+    Search
+  },
   data: () => ({
-    isCancelling: false
+    isCancelling: false,
+    localError: null
   }),
-  created () {
-    this.dispatchGetAllClosedOrders()
-    this.dispatchGetAllOpenOrders()
+  beforeMount () {
+    if (this.selectedExchange !== 'binance') {
+      this.dispatchGetAllClosedOrders()
+      this.dispatchGetAllOpenOrders()
+    }
   },
   computed: {
     ...mapGetters({
+      selectedExchange: 'exchanges/selected',
       ordersOpen: 'orders/open',
       ordersClosed: 'orders/closed'
-    })
+    }),
+    message () {
+      if (this.selectedExchange === 'binance') {
+        return 'This page does not yet work for Binance'
+      }
+    }
   },
   methods: {
-    async handleClickDelete (orderUuid) {
-      this.isCancelling = orderUuid
-      try {
-        const result = await this.$store.dispatch('orders/cancelOrder', orderUuid)
-        await this.dispatchGetAllOpenOrders(true)
-        return result
-      } catch (err) {
-        console.log('Error cancelling order', err)
-      } finally {
-        this.isCancelling = false
-      }
-    },
-    dispatchGetAllClosedOrders (forceRefresh) {
-      const payload = (forceRefresh) ? {forceRefresh: true} : null
+    dispatchGetAllClosedOrders (payload) {
       return this.$store.dispatch('orders/getAllClosedOrders', payload)
     },
-    dispatchGetAllOpenOrders (forceRefresh) {
-      const payload = (forceRefresh) ? {forceRefresh: true} : null
+    dispatchGetAllOpenOrders (payload) {
       return this.$store.dispatch('orders/getAllOpenOrders', payload)
     }
   }

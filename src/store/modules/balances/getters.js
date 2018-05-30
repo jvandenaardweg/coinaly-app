@@ -36,7 +36,6 @@ export default {
     // TODO: write test
     const getPriceBySymbol = rootGetters['prices/getPriceBySymbol']
     const baseMarkets = rootGetters['markets/allBaseMarkets']
-    const quoteMarkets = rootGetters['markets/allQuoteMarkets']
     const getTickerBySymbol = rootGetters['tickers/getTickerBySymbol']
     const isLoadingTickers = rootGetters['tickers/isLoading']
     const isLoadingPrices = rootGetters['prices/isLoading']
@@ -46,7 +45,6 @@ export default {
     if (!isLoadingPrices && !isLoadingMarkets && filledBalances && !isLoadingTickers) {
       return Object.keys(filledBalances).reduce((obj, symbolId) => {
         let marketSymbol
-        let priceSymbol
         let quoteId
         let baseId
         let price

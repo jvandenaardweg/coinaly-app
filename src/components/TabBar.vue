@@ -6,7 +6,7 @@
     </router-link>
     <router-link class="nav-link" to="/orders">
       <Icon name="package"></Icon>
-      <span>Orders</span>
+      <span>Orders <span v-if="totalOpenOrders">{{ totalOpenOrders }}</span></span>
     </router-link>
     <router-link class="nav-link" to="/buy">
       <Icon name="download"></Icon>
@@ -29,11 +29,16 @@
 
 <script>
 import Icon from '@/components/Icon'
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'TabBar',
   components: {
     Icon
+  },
+  computed: {
+    ...mapGetters({
+      totalOpenOrders: 'orders/totalOpenOrders'
+    })
   }
 }
 </script>
@@ -91,6 +96,12 @@ export default {
         @include media-breakpoint-up(md) {
           color: $gray-700;
         }
+
+        span {
+          > span {
+            background-color: $gray-700;
+          }
+        }
       }
 
       &:last-child {
@@ -104,6 +115,12 @@ export default {
         svg {
           stroke: $primary;
         }
+
+        span {
+          > span {
+            background-color: $primary;
+          }
+        }
       }
 
       svg {
@@ -116,7 +133,7 @@ export default {
         }
       }
 
-      span {
+      > span {
         display: block;
         text-align: center;
         bottom: -2px;
@@ -125,6 +142,30 @@ export default {
         @include media-breakpoint-up(md) {
           display: inline-block;
           bottom: 1px;
+        }
+
+        span {
+          width: 18px;
+          height: 18px;
+          border-radius: 18px;
+          text-align: center;
+          background-color: $gray-500;
+          color: $white;
+          position: absolute;
+          top: -25px;
+          right: -28px;
+          display: inline-block;
+          left: 0;
+          margin: auto;
+          transition: 150ms background-color;
+
+          @include media-breakpoint-up(md) {
+            top: -2px;
+            right: auto;
+            margin-left: 2px;
+            font-size: 0.7rem;
+            position: relative;
+          }
         }
       }
     }

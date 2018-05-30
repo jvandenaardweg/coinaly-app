@@ -71,23 +71,32 @@ export default {
       await this.loadAllData(exchangeSlug)
     },
     async loadAllData (exchangeSlug) {
-      await Promise.all([
-        this.$store.dispatch('websocket/unsubscribe'),
-        this.$store.commit('exchanges/setSelected', exchangeSlug),
-        this.$store.commit('deposits/resetState'),
-        this.$store.commit('balances/resetState'),
-        this.$store.commit('markets/resetState'),
-        this.$store.commit('orders/resetState'),
-        this.$store.commit('tickers/resetState'),
-        this.$store.dispatch('markets/loadAll'),
-        this.$store.dispatch('balances/getAll'),
-        this.$store.dispatch('exchanges/getAllExchanges'),
-        // this.$store.dispatch('orders/getAllClosedOrders', exchangeSlug),
-        this.$store.dispatch('websocket/subscribe'),
-        this.$store.dispatch('websocket/watch')
-      ])
-
-      this.isLoading = false
+      try {
+        await Promise.all([
+          this.$store.dispatch('websocket/unsubscribe'),
+          this.$store.commit('exchanges/setSelected', exchangeSlug),
+          this.$store.commit('deposits/resetState'),
+          this.$store.commit('balances/resetState'),
+          this.$store.commit('markets/resetState'),
+          this.$store.commit('orders/resetState'),
+          this.$store.commit('tickers/resetState'),
+          this.$store.dispatch('markets/loadAll'),
+          this.$store.dispatch('balances/getAll'),
+          this.$store.dispatch('exchanges/getAllExchanges'),
+          this.$store.dispatch('websocket/subscribe'),
+          this.$store.dispatch('websocket/watch')
+        ])
+        if (exchangeSlug !== 'binance') {
+          await Promise.all([
+            this.$store.dispatch('orders/getAllClosedOrders'),
+            this.$store.dispatch('orders/getAllOpenOrders')
+          ])
+        }
+      } catch (err) {
+        console.log('Error while switching exchanges', err)
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 }

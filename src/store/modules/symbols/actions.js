@@ -11,7 +11,7 @@ export default {
       return response
     } catch (error) {
       const errorMessage = (error.response) ? error.response.data.message : 'We could not get the symbols information. Please try again later.'
-      commit('setError', error.message)
+      commit('setError', errorMessage)
       return error
     } finally {
       commit('stopLoading')

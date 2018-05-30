@@ -1,20 +1,19 @@
 import axios from '../axios'
-require('isomorphic-fetch')
-export function getAllClosedOrders (exchangeSlug, symbolId = null, forceRefresh = false) {
+// require('isomorphic-fetch')
+
+export function getAllClosedOrders (exchangeSlug, forceRefresh = null) {
   return axios.get(`/exchanges/${exchangeSlug}/orders/closed`, {
     params: {
-      ...symbolId,
-      ...forceRefresh
+      forceRefresh: forceRefresh
     }
   })
     .then(response => response.data)
 }
 
-export function getAllOpenOrders (exchangeSlug, symbolId = null, forceRefresh = false) {
+export function getAllOpenOrders (exchangeSlug, forceRefresh = null) {
   return axios.get(`/exchanges/${exchangeSlug}/orders/open`, {
     params: {
-      ...symbolId,
-      ...forceRefresh
+      forceRefresh: forceRefresh
     }
   })
     .then(response => response.data)

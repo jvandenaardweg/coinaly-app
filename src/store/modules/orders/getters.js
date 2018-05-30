@@ -1,6 +1,10 @@
 export default {
   closed: state => {
-    return state.closed
+    if (state.closed && state.closed.length) {
+      return state.closed.sort((a, b) => b.timestamp - a.timestamp)
+    } else {
+      return []
+    }
   },
   open: state => {
     // TODO: write test
@@ -12,6 +16,10 @@ export default {
   hasOpen: state => {
     // TODO: write test
     return (state.open) ? state.open.length > 0 : false
+  },
+  totalOpenOrders: state => {
+    // TODO: write test
+    return (state.open) ? state.open.length : 0
   },
   isLoading: state => {
     return state.isLoading

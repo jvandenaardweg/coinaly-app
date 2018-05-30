@@ -17,6 +17,7 @@
     </div>
 
     <span class="ml-auto text-muted">
+      <span v-if="badges" class="badge badge-light mr-2" v-for="badge in badges" :key="badge">{{ badge }}</span>
       <span>
         {{ meta }}
       </span>
@@ -48,6 +49,10 @@ export default {
     },
     meta: {
       type: String,
+      required: false
+    },
+    badges: {
+      type: Array,
       required: false
     }
   },

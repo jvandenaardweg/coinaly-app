@@ -14,7 +14,7 @@
         {{ price | currency }}
       </div>
       <div class="progress">
-        <div class="progress-bar" role="progressbar" :style="{'width': `${balancePercentage}%`, 'background-color': symbolColor }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar" role="progressbar" :style="{'width': `${balancePercentage}%`, 'background-color': symbolColor }" :aria-valuenow="balancePercentage" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       <!-- <progress value="20" max="100"></progress> -->
       <!-- <div>test</div> -->

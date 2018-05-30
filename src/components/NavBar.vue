@@ -13,7 +13,7 @@
       </div>
 
       <div class="navbar-authenticated" v-if="isAuthenticated" ref="navbarAuthenticated">
-        <btn-refresh class="d-none d-sm-block"></btn-refresh>
+        <btn-sync class="d-none d-sm-block"></btn-sync>
         <btn-select-exchange></btn-select-exchange>
         <btn-settings class="ml-1"></btn-settings>
       </div>
@@ -24,7 +24,7 @@
 
 <script>
 import BtnBack from '@/components/btn/Back'
-import BtnRefresh from '@/components/btn/Refresh'
+import BtnSync from '@/components/btn/Sync'
 import BtnSettings from '@/components/btn/Settings'
 import BtnSelectExchange from '@/components/btn/SelectExchange'
 import Logo from '@/components/Logo'
@@ -33,7 +33,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'NavBar',
   components: {
-    BtnRefresh,
+    BtnSync,
     BtnSelectExchange,
     BtnSettings,
     BtnBack,

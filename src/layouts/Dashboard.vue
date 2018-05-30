@@ -42,13 +42,14 @@ export default {
 
     // Use before mount for API calls that don't need additional data, like a selected exchange
     if (!this.keys) {
+      this.$store.dispatch('keys/getAllKeys')
       this.$store.dispatch('prices/getAllPrices')
       this.$store.dispatch('symbols/getAll')
       this.$store.dispatch('exchanges/getAllExchanges')
-      this.$store.dispatch('keys/getAllKeys')
+      this.$store.dispatch('markets/loadAll')
 
       if (this.selectedExchange) {
-        this.loadInitialData()
+        this.loadInitialUserData()
       }
     }
 
@@ -64,9 +65,12 @@ export default {
     hideCrispChat () {
       window.$crisp.push(['do', 'chat:hide'])
     },
-    loadInitialData () {
-      this.$store.dispatch('markets/loadAll')
+    loadInitialUserData () {
       this.$store.dispatch('balances/getAll')
+      if (this.selectedExchange !== 'binance') {
+        this.$store.dispatch('orders/getAllOpenOrders')
+        this.$store.dispatch('orders/getAllClosedOrders')
+      }
     },
     connectWebsocket () {
       this.$store.dispatch('websocket/connect')
@@ -76,6 +80,7 @@ export default {
   },
   watch: {
     keys (newValue, oldValue) {
+      console.log('watch keys', newValue, this.selectedExchange)
       // Watch for changes in the keys store
       // When we have keys, and there's no selectedExchange, we just set the selectedExchange to the first
       if (!this.selectedExchange) {
@@ -83,11 +88,12 @@ export default {
       }
     },
     selectedExchange (newValue, oldValue) {
+      console.log('watch selected exchange', newValue)
       // If oldValue is null, it means the user has not yet have the selectedExchange in localStorage
       // So when we got a newValue that is set, we can assume the "keys" watcher above has done it's job
       // So we can safely load data that needs to know the exchange, like markets and balances
       if (oldValue === null && newValue) {
-        this.loadInitialData()
+        this.loadInitialUserData()
       }
     }
   }
