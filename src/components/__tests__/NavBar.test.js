@@ -64,9 +64,27 @@ describe('components/NavBar.vue', () => {
     expect($navbarAuthenticated.exists()).toBe(true)
   })
 
-  it('should display the route name in the title', () => {
-    router.push({ path: '/balances/BTC' })
-    const $navbarTitle = component.find({ref: 'navbarTitle'})
-    expect($navbarTitle.text()).toBe('BTC')
+  it('should show the sync button when the user is logged in', () => {
+    store.commit('auth/setAuthenticated')
+    const $navbarSync = component.find({ref: 'navbarSync'})
+    expect($navbarSync.exists()).toBe(true)
   })
+
+  it('should show select exchange button when the user is logged in', () => {
+    store.commit('auth/setAuthenticated')
+    const $navbarSelectExchange = component.find({ref: 'navbarSelectExchange'})
+    expect($navbarSelectExchange.exists()).toBe(true)
+  })
+
+  it('should show settings button when the user is logged in', () => {
+    store.commit('auth/setAuthenticated')
+    const $navbarSettings = component.find({ref: 'navbarSettings'})
+    expect($navbarSettings.exists()).toBe(true)
+  })
+
+  // it('should display the route name in the title', () => {
+  //   router.push({ path: '/balances/BTC' })
+  //   const $navbarTitle = component.find({ref: 'navbarTitle'})
+  //   expect($navbarTitle.text()).toBe('BTC')
+  // })
 })

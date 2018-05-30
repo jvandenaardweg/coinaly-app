@@ -8,14 +8,14 @@
         <logo fill="#ffffff"></logo>
       </router-link>
 
-      <div class="navbar-title d-sm-none" ref="navbarTitle">
+      <!-- <div class="navbar-title d-sm-none" ref="navbarTitle">
         <h1 class="h4">{{ routeName }}</h1>
-      </div>
+      </div> -->
 
       <div class="navbar-authenticated" v-if="isAuthenticated" ref="navbarAuthenticated">
-        <btn-sync class="d-none d-sm-block"></btn-sync>
-        <btn-select-exchange></btn-select-exchange>
-        <btn-settings class="ml-1"></btn-settings>
+        <btn-sync ref="navbarSync"></btn-sync>
+        <btn-select-exchange class="ml-1" ref="navbarSelectExchange"></btn-select-exchange>
+        <btn-settings class="ml-1" ref="navbarSettings"></btn-settings>
       </div>
 
     </div>
