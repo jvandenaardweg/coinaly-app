@@ -1,5 +1,9 @@
 <template>
-  <button type="button" class="btn btn-sync btn-sm mr-3" :class="{'is-loading': isLoading }" @click.prevent="handleClick()">
+  <button
+    type="button"
+    class="btn btn-select btn-dark-blue btn-sm btn-square-sm"
+    :class="{'is-loading': isLoading }"
+    @click.prevent="handleClick()">
     <svg class="feather feather-refresh-ccw" width="18" height="18" fill="transparent" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="/static/icons/feather-icons/feather-sprite.svg#refresh-ccw"/></svg>
   </button>
 </template>
@@ -22,11 +26,7 @@ export default {
       if (!this.isDisabled) {
         this.isLoading = true
         try {
-          await Promise.all([
-            this.$store.dispatch('balances/getAll', {forceRefresh: true}),
-            this.$store.dispatch('orders/getAllOpenOrders', {forceRefresh: true}),
-            this.$store.dispatch('orders/getAllClosedOrders', {forceRefresh: true})
-          ])
+          await this.forceRefreshUserData()
           this.activateTimeout()
         } finally {
           this.isDisabled = true
@@ -34,28 +34,38 @@ export default {
         }
       } else {
         // TODO: Temporary, we should handle this more friendly
-        window.alert(`Please wait ${this.timeoutSeconds} seconds before syncing your balance and orders again.`)
+        this.showAlert()
       }
     },
     activateTimeout () {
       setTimeout(() => {
         this.isDisabled = false
       }, this.timeout)
+    },
+    showAlert () {
+      window.alert(`Please wait ${this.timeoutSeconds} seconds before syncing your balance and orders again.`)
+    },
+    forceRefreshUserData () {
+      return Promise.all([
+        this.$store.dispatch('balances/getAll', {forceRefresh: true}),
+        this.$store.dispatch('orders/getAllOpenOrders', {forceRefresh: true}),
+        this.$store.dispatch('orders/getAllClosedOrders', {forceRefresh: true})
+      ])
     }
   }
 }
 </script>
 
 <style lang="scss">
-.btn-sync {
-  border: 0;
-  background: transparent;
-  width: 40px;
+// .btn-sync {
+//   border: 0;
+//   background: transparent;
+//   width: 40px;
 
-  &:focus {
-    outline: none;
-  }
-}
+//   &:focus {
+//     outline: none;
+//   }
+// }
 
 // @keyframes spin { 100% { transform:rotate(360deg); } }
 </style>
