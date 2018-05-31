@@ -1,29 +1,30 @@
 <template>
   <router-link :to="toPath"
-    class="list-group-item list-group-item-action list-group-item-symbol-select">
+    class="list-group-item list-group-item-action symbol-select">
 
-    <div>
+    <div class="d-flex align-items-center">
       <img
       :src="currency.icon_uri"
       :id="`list-group-item-icon-${symbol}`"
       width="18"
-      class="mr-1"
       :alt="symbol" />
 
-      <strong>{{ symbol }}</strong>
-
-      <span class="text-muted font-weight-normal ml-1">(<span :id="`list-group-item-name-${symbol}`">{{ currency.name }}</span>)</span>
+      <div class="symbol-select-symbol">
+        <strong>{{ symbol }}</strong>
+        <div class="symbol-select-fullname text-muted"><span :id="`list-group-item-name-${symbol}`">{{ currency.name }}</span></div>
+      </div>
 
     </div>
 
-    <span class="ml-auto text-muted">
-      <span v-if="badges" class="badge badge-light mr-2" v-for="badge in badges" :key="badge">{{ badge }}</span>
-      <span>
+    <div class="ml-auto text-right">
+      <div class="text-muted">
         {{ meta }}
-      </span>
-    </span>
+      </div>
+      <div v-if="badges" class="badge badge-light" v-for="badge in badges" :key="badge">{{ badge }}</div>
+    </div>
 
     <icon name="chevron-right"></icon>
+
   </router-link>
 </template>
 
@@ -72,10 +73,33 @@ export default {
 
 <style lang="scss">
 .list-group-item {
-  &.list-group-item-symbol-select {
+  &.symbol-select {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    line-height: 1.2;
+
+    img {
+      margin-right: 10px;
+
+      @include media-breakpoint-up(md) {
+        margin-right: 15px;
+      }
+    }
+
+    .symbol-select-fullname {
+      // font-size: rem-calc(14);
+
+      // @include media-breakpoint-up(md) {
+      //   font-size: rem-calc(16);
+      // }
+    }
+
+    .symbol-select-symbol {
+      strong {
+        display: block;
+      }
+    }
   }
 }
 </style>

@@ -122,19 +122,27 @@ export default {
     align-items: center;
 
     img {
-      margin-right: 0.5rem;
+      margin-right: rem-calc(10);
       width: 18px;
+
+      @include media-breakpoint-up(md) {
+        margin-right: rem-calc(15);
+      }
     }
 
     strong {
-      margin-left: 0.5rem;
+      // margin-left: 0.5rem;
       text-align: left;
 
       .symbol-full {
         font-weight: normal;
         display: block;
         max-width: 70px;
-        // max-width: 115px;
+        // font-size: rem-calc(14);
+
+        // @include media-breakpoint-up(md) {
+        //   font-size: rem-calc(16);
+        // }
       }
     }
   }

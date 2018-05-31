@@ -77,7 +77,7 @@ export default {
     },
     isLoading () {
       // Only show loading indicator when we have no markets
-      return !this.hasMarkets && (this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets || this.isLoadingPrices)
+      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets || this.isLoadingPrices
     },
     filtering () {
       return this.$route.query.filter

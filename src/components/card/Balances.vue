@@ -58,14 +58,15 @@ export default {
       availableBaseMarkets: 'markets/availableBaseMarkets',
       prices: 'prices/prices',
       isLoadingTickers: 'tickers/isLoading',
-      isLoadingCurrencies: 'symbols/isLoading',
+      isLoadingSymbols: 'symbols/isLoading',
       isLoadingBalances: 'balances/isLoading',
       isLoadingPrices: 'prices/isLoading',
       isLoadingMarkets: 'markets/isLoading'
     }),
     isLoading () {
+      return this.isLoadingBalances || this.isLoadingSymbols || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets
       // Only show the loading indicator when we have nothing in our balance
-      return !this.hasBalances && (this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets)
+      // return this.isLoadingBalances || this.isLoadingSymbols || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets
     },
     emptyText () {
       if (this.balancesError) return this.balancesError
@@ -97,7 +98,7 @@ export default {
       return null
     },
     symbol (symbolId) {
-      return this.symbols[symbolId]
+      if (this.symbols) return this.symbols[symbolId]
     },
     balanceTicker (symbolId) {
       return this.allTickers[`${symbolId}/${this.tickerQuote(symbolId)}`]

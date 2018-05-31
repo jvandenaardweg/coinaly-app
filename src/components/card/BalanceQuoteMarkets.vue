@@ -56,7 +56,7 @@ export default {
     }),
     isLoading () {
       // Only show loading when we have no markets
-      return !this.hasMarkets && (this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets)
+      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets
     },
     availableBalances () {
       // Determine the available balances based on the quote symbol ID's

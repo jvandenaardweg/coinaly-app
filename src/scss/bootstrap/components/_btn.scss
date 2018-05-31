@@ -4,6 +4,13 @@
     // text-indent: -13337px;
     color: transparent;
 
+    &.active {
+      color: transparent;
+      &:not(:disabled) {
+        color: transparent;
+      }
+    }
+
     svg {
       opacity: 0;
     }

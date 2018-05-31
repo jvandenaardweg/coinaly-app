@@ -15,7 +15,7 @@
         </select-pricing>
       </div>
       <div class="col-md-8">
-        <TradingViewChart :exchange="`BITTREX`" :baseId="baseId" :quoteId="quoteId"></TradingViewChart>
+        <TradingViewChart :exchange="exchangeUpperCased" :baseId="baseId" :quoteId="quoteId"></TradingViewChart>
       </div>
     </div>
   </div>
@@ -41,7 +41,8 @@ export default {
       getTickerBySymbol: 'tickers/getTickerBySymbol',
       getMarketBySymbol: 'markets/getMarketBySymbol',
       getBalanceBySymbol: 'balances/getBalanceBySymbol',
-      prices: 'prices/prices'
+      prices: 'prices/prices',
+      selectedExchange: 'exchanges/selected'
     }),
     isLoading () {
       return this.isLoadingBalances || this.isLoadingMarkets || this.isLoadingTickers
@@ -63,6 +64,9 @@ export default {
     },
     ticker () {
       return this.getTickerBySymbol(this.marketSymbol)
+    },
+    exchangeUpperCased () {
+      return this.selectedExchange.toUpperCase()
     }
   }
   // beforeRouteEnter (to, from, next) {

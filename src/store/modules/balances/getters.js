@@ -66,7 +66,7 @@ export default {
         if (baseId) {
           ticker = getTickerBySymbol(marketSymbol)
           tickerLast = (ticker) ? ticker.last : 0 // Like: 0.001231231
-          price = getPriceBySymbol(quoteId).USD // Like: 8913
+          price = getPriceBySymbol(quoteId).USD // Like: 8913 // TODO: this might not work when there's an "USD" market where quoteID = "USD"
           totalInBalance = filledBalances[symbolId].total // Like: 0.123123
           obj[symbolId] = totalInBalance * (price * tickerLast)
         } else {

@@ -11,15 +11,17 @@
     <div class="list-group list-group-flush" v-if="!isLoading">
       <div class="list-group-item list-group-item-wallet" v-for="symbol in searchedSymbols" :key="symbol">
         <div class="list-group-item-wallet-header">
-          <div>
-            <img class="mr-1" :src="currencyIconLocation(symbol)" width="18" :alt="symbol" />
-            <strong>{{ symbol }}</strong>
-            <span class="text-muted">{{ symbolName(symbol) }}</span>
+          <div class="d-flex align-items-center">
+            <img :src="currencyIconLocation(symbol)" width="18" :alt="symbol" />
+            <div>
+              <strong class="d-block">{{ symbol }}</strong>
+              <div class="text-muted">{{ symbolName(symbol) }}</div>
+            </div>
           </div>
-          <div class="ml-auto">
+          <div class="d-flex ml-auto align-item-center">
             <button type="button"
               class="btn btn-outline-primary btn-sm ml-auto"
-              style="width: 120px"
+              style="width: 130px"
               :class="{'active': showAddress(symbol), 'active is-loading': IsLoadingSymbol(symbol) }"
               @click.prevent="handleGetDepositAddress(symbol)">
             Deposit address</button>
@@ -28,7 +30,7 @@
         <div class="list-group-item-wallet-footer" v-if="getAddressBySymbol(symbol)">
           <div class="form-group m-0">
             <input type="text" name="address" :value="getAddressBySymbol(symbol)" class="form-control" @click.prevent="handleInputClick">
-            <p class="text-success">Deposit address is copied to your clipboard!</p>
+            <!-- <p class="text-success">Deposit address is copied to your clipboard!</p> -->
           </div>
         </div>
       </div>
@@ -94,7 +96,7 @@ export default {
     },
     symbolName (symbol) {
       const name = this.getNameBySymbol(symbol)
-      if (name) return `(${name})`
+      if (name) return name
       return null
     },
     showAddress (symbol) {
@@ -127,6 +129,15 @@ export default {
 .list-group-item-wallet {
   .list-group-item-wallet-header {
     display: flex;
+    line-height: 1.2;
+
+    img {
+      margin-right: rem-calc(10);
+
+      @include media-breakpoint-up(md) {
+        margin-right: rem-calc(15);
+      }
+    }
   }
   .list-group-item-wallet-footer {
     padding-top: 0.5rem;

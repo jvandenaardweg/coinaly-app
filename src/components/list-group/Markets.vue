@@ -46,7 +46,7 @@ export default {
       hasMarkets: 'markets/hasMarkets'
     }),
     isLoading () {
-      return !this.hasMarkets && (this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices)
+      return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices
     },
     filteredMarkets () {
       if (this.quote === 'all') {

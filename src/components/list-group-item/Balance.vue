@@ -125,12 +125,12 @@ export default {
     align-items: center;
 
     img {
-      margin-right: 0.5rem;
+      margin-right: 10px;
       width: 18px;
-    }
 
-    > div {
-      margin-left: 0.5rem;
+      @include media-breakpoint-up(md) {
+        margin-right: 15px;
+      }
     }
 
     strong {
@@ -139,22 +139,25 @@ export default {
     }
 
     .symbol-full {
-        font-weight: normal;
-        display: block;
-        max-width: 120px;
-        // max-width: 115px;
-      }
+      font-weight: normal;
+      display: block;
+      max-width: 120px;
+      // font-size: rem-calc(14);
+
+      // @include media-breakpoint-up(md) {
+      //   font-size: rem-calc(16);
+      // }
+    }
   }
 
   .balance-item-meta {
-    // display: flex;
-    // align-items: center;
     text-align: right;
-    margin-right: 1rem;
-    width: 65px;
+    margin-right: 10px;
+    width: 70px;
 
     @include media-breakpoint-up(md) {
       width: 120px;
+      margin-right: 15px;
     }
 
     .progress {

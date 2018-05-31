@@ -54,7 +54,7 @@ export default {
     }),
     isLoading () {
       // Only show loading indicator when we have no markets
-      return !this.hasMarkets && (this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers)
+      return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers
     },
     emptyText () {
       if (!this.isLoadingMarkets && !this.hasMarkets) return 'No markets available.'

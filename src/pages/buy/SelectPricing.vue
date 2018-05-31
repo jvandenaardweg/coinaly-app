@@ -18,7 +18,7 @@
 
       </div>
       <div class="col-md-6 col-lg-8">
-        <trading-view-chart :exchange="`BITTREX`" :quoteId="quoteId" :baseId="baseId"></trading-view-chart>
+        <trading-view-chart v-if="!isLoading" :exchange="exchangeUpperCased" :quoteId="quoteId" :baseId="baseId"></trading-view-chart>
       </div>
     </div>
   </div>
@@ -43,10 +43,12 @@ export default {
       getTickerBySymbol: 'tickers/getTickerBySymbol',
       getMarketBySymbol: 'markets/getMarketBySymbol',
       getBalanceBySymbol: 'balances/getBalanceBySymbol',
-      prices: 'prices/prices'
+      prices: 'prices/prices',
+      selectedExchange: 'exchanges/selected',
+      isLoadingExchanges: 'exchanges/isLoading'
     }),
     isLoading () {
-      return this.isLoadingBalances || this.isLoadingMarkets || this.isLoadingTickers
+      return this.isLoadingBalances || this.isLoadingMarkets || this.isLoadingTickers || this.isLoadingExchanges
     },
     balance () {
       return this.getBalanceBySymbol(this.quoteId)
@@ -65,6 +67,9 @@ export default {
     },
     ticker () {
       return this.getTickerBySymbol(this.marketSymbol)
+    },
+    exchangeUpperCased () {
+      return this.selectedExchange.toUpperCase()
     }
   }
 }

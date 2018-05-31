@@ -48,7 +48,7 @@ export default {
       hasMarkets: 'markets/hasMarkets'
     }),
     isLoading () {
-      return !this.hasMarkets && (!this.symbols || !this.allTickers || !this.quoteMarkets)
+      return !this.symbols || !this.allTickers || !this.quoteMarkets
     },
     quoteMarkets () {
       return this.getQuoteMarketsBySymbolId(this.baseId)

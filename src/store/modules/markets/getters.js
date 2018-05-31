@@ -26,8 +26,8 @@ export default {
     if (!state.markets || !Object.keys(state.markets).length) return null
 
     return Object.keys(state.markets).reduce((obj, curKey) => {
-      if (!obj[state.markets[curKey].quote]) obj[state.markets[curKey].quote] = []
-      obj[state.markets[curKey].quote].push(state.markets[curKey].base)
+      if (!obj[state.markets[curKey].quote] && state.markets[curKey].active) obj[state.markets[curKey].quote] = []
+      if (state.markets[curKey].active) obj[state.markets[curKey].quote].push(state.markets[curKey].base)
 
       // obj[state.markets[curKey].quote] = (obj[state.markets[curKey].quote] || 0) + 1
       // Returning something like: {"BTC": ["USDT", "ETH"]}
@@ -38,8 +38,8 @@ export default {
     if (!state.markets || !Object.keys(state.markets).length) return null
 
     return Object.keys(state.markets).reduce((obj, curKey) => {
-      if (!obj[state.markets[curKey].base]) obj[state.markets[curKey].base] = []
-      obj[state.markets[curKey].base].push(state.markets[curKey].quote)
+      if (!obj[state.markets[curKey].base] && state.markets[curKey].active) obj[state.markets[curKey].base] = []
+      if (state.markets[curKey].active) obj[state.markets[curKey].base].push(state.markets[curKey].quote)
 
       // Returning something like: {"ADA": ["BTC", "USDT"] } // Where BTC is the symbol we can use to calculate the worth of one ADA
       return obj
