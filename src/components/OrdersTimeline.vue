@@ -21,7 +21,7 @@
             <span class="timeline-symbol" v-html="title(order)"></span>
 
             <div class="ml-auto d-flex">
-              <button  v-if="context === 'open'" type="button" class="btn btn-sm btn-danger ml-auto" :class="{'is-loading': orderIsCancelling(order.id)}" :disabled="orderIsCancelling(order.id)" @click.prevent="handleClickCancel(order.id)">Cancel</button>
+              <button v-if="context === 'open'" type="button" class="btn btn-sm btn-danger ml-auto" :class="{'is-loading': orderIsCancelling(order.id)}" :disabled="orderIsCancelling(order.id)" @click.prevent="handleClickCancel(order.id)">Cancel</button>
               <icon name="chevron-down" class="timeline-chevron ml-2"></icon>
             </div>
 
@@ -232,7 +232,7 @@ export default {
   .timeline-header {
     display: flex;
     padding-bottom: 0.5rem;
-    line-height: 1;
+    line-height: 1.2;
 
     img {
       justify-content: center;
@@ -293,8 +293,7 @@ export default {
 
     > div {
       background-color: $white;
-      // background: $gray-100;
-      padding: rem-calc(12);
+      padding: rem-calc(14);
       border-radius: $border-radius;
       border: 1px $border-color solid;
       position: relative;
@@ -303,25 +302,9 @@ export default {
       color: inherit;
       z-index: 1;
       cursor: pointer;
-      // transition: background-color 250ms;
 
       @include media-breakpoint-up(md) {
-        padding: rem-calc(16);
-      }
-      // &:before {
-      //   content: "";
-      //   background: red;
-      //   width: 40px;
-      //   height: 40px;
-      //   position: absolute;
-      //   right: 0;
-      //   top: 0;
-      // }
-
-      &:hover {
-        @include media-breakpoint-up(md) {
-          // background-color: $gray-100;
-        }
+        padding: rem-calc(16) rem-calc(19);
       }
     }
 
