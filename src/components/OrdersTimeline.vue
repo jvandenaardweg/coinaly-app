@@ -9,21 +9,22 @@
         v-if="!isLoading"
         @click.prevent="isOpen = order.id"
         class="timeline-item"
+        :class="{'is-active': isOpen === order.id}"
         v-for="order in orders"
-        :key="order.id"
-        :class="{'is-buy': order.side === 'buy', 'is-sell': order.side === 'sell' }">
+        :key="order.id">
 
         <div>
           <div class="timeline-date">{{ order.datetime | readableDate }} ({{ timeDistance(order.datetime) }})</div>
 
           <div class="timeline-header">
             <img :src="symbol(order.symbol).icon_uri" width="18" />
-            <img :src="symbol(quoteId(order.symbol)).icon_uri" width="18" />
             <span class="timeline-symbol" v-html="title(order)"></span>
 
-            <div class="ml-auto d-flex" v-if="context === 'open'">
-              <button type="button" class="btn btn-sm btn-danger" :class="{'is-loading': orderIsCancelling(order.id)}" :disabled="orderIsCancelling(order.id)" @click.prevent="handleClickCancel(order.id)">Cancel</button>
+            <div class="ml-auto d-flex">
+              <button  v-if="context === 'open'" type="button" class="btn btn-sm btn-danger ml-auto" :class="{'is-loading': orderIsCancelling(order.id)}" :disabled="orderIsCancelling(order.id)" @click.prevent="handleClickCancel(order.id)">Cancel</button>
+              <icon name="chevron-down" class="timeline-chevron ml-2"></icon>
             </div>
+
           </div>
 
           <div class="timeline-subheader">
@@ -62,7 +63,6 @@
           </table>
 
         </div>
-
       </div>
 
     </div>
@@ -76,13 +76,15 @@ import Loader from '@/components/Loader'
 import PercentageBadge from '@/components/PercentageBadge'
 import CardPartialEmpty from '@/components/card/PartialEmpty'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+import Icon from '@/components/Icon'
 
 export default {
   name: 'OrdersTimeline',
   components: {
     PercentageBadge,
     Loader,
-    CardPartialEmpty
+    CardPartialEmpty,
+    Icon
   },
   props: {
     orders: {
@@ -201,6 +203,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .timeline {
   margin-top: 4rem;
   position: relative;
@@ -211,14 +214,7 @@ export default {
     margin-top: 5px;
   }
 
-  .timeline-items {
-    // padding: 0 0 0 1rem;
-    // border-left: 2px $border-color solid;
-  }
-
   .timeline-subheader {
-    // text-align: center;
-    // margin-bottom: 1rem;
     height: 10px;
 
     .badge {
@@ -227,16 +223,16 @@ export default {
     }
   }
 
+  .timeline-symbol {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
   .timeline-header {
     display: flex;
-    // margin-bottom: 0.5rem;
-    // border-bottom: 1px $border-color solid;
     padding-bottom: 0.5rem;
-
-    @include media-breakpoint-up(md) {
-      // padding-bottom: 1rem;
-      // margin-bottom: 1rem;
-    }
+    line-height: 1;
 
     img {
       justify-content: center;
@@ -248,39 +244,61 @@ export default {
   .timeline-item {
     position: relative;
 
+    &:last-child {
+      &:after {
+        height: 70px;
+      }
+    }
+
+    &.is-active {
+      .timeline-chevron {
+        transform: rotate(180deg);
+      }
+    }
+
+    // The dot
     &:before {
       content: "";
-      width: 1rem;
-      height: 1rem;
+      width: rem-calc(16);
+      height: rem-calc(16);
       background: $white;
       border: 3px $border-color solid;
       border-radius: 100%;
       position: absolute;
-      left: 23px;
-      top: -33px;
+      left: 13px;
+      top: -27px;
       margin: auto;
       z-index: 2;
+
+      @include media-breakpoint-up(md) {
+        left: 19px;
+      }
     }
 
+    // The line
     &:after {
       content: "";
       width: 2px;
       height: calc(100% + 70px);
       background: $border-color;
       position: absolute;
-      left: 30px;
-      top: -30px;
+      left: 20px;
+      top: -25px;
       z-index: 0;
+
+      @include media-breakpoint-up(md) {
+        left: 26px;
+      }
     }
 
     > div {
       background-color: $white;
       // background: $gray-100;
-      padding: 0.75rem;
+      padding: rem-calc(12);
       border-radius: $border-radius;
       border: 1px $border-color solid;
       position: relative;
-      margin-bottom: 4rem;
+      margin-bottom: rem-calc(47);
       display: block;
       color: inherit;
       z-index: 1;
@@ -288,18 +306,17 @@ export default {
       // transition: background-color 250ms;
 
       @include media-breakpoint-up(md) {
-        padding: 1rem;
+        padding: rem-calc(16);
       }
-
-      &:before {
-        content: "";
-        background: red;
-        width: 40px;
-        height: 40px;
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
+      // &:before {
+      //   content: "";
+      //   background: red;
+      //   width: 40px;
+      //   height: 40px;
+      //   position: absolute;
+      //   right: 0;
+      //   top: 0;
+      // }
 
       &:hover {
         @include media-breakpoint-up(md) {
@@ -310,9 +327,14 @@ export default {
 
     .timeline-date {
       position: absolute;
-      top: -2.5rem;
-      left: 50px;
+      top: rem-calc(-31);
+      left: 37px;
       color: $gray-600;
+      font-size: rem-calc(14);
+
+      @include media-breakpoint-up(md) {
+        left: 40px;
+      }
     }
   }
 
@@ -325,6 +347,11 @@ export default {
   width: 100%;
   line-height: 1.2;
   margin-top: 10px;
+  font-size: rem-calc(14);
+
+  @include media-breakpoint-up(md) {
+    font-size: rem-calc(16);
+  }
 
   th,td {
     width: 33.333333%;
@@ -332,8 +359,12 @@ export default {
 
   th {
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: rem-calc(12);
     font-weight: 700;
+
+    @include media-breakpoint-up(md) {
+      font-size: rem-calc(14);
+    }
   }
 
   td {

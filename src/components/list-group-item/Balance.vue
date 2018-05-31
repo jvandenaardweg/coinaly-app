@@ -11,7 +11,7 @@
     </div>
     <div class="balance-item-meta">
       <div class="balance-item-price" :class="{'is-positive': changeIsPositive === true, 'is-negative': changeIsPositive === false }">
-        {{ price | currency }}
+        {{ priceCurrency }}
       </div>
       <div class="progress">
         <div class="progress-bar" role="progressbar" :style="{'width': `${balancePercentage}%`, 'background-color': symbolColor }" :aria-valuenow="balancePercentage" aria-valuemin="0" aria-valuemax="100"></div>
@@ -84,10 +84,13 @@ export default {
     symbolColor () {
       if (this.symbol.color) return this.symbol.color
       return '#999999'
+    },
+    priceCurrency () {
+      return this.$options.filters.currency(this.price)
     }
   },
   watch: {
-    price (newValue, oldValue) {
+    priceCurrency (newValue, oldValue) {
       // if (newValue < oldValue) console.log('down')
       // if (newValue > oldValue) console.log('up')
       // if (newValue === oldValue) console.log('neutral')

@@ -1,7 +1,11 @@
-@import "./setting";
+@import "./src/scss/bootstrap/settings";
 // @import "~bootstrap/scss/bootstrap";
-
+@import "./src/scss/bootstrap/rem-calc";
 // Import the seperate components, so we can keep the CSS size as small as possible
+@function rem-calc2($size) {
+  $remSize: $size / 16;
+  @return #{$remSize}rem;
+}
 
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
@@ -38,13 +42,13 @@
 
 
 // Overwrites
-@import "./components/dropdown";
-@import "./components/card";
-@import "./components/list-group";
-@import "./components/form-control";
-@import "./components/label";
-@import "./components/btn";
-@import "./components/custom-select";
+@import "./src/scss/bootstrap/components/dropdown";
+@import "./src/scss/bootstrap/components/card";
+@import "./src/scss/bootstrap/components/list-group";
+@import "./src/scss/bootstrap/components/form-control";
+@import "./src/scss/bootstrap/components/label";
+@import "./src/scss/bootstrap/components/btn";
+@import "./src/scss/bootstrap/components/custom-select";
 
 .btn {
   font-weight: 600;
