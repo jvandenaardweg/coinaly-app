@@ -64,7 +64,8 @@ export default {
       isLoadingMarkets: 'markets/isLoading'
     }),
     isLoading () {
-      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets
+      // Only show the loading indicator when we have nothing in our balance
+      return !this.hasBalances && (this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices || this.isLoadingMarkets)
     },
     emptyText () {
       if (this.balancesError) return this.balancesError

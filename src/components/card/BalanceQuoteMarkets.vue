@@ -51,10 +51,12 @@ export default {
       isLoadingBalances: 'balances/isLoading',
       isLoadingCurrencies: 'symbols/isLoading',
       isLoadingPrices: 'prices/isLoading',
-      isLoadingTickers: 'tickers/isLoading'
+      isLoadingTickers: 'tickers/isLoading',
+      hasMarkets: 'markets/hasMarkets'
     }),
     isLoading () {
-      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets
+      // Only show loading when we have no markets
+      return !this.hasMarkets && (this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets)
     },
     availableBalances () {
       // Determine the available balances based on the quote symbol ID's

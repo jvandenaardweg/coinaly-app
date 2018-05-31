@@ -61,7 +61,7 @@ export default {
     },
     isLoading () {
       // Only show loading indicator when we have no data
-      return this.isLoadingMarkets && !this.ohlcvData
+      return !this.ohlcvData && this.isLoadingMarkets
     },
     tickerLast () {
       const ticker = this.getTickerBySymbol(this.marketSymbol)

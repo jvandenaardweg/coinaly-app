@@ -42,10 +42,11 @@ export default {
       selectedExchange: 'exchanges/selected',
       userMarketFavorites: 'user/marketFavorites',
       currencies: 'symbols/symbols',
-      prices: 'prices/prices'
+      prices: 'prices/prices',
+      hasMarkets: 'markets/hasMarkets'
     }),
     isLoading () {
-      return this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices
+      return !this.hasMarkets && (this.isLoadingMarkets || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingPrices)
     },
     filteredMarkets () {
       if (this.quote === 'all') {

@@ -66,7 +66,8 @@ export default {
       isLoadingCurrencies: 'symbols/isLoading',
       isLoadingPrices: 'prices/isLoading',
       isLoadingTickers: 'tickers/isLoading',
-      marketsError: 'markets/error'
+      marketsError: 'markets/error',
+      hasMarkets: 'markets/hasMarkets'
     }),
     subNavItems () {
       return [
@@ -75,7 +76,8 @@ export default {
       ]
     },
     isLoading () {
-      return this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets || this.isLoadingPrices
+      // Only show loading indicator when we have no markets
+      return !this.hasMarkets && (this.isLoadingBalances || this.isLoadingCurrencies || this.isLoadingTickers || this.isLoadingMarkets || this.isLoadingPrices)
     },
     filtering () {
       return this.$route.query.filter

@@ -44,10 +44,11 @@ export default {
     ...mapGetters({
       getQuoteMarketsBySymbolId: 'markets/getQuoteMarketsBySymbolId',
       allTickers: 'tickers/allTickers',
-      symbols: 'symbols/symbols'
+      symbols: 'symbols/symbols',
+      hasMarkets: 'markets/hasMarkets'
     }),
     isLoading () {
-      return !this.symbols || !this.allTickers || !this.quoteMarkets
+      return !this.hasMarkets && (!this.symbols || !this.allTickers || !this.quoteMarkets)
     },
     quoteMarkets () {
       return this.getQuoteMarketsBySymbolId(this.baseId)
