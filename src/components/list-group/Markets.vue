@@ -53,7 +53,7 @@ export default {
         return this.allMarkets
       } else {
         return pickBy(this.allMarkets, (values, marketSymbol) => {
-          return marketSymbol.includes(`/${this.quote}`)
+          return values.quote === this.quote
         })
       }
     }

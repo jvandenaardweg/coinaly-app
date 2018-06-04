@@ -64,7 +64,8 @@ export default {
       if (quoteMarkets && Object.keys(quoteMarkets).length) {
         return pickBy(this.allFilledBalances, (balance, symbolId) => {
           return Object.keys(quoteMarkets).some(marketSymbol => {
-            return marketSymbol.includes(`/${symbolId}`)
+            const quoteId = marketSymbol.split('/')[1]
+            return quoteId === symbolId
           })
         })
       }

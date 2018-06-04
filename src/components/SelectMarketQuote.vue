@@ -53,7 +53,8 @@ export default {
   },
   methods: {
     isAvailable (marketSymbol) {
-      return Object.keys(this.allFilledBalances).includes(marketSymbol.split('/')[1])
+      const quoteId = marketSymbol.split('/')[1]
+      return Object.keys(this.allFilledBalances).includes(quoteId)
     },
     setSelected (marketName) {
       this.baseCurrency = this.marketNameToSymbol(marketName)
