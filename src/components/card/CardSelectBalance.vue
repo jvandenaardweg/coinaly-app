@@ -1,16 +1,17 @@
 <template>
   <div class="card card-100-xs">
 
-    <loader v-if="!hasBalances && isLoading"></loader>
+    <loader v-if="isLoading"></loader>
 
     <card-partial-empty :text="emptyText"></card-partial-empty>
 
-    <div v-if="hasBalances" class="list-group list-group-flush">
+    <div v-if="!isLoading" class="list-group list-group-flush">
       <list-group-item-symbol-select
-        v-for="(meta, symbol) in allFilledBalances" :key="symbol"
+        v-for="(meta, symbol) in filteredBalances"
+        :key="symbol"
         :symbol="symbol"
         :meta="meta.free.toString()"
-        :currency="currencies[symbol]">
+        :currency="symbols[symbol]">
       </list-group-item-symbol-select>
     </div>
 
@@ -22,50 +23,43 @@ import ListGroupItemSymbolSelect from '@/components/list-group-item/SymbolSelect
 import { mapGetters } from 'vuex'
 import Loader from '@/components/Loader'
 import CardPartialEmpty from '@/components/card/PartialEmpty'
+import pickBy from 'lodash/pickBy'
 
 export default {
   name: 'CardSelectBalance',
-  props: ['preselectedCurrency', 'nextStepAction', 'routeBase'],
   components: {
     Loader,
     CardPartialEmpty,
     ListGroupItemSymbolSelect
   },
-  data () {
-    return {
-      currency: this.preselectedCurrency || null
-    }
-  },
   computed: {
     ...mapGetters({
       allFilledBalances: 'balances/allFilledBalances',
       hasBalances: 'balances/hasBalances',
-      isLoading: 'balances/isLoading',
-      currencies: 'symbols/symbols'
+      isLoadingBalances: 'balances/isLoading',
+      isLoadingMarkets: 'markets/isLoading',
+      isLoadingSymbols: 'symbols/isLoading',
+      symbols: 'symbols/symbols',
+      availableBaseMarkets: 'markets/availableBaseMarkets'
     }),
-    routeUrl () {
-      return `/${this.routeBase}/${this.currency}`
+    isLoading () {
+      return this.isLoadingBalances || this.isLoadingMarkets || this.isLoadingSymbols
     },
     emptyText () {
-      if (!this.isLoading && !this.hasBalances) return 'No currencies available in your balance.'
+      if (!this.isLoading && !this.hasFilteredBalances) return 'No currencies available in your balance you can sell.'
       return null
-    }
-  },
-  methods: {
-    currencyName (symbol) {
-      return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].name : null
     },
-    currencyIconLocation (symbol) {
-      return (this.currenciesCurrency[symbol]) ? this.currenciesCurrency[symbol].icon_uri : null
+    hasFilteredBalances () {
+      return Object.keys(this.filteredBalances).length > 0
     },
-    handleSelectedCurrency (symbol) {
-      this.currency = symbol
-    },
-    isActive (symbol) {
-      return (this.currency === symbol || this.activeCurrency === symbol) || false
-    },
-    setSelected (symbol) {
-      this.currency = symbol
+    filteredBalances () {
+      // Match currencies in the balance with the available base markets
+      // So the user does not select a currency that he can't sell
+      return pickBy(this.allFilledBalances, (balance, symbolId) => {
+        return Object.keys(this.availableBaseMarkets).some(baseId => {
+          return baseId === symbolId
+        })
+      })
     }
   }
 }

@@ -6,6 +6,9 @@ describe('components/SubNav.vue', () => {
 
   beforeEach(() => {
     component = shallowMount(SubNav, {
+      props: {
+        items: []
+      },
       stubs: ['router-link', 'router-view']
     })
   })

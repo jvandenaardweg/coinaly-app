@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import CardSelectBalance from '@/components/card/CardSelectBalance.vue'
 
 import balancesModule from '@/store/modules/balances'
+import marketsModule from '@/store/modules/markets'
+import symbolsModule from '@/store/modules/symbols'
 
 const localVue = createLocalVue()
 
@@ -15,7 +17,9 @@ describe('components/card/CardSelectBalance.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
-        balances: balancesModule
+        balances: balancesModule,
+        markets: marketsModule,
+        symbols: symbolsModule
       }
     })
 

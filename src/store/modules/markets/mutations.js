@@ -8,6 +8,10 @@ export default {
   addFavorites (state, favorites) {
     Vue.set(state, 'favorites', favorites)
   },
+  addFavorite (state, marketSymbol) {
+    // TODO: write test
+    state.favorites.push(marketSymbol)
+  },
   startLoading (state) {
     Vue.set(state, 'isLoading', true)
   },

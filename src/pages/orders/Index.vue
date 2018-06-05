@@ -44,7 +44,8 @@ export default {
     ...mapGetters({
       selectedExchange: 'exchanges/selected',
       ordersOpen: 'orders/open',
-      ordersClosed: 'orders/closed'
+      ordersClosed: 'orders/closed',
+      allFilledBalances: 'balances/allFilledBalances'
     }),
     message () {
       if (this.selectedExchange === 'binance') {

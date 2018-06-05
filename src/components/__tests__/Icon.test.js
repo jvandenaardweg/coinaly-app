@@ -5,7 +5,11 @@ describe('components/Icon.vue', () => {
   let component
 
   beforeEach(() => {
-    component = shallowMount(Icon)
+    component = shallowMount(Icon, {
+      props: {
+        name: 'download'
+      }
+    })
   })
 
   it('renders a vue instance', () => {

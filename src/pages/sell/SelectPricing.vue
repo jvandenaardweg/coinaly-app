@@ -15,7 +15,7 @@
         </select-pricing>
       </div>
       <div class="col-md-8">
-        <TradingViewChart :exchange="exchangeUpperCased" :baseId="baseId" :quoteId="quoteId"></TradingViewChart>
+        <TradingViewChart v-if="!isLoading && quoteId && baseId" :exchange="exchangeUpperCased" :baseId="baseId" :quoteId="quoteId"></TradingViewChart>
       </div>
     </div>
   </div>

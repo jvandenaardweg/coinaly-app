@@ -193,11 +193,6 @@ export default new Router({
               path: '', // Matches: /markets
               component: PageMarketsQuote,
               name: 'Markets Quote'
-            },
-            {
-              path: ':quote', // Matches: /markets/BTC
-              component: PageMarketsQuote,
-              name: 'Markets Quote ID'
             }
           ]
         },

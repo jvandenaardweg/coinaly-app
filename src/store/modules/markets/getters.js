@@ -2,7 +2,9 @@ import pickBy from 'lodash/pickBy'
 
 export default {
   allMarkets: state => {
-    return state.markets
+    return pickBy(state.markets, (market, marketSymbol) => {
+      return market.active === true
+    })
   },
   allFavoriteMarkets: state => {
     let favoriteMarkets = {}

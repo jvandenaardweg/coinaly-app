@@ -18,7 +18,7 @@
 
       </div>
       <div class="col-md-6 col-lg-8">
-        <trading-view-chart v-if="!isLoading" :exchange="exchangeUpperCased" :quoteId="quoteId" :baseId="baseId"></trading-view-chart>
+        <trading-view-chart v-if="!isLoading && quoteId && baseId" :exchange="exchangeUpperCased" :quoteId="quoteId" :baseId="baseId"></trading-view-chart>
       </div>
     </div>
   </div>

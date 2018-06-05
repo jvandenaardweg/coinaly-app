@@ -2,16 +2,29 @@
   <nav class="subnav">
     <div class="subnav-group">
       <router-link class="subnav-group-item" :to="item.uri" v-for="item in items" :key="item.slug" exact>
-        <span class="subnav-group-button">{{ item.label }}</span>
+        <span class="subnav-group-button">
+          <icon v-if="item.icon" :name="item.icon" stroke="#000" fill="#000" class="subnav-group-button-icon"></icon>
+          {{ item.label }}
+        </span>
       </router-link>
     </div>
   </nav>
 </template>
 
 <script>
+import Icon from '@/components/Icon'
+
 export default {
   name: 'SubNav',
-  props: ['items', 'selected'],
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
+  components: {
+    Icon
+  },
   // Using empty data fixes some weird Jest coverage issues
   data () {
     return {}
@@ -44,6 +57,11 @@ export default {
       .subnav-group-button {
         color: $black;
       }
+
+      .subnav-group-button-icon {
+        fill: $black;
+        stroke: $black;
+      }
     }
 
     & + & {
@@ -71,6 +89,11 @@ export default {
         z-index: 2;
         color: $primary;
       }
+
+      .subnav-group-button-icon {
+        fill: $primary;
+        stroke: $primary;
+      }
     }
   }
 
@@ -86,7 +109,7 @@ export default {
     display: block;
     border: 1px solid $input-border-color;
     text-align: center;
-    padding: $input-btn-padding-y 1rem;
+    padding: $input-btn-padding-y 0.5rem;
     position: relative;
     cursor: pointer;
     border-radius: 3px;
@@ -99,10 +122,11 @@ export default {
   }
 
   .subnav-group-button-icon {
-    padding-left: .5rem;
-    padding-right: .5rem;
-    font-size: 1.125rem;
-    line-height: 1.125rem;
+    position: relative;
+    top: rem-calc(3);
+    fill: $text-muted;
+    stroke: $text-muted;
+    transition: 250ms fill, 250ms stroke;
   }
 
   .subnav-group-pills {

@@ -22,7 +22,8 @@
         </span>
       </span>
       <percentage-badge :percentage="tickerPercentage"></percentage-badge>
-      <BtnFavorite :active="isFavorite" class="ml-2" @click.native="handleClickFavorite"></BtnFavorite>
+      <!-- <btn-favorite :active="isFavorite" class="ml-3" @click.native="handleClickFavorite"></btn-favorite> -->
+      <icon name="chevron-right"></icon>
     </div>
   </div>
 </template>
@@ -31,6 +32,7 @@
 import { marketSymbolToQuoteSymbol, marketSymbolToBaseSymbol } from '@/helpers/symbols'
 import PercentageBadge from '@/components/PercentageBadge'
 import BtnFavorite from '@/components/btn/Favorite'
+import Icon from '@/components/Icon'
 
 export default {
   name: 'ListGroupItemMarket',
@@ -47,7 +49,8 @@ export default {
   },
   components: {
     PercentageBadge,
-    BtnFavorite
+    BtnFavorite,
+    Icon
   },
   methods: {
     marketSymbolToQuoteSymbol,

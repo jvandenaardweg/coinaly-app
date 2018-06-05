@@ -12,6 +12,12 @@ const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
+const $route = {
+  query: {
+    filter: 'all'
+  }
+}
+
 describe('components/card/Markets.vue', () => {
   let component
   let store
@@ -28,7 +34,10 @@ describe('components/card/Markets.vue', () => {
     component = shallowMount(Markets, {
       store,
       localVue,
-      stubs: ['router-link', 'router-view']
+      stubs: ['router-link', 'router-view'],
+      mocks: {
+        $route
+      }
     })
   })
 

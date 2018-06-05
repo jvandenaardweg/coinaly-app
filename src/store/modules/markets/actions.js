@@ -47,5 +47,26 @@ export default {
       commit('stopLoading')
       return error
     }
+  },
+
+  async addFavorite ({ commit, rootGetters }, payload) {
+    // commit('startLoading')
+    const marketSymbol = payload.marketSymbol
+
+    try {
+      const selectedExchange = rootGetters['exchanges/selected']
+      const response = await api.addFavorite(selectedExchange, marketSymbol)
+
+      if (response) {
+        commit('addFavorite', marketSymbol)
+      }
+      return response
+    } catch (error) {
+      const errorMessage = (error.response) ? error.response.data.message : 'We could not add this market to your favorites. Please try again later.'
+      // commit('setError', errorMessage)
+      return errorMessage
+    } finally {
+      commit('stopLoading')
+    }
   }
 }
