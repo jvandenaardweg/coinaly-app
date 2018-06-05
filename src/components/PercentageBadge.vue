@@ -31,7 +31,7 @@ export default {
   padding: 0;
   color: #fff;
   font-weight: 600;
-  width: 4rem;
+  width: rem-calc(70);
   height: 2.1rem;
   line-height: 2.1rem;
   text-align: center;

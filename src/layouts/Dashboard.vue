@@ -37,7 +37,7 @@ export default {
 
     // Hide crisp chat in the dashboard
     if (window.$crisp) {
-      window.$crisp.push(['on', 'chat:initiated', this.hideCrispChat])
+      window.$crisp.push(['config', 'hide:on:mobile', true])
     }
 
     // Use before mount for API calls that don't need additional data, like a selected exchange
@@ -60,9 +60,6 @@ export default {
     })
   },
   methods: {
-    hideCrispChat () {
-      window.$crisp.push(['do', 'chat:hide'])
-    },
     loadInitialUserData () {
       this.$store.dispatch('markets/loadAll')
       this.$store.dispatch('balances/getAll')
