@@ -48,11 +48,10 @@ export default {
       this.$store.dispatch('exchanges/getAllExchanges')
 
       if (this.selectedExchange) {
+        this.connectWebsocket()
         this.loadInitialUserData()
       }
     }
-
-    this.connectWebsocket()
   },
   computed: {
     ...mapGetters({
@@ -93,6 +92,7 @@ export default {
       // So when we got a newValue that is set, we can assume the "keys" watcher above has done it's job
       // So we can safely load data that needs to know the exchange, like markets and balances
       if (oldValue === null && newValue) {
+        this.connectWebsocket()
         this.loadInitialUserData()
       }
     }
