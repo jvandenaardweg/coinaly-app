@@ -120,6 +120,22 @@ describe('modules/markets/getters.js', () => {
     expect(getters.availableBaseMarkets(state, gettersMock, rootStateMock, rootGettersMock)).toMatchObject(expectedAvailableBaseMarkets)
   })
 
+  it('getter availableQuoteMarkets should return the quote market symbols which the user can buy/sell', () => {
+    const rootStateMock = {}
+
+    state.markets = marketsMock
+    stateBalances.balances = balancesMock
+
+    const rootGettersMock = {'balances/allFilledBalances': gettersBalances.allFilledBalances(stateBalances)}
+    const gettersMock = {'allQuoteMarkets': getters.allQuoteMarkets(state)}
+
+    const expectedBalance = {'BTC': {'free': 2, 'total': 2, 'used': 0}}
+    const expectedAvailableQuoteMarkets = {'BTC': ['ADA']}
+
+    expect(gettersBalances.allFilledBalances(stateBalances)).toMatchObject(expectedBalance)
+    expect(getters.availableQuoteMarkets(state, gettersMock, rootStateMock, rootGettersMock)).toMatchObject(expectedAvailableQuoteMarkets)
+  })
+
   it('getter getMarketBySymbol should return the market from a given symbol', () => {
     state.markets = marketsMock
     expect(getters.getMarketBySymbol(state)('BTC/USDT')).toMatchObject(marketsMock['BTC/USDT'])

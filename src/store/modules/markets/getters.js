@@ -87,7 +87,6 @@ export default {
     }
   },
   availableQuoteMarkets: (state, getters, rootState, rootGetters) => {
-    // TODO: write test
     // Getter dependency: balances
     const allFilledBalances = rootGetters['balances/allFilledBalances']
     const allQuoteMarkets = getters.allQuoteMarkets
