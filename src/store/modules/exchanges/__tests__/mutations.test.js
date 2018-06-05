@@ -10,6 +10,12 @@ describe('modules/exchanges/mutations.js', () => {
     expect(state.selected).toBe('bittrex')
   })
 
+  it('removeSelected unsets the selected exchange', () => {
+    mutations.setSelected(state, 'Bittrex')
+    mutations.removeSelected(state)
+    expect(state.selected).toBe(null)
+  })
+
   it('addAll adds all exchanges', () => {
     mutations.addAll(state, mockExchangesAll)
     expect(state.exchanges).toMatchObject(mockExchangesAll)

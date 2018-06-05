@@ -85,6 +85,7 @@ export default {
   logout ({ commit }) {
     commit('unsetAuthenticated')
     commit('removeToken')
+    commit('exchanges/removeSelected', null, { root: true })
     window.location.reload(true)
   },
 

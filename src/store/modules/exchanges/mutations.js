@@ -13,6 +13,13 @@ export default {
       window.localStorage.setItem('selectedExchange', exchangeSlug)
     }
   },
+  removeSelected (state) {
+    Vue.set(state, 'selected', null)
+
+    if (window.localStorage) {
+      window.localStorage.removeItem('selectedExchange')
+    }
+  },
   startLoading (state) {
     Vue.set(state, 'isLoading', true)
   },

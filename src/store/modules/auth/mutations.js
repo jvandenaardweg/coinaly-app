@@ -21,7 +21,7 @@ export default {
   },
   removeToken (state) {
     Vue.set(state, 'token', null)
-    if (window.localStorage) localStorage.removeItem('token')
+    if (window.localStorage) window.localStorage.removeItem('token')
   },
   setError (state, message) {
     Vue.set(state, 'error', message)

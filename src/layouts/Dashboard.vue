@@ -46,7 +46,6 @@ export default {
       this.$store.dispatch('prices/getAllPrices')
       this.$store.dispatch('symbols/getAll')
       this.$store.dispatch('exchanges/getAllExchanges')
-      this.$store.dispatch('markets/loadAll')
 
       if (this.selectedExchange) {
         this.loadInitialUserData()
@@ -66,6 +65,7 @@ export default {
       window.$crisp.push(['do', 'chat:hide'])
     },
     loadInitialUserData () {
+      this.$store.dispatch('markets/loadAll')
       this.$store.dispatch('balances/getAll')
       if (this.selectedExchange !== 'binance') {
         this.$store.dispatch('orders/getAllOpenOrders')
