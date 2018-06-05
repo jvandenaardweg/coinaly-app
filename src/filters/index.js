@@ -13,7 +13,7 @@ Vue.filter('currency', function (value, prefix = '$') {
 })
 
 Vue.filter('percentage', function (value) {
-  if (value === null || value === '') return value
+  if (!value) return value
   return parseFloat(value).toFixed(2) + '%'
 })
 
@@ -22,11 +22,16 @@ Vue.filter('readableDate', function (value) {
 })
 
 Vue.filter('toFixed', function (value, decimals = 8) {
-  if (value === null) return value
+  if (!value) return value
   return value.toFixed(decimals)
 })
 
 Vue.filter('number', function (value) {
   if (!value) return value
   return numeral(value).format('0,0.[00000000]')
+})
+
+Vue.filter('shortNumber', function (value) {
+  if (!value) return value
+  return numeral(value).format('0a') // 104000 > 104k
 })

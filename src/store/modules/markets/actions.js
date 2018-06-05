@@ -22,7 +22,7 @@ export default {
   },
 
   async getOHLCV ({ commit, rootGetters }, payload) {
-    commit('startLoading')
+    // commit('startLoading')
 
     const interval = payload.interval
     const marketSymbol = payload.marketSymbol
@@ -38,35 +38,14 @@ export default {
           interval: interval,
           data: response
         })
-        commit('stopLoading')
+        // commit('stopLoading')
       }
       return response
     } catch (error) {
       const errorMessage = (error.response) ? error.response.data.message : 'We could not get the markets OHLCV information. Please try again later.'
-      commit('setError', errorMessage)
-      commit('stopLoading')
-      return error
-    }
-  },
-
-  async addFavorite ({ commit, rootGetters }, payload) {
-    // commit('startLoading')
-    const marketSymbol = payload.marketSymbol
-
-    try {
-      const selectedExchange = rootGetters['exchanges/selected']
-      const response = await api.addFavorite(selectedExchange, marketSymbol)
-
-      if (response) {
-        commit('addFavorite', marketSymbol)
-      }
-      return response
-    } catch (error) {
-      const errorMessage = (error.response) ? error.response.data.message : 'We could not add this market to your favorites. Please try again later.'
       // commit('setError', errorMessage)
+      // commit('stopLoading')
       return errorMessage
-    } finally {
-      commit('stopLoading')
     }
   }
 }

@@ -128,7 +128,7 @@ export default {
         return market.quoteId === symbolId
       })
     } else {
-      return null
+      return {}
     }
   },
   getMarketBySymbol: (state) => (marketSymbol) => {
@@ -136,7 +136,7 @@ export default {
     if (state.markets) {
       return state.markets[marketSymbol]
     }
-    return null
+    return {}
   },
   ohlcv: state => {
     return state.ohlcv

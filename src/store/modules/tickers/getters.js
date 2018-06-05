@@ -9,7 +9,7 @@ export default {
     if (state.tickers && state.tickers[symbol]) {
       return state.tickers[symbol]
     } else {
-      return null
+      return {}
     }
   }
 }

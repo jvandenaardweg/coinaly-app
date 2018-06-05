@@ -37,6 +37,12 @@
     height: 34px;
     line-height: 32px;
   }
+
+  &.btn-white {
+    background-color: $white;
+    color: $dark;
+    border-color: $white;
+  }
 }
 
 @-webkit-keyframes spinAround {

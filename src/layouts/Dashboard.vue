@@ -79,7 +79,7 @@ export default {
   },
   watch: {
     keys (newValue, oldValue) {
-      console.log('watch keys', newValue, this.selectedExchange)
+      // console.log('watch keys', newValue, this.selectedExchange)
       // Watch for changes in the keys store
       // When we have keys, and there's no selectedExchange, we just set the selectedExchange to the first
       if (!this.selectedExchange) {
@@ -87,7 +87,7 @@ export default {
       }
     },
     selectedExchange (newValue, oldValue) {
-      console.log('watch selected exchange', newValue)
+      // console.log('watch selected exchange', newValue)
       // If oldValue is null, it means the user has not yet have the selectedExchange in localStorage
       // So when we got a newValue that is set, we can assume the "keys" watcher above has done it's job
       // So we can safely load data that needs to know the exchange, like markets and balances

@@ -8,12 +8,18 @@
       <loader v-if="isLoading"></loader>
     </div>
     <line-chart
-    v-if="!isLoading"
-    :labels="timestamps"
-    :data="closes"
-    :backgroundColor="chartBackgroundColor"
-    :borderColor="chartBorderColor"
-    :height="150"></line-chart>
+      v-if="!isLoading && chartBackgroundColor"
+      :labels="timestamps"
+      :data="closes"
+      :backgroundColor="chartBackgroundColor"
+      :borderColor="chartBorderColor"
+      :height="150"></line-chart>
+    <div v-if="!isLoading" class="chart-controls" :style="{'background-color': chartBackgroundColor}">
+      <button type="button" class="btn btn-white btn-sm">1h</button>
+      <button type="button" class="btn btn-white btn-sm">1w</button>
+      <button type="button" class="btn btn-white btn-sm">1m</button>
+      <button type="button" class="btn btn-white btn-sm">1y</button>
+    </div>
   </div>
 </template>
 
@@ -22,6 +28,7 @@ import { mapGetters } from 'vuex'
 import LineChart from '@/components/charts/Line.js'
 import Loader from '@/components/Loader'
 import format from 'date-fns/format'
+import Chart from 'chart.js'
 
 export default {
   name: 'CardChart',
@@ -43,6 +50,10 @@ export default {
   beforeMount () {
     this.dispatchGetOHLCV(this.marketSymbol)
   },
+  data: () => ({
+    error: null,
+    isLoadingOHLCV: null
+  }),
   computed: {
     ...mapGetters({
       ohlcv: 'markets/ohlcv',
@@ -51,17 +62,19 @@ export default {
       isLoadingSymbols: 'symbols/isLoading',
       getTickerBySymbol: 'tickers/getTickerBySymbol'
     }),
+    symbolColor () {
+      return (this.symbols && this.symbols[this.baseId]) ? this.symbols[this.baseId].color : null
+    },
     chartBackgroundColor () {
-      if (this.symbols) return this.symbols[this.baseId].color
-      return null
+      if (this.symbolColor) return Chart.helpers.color(this.symbolColor).alpha(0.15).rgbString()
+      return Chart.helpers.color('#2E63B1').alpha(0.15).rgbString()
     },
     chartBorderColor () {
-      if (this.symbols) return this.symbols[this.baseId].color
-      return null
+      if (this.symbolColor) return this.symbolColor
+      return '#2E63B1'
     },
     isLoading () {
-      // Only show loading indicator when we have no data
-      return !this.ohlcvData && this.isLoadingMarkets
+      return this.isLoadingOHLCV || this.isLoadingMarkets || this.isLoadingSymbols
     },
     tickerLast () {
       const ticker = this.getTickerBySymbol(this.marketSymbol)
@@ -121,14 +134,22 @@ export default {
         'D MMM'
       )
     },
-    dispatchGetOHLCV (marketSymbol, forceRefresh = false) {
+    async dispatchGetOHLCV (marketSymbol, forceRefresh = false) {
+      this.isLoadingOHLCV = true
+
       const payload = {
         marketSymbol: marketSymbol,
         interval: '1h',
         forceRefresh: forceRefresh
       }
-      // console.log(payload)
-      this.$store.dispatch('markets/getOHLCV', payload)
+
+      try {
+        await this.$store.dispatch('markets/getOHLCV', payload)
+      } catch (err) {
+        this.error = err
+      } finally {
+        this.isLoadingOHLCV = false
+      }
     }
   },
   watch: {
@@ -142,5 +163,19 @@ export default {
 </script>
 
 <style lang="scss">
+.chart-controls {
+  display: flex;
+  padding-top: rem-calc(15);
+  padding-bottom: rem-calc(15);
+  left: 0;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 
+  .btn {
+    margin-left: rem-calc(5);
+    margin-right: rem-calc(5);
+  }
+}
 </style>

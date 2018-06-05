@@ -22,7 +22,8 @@
         class="list-group-item list-group-item-action">
         <list-group-item-market
           :currency="currencies[meta.base]"
-          :market="meta" :ticker="allTickers[symbol]"
+          :market="meta"
+          :ticker="allTickers[symbol]"
           :price="prices[meta.quote]"
           :favorite="isFavoriteMarket(symbol)"
           :hideVolume="false">
@@ -90,7 +91,7 @@ export default {
         return `You have no favorite markets, yet!`
       } else if (!this.isLoadingMarkets && !this.hasSearchedMarkets && !this.searchQuery) {
         return `No markets available...`
-      }  else if (this.searchQuery && !this.hasSearchedMarkets) {
+      } else if (this.searchQuery && !this.hasSearchedMarkets) {
         return `No markets found for <strong>${this.searchQuery}</strong>`
       } else if (this.marketsError) {
         return this.marketsError
@@ -171,7 +172,6 @@ export default {
       }
     },
     handleShowAllMarkets () {
-      const totalMarkets = Object.keys(this.searchedMarkets).length
       this.paginationLimit = this.paginationLimit + this.paginationIncrement
     },
     marketLink (base, quote) {

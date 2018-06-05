@@ -197,7 +197,7 @@ export default new Router({
           ]
         },
         {
-          path: '/markets/:quoteId/:baseId', // Matches: /markets/BTC/XRP
+          path: '/markets/:baseId/:quoteId', // Matches: /markets/XRP/BTC
           name: 'Market',
           component: PageMarketsMarket
         },

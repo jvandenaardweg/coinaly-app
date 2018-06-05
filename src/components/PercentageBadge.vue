@@ -1,6 +1,6 @@
 <template>
   <div class="percentage-badge" :class="colorClass">
-    {{ percentage | percentage}}
+    {{ percentage | percentage }}
   </div>
 </template>
 
@@ -9,13 +9,13 @@ export default {
   name: 'PercentageBadge',
   props: {
     percentage: Number,
-    required: true
+    default: 0
   },
   computed: {
     colorClass () {
       if (this.percentage > 0) {
         return 'bg-success'
-      } else if (this.percentage === 0) {
+      } else if (!this.percentage) {
         return 'bg-light'
       } else {
         return 'bg-danger'

@@ -37,7 +37,7 @@
             <span class="badge badge-dark" v-if="percentageFilled(order) === 0" :style="{'left': `0`}">{{ percentageFilled(order) | percentage }}</span>
           </div>
 
-          <table class="table" v-if="isOpen === order.id">
+          <table class="table table-orders" v-if="isOpen === order.id">
             <tbody>
               <tr>
                 <th scope="col">Price ({{ quoteId(order.symbol) }})</th>
@@ -327,42 +327,45 @@ export default {
 }
 
 .table {
-  width: 100%;
-  line-height: 1.2;
-  margin-top: 10px;
-  font-size: rem-calc(14);
-
-  @include media-breakpoint-up(md) {
-    font-size: rem-calc(16);
-  }
-
-  th,td {
-    width: 33.333333%;
-  }
-
-  th {
-    text-transform: uppercase;
-    font-size: rem-calc(12);
-    font-weight: 700;
+  .table-orders {
+    width: 100%;
+    line-height: 1.2;
+    margin-top: 10px;
+    font-size: rem-calc(14);
 
     @include media-breakpoint-up(md) {
-      font-size: rem-calc(14);
+      font-size: rem-calc(16);
     }
-  }
 
-  td {
-    color: $gray-600;
-  }
-
-  tr {
-    &:nth-child(1n) td {
-      padding-bottom: 15px;
+    th,td {
+      width: 33.333333%;
     }
-    &:last-child {
-      td {
-        padding-bottom: 0;
+
+    th {
+      text-transform: uppercase;
+      font-size: rem-calc(12);
+      font-weight: 700;
+
+      @include media-breakpoint-up(md) {
+        font-size: rem-calc(14);
+      }
+    }
+
+    td {
+      color: $gray-600;
+    }
+
+    tr {
+      &:nth-child(1n) td {
+        padding-bottom: 15px;
+      }
+      &:last-child {
+        td {
+          padding-bottom: 0;
+        }
       }
     }
   }
+
 }
 </style>
