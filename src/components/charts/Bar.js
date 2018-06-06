@@ -116,12 +116,12 @@ export default {
             gridLines: {
               display: false
             },
-            ticks: {
-              max: this.max,
-              min: 0,
-              beginAtZero: true,
-              stepSize: (this.max / 20)
-            }
+            // ticks: {
+            //   max: this.max,
+            //   min: 0,
+            //   beginAtZero: true,
+            //   stepSize: (this.max / 20)
+            // }
           }
         ]
       }

@@ -60,6 +60,7 @@
         <p>display trades in this market</p>
         <p>show candlestick chart</p>
         <p>show order book?</p>
+        <p>show market signals from external services?</p>
         <button type="button" class="btn btn-outline-primary">View candlestick chart</button> &nbsp;
         <router-link :disabled="!canBuy" :to="`/buy/${baseId}/${quoteId}`" class="btn btn-primary" :class="{'disabled': !canBuy}"><icon name="download" stroke="#fff"></icon> &nbsp; Buy {{ baseId }}</router-link> &nbsp;
         <router-link :disabled="!canSell" :to="`/sell/${baseId}/${quoteId}`" class="btn btn-primary" :class="{'disabled': !canSell}"><icon name="upload" stroke="#fff"></icon> &nbsp; Sell {{ baseId }}</router-link>

@@ -17,7 +17,7 @@
         :data="closes"
         :backgroundColor="chartBackgroundColor"
         :borderColor="chartBorderColor"
-        :height="150">
+        :height="300">
       </line-chart>
       <bar-chart
         class="card-chart"

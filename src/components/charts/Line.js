@@ -124,6 +124,14 @@ export default {
 
       return highest * 1.05 // So we create some space on top of the chart for our top tooltip
     },
+    stepSize () {
+      // Calculates the proper stepSize needed for the chart
+      // Because we can have data points like "0.00000001" or "10000.00000001", each chart needs its own stepSize
+      const number = this.data[0] // 0.00000005
+      const totalDecimalZeros = -Math.floor(Math.log(number) / Math.log(10) + 1) + 1 // Becomes: 8
+      const stepSize = (0.1 / Math.pow(10, totalDecimalZeros)) // Becomes: 0.00000001 (8 decimals)
+      return stepSize
+    },
     chartData () {
       return {
         labels: this.labels,
@@ -148,6 +156,7 @@ export default {
     options () {
       return {
         height: this.height,
+        maintainAspectRatio: false,
         legend: {
           display: false
         },
@@ -220,7 +229,7 @@ export default {
             },
             ticks: {
               max: this.max,
-              // min: 0,
+              stepSize: this.stepSize,
               beginAtZero: false
             }
           }]
