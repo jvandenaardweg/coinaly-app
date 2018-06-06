@@ -37,7 +37,23 @@
       </div>
     </div>
 
+    <!-- <div class="card card-100-xs">
+      <div class="card-header">
+        <sub-nav :items="subNavItems" class="mt-3 mb-3"></sub-nav>
+      </div>
+    </div> -->
+
+
     <card-chart :marketSymbol="marketSymbol" :baseId="baseId" :quoteId="quoteId" class="mt-3 mb-3"></card-chart>
+
+    <!-- <trading-view-chart v-if="quoteId && baseId" :exchange="exchangeUpperCased" :quoteId="quoteId" :baseId="baseId"></trading-view-chart> -->
+
+    <div class="chart-controls">
+        <button type="button" class="btn btn-white btn-sm">1h</button>
+        <button type="button" class="btn btn-white btn-sm">1w</button>
+        <button type="button" class="btn btn-white btn-sm">1m</button>
+        <button type="button" class="btn btn-white btn-sm">1y</button>
+      </div>
 
     <div class="card">
       <div class="card-body">
@@ -58,21 +74,35 @@ import PercentageBadge from '@/components/PercentageBadge'
 import { mapGetters } from 'vuex'
 import CardChart from '@/components/card/Chart.vue'
 import Icon from '@/components/Icon'
+import TradingViewChart from '@/components/TradingViewChart'
+import SubNav from '@/components/SubNav'
 
 export default {
   name: 'PageMarketsMarket',
   components: {
     CardChart,
     Icon,
-    PercentageBadge
+    PercentageBadge,
+    TradingViewChart,
+    SubNav
   },
   computed: {
     ...mapGetters({
       getMarketBySymbol: 'markets/getMarketBySymbol',
       getTickerBySymbol: 'tickers/getTickerBySymbol',
       getSymbolBySymbol: 'symbols/getSymbolBySymbol',
-      availableBaseMarkets: 'markets/availableBaseMarkets'
+      availableBaseMarkets: 'markets/availableBaseMarkets',
+      selectedExchange: 'exchanges/selected'
     }),
+    subNavItems () {
+      return [
+        { label: 'Simple chart', uri: '/markets', slug: 'available' },
+        { label: 'Advanced chart', uri: '/buy?filter=unavailable', slug: 'unavailable' }
+      ]
+    },
+    exchangeUpperCased () {
+      return this.selectedExchange.toUpperCase()
+    },
     baseId () {
       return (this.$route) ? this.$route.params.baseId : null
     },
@@ -186,6 +216,7 @@ export default {
   span {
     display: block;
     color: $gray-600;
+    line-height: 1;
   }
 }
 </style>

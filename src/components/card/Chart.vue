@@ -1,5 +1,6 @@
 <template>
   <div class="card card-100-xs">
+
     <div class="card-body text-center">
       <h1 class="h1 mb-1"><img v-if="iconUrl" :src="iconUrl" ref="icon" width="24" /> {{ marketSymbol }}</h1>
       <div class="text-muted">
@@ -7,25 +8,36 @@
       </div>
       <loader v-if="isLoading"></loader>
     </div>
-    <line-chart
-      v-if="!isLoading && chartBackgroundColor"
-      :labels="timestamps"
-      :data="closes"
-      :backgroundColor="chartBackgroundColor"
-      :borderColor="chartBorderColor"
-      :height="150"></line-chart>
-    <div v-if="!isLoading" class="chart-controls" :style="{'background-color': chartBackgroundColor}">
-      <button type="button" class="btn btn-white btn-sm">1h</button>
-      <button type="button" class="btn btn-white btn-sm">1w</button>
-      <button type="button" class="btn btn-white btn-sm">1m</button>
-      <button type="button" class="btn btn-white btn-sm">1y</button>
+
+    <div class="card-chart">
+      <line-chart
+        class="card-chart"
+        v-if="!isLoading && chartBackgroundColor"
+        :labels="timestamps"
+        :data="closes"
+        :backgroundColor="chartBackgroundColor"
+        :borderColor="chartBorderColor"
+        :height="150">
+      </line-chart>
+      <bar-chart
+        class="card-chart"
+        v-if="!isLoading && chartBackgroundColor"
+        :labels="timestamps"
+        :data="volumes"
+        :backgroundColor="chartBackgroundColor"
+        :borderColor="chartBorderColor"
+        :height="100"
+        :style="{'background-color': chartBackgroundColor}">
+      </bar-chart>
     </div>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import LineChart from '@/components/charts/Line.js'
+import BarChart from '@/components/charts/Bar.js'
 import Loader from '@/components/Loader'
 import format from 'date-fns/format'
 import Chart from 'chart.js'
@@ -34,6 +46,7 @@ export default {
   name: 'CardChart',
   components: {
     LineChart,
+    BarChart,
     Loader
   },
   props: {
@@ -48,7 +61,8 @@ export default {
     }
   },
   beforeMount () {
-    this.dispatchGetOHLCV(this.marketSymbol)
+    // 1m, 1h, 1d
+    this.dispatchGetOHLCV(this.marketSymbol, '1h')
   },
   data: () => ({
     error: null,
@@ -110,10 +124,13 @@ export default {
         return null
       }
     },
+    timeframe () {
+      return -168
+    },
     timestamps () {
       if (this.ohlcvData) {
         const timestampIndex = 0
-        return this.ohlcvData.slice(-168).map(x => this.formatTimestamp(x[timestampIndex]))
+        return this.ohlcvData.slice(this.timeframe).map(x => this.formatTimestamp(x[timestampIndex]))
       } else {
         return null
       }
@@ -121,7 +138,15 @@ export default {
     closes () {
       if (this.ohlcvData) {
         const closeIndex = 4
-        return this.ohlcvData.slice(-168).map(x => x[closeIndex].toFixed(8))
+        return this.ohlcvData.slice(this.timeframe).map(x => x[closeIndex].toFixed(8))
+      } else {
+        return null
+      }
+    },
+    volumes () {
+      if (this.ohlcvData) {
+        const volumesIndex = 5
+        return this.ohlcvData.slice(this.timeframe).map(x => x[volumesIndex].toFixed(8))
       } else {
         return null
       }
@@ -131,15 +156,15 @@ export default {
     formatTimestamp (timestamp) {
       return format(
         new Date(timestamp),
-        'D MMM'
+        'D MMM HH:mm'
       )
     },
-    async dispatchGetOHLCV (marketSymbol, forceRefresh = false) {
+    async dispatchGetOHLCV (marketSymbol, interval = '1h', forceRefresh = false) {
       this.isLoadingOHLCV = true
 
       const payload = {
         marketSymbol: marketSymbol,
-        interval: '1h',
+        interval: interval,
         forceRefresh: forceRefresh
       }
 

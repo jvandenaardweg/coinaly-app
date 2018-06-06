@@ -1,3 +1,5 @@
+@import "./src/scss/bootstrap/rem-calc";
+
 // Options
 $enable-rounded: true;
 $enable-shadows: false;
@@ -12,17 +14,17 @@ $font-family-base: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe 
 $font-family-monospace: Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
 $font-size-base: 1rem; // 16px
-$font-size-lg: 1.125rem;
-$font-size-sm: .875rem;
+$font-size-lg: 2rem; // 32px
+$font-size-sm: 0.8125rem; // 13px
 
 $line-height-base: 1.5;
 
-$h1-font-size: 2rem; //32px
-$h2-font-size: 1.75rem; //28px
-$h3-font-size: 1.5rem; //24px
-$h4-font-size: 1.125rem; //18px
-$h5-font-size: 1rem; //16px
-$h6-font-size: .875rem; //14px
+$h1-font-size: rem-calc(32); //32px
+$h2-font-size: rem-calc(28); //28px
+$h3-font-size: rem-calc(24); //24px
+$h4-font-size: rem-calc(18); //18px
+$h5-font-size: rem-calc(16); //16px
+$h6-font-size: rem-calc(14); //14px
 
 $small-font-size: 87.5%;
 
@@ -323,5 +325,3 @@ $navbar-nav-link-padding-y: 0.2rem;
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
-
-@import "./src/scss/bootstrap/rem-calc";
