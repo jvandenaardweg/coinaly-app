@@ -43,7 +43,6 @@
       </div>
     </div> -->
 
-
     <card-chart :marketSymbol="marketSymbol" :baseId="baseId" :quoteId="quoteId" class="mt-3 mb-3"></card-chart>
 
     <!-- <trading-view-chart v-if="quoteId && baseId" :exchange="exchangeUpperCased" :quoteId="quoteId" :baseId="baseId"></trading-view-chart> -->
